@@ -1,0 +1,17 @@
+<svg id="Group_61" data-name="Group 61" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <ellipse id="Ellipse_16" data-name="Ellipse 16" cx="12" cy="12" rx="12" ry="12" fill="#ffd93b"/>
+  <path id="SVGCleanerId_0" data-name="SVGCleanerId 0" d="M108.031,320.7a8.188,8.188,0,0,1-15.206,0,.643.643,0,0,1,.589-.889h14.029A.643.643,0,0,1,108.031,320.7Z" transform="translate(-88.428 -304.817)" fill="#3e4347"/>
+  <g id="Group_58" data-name="Group 58" transform="translate(4.349 14.991)">
+    <path id="SVGCleanerId_0-2" data-name="SVGCleanerId 0" d="M108.031,320.7a8.188,8.188,0,0,1-15.206,0,.643.643,0,0,1,.589-.889h14.029A.643.643,0,0,1,108.031,320.7Z" transform="translate(-92.777 -319.808)" fill="#3e4347"/>
+  </g>
+  <path id="Path_95" data-name="Path 95" d="M78.061,66.061A12,12,0,0,1,56.72,73.6,12,12,0,0,0,73.595,56.72,11.987,11.987,0,0,1,78.061,66.061Z" transform="translate(-54.061 -54.061)" fill="#f4c534"/>
+  <g id="Group_59" data-name="Group 59" transform="translate(5.407 7.28)">
+    <path id="Path_96" data-name="Path 96" d="M115.405,159.644a.563.563,0,0,1,.245-.757l2.746-1.4-2.175-1.111a.562.562,0,0,1,.511-1l3.156,1.612a.563.563,0,0,1,0,1l-3.727,1.9A.563.563,0,0,1,115.405,159.644Z" transform="translate(-115.343 -155.311)" fill="#3e4347"/>
+    <path id="Path_97" data-name="Path 97" d="M297.185,159.89l-3.727-1.9a.563.563,0,0,1,0-1l3.156-1.612a.562.562,0,1,1,.511,1l-2.175,1.111,2.745,1.4a.562.562,0,0,1-.511,1Z" transform="translate(-284.817 -155.311)" fill="#3e4347"/>
+  </g>
+  <path id="Path_98" data-name="Path 98" d="M132.068,341.808l-.018.038a2.329,2.329,0,0,1-1.911,1.29,55.287,55.287,0,0,1-8.964-.014,2.352,2.352,0,0,1-1.922-1.3l-.006-.013h12.82Z" transform="translate(-113.658 -325.786)" fill="#fff"/>
+  <path id="Path_99" data-name="Path 99" d="M198.039,398.117a2.522,2.522,0,0,1-1.126.25,2.466,2.466,0,0,1-.25-.013,1.516,1.516,0,0,0-1.393.58,2.978,2.978,0,0,0-.422.893,8.154,8.154,0,0,0,5.773-.013,3,3,0,0,0-.977-1.481A1.506,1.506,0,0,0,198.039,398.117Z" transform="translate(-185.714 -379.32)" fill="#e24b4b"/>
+  <g id="Group_60" data-name="Group 60" transform="translate(12.868 18.924)" opacity="0.2">
+    <ellipse id="Ellipse_17" data-name="Ellipse 17" cx="0.274" cy="0.47" rx="0.274" ry="0.47" transform="translate(0 0.424) rotate(-50.6)" fill="#fff"/>
+  </g>
+</svg>
