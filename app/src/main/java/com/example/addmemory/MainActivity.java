@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.xbtn:
-                //delete the selected image.
+                //delete the selected image. NEW STUFFFFFFFFAWFDSFBZ
                 break;
         }
     }
