@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AddMemory</string>
+    <string name="save">SAVE</string>
+    <string name="todo">TODO</string>
+    <string name="tags">Tags</string>
+    <string name="write_your_memory">Write Your Memory</string>
+    <string name="add_pictures">Add Pictures</string>
+    <string name="add_video">Add Video</string>
+    <string name="location">Location</string>
+    <string name="feeling">Feeling</string>
+    <string name="this_was_at">This was at</string>
 </resources>

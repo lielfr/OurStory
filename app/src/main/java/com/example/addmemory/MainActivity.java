@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        iv=(ImageView)findViewById(R.id.imgclcable);
+        iv = findViewById(R.id.imgclcable);
 
 
         ImageButton smileb=findViewById(R.id.smilebtn);
@@ -80,9 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 displayToast("You have selected Save Button.");
                 break;
             case R.id.Cancelbtn:
-                finish();
-                break;
-            case R.id.backbtn:
                 finish();
                 break;
             case R.id.xbtn:

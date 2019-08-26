@@ -46,7 +46,7 @@
                 android:id="@+id/datebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/calendar"
+                android:background="@drawable/calendar_icon"
                 android:onClick="showDatePicker"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/date"
@@ -60,7 +60,7 @@
                 android:id="@+id/Savebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/savebtn"
+                android:background="@drawable/login_button"
                 android:text="@string/save"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
@@ -182,8 +182,8 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
                     android:background="#212F3D"
-                    android:drawableBottom="@drawable/smile"
-                    android:src="@drawable/smile" />
+                    android:drawableBottom="@drawable/ic_emoji_smile"
+                    android:src="@drawable/ic_emoji_smile" />
 
                 <ImageButton
                     android:id="@+id/sadbtn"
@@ -194,8 +194,8 @@
                     android:layout_marginTop="0dp"
                     android:layout_toRightOf="@id/smilebtn"
                     android:background="#212F3D"
-                    android:drawableBottom="@drawable/sad"
-                    android:src="@drawable/sad" />
+                    android:drawableBottom="@drawable/ic_emoji_sad"
+                    android:src="@drawable/ic_emoji_sad" />
 
                 <ImageButton
                     android:id="@+id/happybtn"
@@ -218,8 +218,8 @@
                     android:layout_marginTop="0dp"
                     android:layout_toRightOf="@id/happybtn"
                     android:background="#212F3D"
-                    android:drawableBottom="@drawable/love"
-                    android:src="@drawable/love" />
+                    android:drawableBottom="@drawable/ic_emoji_love"
+                    android:src="@drawable/ic_emoji_love" />
 
                 <ImageButton
                     android:id="@+id/happy1btn"
@@ -242,8 +242,8 @@
                     android:layout_marginTop="0dp"
                     android:layout_toRightOf="@id/happy1btn"
                     android:background="#212F3D"
-                    android:drawableBottom="@drawable/untitled"
-                    android:src="@drawable/untitled" />
+                    android:drawableBottom="@drawable/ic_emoji_blessed"
+                    android:src="@drawable/ic_emoji_blessed" />
             </RelativeLayout>
 
             <TextView
@@ -363,7 +363,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/date_round"
+                android:background="@drawable/edit_round"
                 android:hint="     dd     .     mm     .     year"
                 android:textColor="@android:color/background_light"
                 android:textColorHint="@android:color/darker_gray"
