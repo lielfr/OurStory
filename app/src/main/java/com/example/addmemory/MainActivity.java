@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 displayToast("You have selected sunglasses Emoji.");
                 break;
             case R.id.Savebtn:
-                displayToast("You have selected Save Button.");
+                displayToast("You have selected Save Button. Liel was here.");
                 break;
             case R.id.Cancelbtn:
                 finish();
