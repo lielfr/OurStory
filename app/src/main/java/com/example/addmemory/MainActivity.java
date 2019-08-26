@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         iv = findViewById(R.id.imgclcable);
 
+        // Just to test it
 
         ImageButton smileb=findViewById(R.id.smilebtn);
         ImageButton sadb=findViewById(R.id.sadbtn);
