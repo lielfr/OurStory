@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         iv = findViewById(R.id.imgclcable);
 
-        // Just to test it
 
         ImageButton smileb=findViewById(R.id.smilebtn);
         ImageButton sadb=findViewById(R.id.sadbtn);
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.xbtn:
-                //delete the selected image. NEW STUFFFFFFFFAWFDSFBZ
+                //delete the selected image.
                 break;
         }
     }
