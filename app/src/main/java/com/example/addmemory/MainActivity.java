@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        iv = findViewById(R.id.imgclcable);
-
-
         ImageButton smileb=findViewById(R.id.smilebtn);
         ImageButton sadb=findViewById(R.id.sadbtn);
         ImageButton happyb=findViewById(R.id.happybtn);
@@ -82,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.Cancelbtn:
                 finish();
                 break;
-            case R.id.xbtn:
-                //delete the selected image.
-                break;
         }
     }
 
@@ -134,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String month_string = Integer.toString(month+1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-        String dateMessage = ("     "+day_string +
+        String dateMessage = (day_string +
                 "     .     " + month_string + "     .     " + year_string);
         txdate=findViewById(R.id.date);
         txdate.setText(dateMessage);
