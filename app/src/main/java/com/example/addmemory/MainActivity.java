@@ -1,6 +1,8 @@
 package com.example.addmemory;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,10 @@ import com.esafirm.imagepicker.model.Image;
 import com.example.addmemory.model.Feeling;
 import com.example.addmemory.model.Memory;
 
+import org.w3c.dom.Text;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -141,6 +147,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String year_string = Integer.toString(year);
 //
         currentDate = day_string + "/" + month_string + "/" + year_string;
+        TextView dayDate = findViewById(R.id.day_text);
+        TextView monthDate = findViewById(R.id.month_text);
+        TextView yearDate = findViewById(R.id.year_text);
+
+        dayDate.setText(day_string);
+        monthDate.setText(month_string);
+        yearDate.setText(year_string);
     }
 
     public void closeActivity(View view) {
