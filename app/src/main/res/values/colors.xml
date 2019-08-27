@@ -11,4 +11,5 @@
     <color name="colorRegister">#e47169</color>
     <color name="colorGrayInput">#3f5972</color>
     <color name="colorGrayHint">#4dffffff</color>
+    <color name="colorTags">#3c1C2733</color>
 </resources>

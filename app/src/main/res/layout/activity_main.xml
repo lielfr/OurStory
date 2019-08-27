@@ -45,20 +45,6 @@
                 tools:layout_conversion_absoluteWidth="0dp" />
 
             <Button
-                android:id="@+id/datebtn"
-                android:layout_width="30dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/calendar_icon"
-                android:onClick="showDatePicker"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
-                app:layout_constraintStart_toEndOf="@+id/date"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                tools:layout_conversion_absoluteHeight="0dp"
-                tools:layout_conversion_absoluteWidth="0dp" />
-
-            <Button
                 android:id="@+id/Savebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -219,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/quicksand_bold"
                 android:text="@string/location"
                 android:textColor="@android:color/background_light"
@@ -251,23 +237,99 @@
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" />
 
-            <TextView
+            <!--            <TextView-->
+            <!--                android:id="@+id/date"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="72dp"-->
+            <!--                android:layout_marginLeft="72dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:background="@drawable/edit_round"-->
+            <!--                android:fontFamily="@font/quicksand_bold"-->
+            <!--                android:hint=" dd   .   mm   .   year"-->
+            <!--                android:textColor="@android:color/background_light"-->
+            <!--                android:textColorHint="@android:color/darker_gray"-->
+            <!--                android:textSize="20sp"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/textView8"-->
+            <!--                tools:layout_conversion_absoluteHeight="0dp"-->
+            <!--                tools:layout_conversion_absoluteWidth="0dp" />-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="72dp"
-                android:layout_marginLeft="72dp"
+                android:layout_width="328dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/edit_round"
-                android:fontFamily="@font/quicksand_bold"
-                android:hint=" dd   .   mm   .   year"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="20sp"
+                android:background="@drawable/edittext_legend_continuous"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8"
                 tools:layout_conversion_absoluteHeight="0dp"
-                tools:layout_conversion_absoluteWidth="0dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_conversion_absoluteWidth="0dp">
+
+                <EditText
+                    android:id="@+id/day_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#2c3e50"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:hint="@string/day"
+                    android:paddingLeft="5dp"
+                    android:textColorHint="@color/colorGrayHint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/year_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:hint="@string/year"
+                    android:paddingLeft="5dp"
+                    android:textColorHint="@color/colorGrayHint"
+                    app:layout_constraintBottom_toBottomOf="@+id/month_text"
+                    app:layout_constraintStart_toEndOf="@+id/month_text"
+                    app:layout_constraintTop_toTopOf="@+id/month_text"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <EditText
+                    android:id="@+id/month_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginLeft="64dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:hint="@string/month"
+                    android:paddingLeft="5dp"
+                    android:textColorHint="@color/colorGrayHint"
+                    app:layout_constraintBottom_toBottomOf="@+id/day_text"
+                    app:layout_constraintStart_toEndOf="@+id/day_text"
+                    app:layout_constraintTop_toTopOf="@+id/day_text"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="19dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/year_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/year_text"
+                    app:layout_constraintTop_toTopOf="@+id/year_text"
+                    app:srcCompat="@drawable/ic_calendar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/relativeLayout"
