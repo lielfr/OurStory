@@ -4,15 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 
-enum Feeling {
-    HAPPY,
-    SAD,
-    BLESSED,
-    LOVE,
-    HAHA,
-    COOL
-}
-
 public class Memory {
     long id;
     long storyId;

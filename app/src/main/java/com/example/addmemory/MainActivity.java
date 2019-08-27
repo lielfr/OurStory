@@ -1,8 +1,6 @@
 package com.example.addmemory;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
+//import com.example.addmemory.model.Feeling;
+import com.example.addmemory.model.Feeling;
 import com.example.addmemory.model.Memory;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView txdate;
     ImageView iv;
     AddMemoryImageAdapter adapter;
-
+    Feeling SelectedEmoji;
     String currentDate;
 
     @Override
@@ -72,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.smilebtn:
                 displayToast("You have selected smile Emoji.");
+                SelectedEmoji=Feeling.HAPPY;
                 break;
             case R.id.sadbtn:
                 displayToast("You have selected pensive-face Emoji.");
@@ -151,7 +150,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void saveMemory(View view) {
 
         Memory mem = new Memory();
-        EditText locationText = findViewById(R.id.editText2);
+        EditText locationText = findViewById(R.id.memLocation);
         mem.setLocation(locationText.getText().toString());
+        EditText DescriptionText=findViewById(R.id.memDescription);
+        mem.setDescription(DescriptionText.getText().toString());
+
     }
 }
