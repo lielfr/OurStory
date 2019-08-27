@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
+import com.example.addmemory.model.Memory;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView txdate;
     ImageView iv;
     AddMemoryImageAdapter adapter;
+
+    String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,13 +140,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String month_string = Integer.toString(month+1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-        String dateMessage = ("   " + day_string + "   .   " + month_string + "   .   " + year_string);
-        txdate=findViewById(R.id.date);
-        txdate.setText(dateMessage);
-
+//
+        currentDate = day_string + "/" + month_string + "/" + year_string;
     }
 
     public void closeActivity(View view) {
         finish();
+    }
+
+    public void saveMemory(View view) {
+
+        Memory mem = new Memory();
+        EditText locationText = findViewById(R.id.editText2);
+        mem.setLocation(locationText.getText().toString());
     }
 }
