@@ -72,8 +72,10 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/custom_toolbar"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -158,18 +160,42 @@
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
 
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_memory_description_background"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_location_background"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewAMRV"
                 android:layout_width="412dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
                 android:adjustViewBounds="false"
-                android:background="@drawable/pic"
                 android:cropToPadding="false"
+                android:scaleType="centerInside"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.454"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:srcCompat="@drawable/pic" />
 
             <ImageView
                 android:id="@+id/video"
@@ -351,9 +377,9 @@
                     android:layout_height="24dp"
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/ic_emoji_smile"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_emoji_smile"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -364,9 +390,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_emoji_sad"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toRightOf="@id/smilebtn"
                     app:layout_constraintStart_toEndOf="@+id/smilebtn"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -392,6 +418,7 @@
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/ic_emoji_love"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_emoji_love"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/happybtn"
@@ -418,6 +445,7 @@
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/ic_emoji_blessed"
+                    android:scaleType="centerInside"
                     android:src="@drawable/ic_emoji_blessed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -425,29 +453,6 @@
                     app:layout_constraintStart_toEndOf="@+id/happy1btn"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_memory_description_background"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_location_background"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
