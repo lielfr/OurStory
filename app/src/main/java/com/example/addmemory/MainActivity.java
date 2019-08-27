@@ -14,14 +14,21 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.esafirm.imagepicker.features.ImagePicker;
+import com.esafirm.imagepicker.model.Image;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView txdate;
     ImageView iv;
+    AddMemoryImageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         svbtn.setOnClickListener(this);
         cnslbtn.setOnClickListener(this);
 
-
+        RecyclerView rv = findViewById(R.id.add_pictures_rv);
+        adapter = new AddMemoryImageAdapter(this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+                false));
 
     }
 
@@ -98,15 +109,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode== RESULT_OK && requestCode == 1){
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
-                iv.setImageBitmap(bitmap);
-
-            }catch (FileNotFoundException e){
-                e.printStackTrace();
+        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+            List<Image> images = ImagePicker.getImages(data);
+            for (Image img : images) {
+                adapter.images.add(img.getPath());
             }
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -132,5 +140,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txdate=findViewById(R.id.date);
         txdate.setText(dateMessage);
 
+    }
+
+    public void closeActivity(View view) {
+        finish();
     }
 }

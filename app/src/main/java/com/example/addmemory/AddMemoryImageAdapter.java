@@ -21,7 +21,7 @@ import java.util.List;
 public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAdapter.ViewHolder> {
     Context ctx;
     Activity parent;
-    private List<String> images;
+    List<String> images;
 
     public AddMemoryImageAdapter(Activity parent) {
         super();
@@ -44,8 +44,7 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
         ImageView imageView = holder.itemView.findViewById(R.id.imageViewAMRV);
         if (position == 0) {
             Glide.with(holder.itemView)
-                    .load(R.drawable.rv_round_add)
-                    .centerCrop()
+                    .load(R.drawable.ic_plus_cube)
                     .into(imageView);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -56,10 +55,9 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
                 }
             });
         } else {
-            String uri = images.get(position);
+            String uri = images.get(position - 1);
             Glide.with(holder.itemView)
                     .load(uri)
-                    .centerCrop()
                     .into(imageView);
         }
     }

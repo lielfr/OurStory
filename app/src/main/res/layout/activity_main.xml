@@ -8,63 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/custom_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:theme="@style/AppTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/back_button_viewstory2"
-            android:layout_width="32dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_arrow_back"
-            android:onClick="closeActivity"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.128"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="51.33dp"
-            android:layout_height="23.85dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="29dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ourstory_logo" />
-
-        <TextView
-            android:id="@+id/text_create_story"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Add A Memory"
-            android:textColor="@color/colorWhite"
-            android:textSize="21sp"
-            app:fontFamily="@font/quicksand_bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -86,6 +29,8 @@
                 android:id="@+id/Cancelbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="118dp"
+                android:layout_marginLeft="118dp"
                 android:background="@drawable/edit_round"
                 android:text="@android:string/cancel"
                 android:textColor="@android:color/tertiary_text_light"
@@ -93,11 +38,12 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/Savebtn"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15"
                 app:layout_constraintVertical_bias="0.0"
                 tools:layout_conversion_absoluteHeight="0dp"
-                tools:layout_conversion_absoluteWidth="0dp"
-                tools:layout_editor_absoluteX="118dp" />
+                tools:layout_conversion_absoluteWidth="0dp" />
 
             <Button
                 android:id="@+id/datebtn"
@@ -182,20 +128,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-            <ImageView
-                android:id="@+id/imageViewAMRV"
-                android:layout_width="412dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="16dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="centerInside"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.454"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:srcCompat="@drawable/pic" />
 
             <ImageView
                 android:id="@+id/video"
@@ -290,6 +222,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/add_video"
                 android:textColor="@android:color/background_light"
                 android:textSize="16sp"
@@ -297,7 +230,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/add_pictures_rv"
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -378,7 +311,7 @@
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/ic_emoji_smile"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_emoji_smile"
+                    app:srcCompat="@drawable/ic_emoji_smile"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -391,7 +324,7 @@
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_emoji_sad"
+                    app:srcCompat="@drawable/ic_emoji_sad"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/smilebtn"
                     app:layout_constraintStart_toEndOf="@+id/smilebtn"
@@ -404,7 +337,7 @@
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/happy"
-                    android:src="@drawable/happy"
+                    app:srcCompat="@drawable/happy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toRightOf="@id/sadbtn"
@@ -419,7 +352,7 @@
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/ic_emoji_love"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_emoji_love"
+                    app:srcCompat="@drawable/ic_emoji_love"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/happybtn"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -431,7 +364,7 @@
                     android:layout_marginLeft="8dp"
                     android:background="#1C2733"
                     android:drawableBottom="@drawable/happy1"
-                    android:src="@drawable/happy1"
+                    app:srcCompat="@drawable/happy1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toRightOf="@id/lovebtn"
@@ -446,7 +379,7 @@
                     android:background="#212F3D"
                     android:drawableBottom="@drawable/ic_emoji_blessed"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_emoji_blessed"
+                    app:srcCompat="@drawable/ic_emoji_blessed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toRightOf="@id/happy1btn"
@@ -454,8 +387,74 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/add_pictures_rv"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/custom_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/back_button_viewstory2"
+            android:layout_width="32dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_arrow_back"
+            android:onClick="closeActivity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="51.33dp"
+            android:layout_height="23.85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ourstory_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_create_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Add A Memory"
+            android:textColor="@color/colorWhite"
+            android:textSize="21sp"
+            app:fontFamily="@font/quicksand_bold"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
