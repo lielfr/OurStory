@@ -28,6 +28,10 @@ import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,7 +41,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AddMemoryImageAdapter adapter;
     Feeling SelectedEmoji;
     String currentDate;
-
+    Date MemDate = new Date();
+    Calendar cal = Calendar.getInstance();
+    Date today = cal.getTime();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,18 +86,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.sadbtn:
                 displayToast("You have selected pensive-face Emoji.");
+                SelectedEmoji = Feeling.SAD;
                 break;
             case R.id.happybtn:
                 displayToast("You have selected happy Emoji.");
+                SelectedEmoji = Feeling.BLESSED;
                 break;
             case R.id.lovebtn:
                 displayToast("You have selected heart-eyes Emoji.");
+                SelectedEmoji = Feeling.LOVE;
                 break;
             case R.id.happy1btn:
                 displayToast("You have selected very-happy Emoji.");
+                SelectedEmoji = Feeling.HAHA;
                 break;
             case R.id.untitledbtn:
                 displayToast("You have selected sunglasses Emoji.");
+                SelectedEmoji = Feeling.COOL;
                 break;
             case R.id.Savebtn:
                 displayToast("You have selected Save Button. Liel was here.");
@@ -146,7 +157,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
 //
+
         currentDate = day_string + "/" + month_string + "/" + year_string;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            MemDate = dateFormat.parse(currentDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (today.before(MemDate)) {
+            displayToast("You have selected invalid date , please choose valid date again ");
+
+        }
+
+
+        //dateFormat.parse(currentDate);
         TextView dayDate = findViewById(R.id.day_text);
         TextView monthDate = findViewById(R.id.month_text);
         TextView yearDate = findViewById(R.id.year_text);
@@ -167,6 +192,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mem.setLocation(locationText.getText().toString());
         EditText DescriptionText=findViewById(R.id.memDescription);
         mem.setDescription(DescriptionText.getText().toString());
+        mem.setFeeling(SelectedEmoji);
+        mem.setMemoryDate(MemDate);
 
     }
 }
