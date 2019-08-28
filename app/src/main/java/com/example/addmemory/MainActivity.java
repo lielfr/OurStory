@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,25 +40,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView txdate;
     ImageView iv;
+    boolean flag = false;
+    boolean dateFlag = false;
     AddMemoryImageAdapter adapter;
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
     Calendar cal = Calendar.getInstance();
     Date today = cal.getTime();
+    private EditText editTextDescription;
+    private EditText editTextLocation;
+    private ImageButton smileb;
+    private ImageButton sadb;
+    private ImageButton happyb;
+    private ImageButton loveb;
+    private ImageButton happy1b;
+    private ImageButton untitledb;
+    private Button svbtn;
+    private Button cnslbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ImageButton smileb=findViewById(R.id.smilebtn);
-        ImageButton sadb=findViewById(R.id.sadbtn);
-        ImageButton happyb=findViewById(R.id.happybtn);
-        ImageButton loveb=findViewById(R.id.lovebtn);
-        ImageButton happy1b=findViewById(R.id.happy1btn);
-        ImageButton untitledb=findViewById(R.id.untitledbtn);
-        Button svbtn=findViewById(R.id.Savebtn);
-        Button cnslbtn=findViewById(R.id.Cancelbtn);
+        editTextDescription = findViewById(R.id.memDescription);
+        editTextLocation = findViewById(R.id.memLocation);
+        smileb = findViewById(R.id.smilebtn);
+        sadb = findViewById(R.id.sadbtn);
+        happyb = findViewById(R.id.happybtn);
+        loveb = findViewById(R.id.lovebtn);
+        happy1b = findViewById(R.id.happy1btn);
+        untitledb = findViewById(R.id.untitledbtn);
+        svbtn = findViewById(R.id.Savebtn);
+        cnslbtn = findViewById(R.id.Cancelbtn);
 
         smileb.setOnClickListener(this);
         sadb.setOnClickListener(this);
@@ -64,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loveb.setOnClickListener(this);
         happy1b.setOnClickListener(this);
         untitledb.setOnClickListener(this);
+
         svbtn.setOnClickListener(this);
         cnslbtn.setOnClickListener(this);
 
@@ -73,36 +90,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
+        editTextDescription.addTextChangedListener(SaveTextWatcher);
+        editTextLocation.addTextChangedListener(SaveTextWatcher);
+
     }
-
-
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.smilebtn:
                 displayToast("You have selected smile Emoji.");
-                SelectedEmoji=Feeling.HAPPY;
+                SelectedEmoji = Feeling.HAPPY;
+                flag = true;
                 break;
             case R.id.sadbtn:
                 displayToast("You have selected pensive-face Emoji.");
                 SelectedEmoji = Feeling.SAD;
+                flag = true;
                 break;
             case R.id.happybtn:
                 displayToast("You have selected happy Emoji.");
                 SelectedEmoji = Feeling.BLESSED;
+                flag = true;
                 break;
             case R.id.lovebtn:
                 displayToast("You have selected heart-eyes Emoji.");
                 SelectedEmoji = Feeling.LOVE;
+                flag = true;
                 break;
             case R.id.happy1btn:
                 displayToast("You have selected very-happy Emoji.");
                 SelectedEmoji = Feeling.HAHA;
+                flag = true;
                 break;
             case R.id.untitledbtn:
                 displayToast("You have selected sunglasses Emoji.");
                 SelectedEmoji = Feeling.COOL;
+                flag = true;
                 break;
             case R.id.Savebtn:
                 displayToast("You have selected Save Button. Liel was here.");
@@ -120,9 +144,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void pickpic(View view) {
-        Intent i= new Intent(Intent.ACTION_GET_CONTENT);
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.setType("image/*");
-        startActivityForResult(Intent.createChooser(i,"Pick an image"),1);
+        startActivityForResult(Intent.createChooser(i, "Pick an image"), 1);
     }
 
     @Override
@@ -138,22 +162,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private TextWatcher SaveTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String DescriptionInput = editTextDescription.getText().toString().trim();
+            String LocationInput = editTextLocation.getText().toString().trim();
+            Feeling ChoosenEmoji = SelectedEmoji;
+
+            svbtn.setEnabled(!DescriptionInput.isEmpty() && !LocationInput.isEmpty() && flag && dateFlag);
+        }
+    };
+
     public void upvid(View view) {
-        Intent i= new Intent(Intent.ACTION_GET_CONTENT);
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.setType("video/*");
-        startActivityForResult(Intent.createChooser(i,"Upload a video"),1);
+        startActivityForResult(Intent.createChooser(i, "Upload a video"), 1);
 
     }
 
 
     public void showDatePicker(View view) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(),"datePicker");
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     public void processDatePickerResult(int year, int month, int day) {
 
-        String month_string = Integer.toString(month+1);
+        String month_string = Integer.toString(month + 1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
 //
@@ -165,10 +210,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (today.before(MemDate)) {
+        if (MemDate == null)
+            displayToast("Plese Enter Memory date ");
+        else if (today.before(MemDate))
             displayToast("You have selected invalid date , please choose valid date again ");
 
-        }
+        else
+            dateFlag = true;
 
 
         //dateFormat.parse(currentDate);
@@ -190,10 +238,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Memory mem = new Memory();
         EditText locationText = findViewById(R.id.memLocation);
         mem.setLocation(locationText.getText().toString());
-        EditText DescriptionText=findViewById(R.id.memDescription);
+        EditText DescriptionText = findViewById(R.id.memDescription);
         mem.setDescription(DescriptionText.getText().toString());
         mem.setFeeling(SelectedEmoji);
         mem.setMemoryDate(MemDate);
+
 
     }
 }
