@@ -1,4 +1,4 @@
-package com.example.addmemory.model;
+package org.tsofen.ourstory.model;
 
 import java.util.Date;
 

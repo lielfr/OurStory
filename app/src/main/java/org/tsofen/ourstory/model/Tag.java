@@ -1,4 +1,4 @@
-package com.example.addmemory.model;
+package org.tsofen.ourstory.model;
 
 public class Tag {
     long id;
