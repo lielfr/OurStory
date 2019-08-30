@@ -163,7 +163,7 @@
             app:srcCompat="@drawable/comment" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/postedattxt"
             android:layout_width="72dp"
             android:layout_height="23dp"
             android:fontFamily="@font/quicksand_light"
