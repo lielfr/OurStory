@@ -2,11 +2,14 @@ package org.tsofen.ourstory;
 
 import android.content.Context;
 import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +50,19 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                 @Override
                 public void onClick(View view) {
                     // TODO: Add the suggestions menu here
+                }
+            });
+            editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                    // This actually adds the tag whenever the user presses the enter.
+                    if (i == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                        Tag t = new Tag();
+                        t.setLabel(editText.getText().toString());
+                        tags.add(t);
+                        notifyDataSetChanged();
+                    }
+                    return true;
                 }
             });
         } else {
