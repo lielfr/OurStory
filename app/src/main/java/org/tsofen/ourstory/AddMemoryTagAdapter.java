@@ -4,11 +4,13 @@ import android.content.Context;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import java.util.List;
 public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapter.ViewHolder> {
 
     List<Tag> tags;
+    Context ctx;
 
     public AddMemoryTagAdapter(List<Tag> tags) {
         super();
@@ -32,7 +35,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context ctx = parent.getContext();
+        ctx = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(ctx);
         View view = inflater.inflate(R.layout.addmemory_tags_rv_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -46,33 +49,32 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
         if (position == tags.size()) {
             editText.setInputType(InputType.TYPE_CLASS_TEXT); // Enables input
             closeButton.setVisibility(View.INVISIBLE);
-            editText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // TODO: Add the suggestions menu here
-                }
-            });
-            editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                    // This actually adds the tag whenever the user presses the enter.
-                    if (i == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                        Tag t = new Tag();
-                        t.setLabel(editText.getText().toString());
-                        tags.add(t);
-                        notifyDataSetChanged();
-                    }
+            editText.setOnClickListener(view -> {
+                PopupMenu suggestionsMenu = new PopupMenu(ctx, holder.itemView);
+                // TODO: Replace those with actual suggestions.
+                suggestionsMenu.getMenu().add("One");
+                suggestionsMenu.getMenu().add("Two");
+                suggestionsMenu.getMenu().add("Three");
+                suggestionsMenu.setOnMenuItemClickListener(menuItem -> {
+                    editText.setText(menuItem.getTitle());
                     return true;
+                });
+            });
+            editText.setOnEditorActionListener((textView, i, keyEvent) -> {
+                // This actually adds the tag whenever the user presses the enter.
+                if (i == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                    Tag t = new Tag();
+                    t.setLabel(editText.getText().toString());
+                    tags.add(t);
+                    notifyDataSetChanged();
                 }
+                return true;
             });
         } else {
             editText.setText(tags.get(position).getLabel());
-            closeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    tags.remove(position);
-                    notifyItemRemoved(position);
-                }
+            closeButton.setOnClickListener(view -> {
+                tags.remove(position);
+                notifyItemRemoved(position);
             });
         }
     }
