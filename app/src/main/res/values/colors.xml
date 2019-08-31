@@ -12,6 +12,6 @@
     <color name="colorGrayInput">#3f5972</color>
     <color name="colorGrayHint">#4dffffff</color>
     <color name="colorTags">#3c1C2733</color>
-    <color name="colorPrimaryDarkTagAlpha">#C22C3E50</color>
+    <color name="colorPrimaryDarkTagAlpha">#ED2C3E50</color>
     <color name="colorAccentTagSeparator">#A1E47169</color>
 </resources>

@@ -1,13 +1,18 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
+import android.renderscript.ScriptGroup;
 import android.text.InputType;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -26,10 +31,12 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
 
     List<Tag> tags;
     Context ctx;
+    RecyclerView rv;
 
-    public AddMemoryTagAdapter(List<Tag> tags) {
+    public AddMemoryTagAdapter(List<Tag> tags, RecyclerView rv) {
         super();
         this.tags = tags;
+        this.rv = rv;
     }
 
     @NonNull
@@ -45,33 +52,36 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageView closeButton = holder.itemView.findViewById(R.id.imageView_tags_rv);
-        EditText editText = holder.itemView.findViewById(R.id.cememory_rv_text);
+        AutoCompleteTextView editText = holder.itemView.findViewById(R.id.cememory_rv_text);
         if (position == tags.size()) {
             editText.setInputType(InputType.TYPE_CLASS_TEXT); // Enables input
-            closeButton.setVisibility(View.INVISIBLE);
-            editText.setOnClickListener(view -> {
-                PopupMenu suggestionsMenu = new PopupMenu(ctx, holder.itemView);
-                // TODO: Replace those with actual suggestions.
-                suggestionsMenu.getMenu().add("One");
-                suggestionsMenu.getMenu().add("Two");
-                suggestionsMenu.getMenu().add("Three");
-                suggestionsMenu.setOnMenuItemClickListener(menuItem -> {
-                    editText.setText(menuItem.getTitle());
-                    return true;
-                });
-            });
+            closeButton.setVisibility(View.GONE);
             editText.setOnEditorActionListener((textView, i, keyEvent) -> {
                 // This actually adds the tag whenever the user presses the enter.
-                if (i == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+
+                if (i == EditorInfo.IME_ACTION_DONE && keyEvent == null) {
                     Tag t = new Tag();
                     t.setLabel(editText.getText().toString());
                     tags.add(t);
-                    notifyDataSetChanged();
+                    notifyItemInserted(tags.size() - 1);
+                    editText.setText("");
+                    rv.scrollToPosition(tags.size());
+                    editText.dismissDropDown();
                 }
                 return true;
             });
+            editText.setOnClickListener(view -> {
+                editText.showDropDown();
+            });
+            final String[] suggestions = new String[]{"sunset", "beach", "water", "sky", "beer"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
+                    R.layout.tags_dropdown_item, suggestions);
+            editText.setAdapter(adapter);
+            editText.showDropDown();
         } else {
             editText.setText(tags.get(position).getLabel());
+            editText.setInputType(InputType.TYPE_NULL);
+            closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
                 tags.remove(position);
                 notifyItemRemoved(position);
