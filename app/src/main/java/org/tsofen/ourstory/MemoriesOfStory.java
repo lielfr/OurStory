@@ -1,4 +1,4 @@
-package com.example.memories;
+package org.tsofen.ourstory;
 
 import android.content.Intent;
 import android.os.Bundle;
