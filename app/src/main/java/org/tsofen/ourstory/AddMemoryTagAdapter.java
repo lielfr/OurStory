@@ -73,6 +73,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             editText.setOnClickListener(view -> {
                 editText.showDropDown();
             });
+            // TODO: Replace this with using a suggestion API
             final String[] suggestions = new String[]{"sunset", "beach", "water", "sky", "beer"};
             ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
                     R.layout.tags_dropdown_item, suggestions);
