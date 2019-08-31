@@ -6,10 +6,24 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:dropDownItemStyle">@style/myDropDownItemStyle</item>
+        <iten mane="android:dropDownListViewStyle">@style/myDropDownListView</iten>
     </style>
 
     <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="myDropDownItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorPrimaryDarkTagAlpha</item>
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="myDropDownListView" parent="@android:style/Widget.ListView">
+        <item name="android:divider">@drawable/tags_dottedline</item>
     </style>
 
 </resources>
