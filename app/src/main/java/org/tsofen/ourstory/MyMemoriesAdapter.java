@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ourstory.R;
 
@@ -17,13 +17,12 @@ import org.tsofen.ourstory.model.Memory;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
+public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 
     public ArrayList<Memory> mMemories;
-    public MemoryAdapter(ArrayList<Memory> memories) {
+    public MyMemoriesAdapter(ArrayList<Memory> memories) {
         this.mMemories = memories;
     }
-
 
     @NonNull
     @Override
@@ -32,7 +31,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
 
         // inflate the custom layout
-        View contactView = inflater.inflate(R.layout.memory_item,parent,false);
+        View contactView = inflater.inflate(R.layout.memory_item_my_memories,parent,false);
 
 
         // return a new holder instance
@@ -64,24 +63,20 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         return mMemories.size() ;
     }
 
-    public void filterList(ArrayList<Memory> filteredList) {
-        mMemories = filteredList;
-        notifyDataSetChanged();
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name,mem_date,create_date,descr;
-        public ImageView pic;
-        public MemoryAdapter adapter;
 
-        public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
+        public MyMemoriesAdapter adapter;
+
+        public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
             create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
-            pic = itemView.findViewById(R.id.picture_person);
-            adapter = memoryAdapter;
+
+            adapter = MyMemoriesAdapter;
         }
     }
 }

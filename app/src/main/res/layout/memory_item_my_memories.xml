@@ -134,7 +134,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/Secondary"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.022"
@@ -149,7 +149,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/Secondary"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/commentbtn2"
             app:layout_constraintStart_toEndOf="@+id/commentbtn2"
             app:layout_constraintTop_toTopOf="@+id/commentbtn2"
@@ -157,12 +157,41 @@
             app:srcCompat="@drawable/share" />
 
         <ImageButton
+            android:id="@+id/deletebtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="188dp"
+            android:layout_marginLeft="188dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/sharebtn"
+            app:layout_constraintStart_toEndOf="@+id/sharebtn"
+            app:layout_constraintTop_toTopOf="@+id/sharebtn"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/delete" />
+
+        <ImageButton
+            android:id="@+id/deletebtn2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/deletebtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/deletebtn"
+            app:layout_constraintTop_toTopOf="@+id/deletebtn"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/edit" />
+
+        <ImageButton
             android:id="@+id/commentbtn2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/Secondary"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/likebtn"
             app:layout_constraintStart_toEndOf="@+id/likebtn"
             app:layout_constraintTop_toBottomOf="@+id/memory_pic"
