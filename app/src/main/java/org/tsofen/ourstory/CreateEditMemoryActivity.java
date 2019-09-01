@@ -157,7 +157,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        if (data == null) return;
         if (requestCode == AddMemoryImageAdapter.ADDMEMORY_IMAGE) {
             if (data.getClipData() != null) {
                 int count = data.getClipData().getItemCount();
@@ -165,7 +165,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
                     imageAdapter.images.add(currentUri.toString());
                 }
-            } else {
+            } else if (data.getData() != null) {
                 imageAdapter.images.add(data.getData().toString());
             }
             imageAdapter.notifyDataSetChanged();
@@ -176,7 +176,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
                     videoAdapter.videos.add(currentUri.toString());
                 }
-            } else {
+            } else if (data.getData() != null) {
                 videoAdapter.videos.add(data.getData().toString());
             }
             videoAdapter.notifyDataSetChanged();
