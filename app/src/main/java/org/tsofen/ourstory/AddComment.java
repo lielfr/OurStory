@@ -1,4 +1,4 @@
-package com.example.addmemory;
+package org.tsofen.ourstory;
 
 import android.content.Context;
 import android.net.Uri;
