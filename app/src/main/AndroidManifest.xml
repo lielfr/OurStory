@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ourstory">
+package="com.example.ourstory">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg"></activity>
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage" />
+    <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
+    <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
+    <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-    </application>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity">
+    </activity>
+
+    <meta-data
+        android:name="preloaded_fonts"
+        android:resource="@array/preloaded_fonts" />
+</application>
 
 </manifest>
