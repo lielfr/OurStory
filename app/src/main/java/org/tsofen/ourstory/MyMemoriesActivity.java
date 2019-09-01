@@ -24,7 +24,7 @@ public class MyMemoriesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_memories);
+        setContentView(R.layout.activity_my_memories);
         Intent intent = getIntent();
         String message =intent.getStringExtra(YearActivity.EXTRA_MESSAGE);
         String[] m = message.split(" ");

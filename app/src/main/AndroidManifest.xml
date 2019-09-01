@@ -17,6 +17,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="org.tsofen.ourstory.MemoriesOfStory"
+            android:label="Memories"
+            android:parentActivityName = "org.tsofen.ourstory.YearActivity"></activity>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="org.tsofen.ourstory.YearActivity"/>
+
+        <activity android:name="org.tsofen.ourstory.YearActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
