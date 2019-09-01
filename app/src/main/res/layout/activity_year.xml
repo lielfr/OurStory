@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Primary"
-    tools:context=".year">
+    android:background="@color/colorPrimaryDark"
+    >
 
     <EditText
         android:id="@+id/nametxt"
@@ -18,7 +18,8 @@
         android:inputType="textPersonName"
         android:textColorHint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <EditText
         android:id="@+id/year"
@@ -30,18 +31,19 @@
         android:fontFamily="@font/quicksand_bold"
         android:hint="year"
         android:inputType="number"
-        android:textAlignment="textStart"
+
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nametxt" />
+        app:layout_constraintTop_toBottomOf="@+id/nametxt"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
-        android:background="@color/pink"
+        android:background="@color/colorRegister"
         android:onClick="launchSecondActivity"
         android:text="Done"
         android:textAlignment="center"

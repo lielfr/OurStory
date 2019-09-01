@@ -51,7 +51,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                 "/"+(memory.getCreateDate().get(Calendar.YEAR));
         String[] monthNames = {" ","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH );
-
+        holder.num_of_shares.setText(memory.getLikes().size());
+        holder.num_of_shares.setText(memory.getShares().size());
+        holder.num_of_comments.setText(memory.getComments().size());
         holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
 
@@ -65,9 +67,10 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name,mem_date,create_date,descr;
+        public TextView name,mem_date,create_date,descr,num_of_likes,num_of_comments,num_of_shares;
 
         public MyMemoriesAdapter adapter;
+
 
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
@@ -75,6 +78,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             mem_date = itemView.findViewById(R.id.memory_date);
             create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
+            num_of_comments = itemView.findViewById(R.id.commentNum);
+            num_of_likes = itemView.findViewById(R.id.likesNum);
+            num_of_shares = itemView.findViewById(R.id.shareNum);
 
             adapter = MyMemoriesAdapter;
         }

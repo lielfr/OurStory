@@ -134,7 +134,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/Secondary"
+
             app:layout_constraintBottom_toBottomOf="@+id/background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.022"
@@ -149,7 +149,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/Secondary"
+
             app:layout_constraintBottom_toBottomOf="@+id/commentbtn2"
             app:layout_constraintStart_toEndOf="@+id/commentbtn2"
             app:layout_constraintTop_toTopOf="@+id/commentbtn2"
@@ -162,12 +162,60 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/Secondary"
             app:layout_constraintBottom_toBottomOf="@+id/likebtn"
             app:layout_constraintStart_toEndOf="@+id/likebtn"
             app:layout_constraintTop_toBottomOf="@+id/memory_pic"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/comment" />
+
+        <TextView
+            android:id="@+id/likesNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="15"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/commentbtn2"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toStartOf="@+id/likebtn" />
+
+        <TextView
+            android:id="@+id/commentNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="9"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/likesNum"
+            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
+            app:layout_constraintHorizontal_bias="0.409"
+            app:layout_constraintStart_toEndOf="@+id/likesNum"
+            app:layout_constraintTop_toTopOf="@+id/likesNum"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/shareNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="2"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/commentNum"
+            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
+            app:layout_constraintStart_toEndOf="@+id/commentNum"
+            app:layout_constraintTop_toTopOf="@+id/commentNum"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/postedattxt"
