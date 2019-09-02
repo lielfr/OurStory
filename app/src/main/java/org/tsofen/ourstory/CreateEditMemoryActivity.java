@@ -1,14 +1,17 @@
 package org.tsofen.ourstory;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +39,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
     TextView txdate;
     ImageView iv;
-    boolean flag = false;
+    int flag = -1;
     boolean dateFlag = false;
     AddMemoryImageAdapter adapter;
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
+    Date BirthDate = new Date();
+    Date DeathDate = new Date();
     Calendar cal = Calendar.getInstance();
     Date today = cal.getTime();
     private EditText editTextDescription;
@@ -54,6 +59,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private ImageButton untitledb;
     private Button svbtn;
     private Button cnslbtn;
+    private EditText DescriptionText;
+    private EditText locationText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,46 +93,62 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
-        editTextDescription.addTextChangedListener(SaveTextWatcher);
-        editTextLocation.addTextChangedListener(SaveTextWatcher);
+        //   editTextDescription.addTextChangedListener(SaveTextWatcher);
+        // editTextLocation.addTextChangedListener(SaveTextWatcher);
 
     }
 
     @Override
     public void onClick(View v) {
+       /* switch (flag)
+        {
+            case (0):
+
+                break;
+        }*/
         switch (v.getId()) {
             case R.id.smilebtn_cememory:
                 displayToast("You have selected smile Emoji.");
                 SelectedEmoji = Feeling.HAPPY;
-                flag = true;
+                //  smileb.setBackgroundColor(Color.parseColor("#C3D7EB"));
+                // smileb.getLayoutParams().height(34);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(35, 35);
+                smileb.setLayoutParams(params);
+                flag = 0;
                 break;
             case R.id.sadbtn_cememory:
                 displayToast("You have selected pensive-face Emoji.");
                 SelectedEmoji = Feeling.SAD;
-                flag = true;
+                flag = 1;
                 break;
             case R.id.happybtn_cememory:
                 displayToast("You have selected happy Emoji.");
                 SelectedEmoji = Feeling.BLESSED;
-                flag = true;
+                flag = 2;
                 break;
             case R.id.lovebtn_cememory:
                 displayToast("You have selected heart-eyes Emoji.");
                 SelectedEmoji = Feeling.LOVE;
-                flag = true;
+                flag = 3;
                 break;
             case R.id.happy1btn_cememory:
                 displayToast("You have selected very-happy Emoji.");
                 SelectedEmoji = Feeling.HAHA;
-                flag = true;
+                flag = 4;
                 break;
             case R.id.untitledbtn_cememory:
                 displayToast("You have selected sunglasses Emoji.");
                 SelectedEmoji = Feeling.COOL;
-                flag = true;
+                flag = 5;
                 break;
             case R.id.Savebtn_cememory:
-                displayToast("You have selected Save Button.");
+                if (CheckValidation(v)) {
+                    this.svbtn.setEnabled(true);
+                    saveMemory(v);
+                } else {
+                    displayToast("Error , Please try filling out the fields again");
+                    //this.svbtn.setEnabled(false);
+                }
                 break;
             case R.id.Cancelbtn_cememory:
                 finish();
@@ -133,16 +156,37 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 
+    public void HiglightEmoji(ImageButton Selected) {
+
+    }
+
+    public boolean CheckValidation(View v) {        //(Memory m) {
+        if ((editTextDescription.getText().toString().equals("")) && (adapter.getItemCount() == 1)) {
+            {
+                displayToast("You should either enter an image or a description for your memory!");
+                return false;
+            }
+        }
+        if (today.before(MemDate)) {
+            displayToast("You have selected invalid date , please choose valid date again ");
+            return false;
+        }
+        if (MemDate.before(BirthDate)) {
+            displayToast("You have selected invalid date ,Memory can't occur before birth date, please choose valid date again ");
+            return false;
+        }
+        if (MemDate.after(DeathDate)) {
+            displayToast("You have selected invalid date ,Memory can't occur after Death date, please choose valid date again ");
+            return false;
+        } else
+            dateFlag = true;
+        return true;
+    }
+
 
     public void displayToast(String message) {
         Toast.makeText(getApplicationContext(), message,
                 Toast.LENGTH_SHORT).show();
-    }
-
-    public void pickpic(View view) {
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.setType("image/*");
-        startActivityForResult(Intent.createChooser(i, "Pick an image"), 1);
     }
 
     @Override
@@ -158,27 +202,27 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 
-    private TextWatcher SaveTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    /* private TextWatcher SaveTextWatcher = new TextWatcher() {
+         @Override
+         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        }
+         }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
+         @Override
+         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        }
+         }
 
-        @Override
-        public void afterTextChanged(Editable s) {
-            String DescriptionInput = editTextDescription.getText().toString().trim();
-            String LocationInput = editTextLocation.getText().toString().trim();
-            Feeling ChoosenEmoji = SelectedEmoji;
+         @Override
+         public void afterTextChanged(Editable s) {
+             String DescriptionInput = editTextDescription.getText().toString().trim();
+             String LocationInput = editTextLocation.getText().toString().trim();
+             Feeling ChoosenEmoji = SelectedEmoji;
 
-            svbtn.setEnabled(!DescriptionInput.isEmpty() && !LocationInput.isEmpty() && flag && dateFlag);
-        }
-    };
-
+             svbtn.setEnabled(!DescriptionInput.isEmpty() && !LocationInput.isEmpty() && flag && dateFlag);
+         }
+     };
+ */
     public void upvid(View view) {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.setType("video/*");
@@ -206,16 +250,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (MemDate == null)
-            displayToast("Plese Enter Memory date ");
-        else if (today.before(MemDate))
-            displayToast("You have selected invalid date , please choose valid date again ");
 
-        else
-            dateFlag = true;
-
-
-        //dateFormat.parse(currentDate);
         TextView dayDate = findViewById(R.id.day_text_cememory);
         TextView monthDate = findViewById(R.id.month_text_cememory);
         TextView yearDate = findViewById(R.id.year_text_cememory);
@@ -232,12 +267,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public void saveMemory(View view) {
 
         Memory mem = new Memory();
-        EditText locationText = findViewById(R.id.memLocation_cememory);
+
         mem.setLocation(locationText.getText().toString());
-        EditText DescriptionText = findViewById(R.id.memDescription_cememory);
+
         mem.setDescription(DescriptionText.getText().toString());
         mem.setFeeling(SelectedEmoji);
         mem.setMemoryDate(MemDate);
+
+        displayToast("Your memory data has been successfully saved");
 
 
     }
