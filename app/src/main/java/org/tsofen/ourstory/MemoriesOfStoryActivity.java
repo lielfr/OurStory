@@ -15,7 +15,7 @@ import org.tsofen.ourstory.model.Memory;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MemoriesOfStory extends AppCompatActivity {
+public class MemoriesOfStoryActivity extends AppCompatActivity {
 
     RecyclerView rv;
     ArrayList<Memory> data;
@@ -34,9 +34,10 @@ public class MemoriesOfStory extends AppCompatActivity {
         storyName = findViewById(R.id.storyname);
         data = Memory.createContactsList();
         adapter = new MemoryAdapter(data);
+        filter(year);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        filter(year);
+
         storyName.setText(name);
 
     }
