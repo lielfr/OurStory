@@ -206,7 +206,7 @@ public class Memory {
         d8.set(2000,2,12);
         d9.set(2000,2,12);
         d10.set(1999,11,5);
-        memories.add(new Memory("Hazar Nakhleh", null,"Missing you. just sat on our beach and thought about you",d1,d2));
+        memories.add(new Memory("Hazar Nakhleh", null,"Missing you. just sat on our beach and thought about you.Missing you. just sat on our beach and thought about you.Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you",d1,d2));
         memories.add(new Memory("Hazar Nakhleh",null,"Wish you were here.",d3,d4));
         memories.add(new Memory("Oron Werner",null,"Wanted to share all the day with you.",d5,d6));
         memories.add(new Memory("Aya Abed",null,"Missing you. just sat on our beach and thought about you",d7,d8));

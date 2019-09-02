@@ -31,13 +31,13 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.065"
-            tools:srcCompat="@tools:sample/avatars"
-            android:layout_marginLeft="16dp" />
+            app:srcCompat="@drawable/alex" />
 
         <TextView
             android:id="@+id/name_txt_person"
@@ -78,7 +78,7 @@
 
         <TextView
             android:id="@+id/memory_date"
-            android:layout_width="119dp"
+            android:layout_width="146dp"
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -93,10 +93,10 @@
             app:layout_constraintStart_toEndOf="@+id/name_txt_person"
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
-        <TextView
+        <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
-            android:layout_width="373dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/quicksand_bold"
@@ -105,6 +105,12 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
+
+            app:trimExpandedText="@string/showLess"
+            app:trimCollapsedText="@string/showMore"
+            app:trimMode="trimModeLength"
+            app:trimLength="120"
+
             app:layout_constraintEnd_toEndOf="@+id/background"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/background"
@@ -147,18 +153,28 @@
             android:id="@+id/deletebtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="216dp"
+            android:layout_marginStart="196dp"
 
-            android:layout_marginLeft="216dp"
+            android:layout_marginLeft="196dp"
             android:background="@color/colorPrimaryDark"
             app:layout_constraintStart_toEndOf="@+id/commentbtn2"
             app:layout_constraintTop_toBottomOf="@+id/memory_pic"
             app:srcCompat="@drawable/delete" />
 
         <ImageButton
+            android:id="@+id/deletebtn2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
+            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
+            app:srcCompat="@drawable/sharebutton" />
+
+        <ImageButton
             android:id="@+id/editbtn"
-            android:layout_width="34dp"
-            android:layout_height="28dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
 

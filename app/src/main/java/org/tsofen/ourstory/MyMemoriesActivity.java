@@ -42,7 +42,7 @@ public class MyMemoriesActivity extends AppCompatActivity {
         for (Memory memory: data){
 
             String name = memory.getCreatorName();
-            if(name == text)
+            if(name.equals(text))
                 filteredList.add(memory);
         }
 
