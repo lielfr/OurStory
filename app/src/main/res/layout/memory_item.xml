@@ -31,13 +31,14 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.065"
-            tools:srcCompat="@tools:sample/avatars"
-            android:layout_marginLeft="16dp" />
+            app:srcCompat="@drawable/alex"
+            tools:srcCompat="@drawable/alex" />
 
         <TextView
             android:id="@+id/name_txt_person"
@@ -78,12 +79,13 @@
 
         <TextView
             android:id="@+id/memory_date"
-            android:layout_width="104dp"
-            android:layout_height="25dp"
+            android:layout_width="138dp"
+            android:layout_height="27dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:editable="false"
             android:fontFamily="@font/quicksand_light"
+            android:gravity="center"
             android:text="date"
             android:textAlignment="center"
             android:textColor="#FFFFFF"

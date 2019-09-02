@@ -136,7 +136,7 @@ public class Memory {
         return creatorPic;
     }
 
-    public Memory(String creatorName, URI creatorPic, String description, Calendar createDate, Calendar memoryDate) {
+    public Memory(String creatorName, URI creatorPic, String description, Calendar memoryDate, Calendar createDate) {
         this.creatorName = creatorName;
         this.creatorPic = creatorPic;
         this.description = description;
@@ -162,11 +162,11 @@ public class Memory {
         Calendar d8 = getInstance();
         Calendar d9 = getInstance();
         Calendar d10 = getInstance();
-        d1.set(2011,8,1);
-        d2.set(2010,6,12);
-        d3.set(2004,12,1);
-        d4.set(2003,12,1);
-        d5.set(2003,12,1);
+        d1.set(2005,8,1);
+        d2.set(2005,6,12);
+        d3.set(2005,12,1);
+        d4.set(2005,12,1);
+        d5.set(2005,12,1);
         d6.set(2000,12,1);
         d7.set(2000,9,12);
         d8.set(2000,2,12);
@@ -199,18 +199,18 @@ public class Memory {
         d1.set(2011,8,1);
         d2.set(2010,6,12);
         d3.set(2004,12,1);
-        d4.set(2012,12,1);
-        d5.set(2004,12,1);
-        d6.set(2005,12,1);
+        d4.set(2000,12,1);
+        d5.set(2000,12,1);
+        d6.set(2000,12,1);
         d7.set(2000,9,12);
         d8.set(2000,2,12);
         d9.set(2000,2,12);
         d10.set(1999,11,5);
-        memories.add(new Memory("Hazar", null,"Missing you. just sat on our beach and thought about you",d1,d2));
-        memories.add(new Memory("Hazar",null,"Wish you were here.",d3,d4));
-        memories.add(new Memory("Oron",null,"Wanted to share all the day with you.",d5,d6));
-        memories.add(new Memory("Aya",null,"Missing you. just sat on our beach and thought about you",d7,d8));
-        memories.add(new Memory("Orwa",null,"Wish you were celebrating my birthday with me this YearActivity.",d9,d10));
+        memories.add(new Memory("Hazar Nakhleh", null,"Missing you. just sat on our beach and thought about you",d1,d2));
+        memories.add(new Memory("Hazar Nakhleh",null,"Wish you were here.",d3,d4));
+        memories.add(new Memory("Oron Werner",null,"Wanted to share all the day with you.",d5,d6));
+        memories.add(new Memory("Aya Abed",null,"Missing you. just sat on our beach and thought about you",d7,d8));
+        memories.add(new Memory("Orwa Watad",null,"Wish you were celebrating my birthday with me this YearActivity.",d9,d10));
         return memories;
     }
 
