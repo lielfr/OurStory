@@ -2,6 +2,7 @@ package org.tsofen.ourstory;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +35,9 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         storyName = findViewById(R.id.storyname);
         data = Memory.createContactsList();
         adapter = new MemoryAdapter(data);
-        filter(year);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
+        filter(year);
         storyName.setText(name);
 
     }
@@ -47,8 +47,10 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         for (Memory memory: data){
 
             int year2 = memory.getMemoryDate().get(Calendar.YEAR);
-            if(year2 == text)
+            if(year2 == text) {
+                Log.d("tag", "added to filter " + year2);
                 filteredList.add(memory);
+            }
         }
 
         adapter.filterList(filteredList);

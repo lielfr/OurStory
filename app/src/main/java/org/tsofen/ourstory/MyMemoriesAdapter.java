@@ -50,10 +50,10 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) +"/"+(memory.getCreateDate().get(Calendar.MONTH))+
                 "/"+(memory.getCreateDate().get(Calendar.YEAR));
         String[] monthNames = {" ","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH );
-        holder.num_of_shares.setText(memory.getLikes().size());
+        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH )  + " , "+(memory.getMemoryDate().get(Calendar.YEAR));
+        /*holder.num_of_shares.setText(memory.getLikes().size());
         holder.num_of_shares.setText(memory.getShares().size());
-        holder.num_of_comments.setText(memory.getComments().size());
+        holder.num_of_comments.setText(memory.getComments().size());*/
         holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
 
