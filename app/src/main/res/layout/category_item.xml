@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingTop="16dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="16dp">
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/category_round_corners">
+
+        <ImageView
+            android:id="@+id/IV_category_image"
+            android:layout_width="25.13dp"
+            android:layout_height="24dp"
+            android:translationX="46.9dp"
+            android:translationY="48dp"
+            app:srcCompat="@drawable/category_sports" />
+
+        <TextView
+            android:id="@+id/TV_category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sports"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:translationX="8dp"
+            android:translationY="13dp"
+            app:fontFamily="@font/quicksand_bold" />
+
+    </RelativeLayout>
+</LinearLayout>
