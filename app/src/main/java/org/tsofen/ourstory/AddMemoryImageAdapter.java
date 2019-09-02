@@ -2,6 +2,7 @@ package org.tsofen.ourstory;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
     Context ctx;
     Activity parent;
     List<String> images;
+
+    static final int ADDMEMORY_IMAGE = 1;
 
     public AddMemoryImageAdapter(Activity parent) {
         super();
@@ -48,9 +51,11 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ImagePicker.create(parent)
-                            .includeVideo(false)
-                            .start();
+                    Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                    i.setType("image/*");
+                    i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    parent.startActivityForResult(Intent.createChooser(i, "Choose Video"),
+                            ADDMEMORY_IMAGE);
                 }
             });
         } else {

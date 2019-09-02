@@ -7,91 +7,6 @@
     tools:context="org.tsofen.ourstory.UserModel.RegistrationPage2">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/genderHolder"
-        android:layout_width="386dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DateHolder">
-
-        <EditText
-            android:id="@+id/showGender"
-            android:layout_width="371dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/edittext_legend_continuous"
-            android:fontFamily="@font/quicksand"
-            android:hint="@string/Gender2"
-            android:paddingLeft="5dp"
-            android:textColorHint="@color/colorGrayHint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/FemaleRB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="128dp"
-            android:layout_marginLeft="128dp"
-            android:layout_marginTop="15dp"
-            android:buttonTint="@color/colorLogin"
-            android:onClick="onRadioButtonClicked"
-            android:shadowColor="@color/colorWhite"
-            android:text="Female"
-            android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorLogin"
-            android:textColorLink="@color/colorLogin"
-            app:layout_constraintBottom_toBottomOf="@+id/showGender"
-            app:layout_constraintStart_toStartOf="@+id/showGender"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.571" />
-
-        <RadioButton
-            android:id="@+id/MaleRB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:onClick="onRadioButtonClicked"
-            android:buttonTint="@color/colorLogin"
-            android:text="Male"
-            android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorLogin"
-            android:textColorLink="@color/blueHighlight"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/showGender"
-            app:layout_constraintHorizontal_bias="0.671"
-            app:layout_constraintStart_toEndOf="@+id/FemaleRB"
-            app:layout_constraintTop_toTopOf="@+id/showGender"
-            app:layout_constraintVertical_bias="0.05" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="61dp"
-            android:layout_height="18dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/background_gradient"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="@string/gender1"
-            android:textColor="@color/colorGrayHint"
-            app:layout_constraintBottom_toBottomOf="@+id/showGender"
-            app:layout_constraintEnd_toEndOf="@+id/showGender"
-            app:layout_constraintHorizontal_bias="0.051"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <Button
         android:id="@+id/save_button"
         android:layout_width="149dp"
@@ -129,6 +44,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture"
         app:layout_constraintVertical_bias="0.504" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/genderHolder"
+        android:layout_width="386dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DateHolder">
+
+        <TextView
+            android:id="@+id/showGender"
+            android:layout_width="371dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/edittext_legend_continuous"
+            android:fontFamily="@font/quicksand"
+            android:gravity="center|left"
+            android:hint="@string/Gender2"
+            android:paddingLeft="5dp"
+            android:textColorHint="@color/colorGrayHint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/FemaleRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="128dp"
+            android:layout_marginLeft="128dp"
+            android:layout_marginTop="15dp"
+            android:buttonTint="@color/colorLogin"
+            android:onClick="onRadioButtonClicked"
+            android:shadowColor="@color/colorWhite"
+            android:text="Female"
+            android:textColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorLogin"
+            android:textColorLink="@color/colorLogin"
+            app:layout_constraintBottom_toBottomOf="@+id/showGender"
+            app:layout_constraintStart_toStartOf="@+id/showGender"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.571" />
+
+        <RadioButton
+            android:id="@+id/MaleRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:buttonTint="@color/colorLogin"
+            android:onClick="onRadioButtonClicked"
+            android:text="Male"
+            android:textColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorLogin"
+            android:textColorLink="@color/blueHighlight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/showGender"
+            app:layout_constraintHorizontal_bias="0.671"
+            app:layout_constraintStart_toEndOf="@+id/FemaleRB"
+            app:layout_constraintTop_toTopOf="@+id/showGender"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="61dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_gradient"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="@string/gender1"
+            android:textColor="@color/colorGrayHint"
+            app:layout_constraintBottom_toBottomOf="@+id/showGender"
+            app:layout_constraintEnd_toEndOf="@+id/showGender"
+            app:layout_constraintHorizontal_bias="0.051"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
@@ -201,7 +202,6 @@
             android:ems="10"
             android:fontFamily="@font/quicksand"
             android:hint="@string/State1"
-            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
@@ -246,7 +246,6 @@
             android:ems="10"
             android:fontFamily="@font/quicksand"
             android:hint="@string/ct"
-            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"

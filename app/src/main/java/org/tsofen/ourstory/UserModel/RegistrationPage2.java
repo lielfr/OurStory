@@ -37,7 +37,7 @@ public class RegistrationPage2 extends AppCompatActivity {
     public EditText EditText6;
     public EditText EditText7;
     public EditText EditText8;
-public EditText DateOfB;
+    public EditText DateOfB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,21 +48,20 @@ public EditText DateOfB;
         firstNameString = currIntent.getStringExtra("first_name");
         lastNameString = currIntent.getStringExtra("last_name");
         passwordString = currIntent.getStringExtra("password");
-        DateOfB=findViewById(R.id.showDate);
+        DateOfB = findViewById(R.id.showDate);
         Log.d("log4", "values received from registrationPage1:"
                 + emailString + " " + firstNameString + " "
                 + lastNameString + " " + passwordString);
     }
 
 
-
     public void showDatePicker(View view) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(),"datePicker");
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     public void processDatePickerResult(int year, int month, int day) {
-        String month_string = Integer.toString(month+1);
+        String month_string = Integer.toString(month + 1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
         String dateString = (month_string +
@@ -72,52 +71,51 @@ public EditText DateOfB;
     }
 
 
-
-
     public void Go2RegistrationPage3andSave(View view) {
-        Intent regIntent3 = new Intent (this, LogIn.class);
-        EditText6 = (EditText)findViewById(R.id.showState);
-        EditText7 = (EditText)findViewById(R.id.showCity);
+        Intent regIntent3 = new Intent(this, LogIn.class);
+        EditText6 = findViewById(R.id.showState);
+        EditText7 = findViewById(R.id.showCity);
         stateString = EditText6.getText().toString();
         cityString = EditText7.getText().toString();
 
 
         regIntent3.putExtra("email", emailString);
-        regIntent3.putExtra("first_name", firstNameString );
-        regIntent3.putExtra("last_name", lastNameString );
+        regIntent3.putExtra("first_name", firstNameString);
+        regIntent3.putExtra("last_name", lastNameString);
         regIntent3.putExtra("password", passwordString);
         regIntent3.putExtra("state", stateString);
-        regIntent3.putExtra("city", cityString );
-        regIntent3.putExtra("dateOfBirth", dateOfBirth );
-         regIntent3.putExtra("gender",gender);
+        regIntent3.putExtra("city", cityString);
+        regIntent3.putExtra("dateOfBirth", dateOfBirth);
+        regIntent3.putExtra("gender", gender);
         Log.d("log-saved", "values sent to registrationPage3:"
                 + emailString + " " + firstNameString + " "
                 + lastNameString + " " + passwordString + " "
-                + stateString + " " + cityString + " " + dateOfBirth+" "+gender);
+                + stateString + " " + cityString + " " + dateOfBirth + " " + gender);
         startActivity(regIntent3);
     }
 
     public void Go2RegistrationPage3andDontSave(View view) {
-        Intent regIntent3 = new Intent (this, LogIn.class);
+        Intent regIntent3 = new Intent(this, LogIn.class);
         regIntent3.putExtra("email", emailString);
-        regIntent3.putExtra("first_name", firstNameString );
-        regIntent3.putExtra("last_name", lastNameString );
+        regIntent3.putExtra("first_name", firstNameString);
+        regIntent3.putExtra("last_name", lastNameString);
         regIntent3.putExtra("password", passwordString);
 
         Log.d("log-not saved", "values sent to registrationPage3:"
                 + emailString + " " + firstNameString + " "
-                + lastNameString + " " +passwordString + " ");
+                + lastNameString + " " + passwordString + " ");
         startActivity(regIntent3);
     }
 
     public void UploadPicture(View view) {
         //still null
     }
-    public void closeActivity(View view)
-    {
-            Intent back=new Intent(this,LogIn.class);
+
+    public void closeActivity(View view) {
+        Intent back = new Intent(this, LogIn.class);
         startActivity(back);
     }
+
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
@@ -125,12 +123,12 @@ public EditText DateOfB;
         switch (view.getId()) {
             case R.id.MaleRB:
                 if (checked)
-                  gender="Male";
+                    gender = "Male";
 
                 break;
             case R.id.FemaleRB:
                 if (checked)
-                    gender="Female";
+                    gender = "Female";
                 break;
 
             default:

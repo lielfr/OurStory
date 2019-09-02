@@ -32,30 +32,30 @@ public class RegistrationPage1 extends AppCompatActivity {
     public String passwordString;
     public String repeatPasswordString;
 
-    public  boolean emailFlag = false;
-    public  boolean firstNameFlag = false;
-    public  boolean lastNameFlag = false;
-    public  boolean passwordFlag = false;
+    public boolean emailFlag = false;
+    public boolean firstNameFlag ;
+    public boolean lastNameFlag;
+    public boolean passwordFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page1);
-        TextViewInvs1=findViewById(R.id.emptyView1);
-        TextViewInvs2=findViewById(R.id.emptyView2);
-        TextViewInvs3=findViewById(R.id.emptyView4);
-        TextViewInvs4=findViewById(R.id.emptyView4);
+        TextViewInvs1 = findViewById(R.id.emptyView1);
+        TextViewInvs2 = findViewById(R.id.emptyView2);
+        TextViewInvs3 = findViewById(R.id.emptyView4);
+        TextViewInvs4 = findViewById(R.id.emptyView4);
 
     }
 
     public void Go2RegistrationPage2(View view) {
-        Intent regIntent2 = new Intent (this, RegistrationPage2.class);
+        Intent regIntent2 = new Intent(this, RegistrationPage2.class);
 
-        EditText1 = (EditText)findViewById(R.id.showEmail);
-        EditText2 = (EditText)findViewById(R.id.showFirst);
-        EditText3 = (EditText)findViewById(R.id.showLast);
-        EditText4 = (EditText)findViewById(R.id.password_editText);
-        EditText5 = (EditText)findViewById(R.id.repeatpassword_editText);
+        EditText1 = findViewById(R.id.showEmail);
+        EditText2 = findViewById(R.id.showFirst);
+        EditText3 = findViewById(R.id.showLast);
+        EditText4 = findViewById(R.id.password_editText);
+        EditText5 = findViewById(R.id.repeatpassword_editText);
 
         emailString = EditText1.getText().toString();
         firstNameString = EditText2.getText().toString();
@@ -64,64 +64,89 @@ public class RegistrationPage1 extends AppCompatActivity {
         repeatPasswordString = EditText5.getText().toString();
         Log.d("log2", "values sent to registrationPage1:"
                 + emailString + " " + firstNameString + " "
-                + lastNameString + " " +passwordString + " " + repeatPasswordString);
+                + lastNameString + " " + passwordString + " " + repeatPasswordString);
 
-        if (verifyEmail(emailString)){
+        if (verifyEmail(emailString)) {
             Log.d("verification tag1", "email verified");
             TextViewInvs2.setVisibility(View.INVISIBLE);
-            emailFlag=true;
+            emailFlag = true;
 
             // add code to verify if the email already exists
 
-        }
-        else{
+        } else {
             TextViewInvs2.setVisibility(View.VISIBLE);
-            emailFlag= false;
+            emailFlag = false;
         }
 
 
-        if (verifyName(firstNameString)){
-            Log.d("verification tag2", "first name verified");
+     /*  if (verifyName(firstNameString)){
+            Log.d("verification tag3", "first name verified");
             TextViewInvs1.setVisibility(View.INVISIBLE);
-            firstNameFlag=true;
-        }
-        else{
+            firstNameFlag = true;
+        } else {
             TextViewInvs1.setVisibility(View.VISIBLE);
-            firstNameFlag= false;
+            firstNameFlag = false;
         }
-
-        if (verifyName(lastNameString)){
+        if (verifyName(lastNameString)) {
             Log.d("verification tag3", "last name verified");
             TextViewInvs1.setVisibility(View.INVISIBLE);
-            lastNameFlag=true;
-        }
-        else{
+            lastNameFlag = true;
+        } else {
             TextViewInvs1.setVisibility(View.VISIBLE);
-            lastNameFlag= false;
-        }
-        if ((passwordString.length())> 10){
+            lastNameFlag = false;
+        }*/
+       firstNameFlag=verifyName(firstNameString);
+       lastNameFlag=verifyName(lastNameString);
+       if (firstNameFlag==false )
+       {
+           if ( lastNameFlag==false) {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=false;
+               lastNameFlag=false;
+           }
+           else
+           {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=false;
+               lastNameFlag=true;
+           }
+      }
+       else
+       {
+           if ( lastNameFlag==false) {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=true;
+               lastNameFlag=false;
+           }
+           else
+           {
+               TextViewInvs1.setVisibility(View.INVISIBLE);
+               firstNameFlag=true;
+               lastNameFlag=true;
+           }
+       }
+
+        if ((passwordString.length()) > 10) {
             TextViewInvs4.setVisibility(View.VISIBLE);
-        passwordFlag=false;}
-        else
-        {
+            passwordFlag = false;
+        } else {
             TextViewInvs4.setVisibility(View.INVISIBLE);
-            passwordFlag=true;
+            passwordFlag = true;
         }
-        if (passwordString.equals(repeatPasswordString)){
+        if (passwordString.equals(repeatPasswordString)) {
             Log.d("verification tag3", "last name verified");
             TextViewInvs4.setVisibility(View.INVISIBLE);
-            passwordFlag=true;
-        }
-        else{
+            passwordFlag = true;
+        } else {
             TextViewInvs4.setVisibility(View.VISIBLE);
-            passwordFlag= false;
+            passwordFlag = false;
         }
 
 
         if (passwordFlag && emailFlag && firstNameFlag && lastNameFlag) {
             regIntent2.putExtra("email", emailString);
-            regIntent2.putExtra("first_name", firstNameString );
-            regIntent2.putExtra("last_name", lastNameString );
+            regIntent2.putExtra("first_name", firstNameString);
+            regIntent2.putExtra("last_name", lastNameString);
             regIntent2.putExtra("password", passwordString);
             Log.d("log2", "values passed from registrationPage1:"
                     + emailString + " " + firstNameString + " "
@@ -130,40 +155,32 @@ public class RegistrationPage1 extends AppCompatActivity {
         }
 
 
-
     }
 
 
-    public  boolean verifyName(String nameString){
+    public boolean verifyName(String nameString) {
         firstNameString = firstNameString.trim();
 
-        if(nameString == null || nameString.equals(""))
+        if (nameString == null || nameString.equals(""))
             return false;
 
-        if(!nameString.matches("[a-zA-Z]*"))
-            return false;
-
-        return true;
+        return nameString.matches("[a-zA-Z]*");
     }
 
 
-    private boolean verifyEmail(String email)
-    {
+    private boolean verifyEmail(String email) {
         email = email.trim();
 
-        if(email == null || email.equals(""))
+        if (email == null || email.equals(""))
             return false;
 
-        if(!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"))
-            return false;
-
-        return true;
+        return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
     }
-public void closeActivity(View view)
-{
-    Intent back=new Intent(this,AppHomePage.class);
-    startActivity(back);
-}
+
+    public void closeActivity(View view) {
+        Intent back = new Intent(this, AppHomePage.class);
+        startActivity(back);
+    }
 
 }
 

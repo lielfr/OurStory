@@ -73,7 +73,8 @@ public class HomeFragment extends Fragment {
                 //Create and show the AlertDialog.
                 myAlertBuilder.show();
 
-            }});
+            }
+        });
         final Button login = view.findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        final Button registration= view.findViewById(R.id.registration);
+        final Button registration = view.findViewById(R.id.registration);
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
