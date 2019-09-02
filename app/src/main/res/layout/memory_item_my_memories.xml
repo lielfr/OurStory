@@ -63,8 +63,10 @@
             android:layout_width="90dp"
             android:layout_height="23dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="140dp"
+            android:layout_marginEnd="148dp"
+            android:layout_marginRight="148dp"
             android:fontFamily="@font/quicksand_light"
+            android:gravity="start"
             android:text="date"
             android:textAlignment="viewStart"
             android:textColor="#FFFFFF"
@@ -72,13 +74,11 @@
             app:layout_constraintBottom_toBottomOf="@+id/postedattxt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/name_txt_person"
-            app:layout_constraintVertical_bias="1.0"
-            android:layout_marginRight="140dp"
-            android:gravity="start" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/memory_date"
-            android:layout_width="104dp"
+            android:layout_width="119dp"
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -144,31 +144,15 @@
             app:srcCompat="@drawable/like" />
 
         <ImageButton
-            android:id="@+id/sharebtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/commentbtn2"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/share" />
-
-        <ImageButton
             android:id="@+id/deletebtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="152dp"
-            android:layout_marginLeft="152dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
+            android:layout_marginStart="216dp"
 
-            app:layout_constraintBottom_toBottomOf="@+id/sharebtn"
-            app:layout_constraintStart_toEndOf="@+id/sharebtn"
-            app:layout_constraintTop_toTopOf="@+id/sharebtn"
-            app:layout_constraintVertical_bias="0.0"
+            android:layout_marginLeft="216dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
+            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
             app:srcCompat="@drawable/delete" />
 
         <ImageButton
@@ -203,11 +187,12 @@
             android:id="@+id/postedattxt"
             android:layout_width="72dp"
             android:layout_height="23dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/quicksand_light"
             android:text="posted at"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.257"
+            app:layout_constraintHorizontal_bias="0.259"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_txt_person" />
 
@@ -231,32 +216,17 @@
             android:id="@+id/commentNum"
             android:layout_width="22dp"
             android:layout_height="17dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginBottom="16dp"
+
             android:fontFamily="@font/quicksand_bold"
             android:text="9"
-
             android:textColor="@color/colorLogin"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/shareNum" />
+            app:layout_constraintStart_toEndOf="@+id/likesNum" />
 
-        <TextView
-            android:id="@+id/shareNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginEnd="144dp"
-            android:layout_marginRight="144dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="2"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/deletebtn"
-            app:layout_constraintTop_toTopOf="@+id/commentNum"
-            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

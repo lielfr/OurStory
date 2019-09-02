@@ -79,8 +79,8 @@
 
         <TextView
             android:id="@+id/memory_date"
-            android:layout_width="138dp"
-            android:layout_height="27dp"
+            android:layout_width="146dp"
+            android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:editable="false"
@@ -146,19 +146,6 @@
             app:srcCompat="@drawable/like" />
 
         <ImageButton
-            android:id="@+id/sharebtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/commentbtn2"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/share" />
-
-        <ImageButton
             android:id="@+id/commentbtn2"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -196,38 +183,20 @@
             android:textColor="@color/colorLogin"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/likesNum"
-            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
-            app:layout_constraintHorizontal_bias="0.409"
             app:layout_constraintStart_toEndOf="@+id/likesNum"
             app:layout_constraintTop_toTopOf="@+id/likesNum"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/shareNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="2"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/commentNum"
-            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
-            app:layout_constraintStart_toEndOf="@+id/commentNum"
-            app:layout_constraintTop_toTopOf="@+id/commentNum"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/postedattxt"
             android:layout_width="72dp"
             android:layout_height="23dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/quicksand_light"
             android:text="posted at"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.257"
+            app:layout_constraintHorizontal_bias="0.259"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_txt_person" />
     </androidx.constraintlayout.widget.ConstraintLayout>
