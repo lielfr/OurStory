@@ -31,7 +31,7 @@ public class ViewStoryMemoryAdapter extends RecyclerView.Adapter<ViewStoryMemory
     @NonNull
     @Override
     public ViewStoryMemoryAdapter.MemoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = mInflater.inflate(R.layout.memory_item, parent, false);
+        View v = mInflater.inflate(R.layout.memory_item_story, parent, false);
         MemoryViewHolder viewHolder = new MemoryViewHolder(v, this);
         return viewHolder;
     }
@@ -68,7 +68,7 @@ public class ViewStoryMemoryAdapter extends RecyclerView.Adapter<ViewStoryMemory
 
         public MemoryViewHolder(@NonNull View itView, ViewStoryMemoryAdapter mAdapter) {
             super(itView);
-            tv_memory_year = itView.findViewById(R.id.tv_memory_year);
+            tv_memory_year = itView.findViewById(R.id.memory_date);
             this.mAdapter = mAdapter;
             ll_memory_images = itView.findViewById(R.id.ll_memory_images);
             layoutParams = new LinearLayout.LayoutParams(400, 400);

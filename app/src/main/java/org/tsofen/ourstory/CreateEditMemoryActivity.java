@@ -50,8 +50,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
-    Date BirthDate = new Date(1990, 8, 10);
-    Date DeathDate = new Date(2000, 5, 23);
+    //    Date BirthDate = new Date(1990, 8, 10);
+//    Date DeathDate = new Date(2000, 5, 23);
+    Date BirthDate = new Date();
+    Date DeathDate = new Date();
     Calendar cal = Calendar.getInstance();
     Date today = cal.getTime();
     private EditText editTextDescription;

@@ -40,6 +40,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    compile 'com.vatsal.imagezoomer:image-zoomer:1.0.2'
+    implementation 'com.vatsal.imagezoomer:image-zoomer:1.0.2'
 
 }
