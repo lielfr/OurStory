@@ -31,9 +31,9 @@
         app:srcCompat="@drawable/backgroundsecond" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/search"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="330"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -55,7 +55,7 @@
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/add_vs" />
 
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText">
+        app:layout_constraintTop_toBottomOf="@+id/search">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -109,6 +109,27 @@
             android:layout_marginRight="16dp"
             app:tabIndicatorColor="#FFFFFF"
             app:tabTextColor="#FFFFFF" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#2C3E50"
+        android:onClick="finish"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relative_layout" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="409dp"
+        android:layout_height="51dp"
+        android:background="#2C3E58"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
