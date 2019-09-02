@@ -60,6 +60,10 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
     }
 
+    public void filterList(ArrayList<Memory> filteredList) {
+        mMemories = filteredList;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return mMemories.size() ;
