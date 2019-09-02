@@ -1,12 +1,14 @@
 package org.tsofen.ourstory;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 //import com.example.addmemory.model.Feeling;
 import com.example.ourstory.R;
+import com.vatsal.imagezoomer.ZoomAnimation;
 
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
@@ -47,8 +50,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
-    Date BirthDate = new Date();
-    Date DeathDate = new Date();
+    Date BirthDate = new Date(1990, 8, 10);
+    Date DeathDate = new Date(2000, 5, 23);
     Calendar cal = Calendar.getInstance();
     Date today = cal.getTime();
     private EditText editTextDescription;
@@ -119,34 +122,43 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 displayToast("You have selected smile Emoji.");
                 SelectedEmoji = Feeling.HAPPY;
                 //  smileb.setBackgroundColor(Color.parseColor("#C3D7EB"));
-                // smileb.getLayoutParams().height(34);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(35, 35);
-                smileb.setLayoutParams(params);
+                smileb.requestLayout();
+//                Resources r = getResources();
+//                ZoomAnimation zoomAnimation = new ZoomAnimation(this);
+//                zoomAnimation.zoomReverse(v, 50);
+                HiglightEmoji(v);
+//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(35, 35);
+//                smileb.setLayoutParams(params);
                 flag = 0;
                 break;
             case R.id.sadbtn_cememory:
                 displayToast("You have selected pensive-face Emoji.");
                 SelectedEmoji = Feeling.SAD;
+                HiglightEmoji(v);
                 flag = 1;
                 break;
             case R.id.happybtn_cememory:
                 displayToast("You have selected happy Emoji.");
                 SelectedEmoji = Feeling.BLESSED;
+                HiglightEmoji(v);
                 flag = 2;
                 break;
             case R.id.lovebtn_cememory:
                 displayToast("You have selected heart-eyes Emoji.");
                 SelectedEmoji = Feeling.LOVE;
+                HiglightEmoji(v);
                 flag = 3;
                 break;
             case R.id.happy1btn_cememory:
                 displayToast("You have selected very-happy Emoji.");
                 SelectedEmoji = Feeling.HAHA;
+                HiglightEmoji(v);
                 flag = 4;
                 break;
             case R.id.untitledbtn_cememory:
                 displayToast("You have selected sunglasses Emoji.");
                 SelectedEmoji = Feeling.COOL;
+                HiglightEmoji(v);
                 flag = 5;
                 break;
             case R.id.Savebtn_cememory:
@@ -164,14 +176,17 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 
-    public void HiglightEmoji(ImageButton Selected) {
+    public void HiglightEmoji(View v) {
+        Resources r = getResources();
+        ZoomAnimation zoomAnimation = new ZoomAnimation(this);
+        zoomAnimation.zoomReverse(v, 250);
 
     }
 
     public boolean CheckValidation(View v) {        //(Memory m) {
-        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.getItemCount() == 1)) {
+        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.images.isEmpty()) && (videoAdapter.videos.isEmpty())) {
             {
-                displayToast("You should either enter an image or a description for your memory!");
+                displayToast("You should either enter an image or a viedeo or description for your memory!");
                 return false;
             }
         }
@@ -290,14 +305,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public void saveMemory(View view) {
 
         Memory mem = new Memory();
-
+        locationText = findViewById(R.id.memLocation_cememory);
         mem.setLocation(locationText.getText().toString());
 
-        mem.setDescription(DescriptionText.getText().toString());
+        mem.setDescription(editTextDescription.getText().toString());
         mem.setFeeling(SelectedEmoji);
         Calendar c = Calendar.getInstance();
         c.setTime(MemDate);
         mem.setMemoryDate(c);
+        displayToast("Data saved.");
 
     }
 }

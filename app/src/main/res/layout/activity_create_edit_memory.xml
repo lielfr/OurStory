@@ -54,7 +54,7 @@
                 android:background="@drawable/login_button"
                 android:onClick="saveMemory"
                 android:text="@string/save"
-                android:enabled="false"
+                android:enabled="true"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold"
