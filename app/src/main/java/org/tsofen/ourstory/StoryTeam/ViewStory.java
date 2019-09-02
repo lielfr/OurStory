@@ -21,6 +21,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_story);
+        // testing!!!!!!
 
         Intent intent = getIntent();
 
