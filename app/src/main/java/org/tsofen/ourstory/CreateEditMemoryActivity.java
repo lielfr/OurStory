@@ -1,9 +1,11 @@
 package org.tsofen.ourstory;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +40,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     ImageView iv;
     boolean flag = false;
     boolean dateFlag = false;
-    AddMemoryImageAdapter adapter;
+    AddMemoryImageAdapter imageAdapter;
+    AddMemoryVideoAdapter videoAdapter;
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
@@ -80,10 +83,16 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         svbtn.setOnClickListener(this);
         cnslbtn.setOnClickListener(this);
 
-        RecyclerView rv = findViewById(R.id.add_pictures_rv_cememory);
-        adapter = new AddMemoryImageAdapter(this);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+        RecyclerView rvp = findViewById(R.id.add_pictures_rv_cememory);
+        imageAdapter = new AddMemoryImageAdapter(this);
+        rvp.setAdapter(imageAdapter);
+        rvp.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+                false));
+
+        RecyclerView rvv = findViewById(R.id.add_videos_rv_cememory);
+        videoAdapter = new AddMemoryVideoAdapter(this);
+        rvv.setAdapter(videoAdapter);
+        rvv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
         editTextDescription.addTextChangedListener(SaveTextWatcher);
@@ -148,13 +157,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-            List<Image> images = ImagePicker.getImages(data);
-            for (Image img : images) {
-                adapter.images.add(img.getPath());
+        if (data == null) return;
+        if (requestCode == AddMemoryImageAdapter.ADDMEMORY_IMAGE) {
+            if (data.getClipData() != null) {
+                int count = data.getClipData().getItemCount();
+                for (int i = 0; i < count; i++) {
+                    Uri currentUri = data.getClipData().getItemAt(i).getUri();
+                    imageAdapter.images.add(currentUri.toString());
+                }
+            } else if (data.getData() != null) {
+                imageAdapter.images.add(data.getData().toString());
             }
-            adapter.notifyDataSetChanged();
+            imageAdapter.notifyDataSetChanged();
+        } else if (requestCode == AddMemoryVideoAdapter.ADDMEMORY_VIDEO) {
+            if (data.getClipData() != null) {
+                int count = data.getClipData().getItemCount();
+                for (int i = 0; i < count; i++) {
+                    Uri currentUri = data.getClipData().getItemAt(i).getUri();
+                    videoAdapter.videos.add(currentUri.toString());
+                }
+            } else if (data.getData() != null) {
+                videoAdapter.videos.add(data.getData().toString());
+            }
+            videoAdapter.notifyDataSetChanged();
         }
     }
 
@@ -185,7 +210,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         startActivityForResult(Intent.createChooser(i, "Upload a video"), 1);
 
     }
-
 
     public void showDatePicker(View view) {
         DialogFragment newFragment = new DatePickerFragmentCEMemory();
@@ -238,7 +262,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         mem.setDescription(DescriptionText.getText().toString());
         mem.setFeeling(SelectedEmoji);
         mem.setMemoryDate(MemDate);
-
 
     }
 }

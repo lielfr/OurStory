@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name="org.tsofen.ourstory.MyMemoriesActivity"></activity>
         <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity">
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +32,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity">
         </activity>
 
         <meta-data
