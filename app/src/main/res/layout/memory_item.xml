@@ -183,6 +183,8 @@
             android:id="@+id/commentNum"
             android:layout_width="22dp"
             android:layout_height="17dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/quicksand_bold"
             android:text="9"

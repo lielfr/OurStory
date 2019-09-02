@@ -71,7 +71,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name,mem_date,create_date,descr,num_of_likes,num_of_comments,num_of_shares;
+        public TextView name,mem_date,create_date,descr;
 
         public MyMemoriesAdapter adapter;
 
@@ -82,10 +82,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             mem_date = itemView.findViewById(R.id.memory_date);
             create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
-            num_of_comments = itemView.findViewById(R.id.commentNum);
-            num_of_likes = itemView.findViewById(R.id.likesNum);
-            num_of_shares = itemView.findViewById(R.id.shareNum);
-
             adapter = MyMemoriesAdapter;
         }
     }
