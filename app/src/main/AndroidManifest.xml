@@ -9,13 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity">
+        <activity android:name="org.tsofen.ourstory.MyMemoriesActivity"></activity>
+        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="org.tsofen.ourstory.MemoriesOfStory"
+            android:label="Memories"
+            android:parentActivityName="org.tsofen.ourstory.YearActivity"></activity>
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="org.tsofen.ourstory.YearActivity" />
+
+        <activity android:name="org.tsofen.ourstory.YearActivity"></activity>
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
