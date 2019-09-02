@@ -4,30 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/centered_background"
+    android:background="@drawable/johnny"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context="org.tsofen.ourstory.StoryTeam.HomeFragment">
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="312dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_search"
-        android:clickable="true"
-        android:focusable="true"
-        app:defaultQueryHint="Search..."
-        app:layout_constraintStart_toStartOf="@+id/story_dates"
-        app:layout_constraintTop_toBottomOf="@+id/story_dates"
-        app:searchHintIcon="@drawable/ic_search"
-        app:searchIcon="@drawable/ic_search"
-        android:transitionName="search_story"/>
+    tools:context="org.tsofen.ourstory.UserModel.HomeFragment">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/login_button"
         android:layout_width="144dp"
         android:layout_height="48dp"
         android:layout_marginStart="36dp"
@@ -37,11 +22,15 @@
         android:fontFamily="@font/quicksand_bold"
         android:text="@string/login"
         android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.177" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/registration"
         android:layout_width="144dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -52,24 +41,10 @@
         android:fontFamily="@font/quicksand_bold"
         android:text="@string/register"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2" />
-
-    <TextView
-        android:id="@+id/story_dates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/search_for_dear_one"
-        android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        app:fontFamily="@font/quicksand_bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/story_name" />
+        app:layout_constraintStart_toEndOf="@+id/login_button"
+        app:layout_constraintTop_toTopOf="@+id/login_button" />
 
     <Button
         android:id="@+id/create_story_button"
@@ -96,6 +71,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_story_button"
         app:srcCompat="@drawable/ic_ourstory_sep" />
+
+    <TextView
+        android:id="@+id/story_dates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/search_for_dear_one"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        app:fontFamily="@font/quicksand_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/story_name" />
 
     <TextView
         android:id="@+id/story_name"
@@ -127,4 +116,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="312dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/semiTransparentWhite"
+        android:clickable="true"
+        android:focusable="true"
+        app:defaultQueryHint="Search..."
+        app:layout_constraintStart_toStartOf="@+id/story_dates"
+        app:layout_constraintTop_toBottomOf="@+id/story_dates"
+        app:searchHintIcon="@drawable/ic_search"
+        app:searchIcon="@drawable/ic_search" />
 </androidx.constraintlayout.widget.ConstraintLayout>

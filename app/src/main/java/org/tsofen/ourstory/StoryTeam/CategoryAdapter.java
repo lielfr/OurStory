@@ -16,8 +16,8 @@ import com.example.ourstory.R;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-    private LayoutInflater mInflater;
     List<CategoryItem> mItems;
+    private LayoutInflater mInflater;
 
     public CategoryAdapter(Context context, List<CategoryItem> mItems) {
         this.mItems = mItems;

@@ -54,7 +54,7 @@
                 android:background="@drawable/login_button"
                 android:onClick="saveMemory"
                 android:text="@string/save"
-                android:enabled="false"
+                android:enabled="true"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -87,23 +87,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12_cememory" />
-
-            <ImageView
-                android:id="@+id/video_cememory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/todo"
-                android:onClick="upvid"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3_cememory"
-                app:srcCompat="@drawable/vid"
-                tools:layout_conversion_absoluteHeight="0dp"
-                tools:layout_conversion_absoluteWidth="0dp" />
 
             <TextView
                 android:id="@+id/textView8_cememory"
@@ -159,7 +142,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/video_cememory"
+                app:layout_constraintTop_toBottomOf="@+id/add_videos_rv_cememory"
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -238,24 +221,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/memDescription_cememory"
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" />
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/date"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="72dp"-->
-            <!--                android:layout_marginLeft="72dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:background="@drawable/edit_round"-->
-            <!--                android:fontFamily="@font/quicksand_bold"-->
-            <!--                android:hint=" dd   .   mm   .   year"-->
-            <!--                android:textColor="@android:color/background_light"-->
-            <!--                android:textColorHint="@android:color/darker_gray"-->
-            <!--                android:textSize="20sp"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/textView8"-->
-            <!--                tools:layout_conversion_absoluteHeight="0dp"-->
-            <!--                tools:layout_conversion_absoluteWidth="0dp" />-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/date_cememory"
@@ -432,14 +397,14 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
-                    android:drawableBottom="@drawable/ic_emoji_blessed"
+                    android:drawableBottom="@drawable/ic_emoji_cool"
                     android:scaleType="centerInside"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toRightOf="@id/happy1btn_cememory"
                     app:layout_constraintStart_toEndOf="@+id/happy1btn_cememory"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_emoji_blessed" />
+                    app:srcCompat="@drawable/ic_emoji_cool" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -471,7 +436,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_cememory" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/add_videos_rv_cememory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3_cememory" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout

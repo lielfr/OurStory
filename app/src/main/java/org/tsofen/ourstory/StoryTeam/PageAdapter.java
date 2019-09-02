@@ -15,10 +15,13 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: return new StoryFragment();
-            case 1: return new MemoryFragment();
+            case 0:
+                return new StoryFragment();
+            case 1:
+                return new MemoryFragment();
 
-            default: return null;
+            default:
+                return null;
         }
     }
 

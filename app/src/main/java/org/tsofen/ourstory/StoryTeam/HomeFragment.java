@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SearchStory.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        getActivity(), (View) view.findViewById(R.id.searchView),
+                        getActivity(), view.findViewById(R.id.searchView),
                         "search_story");
                 startActivity(intent, options.toBundle());
             }

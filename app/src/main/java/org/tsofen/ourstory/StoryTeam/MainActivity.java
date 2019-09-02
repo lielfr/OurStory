@@ -16,12 +16,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    FragmentManager fragmentManager;
-    Fragment currentFragment;
-
     public static final String KEY_SELECTED = "OurStorySelected";
     public int selected;
-
+    FragmentManager fragmentManager;
+    Fragment currentFragment;
     BottomNavigationView nav;
 
     @Override
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         currentFragment = new HomeFragment();
         currentFragment.setArguments(getIntent().getExtras());
-
 
 
         fragmentManager = getSupportFragmentManager();
