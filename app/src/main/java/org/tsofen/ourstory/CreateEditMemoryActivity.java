@@ -32,11 +32,13 @@ import com.vatsal.imagezoomer.ZoomAnimation;
 
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Tag;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,6 +49,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
     AddMemoryVideoAdapter videoAdapter;
+    AddMemoryTagAdapter tagAdapter;
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
@@ -117,6 +120,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         //   editTextDescription.addTextChangedListener(SaveTextWatcher);
         // editTextLocation.addTextChangedListener(SaveTextWatcher);
+
+        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
+        tagAdapter = new AddMemoryTagAdapter(new LinkedList<Tag>(), tagsRV);
+        tagsRV.setAdapter(tagAdapter);
+        tagsRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,
+                false));
 
     }
 
