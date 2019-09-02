@@ -72,10 +72,15 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_memory_description_background"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="top|left"
+                android:inputType="textLongMessage|textPersonName"
+                android:singleLine="true"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4_cememory" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4_cememory"
+                android:textCursorDrawable="@drawable/custom_curser" />
 
             <EditText
                 android:id="@+id/memLocation_cememory"
