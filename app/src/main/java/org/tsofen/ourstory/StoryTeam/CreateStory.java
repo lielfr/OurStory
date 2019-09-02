@@ -125,7 +125,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         int f1 = 0, f2 = 0, f3 = 0;  // flags
         Date date1D, date2D, todayD;
 
-        Intent i = new Intent(this, ViewStory.class);
+        Intent i = new Intent(CreateStory.this, ViewStory.class);
 
         // Names Validation
         EditText firstName = findViewById(R.id.firstNameEditText);
@@ -174,17 +174,17 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        int tag1 = R.drawable.family_vs, tag2 = R.drawable.sports_vs, tag3 = R.drawable.vacation_vs;
-        i.putExtra("tag1", tag1);
-        i.putExtra("tag2", tag2);
-        i.putExtra("tag3", tag3);
-        String ttag1 = "Sports", ttag2 = "family", ttag3 = "Vacations";
-        i.putExtra("ttag3", ttag3);
-        i.putExtra("ttag1", ttag1);
-        i.putExtra("ttag2", ttag2);
-
-        ImageView iv = findViewById(R.id.profilePic); //pass the profile image
+//
+//        int tag1 = R.drawable.family_vs, tag2 = R.drawable.sports_vs, tag3 = R.drawable.vacation_vs;
+//        i.putExtra("tag1", tag1);
+//        i.putExtra("tag2", tag2);
+//        i.putExtra("tag3", tag3);
+//        String ttag1 = "Sports", ttag2 = "family", ttag3 = "Vacations";
+//        i.putExtra("ttag3", ttag3);
+//        i.putExtra("ttag1", ttag1);
+//        i.putExtra("ttag2", ttag2);
+//
+//        ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
         if (f1 == 1 && f2 == 1 && f3 == 1) {
             // Send data to next activity
@@ -198,5 +198,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             startActivity(i);
         }
+
     }
 }
