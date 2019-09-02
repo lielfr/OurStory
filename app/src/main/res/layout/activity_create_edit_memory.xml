@@ -54,7 +54,7 @@
                 android:background="@drawable/login_button"
                 android:onClick="saveMemory"
                 android:text="@string/save"
-                android:enabled="false"
+                android:enabled="true"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -402,14 +402,14 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:background="#212F3D"
-                    android:drawableBottom="@drawable/ic_emoji_blessed"
+                    android:drawableBottom="@drawable/ic_emoji_cool"
                     android:scaleType="centerInside"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toRightOf="@id/happy1btn_cememory"
                     app:layout_constraintStart_toEndOf="@+id/happy1btn_cememory"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_emoji_blessed" />
+                    app:srcCompat="@drawable/ic_emoji_cool" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

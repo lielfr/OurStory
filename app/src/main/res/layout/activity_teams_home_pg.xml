@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
+
+    <Button
+        android:id="@+id/user_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="256dp"
+        android:onClick="showUserPart"
+        android:text="User Part"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Mem1_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:onClick="showMem1Part"
+        android:text="Mem1 Part"
+        app:layout_constraintEnd_toEndOf="@+id/user_button"
+        app:layout_constraintStart_toStartOf="@+id/user_button"
+        app:layout_constraintTop_toBottomOf="@+id/user_button" />
+
+    <Button
+        android:id="@+id/Mem2_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:onClick="showMem2Part"
+        android:text="Mem2 Part"
+        app:layout_constraintEnd_toEndOf="@+id/Mem1_button"
+        app:layout_constraintStart_toStartOf="@+id/Mem1_button"
+        app:layout_constraintTop_toBottomOf="@+id/Mem1_button" />
+
+    <Button
+        android:id="@+id/Story_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showStoryPart"
+        android:text="Story Part"
+        app:layout_constraintEnd_toEndOf="@+id/Mem2_button"
+        app:layout_constraintStart_toStartOf="@+id/Mem2_button"
+        app:layout_constraintTop_toBottomOf="@+id/Mem2_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
