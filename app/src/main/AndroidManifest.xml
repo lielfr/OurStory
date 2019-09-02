@@ -15,7 +15,10 @@
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
 
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
+
+
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
