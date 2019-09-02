@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AddMemory</string>
+    <string name="app_name">Our Story</string>
     <string name="save">SAVE</string>
     <string name="todo">TODO</string>
     <string name="tags">Tags</string>
@@ -100,6 +100,7 @@
 
     <string name="title_activity_view_story">ViewStory</string>
     <string name="view_story_title">View Story</string>
+    <string name="CreateNewAcount">Create a new account</string>
 
     <string-array name="names">
         <item>Mance Raider</item>

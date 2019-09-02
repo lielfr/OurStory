@@ -72,7 +72,12 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_memory_description_background"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:fontFamily="@font/quicksand_bold"
+                android:gravity="top|left"
+                android:inputType="textLongMessage|textMultiLine|textPersonName"
+                android:singleLine="true"
+                android:textColor="#FFFFFF"
+                android:textCursorDrawable="@drawable/custom_curser"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4_cememory" />
@@ -407,10 +412,10 @@
                     app:srcCompat="@drawable/ic_emoji_cool" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tagsLayout_cememory"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="52dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
@@ -422,12 +427,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView14_cememory">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/add_pictures_rv_cememory"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
@@ -440,7 +445,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/add_videos_rv_cememory"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
