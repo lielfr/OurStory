@@ -73,6 +73,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("AAA");
+        TextView pageTitle = findViewById(R.id.text_cememory);
+        if (bundle == null)
+            pageTitle.setText("Add Memory");
+        else
+            pageTitle.setText("Edit Memory");
+
         editTextDescription = findViewById(R.id.memDescription_cememory);
         editTextLocation = findViewById(R.id.memLocation_cememory);
         smileb = findViewById(R.id.smilebtn_cememory);
@@ -123,14 +132,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             case R.id.smilebtn_cememory:
                 displayToast("You have selected smile Emoji.");
                 SelectedEmoji = Feeling.HAPPY;
-                //  smileb.setBackgroundColor(Color.parseColor("#C3D7EB"));
+
                 smileb.requestLayout();
-//                Resources r = getResources();
-//                ZoomAnimation zoomAnimation = new ZoomAnimation(this);
-//                zoomAnimation.zoomReverse(v, 50);
+//
                 HiglightEmoji(v);
-//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(35, 35);
-//                smileb.setLayoutParams(params);
+//
                 flag = 0;
                 break;
             case R.id.sadbtn_cememory:
