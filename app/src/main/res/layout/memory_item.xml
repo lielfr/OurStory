@@ -1,25 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/memory_border"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_memory_year"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="2085"
-        android:textColor="@color/colorLogin"
-        app:fontFamily="@font/quicksand_bold" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="401dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
-    <LinearLayout
-        android:id="@+id/ll_memory_images"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"></LinearLayout>
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="414dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/picture_person"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.065"
+            tools:srcCompat="@tools:sample/avatars"
+            android:layout_marginLeft="16dp" />
+
+        <TextView
+            android:id="@+id/name_txt_person"
+            android:layout_width="129dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="Name"
+
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/picture_person"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/picture_person"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.446" />
+
+        <TextView
+            android:id="@+id/posted_date"
+            android:layout_width="90dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="140dp"
+            android:fontFamily="@font/quicksand_light"
+            android:text="date"
+            android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/postedattxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name_txt_person"
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_marginRight="140dp"
+            android:gravity="start" />
+
+        <TextView
+            android:id="@+id/memory_date"
+            android:layout_width="104dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:editable="false"
+            android:fontFamily="@font/quicksand_light"
+            android:text="date"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.764"
+            app:layout_constraintStart_toEndOf="@+id/name_txt_person"
+            app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
+
+        <TextView
+            android:id="@+id/descr"
+            android:layout_width="373dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="  Description about this memory"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toBottomOf="@+id/picture_person"
+            android:gravity="start"
+            android:layout_marginRight="8dp" />
+
+        <ImageView
+            android:id="@+id/memory_pic"
+            android:layout_width="0dp"
+            android:layout_height="201dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descr"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/pic" />
+
+        <ImageButton
+            android:id="@+id/likebtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+
+            app:layout_constraintBottom_toBottomOf="@+id/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/like" />
+
+        <ImageButton
+            android:id="@+id/sharebtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+
+            app:layout_constraintBottom_toBottomOf="@+id/commentbtn2"
+            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
+            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/share" />
+
+        <ImageButton
+            android:id="@+id/commentbtn2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/likebtn"
+            app:layout_constraintStart_toEndOf="@+id/likebtn"
+            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/comment" />
+
+        <TextView
+            android:id="@+id/likesNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="15"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/commentbtn2"
+            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintStart_toStartOf="@+id/likebtn" />
+
+        <TextView
+            android:id="@+id/commentNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="9"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/likesNum"
+            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
+            app:layout_constraintHorizontal_bias="0.409"
+            app:layout_constraintStart_toEndOf="@+id/likesNum"
+            app:layout_constraintTop_toTopOf="@+id/likesNum"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/shareNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="2"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/commentNum"
+            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
+            app:layout_constraintStart_toEndOf="@+id/commentNum"
+            app:layout_constraintTop_toTopOf="@+id/commentNum"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/postedattxt"
+            android:layout_width="72dp"
+            android:layout_height="23dp"
+            android:fontFamily="@font/quicksand_light"
+            android:text="posted at"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.257"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_txt_person" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
