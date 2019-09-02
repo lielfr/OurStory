@@ -12,4 +12,63 @@
     <string name="month">mm</string>
     <string name="year">yyyy</string>
     <string name="day">dd</string>
-</resources>
+
+
+        <string name="title_activity_view_story">ViewStory</string>
+        <string name="view_story_title">View Story</string>
+
+        <string name="login">Login</string>
+        <string name="register">Register</string>
+        <string name="search_for_dear_one">Search for Dear One</string>
+        <string name="sweet_memory">Say something about this sweet memory...</string>
+        <string name="create_story_dear_one">Create a Story for a Dear One</string>
+        <string name="separator">Separator</string>
+        <string name="add_profile">Add profile picture</string>
+        <string name="first_name">First Name...</string>
+        <string name="last_name">Last Name...</string>
+        <string name="hello_blank_fragment">Hello Blank Fragmen</string>
+
+        <string-array name="names">
+            <item>Mance Raider</item>
+            <item>Robb Stark</item>
+            <item>Jon Snow</item>
+            <item>Robert Baratheon</item>
+            <item>Stannis Baratheon</item>
+            <item>Balon Greyjoy</item>
+            <item>Joffrey Baratheon</item>
+            <item>Tommen Baratheon</item>
+            <item>Night King</item>
+            <item>Aerys II Targaryen</item>
+            <item>Jaime Lannister</item>
+        </string-array>
+
+        <string-array name="titles">
+            <item>King Beyong The Wall</item>
+            <item>The King In The North</item>
+            <item>The King In The North</item>
+            <item>King Of Westeros</item>
+            <item>King Of Westeros</item>
+            <item>King Of Iron Islands</item>
+            <item>King Of Westeros</item>
+            <item>King Of Westeros</item>
+            <item>Night King</item>
+            <item>The Mad King</item>
+            <item>The Kingslayer</item>
+        </string-array>
+
+        <string-array name="dates">
+            <item>season2-season3</item>
+            <item>season1-season3</item>
+            <item>season1-season8</item>
+            <item>season1</item>
+            <item>season2-season6</item>
+            <item>season3-season5</item>
+            <item>season1-season5</item>
+            <item>season1-season7</item>
+            <item>season4-season8</item>
+            <item>season0</item>
+            <item>season1-season8</item>
+        </string-array>
+
+    </resources>
+
