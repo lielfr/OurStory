@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DateHolder">
 
-        <EditText
+        <TextView
             android:id="@+id/showGender"
             android:layout_width="371dp"
             android:layout_height="60dp"
@@ -64,6 +64,7 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/edittext_legend_continuous"
             android:fontFamily="@font/quicksand"
+            android:gravity="center|left"
             android:hint="@string/Gender2"
             android:paddingLeft="5dp"
             android:textColorHint="@color/colorGrayHint"
@@ -172,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/Create"
+            android:text="@string/CreateNewAcount"
             android:textColor="@color/colorWhite"
             android:textSize="21sp"
             app:fontFamily="@font/quicksand_bold"
@@ -201,7 +202,6 @@
             android:ems="10"
             android:fontFamily="@font/quicksand"
             android:hint="@string/State1"
-            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
@@ -246,7 +246,6 @@
             android:ems="10"
             android:fontFamily="@font/quicksand"
             android:hint="@string/ct"
-            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"

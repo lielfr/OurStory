@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2C3E50"
-    tools:context="org.tsofen.ourstory.StoryTeam.MainActivity">
+    tools:context="org.tsofen.ourstory.StoryTeam.MainActivity"><![CDATA[
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,29 +14,47 @@
     android:background="#2C3E50"
     tools:context=".MainActivity">
 
+
+
+    ]]>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="411dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/backgroundsecond" />
+
     <EditText
         android:id="@+id/editText"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="345dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_width="330"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/second1"
+        android:background="@drawable/searchbar"
         android:ems="10"
         android:inputType="textPersonName"
         android:scrollbarStyle="outsideInset"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="2dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:background="#2C3E50"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editText"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/add_vs" />
@@ -46,7 +64,6 @@
         android:layout_width="412dp"
         android:layout_height="96dp"
         android:background="#34495E"
-        android:hapticFeedbackEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +72,10 @@
 
     <RelativeLayout
         android:id="@+id/relative_layout"
-        android:layout_width="381dp"
-        android:layout_height="328dp"
+        android:layout_width="0dp"
+        android:layout_height="391dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/rectangle_background"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,12 +110,5 @@
             app:tabIndicatorColor="#FFFFFF"
             app:tabTextColor="#FFFFFF" />
     </RelativeLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
