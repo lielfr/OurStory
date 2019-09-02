@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
-
-
-import com.example.ourstory.R;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
 
