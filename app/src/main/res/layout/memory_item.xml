@@ -95,10 +95,10 @@
             app:layout_constraintStart_toEndOf="@+id/name_txt_person"
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
-        <TextView
+        <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
-            android:layout_width="373dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/quicksand_bold"
@@ -107,6 +107,12 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
+
+            app:trimExpandedText="@string/showLess"
+            app:trimCollapsedText="@string/showMore"
+            app:trimMode="trimModeLength"
+            app:trimLength="120"
+
             app:layout_constraintEnd_toEndOf="@+id/background"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/background"

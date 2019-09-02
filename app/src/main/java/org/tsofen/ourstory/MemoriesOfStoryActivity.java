@@ -47,6 +47,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         for (Memory memory: data){
 
             int year2 = memory.getMemoryDate().get(Calendar.YEAR);
+            Log.d("tagrrr", "m d " + year2);
             if(year2 == text) {
                 Log.d("tag", "added to filter " + year2);
                 filteredList.add(memory);
