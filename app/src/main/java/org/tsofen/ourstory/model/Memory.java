@@ -144,6 +144,9 @@ public class Memory {
         this.createDate = createDate;
     }
 
+    public Memory() {
+    }
+
     public void setCreatorPic(URI creatorPic) {
         this.creatorPic = creatorPic;
     }

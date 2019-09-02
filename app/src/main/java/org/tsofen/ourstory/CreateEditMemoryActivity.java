@@ -261,7 +261,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         EditText DescriptionText = findViewById(R.id.memDescription_cememory);
         mem.setDescription(DescriptionText.getText().toString());
         mem.setFeeling(SelectedEmoji);
-        mem.setMemoryDate(MemDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(MemDate);
+        mem.setMemoryDate(c);
 
     }
 }
