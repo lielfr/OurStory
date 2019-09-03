@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void finish(View view) {
-        finish();
-    }
+
+
 }

@@ -13,11 +13,11 @@
         <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
+        <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory" />
 
-        <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"
-            android:exported="true"/> >
 
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
+
 
 
             <intent-filter>

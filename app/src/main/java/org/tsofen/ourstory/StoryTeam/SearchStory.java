@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,11 +22,7 @@ public class SearchStory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
 
-        EditText SearchEditText = (EditText)findViewById(R.id.search);
-        String result = SearchEditText.getText().toString();
-        if (result.matches("")) {
-           finish();
-        }
+
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         // Set the text for each tab.
         tabLayout.addTab(tabLayout.newTab().setText(s));
@@ -56,5 +53,10 @@ public class SearchStory extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+
+    public void finish(View view) {
+        finish();
     }
 }

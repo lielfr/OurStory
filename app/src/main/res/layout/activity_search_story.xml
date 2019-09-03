@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2C3E50"
-    tools:context="org.tsofen.ourstory.StoryTeam.MainActivity"><![CDATA[
+    tools:context="org.tsofen.ourstory.StoryTeam.SearchStory"><![CDATA[
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -70,21 +70,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/first" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#2C3E50"
-        android:onClick="finish"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relative_layout" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="26dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="52dp"
+            android:background="@color/transparent"
+            android:onClick="finish"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/transparent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
