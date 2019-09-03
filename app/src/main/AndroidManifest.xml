@@ -13,6 +13,10 @@
         <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
+        <activity android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
+            android:label="CreateStory"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
             <intent-filter>
@@ -21,7 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
+        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
