@@ -16,6 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< Updated upstream
+=======
+        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
+        <activity android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
+                    android:windowSoftInputMode="adjustPan"
+                    >
+        </activity>
+        <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
+>>>>>>> Stashed changes
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
