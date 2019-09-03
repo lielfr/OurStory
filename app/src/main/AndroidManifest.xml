@@ -17,6 +17,8 @@
             android:label="CreateStory"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
+
 
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
             <intent-filter>
