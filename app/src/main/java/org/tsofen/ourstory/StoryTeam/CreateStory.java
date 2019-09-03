@@ -15,7 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.ourstory.R;
+
+import org.tsofen.ourstory.R;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

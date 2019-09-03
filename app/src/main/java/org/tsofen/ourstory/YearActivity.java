@@ -11,14 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
-
 public class YearActivity extends AppCompatActivity {
 
-    EditText year, name;
-    private static final String LOG_TAG = MemoriesOfStory.class.getSimpleName();
     // Unique tag required for the intent extra
-    public static final String EXTRA_MESSAGE = "com.example.android.memories.extra.MESSAGE";
+    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.memories.extra.MESSAGE";
+    private static final String LOG_TAG = MemoriesOfStoryActivity.class.getSimpleName();
+    EditText year, name, creator_name;
 
     // Unique tag for the intent reply
     @Override
@@ -27,10 +25,11 @@ public class YearActivity extends AppCompatActivity {
         setContentView(R.layout.activity_year);
         year = findViewById(R.id.year);
         name = findViewById(R.id.nametxt);
+        creator_name = findViewById(R.id.name_memory);
 
     }
 
-    public void launchSecondActivity(View view) {
+    public void launchMemoriesActivity(View view) {
         if (year.getText().toString().length() == 0 || name.getText().toString().length() == 0) {
             {
                 AlertDialog.Builder myAlertBuilder = new
@@ -60,12 +59,21 @@ public class YearActivity extends AppCompatActivity {
         } else {
             Log.d(LOG_TAG, "Button clicked!");
 
-            Intent intent = new Intent(this, MemoriesOfStory.class);
+            Intent intent = new Intent(this, MemoriesOfStoryActivity.class);
             String message = year.getText().toString();
             message += " " + name.getText().toString();
 
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
         }
+    }
+
+    public void launchMyMermoriesActivity(View view) {
+        Log.d(LOG_TAG, "Button clicked!");
+
+        Intent intent = new Intent(this, MyMemoriesActivity.class);
+        String message = creator_name.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 }

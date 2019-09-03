@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ourstory">
+    package="org.tsofen.ourstory">
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,8 @@
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
 
+        <activity android:name="org.tsofen.ourstory.MyMemoriesActivity" />
+        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity" />
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
+        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
+
+        <activity android:name="org.tsofen.ourstory.YearActivity"></activity>
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="org.tsofen.ourstory.YearActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
