@@ -1,19 +1,16 @@
 package org.tsofen.ourstory;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.ourstory.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MyMemoriesActivity extends AppCompatActivity {
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
 
 import java.util.LinkedList;
 
