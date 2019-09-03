@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
 
 
 public class UserProfile extends Fragment {

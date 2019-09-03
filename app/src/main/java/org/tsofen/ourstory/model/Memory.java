@@ -1,11 +1,8 @@
 package org.tsofen.ourstory.model;
 
-import com.example.ourstory.R;
-
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import static java.util.Calendar.getInstance;
 

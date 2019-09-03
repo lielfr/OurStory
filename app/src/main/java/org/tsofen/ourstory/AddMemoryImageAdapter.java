@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.example.ourstory.R;
 
 import java.util.LinkedList;
 import java.util.List;

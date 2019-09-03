@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
 
 
 public class RegistrationPage2 extends AppCompatActivity {

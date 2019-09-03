@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ourstory.R;
-
 import org.tsofen.ourstory.model.Memory;
 
 import java.util.ArrayList;

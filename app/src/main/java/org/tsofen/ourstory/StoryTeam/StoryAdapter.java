@@ -10,8 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ourstory.R;
-
+import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Memory;
 
 import java.util.ArrayList;
