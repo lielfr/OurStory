@@ -3,18 +3,12 @@ package org.tsofen.ourstory;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,20 +18,19 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
-//import com.example.addmemory.model.Feeling;
-import com.example.ourstory.R;
 import com.vatsal.imagezoomer.ZoomAnimation;
 
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Tag;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedList;
+
+//import com.example.addmemory.model.Feeling;
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,6 +40,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
     AddMemoryVideoAdapter videoAdapter;
+    AddMemoryTagAdapter tagAdapter;
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
@@ -73,6 +67,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("AAA");
+        TextView pageTitle = findViewById(R.id.text_cememory);
+        if (bundle == null)
+            pageTitle.setText("Add Memory");
+        else
+            pageTitle.setText("Edit Memory");
+
         editTextDescription = findViewById(R.id.memDescription_cememory);
         editTextLocation = findViewById(R.id.memLocation_cememory);
         smileb = findViewById(R.id.smilebtn_cememory);
@@ -109,6 +112,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         //   editTextDescription.addTextChangedListener(SaveTextWatcher);
         // editTextLocation.addTextChangedListener(SaveTextWatcher);
 
+        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
+        tagAdapter = new AddMemoryTagAdapter(new LinkedList<Tag>(), tagsRV);
+        tagsRV.setAdapter(tagAdapter);
+        tagsRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,
+                false));
+
     }
 
     @Override
@@ -123,14 +132,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             case R.id.smilebtn_cememory:
                 displayToast("You have selected smile Emoji.");
                 SelectedEmoji = Feeling.HAPPY;
-                //  smileb.setBackgroundColor(Color.parseColor("#C3D7EB"));
+
                 smileb.requestLayout();
-//                Resources r = getResources();
-//                ZoomAnimation zoomAnimation = new ZoomAnimation(this);
-//                zoomAnimation.zoomReverse(v, 50);
+//
                 HiglightEmoji(v);
-//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(35, 35);
-//                smileb.setLayoutParams(params);
+//
                 flag = 0;
                 break;
             case R.id.sadbtn_cememory:
