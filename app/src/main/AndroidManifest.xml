@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
-
+        <activity android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
+                    android:windowSoftInputMode="adjustPan">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

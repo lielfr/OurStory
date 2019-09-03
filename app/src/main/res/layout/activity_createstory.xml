@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
@@ -7,7 +8,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     tools:context="org.tsofen.ourstory.StoryTeam.CreateStory">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_create_story"
@@ -65,6 +65,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="629dp"
@@ -77,10 +78,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/header_create_story">
 
@@ -387,8 +388,8 @@
                     android:layout_marginBottom="70dp"
                     android:background="@drawable/login_button"
                     android:fontFamily="@font/quicksand_bold"
-                    android:onClick="viewCreatedStory"
                     android:text="CREATE"
+                    android:onClick="viewCreatedStory"
                     android:textColor="@color/colorWhite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/add_profile_picture"
@@ -409,6 +410,7 @@
                     app:layout_constraintStart_toEndOf="@+id/button4"
                     app:layout_constraintTop_toTopOf="@+id/button4"
                     app:layout_constraintVertical_bias="0.0" />
+
 
 
             </LinearLayout>
