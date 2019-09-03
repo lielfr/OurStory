@@ -13,7 +13,7 @@ import org.tsofen.ourstory.UserModel.AppHomePage;
 
 import org.tsofen.ourstory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.YearActivity;
-import org.tsofen.ourstory.StoryTeam.SearchStory;
+
 public class TeamsHomePg extends AppCompatActivity {
 
     @Override
@@ -38,6 +38,5 @@ public class TeamsHomePg extends AppCompatActivity {
     }
 
     public void showStoryPart(View view) {
-
     }
 }
