@@ -27,17 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
         <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-=======
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
-        <activity android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
-                    android:windowSoftInputMode="adjustPan">
-        </activity>
->>>>>>> malik/master
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
