@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage" />
+
+        <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory" />
+        <activity android:name="org.tsofen.ourstory.StoryTeam.CreateStory" />
+
         <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
@@ -22,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
+        <activity android:name="org.tsofen.ourstory.StoryTeam.CreateStory"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
