@@ -18,6 +18,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+<<<<<<< HEAD
+=======
+
+>>>>>>> malik/master
         <Button
             android:id="@+id/back_button_viewstory2"
             android:layout_width="32dp"
@@ -82,6 +86,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/header_create_story">
 
@@ -313,6 +318,10 @@
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
                         android:hint="@string/year"
+<<<<<<< HEAD
+=======
+                        android:paddingLeft="5dp"
+>>>>>>> malik/master
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/day_2"
                         app:layout_constraintStart_toEndOf="@+id/month_2"
@@ -376,15 +385,25 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:orientation="horizontal"
                 android:layout_marginBottom="30dp">
+=======
+                android:orientation="horizontal">
+>>>>>>> malik/master
 
                 <Button
                     android:id="@+id/button4"
                     android:layout_width="112dp"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="80dp"
+=======
+                    android:layout_height="48dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="70dp"
+>>>>>>> malik/master
                     android:background="@drawable/login_button"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="CREATE"
@@ -392,24 +411,47 @@
                     android:textColor="@color/colorWhite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/add_profile_picture"
+<<<<<<< HEAD
                     app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+=======
+                    app:layout_constraintTop_toBottomOf="@+id/profilePic"
+                    app:layout_constraintVertical_bias="0.0" />
+>>>>>>> malik/master
 
                 <Button
                     android:id="@+id/button5"
                     android:layout_width="200dp"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+=======
+                    android:layout_height="48dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="20dp"
+>>>>>>> malik/master
                     android:background="@drawable/register_button"
                     android:text="CREATE &amp; ADD A MEMORY"
                     android:textColor="@color/colorWhite"
                     app:layout_constraintBottom_toBottomOf="@+id/button4"
                     app:layout_constraintStart_toEndOf="@+id/button4"
+<<<<<<< HEAD
                     app:layout_constraintTop_toTopOf="@+id/button4" />
 
             </LinearLayout>
+=======
+                    app:layout_constraintTop_toTopOf="@+id/button4"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+
+            </LinearLayout>
+
+
+>>>>>>> malik/master
         </LinearLayout>
     </ScrollView>
 
