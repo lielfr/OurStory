@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
 
 
 public class RegistrationPage1 extends AppCompatActivity {

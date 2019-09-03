@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.ourstory.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.tsofen.ourstory.R;
 
 public class MainActivity extends AppCompatActivity {
 

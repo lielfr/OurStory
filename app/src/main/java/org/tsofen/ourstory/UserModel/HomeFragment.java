@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
 
 
 public class HomeFragment extends Fragment {

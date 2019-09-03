@@ -11,8 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
-
 public class YearActivity extends AppCompatActivity {
 
     EditText year, name;
