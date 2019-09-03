@@ -12,6 +12,7 @@ import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.UserModel.AppHomePage;
 
 import org.tsofen.ourstory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.YearActivity;
 
 public class TeamsHomePg extends AppCompatActivity {
 
@@ -32,6 +33,8 @@ public class TeamsHomePg extends AppCompatActivity {
     }
 
     public void showMem2Part(View view) {
+        Intent intent = new Intent(this, YearActivity.class);
+        startActivity(intent);
     }
 
     public void showStoryPart(View view) {
