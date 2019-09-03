@@ -10,13 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.ourstory.R;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
