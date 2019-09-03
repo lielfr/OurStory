@@ -38,7 +38,6 @@ public class TeamsHomePg extends AppCompatActivity {
     }
 
     public void showStoryPart(View view) {
-        Intent intent = new Intent(this, SearchStory.class);
-        startActivity(intent);
+
     }
 }
