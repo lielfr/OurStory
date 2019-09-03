@@ -3,18 +3,12 @@ package org.tsofen.ourstory;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +18,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.model.Image;
-//import com.example.addmemory.model.Feeling;
-import com.example.ourstory.R;
 import com.vatsal.imagezoomer.ZoomAnimation;
 
 import org.tsofen.ourstory.model.Feeling;
@@ -39,7 +29,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
+
+//import com.example.addmemory.model.Feeling;
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
 

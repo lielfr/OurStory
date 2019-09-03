@@ -11,4 +11,4 @@
     android:singleLine="true"
     android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
     android:textColor="@color/colorWhite"
-    android:textSize="24sp" />
+    android:textSize="18sp" />
