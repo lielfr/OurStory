@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.vatsal.imagezoomer:image-zoomer:1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a4987f7c1f27f9fe0ee7641801a510a/jetified-image-zoomer-1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a4987f7c1f27f9fe0ee7641801a510a/jetified-image-zoomer-1.0.2/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vatsal.imagezoomer/image-zoomer/1.0.2/104eab867048bfaf039f42194aa28e550b6c9aea/image-zoomer-1.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vatsal.imagezoomer/image-zoomer/1.0.2/a5025f7395cec5f9265be779285e97d6284f48d2/image-zoomer-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
