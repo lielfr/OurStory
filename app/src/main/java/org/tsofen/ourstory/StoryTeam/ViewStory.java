@@ -35,16 +35,18 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         String fName = intent.getStringExtra("first name");
         String lName = intent.getStringExtra("last name");
         String date1 = intent.getStringExtra("date1");
-//        String tag1 = intent.getStringExtra("ttag3");
-//        String tag2 = intent.getStringExtra("ttag2");
-//        String tag3 = intent.getStringExtra("ttag1");
+        String tag1 = intent.getStringExtra("ttag3");
+        String tag2 = intent.getStringExtra("ttag2");
+        String tag3 = intent.getStringExtra("ttag1");
         String date2 = intent.getStringExtra("date2");
-//        int iv = intent.getIntExtra("image", 0);
-//        int ic1 = intent.getIntExtra("tag1", 0);
-//        int ic2 = intent.getIntExtra("tag2", 0);
-//        int ic3 = intent.getIntExtra("tag3", 0);
+        int iv = intent.getIntExtra("image", 0);
+        int ic1 = intent.getIntExtra("tag1", 0);
+        int ic2 = intent.getIntExtra("tag2", 0);
+        int ic3 = intent.getIntExtra("tag3", 0);
 
-        Story story = new Story(fName, lName, date1, date2/*, iv, tag1, tag2, tag3, ic1, ic2, ic3*/);
+       Story story = new Story(fName, lName, date1, date2/*, iv, tag1, tag2, tag3, ic1, ic2, ic3*/);
+
+
 
         String FL_name;
         FL_name = story.getFirstName() + " " + story.getLastName();
