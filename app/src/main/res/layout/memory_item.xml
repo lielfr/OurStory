@@ -31,13 +31,14 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.065"
-            tools:srcCompat="@tools:sample/avatars"
-            android:layout_marginLeft="16dp" />
+            app:srcCompat="@drawable/alex"
+            tools:srcCompat="@drawable/alex" />
 
         <TextView
             android:id="@+id/name_txt_person"
@@ -78,12 +79,13 @@
 
         <TextView
             android:id="@+id/memory_date"
-            android:layout_width="104dp"
-            android:layout_height="25dp"
+            android:layout_width="146dp"
+            android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:editable="false"
             android:fontFamily="@font/quicksand_light"
+            android:gravity="center"
             android:text="date"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -94,23 +96,20 @@
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
         <TextView
-            android:id="@+id/descr"
-            android:layout_width="373dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/commentNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="24dp"
             android:fontFamily="@font/quicksand_bold"
-            android:text="  Description about this memory"
-            android:textAlignment="textStart"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/background"
-            app:layout_constraintTop_toBottomOf="@+id/picture_person"
-            android:gravity="start"
-            android:layout_marginRight="8dp" />
+            android:text="9"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/likesNum"
+            app:layout_constraintStart_toEndOf="@+id/likesNum"
+            app:layout_constraintTop_toTopOf="@+id/likesNum"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/memory_pic"
@@ -144,19 +143,6 @@
             app:srcCompat="@drawable/like" />
 
         <ImageButton
-            android:id="@+id/sharebtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/commentbtn2"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/share" />
-
-        <ImageButton
             android:id="@+id/commentbtn2"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -185,49 +171,42 @@
             app:layout_constraintStart_toStartOf="@+id/likebtn" />
 
         <TextView
-            android:id="@+id/commentNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="9"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/likesNum"
-            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
-            app:layout_constraintHorizontal_bias="0.409"
-            app:layout_constraintStart_toEndOf="@+id/likesNum"
-            app:layout_constraintTop_toTopOf="@+id/likesNum"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/shareNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="2"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/commentNum"
-            app:layout_constraintEnd_toEndOf="@+id/sharebtn"
-            app:layout_constraintStart_toEndOf="@+id/commentNum"
-            app:layout_constraintTop_toTopOf="@+id/commentNum"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
             android:id="@+id/postedattxt"
             android:layout_width="72dp"
             android:layout_height="23dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/quicksand_light"
             android:text="posted at"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.257"
+            app:layout_constraintHorizontal_bias="0.259"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_txt_person" />
+
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/descr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="  Description about this memory"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            app:trimCollapsedText="@string/showMore"
+            app:trimExpandedText="@string/showLess"
+            app:trimLength="120"
+            app:trimMode="trimModeLength"
+
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toBottomOf="@+id/picture_person"
+            android:gravity="start"
+            android:layout_marginRight="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

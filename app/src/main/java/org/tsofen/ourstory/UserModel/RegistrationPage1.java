@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
 
 
 public class RegistrationPage1 extends AppCompatActivity {
@@ -33,8 +33,8 @@ public class RegistrationPage1 extends AppCompatActivity {
     public String repeatPasswordString;
 
     public boolean emailFlag = false;
-    public boolean firstNameFlag = false;
-    public boolean lastNameFlag = false;
+    public boolean firstNameFlag ;
+    public boolean lastNameFlag;
     public boolean passwordFlag = false;
 
     @Override
@@ -79,15 +79,14 @@ public class RegistrationPage1 extends AppCompatActivity {
         }
 
 
-        if (verifyName(firstNameString)) {
-            Log.d("verification tag2", "first name verified");
+     /*  if (verifyName(firstNameString)){
+            Log.d("verification tag3", "first name verified");
             TextViewInvs1.setVisibility(View.INVISIBLE);
             firstNameFlag = true;
         } else {
             TextViewInvs1.setVisibility(View.VISIBLE);
             firstNameFlag = false;
         }
-
         if (verifyName(lastNameString)) {
             Log.d("verification tag3", "last name verified");
             TextViewInvs1.setVisibility(View.INVISIBLE);
@@ -95,7 +94,38 @@ public class RegistrationPage1 extends AppCompatActivity {
         } else {
             TextViewInvs1.setVisibility(View.VISIBLE);
             lastNameFlag = false;
-        }
+        }*/
+       firstNameFlag=verifyName(firstNameString);
+       lastNameFlag=verifyName(lastNameString);
+       if (firstNameFlag==false )
+       {
+           if ( lastNameFlag==false) {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=false;
+               lastNameFlag=false;
+           }
+           else
+           {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=false;
+               lastNameFlag=true;
+           }
+      }
+       else
+       {
+           if ( lastNameFlag==false) {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=true;
+               lastNameFlag=false;
+           }
+           else
+           {
+               TextViewInvs1.setVisibility(View.INVISIBLE);
+               firstNameFlag=true;
+               lastNameFlag=true;
+           }
+       }
+
         if ((passwordString.length()) > 10) {
             TextViewInvs4.setVisibility(View.VISIBLE);
             passwordFlag = false;

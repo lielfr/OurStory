@@ -24,7 +24,7 @@
         android:popupBackground="@drawable/tag_round"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView_tags_rv"
         app:layout_constraintStart_toStartOf="parent"
