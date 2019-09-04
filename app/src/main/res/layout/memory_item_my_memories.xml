@@ -63,9 +63,10 @@
             android:layout_height="48dp"
 
             android:background="@color/colorPrimaryDark"
+            android:onClick="shareMyMemories"
             app:layout_constraintStart_toEndOf="@+id/commentbtn2"
             app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:srcCompat="@drawable/sharebutton" />
+            app:srcCompat="@drawable/sharenew" />
 
         <ImageButton
             android:id="@+id/editbtn"
