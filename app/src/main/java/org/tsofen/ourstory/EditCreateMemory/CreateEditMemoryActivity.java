@@ -16,12 +16,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.AddMemoryTagAdapter;
-import org.tsofen.ourstory.AddMemoryVideoAdapter;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.Tag;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -98,9 +95,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         // editTextLocation.addTextChangedListener(SaveTextWatcher);
 
         RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
-        tagAdapter = new AddMemoryTagAdapter(new LinkedList<Tag>(), tagsRV);
+        tagAdapter = new AddMemoryTagAdapter(new LinkedList<>(), tagsRV);
         tagsRV.setAdapter(tagAdapter);
-        tagsRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,
+        tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
     }
