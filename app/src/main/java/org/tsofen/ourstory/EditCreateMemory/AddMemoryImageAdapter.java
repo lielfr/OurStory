@@ -1,4 +1,4 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
+import org.tsofen.ourstory.R;
 
 import java.util.LinkedList;
 import java.util.List;

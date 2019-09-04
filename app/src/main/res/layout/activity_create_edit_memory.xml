@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2C3E50"
     android:orientation="vertical"
-    tools:context="org.tsofen.ourstory.CreateEditMemoryActivity">
+    tools:context="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity">
 
     <ScrollView
         android:id="@+id/scrollView_cememory"
@@ -14,8 +14,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_toolbar_cememory">
+        app:layout_constraintTop_toBottomOf="@+id/custom_toolbar_cememory"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout_cememory"
@@ -52,9 +54,9 @@
                 android:layout_marginEnd="88dp"
                 android:layout_marginRight="88dp"
                 android:background="@drawable/login_button"
+                android:enabled="true"
                 android:onClick="saveMemory"
                 android:text="@string/save"
-                android:enabled="true"
                 android:textColor="@android:color/background_light"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -233,10 +235,10 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edittext_legend_continuous"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8_cememory"
                 tools:layout_conversion_absoluteHeight="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 tools:layout_conversion_absoluteWidth="0dp">
 
                 <EditText
@@ -329,12 +331,51 @@
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp">
 
+                <ImageView
+                    android:id="@+id/smiley_back3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:src="@drawable/smiley_background_choice"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/smiley_back2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/smiley_back2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:src="@drawable/smiley_background_choice"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/smiley_back1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/smiley_back1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:src="@drawable/smiley_background_choice"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageButton
                     android:id="@+id/smilebtn_cememory"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="#212F3D"
-                    android:drawableBottom="@drawable/ic_emoji_smile"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#00212F3D"
                     android:scaleType="centerInside"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -343,11 +384,13 @@
 
                 <ImageButton
                     android:id="@+id/sadbtn_cememory"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="#212F3D"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#00212F3D"
                     android:scaleType="centerInside"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/smilebtn_cememory"
@@ -356,60 +399,23 @@
                     app:srcCompat="@drawable/ic_emoji_sad" />
 
                 <ImageButton
-                    android:id="@+id/happybtn_cememory"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="#212F3D"
-                    android:drawableBottom="@drawable/happy"
-                    app:srcCompat="@drawable/happy"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintLeft_toRightOf="@id/sadbtn_cememory"
-                    app:layout_constraintStart_toEndOf="@+id/sadbtn_cememory"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
                     android:id="@+id/lovebtn_cememory"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="#212F3D"
-                    android:drawableBottom="@drawable/ic_emoji_love"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#00212F3D"
                     android:scaleType="centerInside"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/happybtn_cememory"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sadbtn_cememory"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_emoji_love" />
 
-                <ImageButton
-                    android:id="@+id/happy1btn_cememory"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="#1C2733"
-                    android:drawableBottom="@drawable/happy1"
-                    app:srcCompat="@drawable/happy1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintLeft_toRightOf="@id/lovebtn_cememory"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/untitledbtn_cememory"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="#212F3D"
-                    android:drawableBottom="@drawable/ic_emoji_cool"
-                    android:scaleType="centerInside"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintLeft_toRightOf="@id/happy1btn_cememory"
-                    app:layout_constraintStart_toEndOf="@+id/happy1btn_cememory"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_emoji_cool" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

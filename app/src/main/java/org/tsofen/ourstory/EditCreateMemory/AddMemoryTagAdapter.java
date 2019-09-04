@@ -1,8 +1,6 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Rect;
 import android.text.InputType;
 import android.util.TypedValue;
@@ -12,14 +10,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Tag;
 
 import java.util.List;
