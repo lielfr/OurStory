@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="48dp"
-    android:background="@drawable/edit_round4">
+    android:layout_gravity="start|center_vertical"
+    android:background="@drawable/edit_round4"
+    app:layout_anchorGravity="start|center_vertical">
 
     <AutoCompleteTextView
         android:id="@+id/cememory_rv_text"

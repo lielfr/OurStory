@@ -2,7 +2,10 @@ package org.tsofen.ourstory;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.text.InputType;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +46,14 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
         return viewHolder;
     }
 
+    public int calculateWidth(String text) {
+        Rect bounds = new Rect();
+        TextView textView = new TextView(ctx);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
+        return bounds.width();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageView closeButton = holder.itemView.findViewById(R.id.imageView_tags_rv);
@@ -72,11 +83,17 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
                     R.layout.tags_dropdown_item, suggestions);
             editText.setAdapter(adapter);
-            editText.showDropDown();
+//            editText.showDropDown();
         } else {
-            editText.setText(tags.get(position).getLabel());
+            String text = tags.get(position).getLabel();
+            editText.setText(text);
             editText.setInputType(InputType.TYPE_NULL);
-            //closeButton.setVisibility(View.VISIBLE);
+//            editText.setLayoutParams(new ConstraintLayout.LayoutParams(
+//                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+//                    ConstraintLayout.LayoutParams.WRAP_CONTENT
+//            ));
+            editText.setWidth((int) Math.ceil(calculateWidth(text)));
+            closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
                 tags.remove(position);
                 notifyItemRemoved(position);
