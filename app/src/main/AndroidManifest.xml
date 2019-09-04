@@ -20,7 +20,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
         <activity android:name="org.tsofen.ourstory.MyMemoriesActivity" />
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity" />
+        <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
