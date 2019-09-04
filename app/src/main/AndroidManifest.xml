@@ -27,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
