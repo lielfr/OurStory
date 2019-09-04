@@ -1,6 +1,8 @@
 package org.tsofen.ourstory.model;
 
-public enum Feeling {
+import java.io.Serializable;
+
+public enum Feeling implements Serializable {
     HAPPY,
     SAD,
     BLESSED,

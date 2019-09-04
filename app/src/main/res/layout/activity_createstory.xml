@@ -8,118 +8,35 @@
     android:background="@drawable/background_gradient"
     tools:context="org.tsofen.ourstory.StoryTeam.CreateStory">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_create_story"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/app_bar_height"
-        android:background="@color/colorPrimary"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/back_button_viewstory2"
-            android:layout_width="32dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.128"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="51.33dp"
-            android:layout_height="23.85dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="29dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo" />
-
-        <TextView
-            android:id="@+id/text_create_story"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Create Story"
-            android:textColor="@color/colorWhite"
-            android:textSize="21sp"
-            app:fontFamily="@font/quicksand_bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="629dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@+id/header_create_story"
         app:layout_constraintTop_toBottomOf="@+id/header_create_story">
 
         <LinearLayout
+            android:id="@+id/linearLayoutCS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/header_create_story">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/firstNameHolder"
-                android:layout_width="328dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="25dp"
-                app:layout_constraintTop_toBottomOf="@+id/header_create_story">
-
-                <EditText
-                    android:id="@+id/firstNameEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/edittext_legend_continuous"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="@string/first_name"
-                    android:inputType="text|textCapSentences|textPersonName"
-                    android:maxLines="1"
-                    android:paddingLeft="5dp"
-                    android:textColorHint="@color/colorGrayHint"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/firstNameTextView"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="7dp"
-                    android:background="@drawable/background_gradient"
-                    android:fontFamily="@font/quicksand_bold"
-                    android:text="First Name"
-                    android:textColor="@color/colorGrayHint"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/profilePic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="add profile picture image view"
+                android:onClick="pickPic"
+                app:layout_constraintTop_toBottomOf="@+id/add_profile_picture"
+                app:srcCompat="@drawable/add_photo" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lastNameHolder"
@@ -216,7 +133,6 @@
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
                         android:hint="@string/year"
-                        android:paddingLeft="5dp"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/month_1"
                         app:layout_constraintStart_toEndOf="@+id/month_1"
@@ -256,6 +172,54 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/login_button"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:onClick="viewCreatedStory"
+                    android:text="CREATE"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/add_profile_picture"
+                    app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/register_button"
+                    android:text="CREATE &amp; ADD A MEMORY"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/button4"
+                    app:layout_constraintStart_toEndOf="@+id/button4"
+                    app:layout_constraintTop_toTopOf="@+id/button4" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/add_profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/quicksand_bold"
+                android:text="@string/add_profile"
+                android:textColor="@color/colorGrayHint"
+                app:layout_constraintTop_toBottomOf="@+id/holder4" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/holder4"
@@ -313,7 +277,6 @@
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
                         android:hint="@string/year"
-                        android:paddingLeft="5dp"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/day_2"
                         app:layout_constraintStart_toEndOf="@+id/month_2"
@@ -355,66 +318,97 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/add_profile_picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/quicksand_bold"
-                android:text="@string/add_profile"
-                android:textColor="@color/colorGrayHint"
-                app:layout_constraintTop_toBottomOf="@+id/holder4" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/firstNameHolder"
+                android:layout_width="328dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toBottomOf="@+id/header_create_story">
 
-            <ImageView
-                android:id="@+id/profilePic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="add profile picture image view"
-                android:onClick="pickPic"
-                app:layout_constraintTop_toBottomOf="@+id/add_profile_picture"
-                app:srcCompat="@drawable/add_photo" />
+                <EditText
+                    android:id="@+id/firstNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edittext_legend_continuous"
+                    android:fontFamily="@font/quicksand"
+                    android:hint="@string/first_name"
+                    android:inputType="text|textCapSentences|textPersonName"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:textColorHint="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="112dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="70dp"
-                    android:background="@drawable/login_button"
+                <TextView
+                    android:id="@+id/firstNameTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/background_gradient"
                     android:fontFamily="@font/quicksand_bold"
-                    android:onClick="viewCreatedStory"
-                    android:text="CREATE"
-                    android:textColor="@color/colorWhite"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/add_profile_picture"
-                    app:layout_constraintTop_toBottomOf="@+id/profilePic"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/register_button"
-                    android:text="CREATE &amp; ADD A MEMORY"
-                    android:textColor="@color/colorWhite"
-                    app:layout_constraintBottom_toBottomOf="@+id/button4"
-                    app:layout_constraintStart_toEndOf="@+id/button4"
-                    app:layout_constraintTop_toTopOf="@+id/button4"
-                    app:layout_constraintVertical_bias="0.0" />
-
-
-            </LinearLayout>
-
-
+                    android:text="First Name"
+                    android:textColor="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_create_story"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <Button
+            android:id="@+id/back_button_viewstory2"
+            android:layout_width="32dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="51.33dp"
+            android:layout_height="23.85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/text_create_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Create Story"
+            android:textColor="@color/colorWhite"
+            android:textSize="21sp"
+            app:fontFamily="@font/quicksand_bold"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

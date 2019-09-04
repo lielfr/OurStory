@@ -1,12 +1,13 @@
 package org.tsofen.ourstory.model;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import static java.util.Calendar.getInstance;
 
-public class Memory {
+public class Memory implements Serializable {
     long id;
     long storyId;
     long creatorId;
