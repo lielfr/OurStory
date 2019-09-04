@@ -28,7 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
             android:name="org.tsofen.ourstory.MemoriesOfStoryActivity"
             android:label="Memories"
             android:parentActivityName="org.tsofen.ourstory.YearActivity" />
