@@ -10,9 +10,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -100,6 +102,33 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper
+                .SimpleCallback(0, ItemTouchHelper.UP | ItemTouchHelper.DOWN) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                if (viewHolder.getAdapterPosition() > 0) {
+                    imageAdapter.data.remove(viewHolder.getAdapterPosition() - 1);
+                    imageAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                    imageAdapter.notifyDataSetChanged();
+
+                    videoAdapter.data.remove(viewHolder.getAdapterPosition() - 1);
+                    videoAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                    videoAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
+        helper.attachToRecyclerView(rvp);
+        helper.attachToRecyclerView(rvv);
+
     }
 
     @Override
@@ -141,7 +170,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     }
 
     public boolean CheckValidation(View v) {        //(Memory m) {
-        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.images.isEmpty()) && (videoAdapter.videos.isEmpty())) {
+        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             {
                 displayToast("You should either enter an image or a viedeo or description for your memory!");
                 return false;
@@ -178,10 +207,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    imageAdapter.images.add(currentUri.toString());
+                    imageAdapter.data.add(currentUri.toString());
                 }
             } else if (data.getData() != null) {
-                imageAdapter.images.add(data.getData().toString());
+                imageAdapter.data.add(data.getData().toString());
             }
             imageAdapter.notifyDataSetChanged();
         } else if (requestCode == AddMemoryVideoAdapter.ADDMEMORY_VIDEO) {
@@ -189,10 +218,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    videoAdapter.videos.add(currentUri.toString());
+                    videoAdapter.data.add(currentUri.toString());
                 }
             } else if (data.getData() != null) {
-                videoAdapter.videos.add(data.getData().toString());
+                videoAdapter.data.add(data.getData().toString());
             }
             videoAdapter.notifyDataSetChanged();
         }
@@ -245,4 +274,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         displayToast("Data saved.");
 
     }
+
+
 }
+
+

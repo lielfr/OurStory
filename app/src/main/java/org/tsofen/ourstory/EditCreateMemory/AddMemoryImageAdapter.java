@@ -21,13 +21,13 @@ import java.util.List;
 public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAdapter.ViewHolder> {
     Context ctx;
     Activity parent;
-    List<String> images;
+    List<String> data;
 
     static final int ADDMEMORY_IMAGE = 1;
 
     public AddMemoryImageAdapter(Activity parent) {
         super();
-        images = new LinkedList<>();
+        data = new LinkedList<>();
         this.parent = parent;
     }
 
@@ -65,12 +65,12 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
                     setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            images.remove(position - 1);
+                            data.remove(position - 1);
                             notifyItemRemoved(position);
                             notifyDataSetChanged();
                         }
                     });
-            String uri = images.get(position - 1);
+            String uri = data.get(position - 1);
             Glide.with(holder.itemView)
                     .load(uri)
                     .into(imageView);
@@ -79,7 +79,7 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
 
     @Override
     public int getItemCount() {
-        return images.size() + 1;
+        return data.size() + 1;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
