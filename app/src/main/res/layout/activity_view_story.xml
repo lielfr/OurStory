@@ -122,14 +122,19 @@
                     app:srcCompat="@drawable/edit_vs" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHeight_max="192dp"
+                    app:layout_constraintHeight_min="192dp"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/pic1" />
+                    app:srcCompat="@drawable/profilepic" />
 
                 <TextView
                     android:id="@+id/textView"
