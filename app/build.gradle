@@ -8,7 +8,7 @@ android {
         targetCompatibility 1.8
     }
     defaultConfig {
-        applicationId "com.example.addmemory"
+        applicationId "org.tsofen.ourstory"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -46,4 +46,4 @@ dependencies {
     implementation 'com.borjabravo:readmoretextview:2.1.0'
 
     implementation 'com.borjabravo:readmoretextview:2.1.0'
-}
+}

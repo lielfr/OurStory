@@ -19,12 +19,12 @@ public class Story {
     String tag1, tag2, tag3;
     int tag_icon1, tag_icon2, tag_icon3;
 
-    public Story(String firstName, String lastName, String date1, String date2, int img) {
+    public Story(String firstName, String lastName, String date1, String date2/*, int img*/) {
         FirstName = firstName;
         LastName = lastName;
         this.date1 = date1;
         this.date2 = date2;
-        this.img = img;
+        // this.img = img;
     }
 
     public Story(String firstName, String lastName, String date1, String date2,
