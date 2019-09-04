@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
+
 import androidx.annotation.NonNull;
-
-
-import com.example.ourstory.R;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
 
@@ -20,6 +18,7 @@ import java.util.Calendar;
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
     public ArrayList<Memory> mMemories;
+
     public MemoryAdapter(ArrayList<Memory> memories) {
         this.mMemories = memories;
     }
@@ -32,11 +31,11 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
 
         // inflate the custom layout
-        View contactView = inflater.inflate(R.layout.memory_item,parent,false);
+        View contactView = inflater.inflate(R.layout.memory_item, parent, false);
 
 
         // return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView,this);
+        ViewHolder viewHolder = new ViewHolder(contactView, this);
 
 
         return viewHolder;
@@ -44,27 +43,25 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Memory memory= mMemories.get(position);
+        Memory memory = mMemories.get(position);
         holder.descr.setText(memory.getDescription());
         holder.name.setText(memory.getCreatorName());
 
-        String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) +"/"+(memory.getCreateDate().get(Calendar.MONTH))+
-                "/"+(memory.getCreateDate().get(Calendar.YEAR));
-        String[] monthNames = {" ","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH ) + " , "+(memory.getMemoryDate().get(Calendar.YEAR));
+        String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) + "/" + (memory.getCreateDate().get(Calendar.MONTH)) +
+                "/" + (memory.getCreateDate().get(Calendar.YEAR));
+        String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
        /* holder.num_of_shares.setText(memory.getLikes().size());
         holder.num_of_shares.setText(memory.getShares().size());
         holder.num_of_comments.setText(memory.getComments().size());*/
         holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
 
-
     }
-
 
     @Override
     public int getItemCount() {
-        return mMemories.size() ;
+        return mMemories.size();
     }
 
     public void filterList(ArrayList<Memory> filteredList) {
@@ -73,7 +70,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name,mem_date,create_date,descr,num_of_likes,num_of_comments,num_of_shares;
+        public TextView name, mem_date, create_date, descr, num_of_likes, num_of_comments, num_of_shares;
         public ImageView pic;
         public MemoryAdapter adapter;
 

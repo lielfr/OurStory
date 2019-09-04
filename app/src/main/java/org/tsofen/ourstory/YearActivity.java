@@ -11,14 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
-
 public class YearActivity extends AppCompatActivity {
 
-    EditText year, name , creator_name;
-    private static final String LOG_TAG = MemoriesOfStoryActivity.class.getSimpleName();
     // Unique tag required for the intent extra
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.memories.extra.MESSAGE";
+    private static final String LOG_TAG = MemoriesOfStoryActivity.class.getSimpleName();
+    EditText year, name, creator_name;
 
     // Unique tag for the intent reply
     @Override
@@ -32,8 +30,7 @@ public class YearActivity extends AppCompatActivity {
     }
 
     public void launchMemoriesActivity(View view) {
-        if(year.getText().toString().length()==0 || name.getText().toString().length()==0)
-        {
+        if (year.getText().toString().length() == 0 || name.getText().toString().length() == 0) {
             {
                 AlertDialog.Builder myAlertBuilder = new
                         AlertDialog.Builder(YearActivity.this);
@@ -59,8 +56,7 @@ public class YearActivity extends AppCompatActivity {
                 myAlertBuilder.show();
             }
 
-        }
-        else {
+        } else {
             Log.d(LOG_TAG, "Button clicked!");
 
             Intent intent = new Intent(this, MemoriesOfStoryActivity.class);
@@ -71,8 +67,8 @@ public class YearActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    public void launchMyMermoriesActivity(View view)
-    {
+
+    public void launchMyMermoriesActivity(View view) {
         Log.d(LOG_TAG, "Button clicked!");
 
         Intent intent = new Intent(this, MyMemoriesActivity.class);
