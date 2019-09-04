@@ -8,7 +8,7 @@ android {
         targetCompatibility 1.8
     }
     defaultConfig {
-        applicationId "com.example.addmemory"
+        applicationId "org.tsofen.addmemory"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1

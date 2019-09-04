@@ -30,7 +30,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 
-//import com.example.addmemory.model.Feeling;
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
 

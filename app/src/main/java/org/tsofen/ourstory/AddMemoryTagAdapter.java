@@ -1,5 +1,6 @@
 package org.tsofen.ourstory;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -8,9 +9,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Tag;
@@ -56,7 +60,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                     notifyItemInserted(tags.size() - 1);
                     editText.setText("");
                     rv.scrollToPosition(tags.size());
-                    editText.dismissDropDown();
+
                 }
                 return true;
             });
@@ -72,7 +76,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
         } else {
             editText.setText(tags.get(position).getLabel());
             editText.setInputType(InputType.TYPE_NULL);
-            closeButton.setVisibility(View.VISIBLE);
+            //closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
                 tags.remove(position);
                 notifyItemRemoved(position);
