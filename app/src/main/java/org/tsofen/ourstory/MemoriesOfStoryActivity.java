@@ -13,7 +13,7 @@ import org.tsofen.ourstory.model.Memory;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MemoriesOfStory extends AppCompatActivity {
+public class MemoriesOfStoryActivity extends AppCompatActivity {
 
     RecyclerView rv;
     ArrayList<Memory> data;

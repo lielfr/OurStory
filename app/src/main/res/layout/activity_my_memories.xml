@@ -83,24 +83,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <TextView
-        android:id="@+id/storyname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginRight="72dp"
-        android:background="@color/colorPrimaryDark"
-        android:fontFamily="@font/quicksand_bold"
-        android:text="Story Name"
-
-        android:textAlignment="center"
-        android:textColor="@color/colorLogin"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
-
-    <TextView
         android:id="@+id/memoriestxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,13 +90,15 @@
         android:layout_marginLeft="68dp"
         android:fontFamily="@font/quicksand_bold"
         android:gravity="start"
-        android:text="Memories of"
+        android:text="My Memories"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:textSize="21sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/storyname" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"

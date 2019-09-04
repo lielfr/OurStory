@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MyMemoriesActivity extends AppCompatActivity {
 
@@ -25,18 +27,26 @@ public class MyMemoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_memories);
         Intent intent = getIntent();
         String message = intent.getStringExtra(YearActivity.EXTRA_MESSAGE);
-        String[] m = message.split(" ");
-        String name = m[1] + " " + m[2];
-        int year = Integer.parseInt(m[0]);
         rv = findViewById(R.id.recycler);
-        storyName = findViewById(R.id.storyname);
         data = Memory.createContactsListMyMemories();
         adapter = new MyMemoriesAdapter(data);
+        filter(message);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        storyName.setText(name);
 
+    }
+
+    private void filter(String text) {
+        ArrayList<Memory> filteredList = new ArrayList<>();
+        for (Memory memory : data) {
+
+            String name = memory.getCreatorName();
+            if (name.equals(text))
+                filteredList.add(memory);
+        }
+
+        adapter.filterList(filteredList);
     }
 
 }

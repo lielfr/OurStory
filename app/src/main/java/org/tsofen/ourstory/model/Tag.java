@@ -1,6 +1,8 @@
 package org.tsofen.ourstory.model;
 
-public class Tag {
+import java.io.Serializable;
+
+public class Tag implements Serializable {
     long id;
     String label;
 
