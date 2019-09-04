@@ -60,9 +60,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
 
-
     }
-
 
     @Override
     public int getItemCount() {

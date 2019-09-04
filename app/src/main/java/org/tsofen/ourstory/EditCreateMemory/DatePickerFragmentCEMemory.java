@@ -1,4 +1,4 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
