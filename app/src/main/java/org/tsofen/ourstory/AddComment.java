@@ -1,19 +1,24 @@
 package org.tsofen.ourstory;
 
-import android.content.Context;
-import android.net.Uri;
+import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+
+import org.tsofen.ourstory.model.api.Comment;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 public class AddComment extends Fragment {
 
-    public AddComment() {
+    long userId;
+
+    public AddComment(long userId) {
         // Required empty public constructor
     }
 
@@ -25,4 +30,15 @@ public class AddComment extends Fragment {
     }
 
 
+    public void SendCmnt(View view) {
+
+        Activity activity = getActivity();
+        Comment comment = new Comment();
+        TextView txtview = activity.findViewById(R.id.AddComment);
+        comment.setText(txtview.getText().toString());
+        comment.setUser(userId);
+        OurStoryService service = WebFactory.getService();
+        service.newComment(comment);
+
+    }
 }
