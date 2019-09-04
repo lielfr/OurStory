@@ -28,7 +28,7 @@
             android:background="@drawable/edittext_legend_continuous"
             android:ems="10"
             android:fontFamily="@font/quicksand"
-            android:inputType="textPassword"
+            android:gravity="center|left"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
@@ -72,7 +72,7 @@
             android:background="@drawable/edittext_legend_continuous"
             android:ems="10"
             android:fontFamily="@font/quicksand"
-            android:inputType="textPassword"
+            android:gravity="center|left"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
@@ -121,7 +121,7 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/edittext_legend_continuous"
             android:fontFamily="@font/quicksand"
-            android:gravity="start"
+            android:gravity="center|left"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorGrayHint"
@@ -264,7 +264,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.892">
 
-        <EditText
+        <TextView
             android:id="@+id/showEmail"
             android:layout_width="376dp"
             android:layout_height="47dp"

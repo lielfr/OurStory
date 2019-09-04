@@ -6,10 +6,11 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
-
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
+import org.tsofen.ourstory.YearActivity;
 
 public class TeamsHomePg extends AppCompatActivity {
 
@@ -30,8 +31,12 @@ public class TeamsHomePg extends AppCompatActivity {
     }
 
     public void showMem2Part(View view) {
+        Intent intent = new Intent(this, YearActivity.class);
+        startActivity(intent);
     }
 
     public void showStoryPart(View view) {
+        Intent intent = new Intent(TeamsHomePg.this, CreateStory.class);
+        startActivity(intent);
     }
 }

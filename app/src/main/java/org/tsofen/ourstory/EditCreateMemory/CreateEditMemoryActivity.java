@@ -16,15 +16,18 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ourstory.R;
-
+import org.tsofen.ourstory.AddMemoryTagAdapter;
+import org.tsofen.ourstory.AddMemoryVideoAdapter;
+import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Tag;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,6 +36,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
     AddMemoryVideoAdapter videoAdapter;
+    AddMemoryTagAdapter tagAdapter;
     Feeling SelectedEmoji;
     String currentDate;
     Date MemDate = new Date();
@@ -54,6 +58,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("AAA");
+        TextView pageTitle = findViewById(R.id.text_cememory);
+        if (bundle == null)
+            pageTitle.setText("Add Memory");
+        else
+            pageTitle.setText("Edit Memory");
+
         editTextDescription = findViewById(R.id.memDescription_cememory);
         editTextLocation = findViewById(R.id.memLocation_cememory);
         smileb = findViewById(R.id.smilebtn_cememory);
@@ -83,6 +96,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         //   editTextDescription.addTextChangedListener(SaveTextWatcher);
         // editTextLocation.addTextChangedListener(SaveTextWatcher);
+
+        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
+        tagAdapter = new AddMemoryTagAdapter(new LinkedList<Tag>(), tagsRV);
+        tagsRV.setAdapter(tagAdapter);
+        tagsRV.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,
+                false));
 
     }
 

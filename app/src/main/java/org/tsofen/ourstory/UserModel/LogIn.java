@@ -9,7 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ourstory.R;
+
+import org.tsofen.ourstory.R;
 
 import java.util.ArrayList;
 
