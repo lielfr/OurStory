@@ -28,7 +28,6 @@
             </intent-filter>
         </activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity"></activity>
 
         <activity android:name="org.tsofen.ourstory.YearActivity"></activity>
 
