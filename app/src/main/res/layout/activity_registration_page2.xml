@@ -346,34 +346,42 @@
         app:layout_constraintTop_toBottomOf="@+id/stateHolder">
 
         <Button
-            android:id="@+id/profilePic_button"
-            android:layout_width="149dp"
+            android:id="@+id/choose_button"
+            android:layout_width="120dp"
             android:layout_height="59dp"
             android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:background="@color/colorLogin"
             android:gravity="center"
-            android:text="Upload"
+            android:text="Choose"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/profilePic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileImageView"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_marginEnd="160dp"
+            android:layout_marginRight="160dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/defaultprofilepicture" />
 
         <TextView
             android:id="@+id/profilePic"
-            android:layout_width="205dp"
+            android:layout_width="150dp"
             android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:background="@drawable/background_gradient"
             android:fontFamily="@font/quicksand_bold"
             android:text="@string/proPic"
             android:textColor="@color/colorGrayHint"
             android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/profileImageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
