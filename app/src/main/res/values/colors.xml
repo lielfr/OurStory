@@ -9,7 +9,7 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="colorLogin">#52A6C2</color>
     <color name="colorRegister">#E47169</color>
-    <color name="colorGrayInput">#3F5972</color>
+    <color name="colorGrayInput">#3f5972</color>
     <color name="colorGrayHint">#4dffffff</color>
     <color name="white">#FFFFFF</color>
     <color name="colorName">#52A6C2</color>

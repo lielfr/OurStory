@@ -24,7 +24,7 @@ public class Story {
         LastName = lastName;
         this.date1 = date1;
         this.date2 = date2;
-       // this.img = img;
+        // this.img = img;
     }
 
     public Story(String firstName, String lastName, String date1, String date2,
