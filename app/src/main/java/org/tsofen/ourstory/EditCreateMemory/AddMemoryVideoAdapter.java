@@ -58,7 +58,18 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
                             ADDMEMORY_VIDEO);
                 }
             });
+            holder.itemView.findViewById(R.id.deleteButtonRVMedia).setVisibility(View.GONE);
+
         } else {
+            holder.itemView.findViewById(R.id.deleteButtonRVMedia).
+                    setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            videos.remove(position - 1);
+                            notifyItemRemoved(position);
+                            notifyDataSetChanged();
+                        }
+                    });
             String uri = videos.get(position - 1);
             Glide.with(holder.itemView)
                     .load(uri)
