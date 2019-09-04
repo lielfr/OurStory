@@ -79,22 +79,7 @@ public class RegistrationPage1 extends AppCompatActivity {
         }
 
 
-     /*  if (verifyName(firstNameString)){
-            Log.d("verification tag3", "first name verified");
-            TextViewInvs1.setVisibility(View.INVISIBLE);
-            firstNameFlag = true;
-        } else {
-            TextViewInvs1.setVisibility(View.VISIBLE);
-            firstNameFlag = false;
-        }
-        if (verifyName(lastNameString)) {
-            Log.d("verification tag3", "last name verified");
-            TextViewInvs1.setVisibility(View.INVISIBLE);
-            lastNameFlag = true;
-        } else {
-            TextViewInvs1.setVisibility(View.VISIBLE);
-            lastNameFlag = false;
-        }*/
+
        firstNameFlag=verifyName(firstNameString);
        lastNameFlag=verifyName(lastNameString);
        if (firstNameFlag==false )
