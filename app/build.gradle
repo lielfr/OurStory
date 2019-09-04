@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -46,4 +46,9 @@ dependencies {
     implementation 'com.borjabravo:readmoretextview:2.1.0'
 
     implementation 'com.borjabravo:readmoretextview:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.google.firebase:firebase-storage:9.2.1'
+    implementation 'com.google.firebase:firebase-auth:9.2.1'
 }
