@@ -33,7 +33,7 @@ public class RegistrationPage1 extends AppCompatActivity {
     public String repeatPasswordString;
 
     public boolean emailFlag = false;
-    public boolean firstNameFlag;
+    public boolean firstNameFlag ;
     public boolean lastNameFlag;
     public boolean passwordFlag = false;
 
@@ -79,45 +79,37 @@ public class RegistrationPage1 extends AppCompatActivity {
         }
 
 
-     /*  if (verifyName(firstNameString)){
-            Log.d("verification tag3", "first name verified");
-            TextViewInvs1.setVisibility(View.INVISIBLE);
-            firstNameFlag = true;
-        } else {
-            TextViewInvs1.setVisibility(View.VISIBLE);
-            firstNameFlag = false;
-        }
-        if (verifyName(lastNameString)) {
-            Log.d("verification tag3", "last name verified");
-            TextViewInvs1.setVisibility(View.INVISIBLE);
-            lastNameFlag = true;
-        } else {
-            TextViewInvs1.setVisibility(View.VISIBLE);
-            lastNameFlag = false;
-        }*/
-        firstNameFlag = verifyName(firstNameString);
-        lastNameFlag = verifyName(lastNameString);
-        if (firstNameFlag == false) {
-            if (lastNameFlag == false) {
-                TextViewInvs1.setVisibility(View.VISIBLE);
-                firstNameFlag = false;
-                lastNameFlag = false;
-            } else {
-                TextViewInvs1.setVisibility(View.VISIBLE);
-                firstNameFlag = false;
-                lastNameFlag = true;
-            }
-        } else {
-            if (lastNameFlag == false) {
-                TextViewInvs1.setVisibility(View.VISIBLE);
-                firstNameFlag = true;
-                lastNameFlag = false;
-            } else {
-                TextViewInvs1.setVisibility(View.INVISIBLE);
-                firstNameFlag = true;
-                lastNameFlag = true;
-            }
-        }
+
+       firstNameFlag=verifyName(firstNameString);
+       lastNameFlag=verifyName(lastNameString);
+       if (firstNameFlag==false )
+       {
+           if ( lastNameFlag==false) {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=false;
+               lastNameFlag=false;
+           }
+           else
+           {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=false;
+               lastNameFlag=true;
+           }
+      }
+       else
+       {
+           if ( lastNameFlag==false) {
+               TextViewInvs1.setVisibility(View.VISIBLE);
+               firstNameFlag=true;
+               lastNameFlag=false;
+           }
+           else
+           {
+               TextViewInvs1.setVisibility(View.INVISIBLE);
+               firstNameFlag=true;
+               lastNameFlag=true;
+           }
+       }
 
         if ((passwordString.length()) > 10) {
             TextViewInvs4.setVisibility(View.VISIBLE);
