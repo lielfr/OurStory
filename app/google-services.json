@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "324647040266",
+    "firebase_url": "https://ourstorygit2.firebaseio.com",
+    "project_id": "ourstorygit2",
+    "storage_bucket": "ourstorygit2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324647040266:android:0078826365039a89",
+        "android_client_info": {
+          "package_name": "org.tsofen.ourstory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324647040266-18kfg966hcm497g3829da8b99hkkl9g8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9IKJmjTVpRq4_9_U_xXXRfcJu6gHX-rA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324647040266-18kfg966hcm497g3829da8b99hkkl9g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
