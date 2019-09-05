@@ -1,4 +1,4 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,15 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import org.tsofen.ourstory.R;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAdapter.ViewHolder> {
     Context ctx;
     Activity parent;
-    List<String> videos;
+    public List<String> videos;
 
-    static final int ADDMEMORY_VIDEO = 959;
+    public static final int ADDMEMORY_VIDEO = 959;
 
     public AddMemoryVideoAdapter(Activity parent) {
         super();
