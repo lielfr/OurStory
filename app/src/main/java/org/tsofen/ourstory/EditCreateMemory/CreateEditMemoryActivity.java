@@ -10,11 +10,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -101,34 +99,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         tagsRV.setAdapter(tagAdapter);
         tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
-
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper
-                .SimpleCallback(0, ItemTouchHelper.UP | ItemTouchHelper.DOWN) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView,
-                                  @NonNull RecyclerView.ViewHolder viewHolder,
-                                  @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                if (viewHolder.getAdapterPosition() > 0) {
-                    imageAdapter.data.remove(viewHolder.getAdapterPosition() - 1);
-                    imageAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                    imageAdapter.notifyDataSetChanged();
-
-                    videoAdapter.data.remove(viewHolder.getAdapterPosition() - 1);
-                    videoAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                    videoAdapter.notifyDataSetChanged();
-                }
-
-            }
-        });
-
-        helper.attachToRecyclerView(rvp);
-        helper.attachToRecyclerView(rvv);
-
     }
 
     @Override
