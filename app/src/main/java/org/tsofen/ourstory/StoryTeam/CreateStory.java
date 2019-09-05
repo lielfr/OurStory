@@ -15,7 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.ourstory.R;
+
+import org.tsofen.ourstory.R;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -47,7 +48,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         } else if (!str.matches("[a-zA-Z ]+")) {
             edtTxt.requestFocus();
             edtTxt.setError("ENTER ONLY ALPHABETICAL CHARACTER");
-        }else { // all good
+        } else { // all good
             return 1;
         }
         return 0;
@@ -59,11 +60,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         newFragment.show(getSupportFragmentManager(), "datePicker");
         flag = 1;
     }
+
     public void showDatePicker2(View view) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
         flag = 2;
     }
+
     public int processDatePickerResult(int year, int month, int day) {
         String month_string = Integer.toString(month + 1);
         String day_string = Integer.toString(day);
@@ -79,7 +82,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             month1.setText(month_string);
 
             return 1;
-        } else{
+        } else {
             TextView year1 = findViewById(R.id.year_2);
             year1.setText(year_string);
             TextView day1 = findViewById(R.id.day_2);
@@ -97,10 +100,11 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.setType("image/*");
         startActivityForResult(Intent.createChooser(i, "Pick an image"), 1);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        image=(ImageView) findViewById(R.id.profilePic);
+        image = findViewById(R.id.profilePic);
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
@@ -119,18 +123,18 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
     // launch ViewStoryActivity
     public void viewCreatedStory(View view) {
-        int f1=0,f2=0,f3=0;  // flags
+        int f1 = 0, f2 = 0, f3 = 0;  // flags
         Date date1D, date2D, todayD;
 
         Intent i = new Intent(this, ViewStory.class);
 
         // Names Validation
         EditText firstName = findViewById(R.id.firstNameEditText);
-            String fns = firstName.getText().toString();
-            f1 = validateName(firstName,fns);
+        String fns = firstName.getText().toString();
+        f1 = validateName(firstName, fns);
         EditText lastName = findViewById(R.id.lastNameEditText);
-            String lns = lastName.getText().toString();
-            f2 = validateName(lastName,lns);
+        String lns = lastName.getText().toString();
+        f2 = validateName(lastName, lns);
 
         // Dates Validation
         EditText d1 = findViewById(R.id.day_1);
@@ -153,21 +157,20 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            date1D = sdf.parse(y1s+"-"+m1s+"-"+d1s);
-            date2D = sdf.parse(y2s+"-"+m2s+"-"+d2s);
+            date1D = sdf.parse(y1s + "-" + m1s + "-" + d1s);
+            date2D = sdf.parse(y2s + "-" + m2s + "-" + d2s);
 
             Calendar cal = Calendar.getInstance();
             todayD = cal.getTime();
 
-            if(date1D.after(date2D)) {
-                f3=0;
-                Toast.makeText(getApplicationContext(),"Invalid Dates",Toast.LENGTH_LONG).show();
-            }else if(todayD.before(date2D)){
-                f3=0;
-                Toast.makeText(getApplicationContext(),"Invalid death date!",Toast.LENGTH_LONG).show();
-            }
-            else{ // all good
-                f3=1;
+            if (date1D.after(date2D)) {
+                f3 = 0;
+                Toast.makeText(getApplicationContext(), "Invalid Dates", Toast.LENGTH_LONG).show();
+            } else if (todayD.before(date2D)) {
+                f3 = 0;
+                Toast.makeText(getApplicationContext(), "Invalid death date!", Toast.LENGTH_LONG).show();
+            } else { // all good
+                f3 = 1;
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -184,7 +187,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
-        if(f1==1 && f2==1 && f3==1){
+        if (f1 == 1 && f2 == 1 && f3 == 1) {
             // Send data to next activity
             i.putExtra("first name", fns);
             i.putExtra("last name", lns);

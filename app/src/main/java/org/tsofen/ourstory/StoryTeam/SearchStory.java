@@ -1,15 +1,18 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-import com.example.ourstory.R;
+
 import com.google.android.material.tabs.TabLayout;
+
+import org.tsofen.ourstory.R;
 
 public class SearchStory extends AppCompatActivity {
 
-    String s="Story";
-    String m="Memory";
+    String s = "Story";
+    String m = "Memory";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

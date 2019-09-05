@@ -13,7 +13,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.ourstory.R;
+import org.tsofen.ourstory.R;
+
 
 public class HomeFragment extends Fragment {
 
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SearchStory.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        getActivity(), (View) view.findViewById(R.id.searchView),
+                        getActivity(), view.findViewById(R.id.searchView),
                         "search_story");
                 startActivity(intent, options.toBundle());
             }
