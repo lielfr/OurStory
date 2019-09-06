@@ -99,7 +99,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         tagsRV.setAdapter(tagAdapter);
         tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
-
     }
 
     @Override
@@ -141,7 +140,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     }
 
     public boolean CheckValidation(View v) {        //(Memory m) {
-        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.images.isEmpty()) && (videoAdapter.videos.isEmpty())) {
+        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             {
                 displayToast("You should either enter an image or a viedeo or description for your memory!");
                 return false;
@@ -178,10 +177,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    imageAdapter.images.add(currentUri.toString());
+                    imageAdapter.data.add(currentUri.toString());
                 }
             } else if (data.getData() != null) {
-                imageAdapter.images.add(data.getData().toString());
+                imageAdapter.data.add(data.getData().toString());
             }
             imageAdapter.notifyDataSetChanged();
         } else if (requestCode == AddMemoryVideoAdapter.ADDMEMORY_VIDEO) {
@@ -189,10 +188,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    videoAdapter.videos.add(currentUri.toString());
+                    videoAdapter.data.add(currentUri.toString());
                 }
             } else if (data.getData() != null) {
-                videoAdapter.videos.add(data.getData().toString());
+                videoAdapter.data.add(data.getData().toString());
             }
             videoAdapter.notifyDataSetChanged();
         }
@@ -245,4 +244,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         displayToast("Data saved.");
 
     }
+
+
 }
+
+
