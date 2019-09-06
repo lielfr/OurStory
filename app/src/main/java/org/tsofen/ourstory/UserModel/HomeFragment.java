@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // This is a little trick to make the search bar clickable and not just the icon in it.
-        SaveSharedPreference.setUserName(getActivity(),"visitor");
+
         final SearchView searchView = view.findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
