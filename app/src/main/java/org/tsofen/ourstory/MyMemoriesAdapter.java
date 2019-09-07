@@ -1,6 +1,7 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
@@ -53,7 +55,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         /*holder.num_of_shares.setText(memory.getLikes().size());
         holder.num_of_shares.setText(memory.getShares().size());
         holder.num_of_comments.setText(memory.getComments().size());*/
-        holder.create_date.setText(createDate);
+//        holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
 
 
@@ -79,9 +81,11 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             super(itemView);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-            create_date = itemView.findViewById(R.id.posted_date);
+//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
             adapter = MyMemoriesAdapter;
         }
     }
+
+
 }

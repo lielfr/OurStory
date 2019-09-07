@@ -3,22 +3,19 @@ package org.tsofen.ourstory;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.StoryTeam.MainActivity;
-import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +52,19 @@ public class MyMemoriesActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void shareMyMemories(View view)
+    {
+        String mimeType = "text/plain"; // For the share func to know which type is the sharing
+        // content so it can offer the right apps
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setType(mimeType)
+                .setChooserTitle("Share this memory with: ")
+                .setText("This is a filler until we can integrate a memory object")
+                .startChooser();
 
     }
 }
