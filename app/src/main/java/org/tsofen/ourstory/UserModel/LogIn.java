@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import org.tsofen.ourstory.R;
 
 import java.util.ArrayList;
@@ -79,6 +78,7 @@ public class LogIn extends AppCompatActivity {
         }
 
         if (flag1 == 1 && flag2 == 1) {
+            SaveSharedPreference.setUserName(LogIn.this,"not a visitor");
             Intent signInDone = new Intent(this, AppHomePage.class);
             signInDone.putExtra("email", inputEmail);
             signInDone.putExtra("index", index);
