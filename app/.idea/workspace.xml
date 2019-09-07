@@ -6,57 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fd4f1ac-d77f-43ff-b41b-eeb077924d55" name="Default Changelist" comment="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml">
-      <change afterPath="$PROJECT_DIR$/google-services.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/SaveSharedPreference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/ListOfStory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Owner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Story.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-hdpi/nomemoryyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-hdpi/nopicyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-ldpi/nomemoryyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-ldpi/nopicyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-mdpi/nomemoryyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-mdpi/nopicyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-v24/defaultprofilepicture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xhdpi/nomemoryyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xhdpi/nopicyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxhdpi/nomemoryyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxhdpi/nopicyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxxhdpi/nomemoryyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxxhdpi/nopicyet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/ic_detete_from_rv.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/sharenew.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/smiley_background_choice.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryImageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/AddMemoryImageAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryTagAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/AddMemoryTagAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryVideoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/AddMemoryVideoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/CreateEditMemoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/CreateEditMemoryActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/DatePickerFragmentCEMemory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/DatePickerFragmentCEMemory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoriesOfStoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoriesOfStoryActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoryAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/CreateStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/CreateStory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/LogIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/LogIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Feeling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Feeling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/sharebutton.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_create_edit_memory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_create_edit_memory.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_registration_page2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_registration_page2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/addmemory_rv_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/addmemory_rv_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/addmemory_tags_rv_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/addmemory_tags_rv_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/memory_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/memory_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/memory_item_my_memories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/memory_item_my_memories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="8fd4f1ac-d77f-43ff-b41b-eeb077924d55" name="Default Changelist" comment="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -575,7 +525,7 @@
       <window_info anchor="bottom" x="351" y="263" width="663" height="201" id="Event Log" order="5" sideWeight="0.50226927" side_tool="true" type="WINDOWED" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" weight="0.32405892" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.3289689" />
       <window_info anchor="bottom" id="Thumbnails" order="10" weight="0.3289689" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
