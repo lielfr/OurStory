@@ -26,6 +26,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
+        <ImageButton
+            android:id="@+id/deletebtn3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
+            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
+            app:srcCompat="@drawable/sharebutton" />
+
         <ImageView
             android:id="@+id/picture_person"
             android:layout_width="64dp"

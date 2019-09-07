@@ -6,32 +6,40 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fd4f1ac-d77f-43ff-b41b-eeb077924d55" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-v24/nomemoryyet.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-v24/nopicyet.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-v24nopicyet.jpeg" afterDir="false" />
+    <list default="true" id="8fd4f1ac-d77f-43ff-b41b-eeb077924d55" name="Default Changelist" comment="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_5_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_15_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_converter_gson_2_6_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_retrofit_2_6_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/APIComment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Comment_.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Embedded.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Links.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Links_.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Memory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Page.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Profile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Search.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Self.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Self_.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Tags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Users.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/WebFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/androidTest/java/org/tsofen/ourstory/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/androidTest/java/org/tsofen/ourstory/ExampleInstrumentedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryTagAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryTagAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/CreateEditMemoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/CreateEditMemoryActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/Story.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/Story.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Feeling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Feeling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/color/navbar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/color/navbar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_view_story.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_view_story.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/addmemory_tags_rv_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/addmemory_tags_rv_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/tags_dropdown_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/tags_dropdown_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_registration_page2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_registration_page2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/add_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/add_comment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/memory_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/memory_item.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,20 +63,65 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/SearchStory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+            <state relative-caret-position="315">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/StoryAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1150">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="200">
+              <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/memory_item.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/memory_item_story.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/StoryFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/MemoryFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/story_item.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="3175">
+              <caret line="127" column="45" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -76,28 +129,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2000">
               <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -125,9 +156,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="480" />
+    <option name="x" value="547" />
+    <option name="y" value="197" />
+    <option name="width" value="650" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -136,6 +167,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="OurStory" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\doaa ziadat\Desktop\OurStory" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,19 +212,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="OurStory" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\Users\doaa ziadat\Desktop\OurStory" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
           </expand>
           <select />
@@ -463,11 +494,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.25718608" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16565809" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -482,9 +513,10 @@
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" x="351" y="263" width="663" height="201" id="Event Log" order="5" sideWeight="0.50226927" side_tool="true" type="WINDOWED" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3289689" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" visible="true" weight="0.32405892" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.3289689" />
+      <window_info anchor="bottom" id="Thumbnails" order="10" weight="0.3289689" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -525,22 +557,23 @@
     <MESSAGE value="ww" />
     <MESSAGE value="finishActivity" />
     <MESSAGE value="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/.idea/caches/build_file_checksums.ser&#10;#&#9;app/.idea/caches/gradle_models.ser&#10;#&#9;app/.idea/misc.xml&#10;#&#9;app/gradle/wrapper/gradle-wrapper.properties&#10;#&#9;app/local.properties&#10;#&#9;app/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/.idea/caches/build_file_checksums.ser&#10;#&#9;app/.idea/caches/gradle_models.ser&#10;#&#9;app/.idea/misc.xml&#10;#&#9;app/gradle/wrapper/gradle-wrapper.properties&#10;#&#9;app/local.properties&#10;#&#9;app/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" />
+    <MESSAGE value="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_memories.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -550,47 +583,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_log_in.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_user_profile.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_view_story.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable-hdpi/01- Visitor Home.png" />
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_view_story.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_home_page.xml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/SearchStory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1150">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2000">
-          <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
-        </state>
-      </provider>
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -602,11 +613,87 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+        <state relative-caret-position="225">
+          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/PageAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/StoryAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/memory_item.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/memory_item_story.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/StoryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/story_item.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2000">
+          <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/MemoryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/WebFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/SearchStory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="3175">
+          <caret line="127" column="45" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
         </state>
       </provider>
     </entry>
