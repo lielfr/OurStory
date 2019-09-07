@@ -2,9 +2,11 @@ package org.tsofen.ourstory;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,5 +52,18 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         }
 
         adapter.filterList(filteredList);
+    }
+
+    public void shareMemory(View view)
+    {
+        String mimeType = "text/plain"; // For the share func to know which type is the sharing
+        // content so it can offer the right apps
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setType(mimeType)
+                .setChooserTitle("Share this memory with: ")
+                .setText("This is a filler until we can integrate a memory object")
+                .startChooser();
+
     }
 }
