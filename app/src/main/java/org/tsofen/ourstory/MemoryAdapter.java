@@ -46,7 +46,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
         String tags="#";
-        if(memory.getDescription()!=null && !(memory.getTags().isEmpty())) {
+       /* if(memory.getDescription()!=null && !(memory.getTags().isEmpty())) {
             for(Tag tag: memory.getTags())
             {
                 tags += "#"+ tag.getLabel();
@@ -65,7 +65,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         }
         else {
             holder.descr.setVisibility(View.GONE);
-        }
+        }*/
         //Todo get story name by id .   holder.name.setText(memory.getStoryId());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
@@ -74,7 +74,10 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         }
         else
             holder.mem_date.setVisibility(View.GONE);
-        if(memory.getLikes().isEmpty())
+        holder.descr.setText(memory.getDescription());
+        holder.name.setText(memory.getCreatorName());
+
+      /*  if(memory.getLikes().isEmpty())
             holder.num_of_likes.setVisibility(View.GONE);
         else
             holder.num_of_likes.setText(memory.getLikes().size());
@@ -89,7 +92,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         if(memory.getFeeling()!=null)
             holder.feeling.setText("#"+memory.getFeeling());
         else
-            holder.feeling.setVisibility(View.GONE);
+            holder.feeling.setVisibility(View.GONE);*/
 
 
     }
