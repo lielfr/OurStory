@@ -7,39 +7,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fd4f1ac-d77f-43ff-b41b-eeb077924d55" name="Default Changelist" comment="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_5_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_0_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_15_0_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_converter_gson_2_6_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_retrofit_2_6_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/APIComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Comment_.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Embedded.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Links.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Links_.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Memory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Page.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Profile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Search.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Self.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Self_.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Tags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/WebFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/SaveSharedPreference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/ListOfStory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Owner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Story.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-hdpi/nomemoryyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-hdpi/nopicyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-ldpi/nomemoryyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-ldpi/nopicyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-mdpi/nomemoryyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-mdpi/nopicyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-v24/defaultprofilepicture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xhdpi/nomemoryyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xhdpi/nopicyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxhdpi/nomemoryyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxhdpi/nopicyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxxhdpi/nomemoryyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-xxxhdpi/nopicyet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/ic_detete_from_rv.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/sharenew.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/smiley_background_choice.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryImageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/AddMemoryImageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryTagAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/AddMemoryTagAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/AddMemoryVideoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/AddMemoryVideoAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/CreateEditMemoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/CreateEditMemoryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/DatePickerFragmentCEMemory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/EditCreateMemory/DatePickerFragmentCEMemory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoriesOfStoryActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoriesOfStoryActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MemoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/MyMemoriesAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/CreateStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/CreateStory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/TeamsHomePage/TeamsHomePg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/LogIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/LogIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/UserModel/RegistrationPage2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Feeling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/Feeling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/web/OurStoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/sharebutton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_create_edit_memory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_create_edit_memory.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_registration_page2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_registration_page2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/add_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/add_comment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/addmemory_rv_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/addmemory_rv_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/addmemory_tags_rv_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/addmemory_tags_rv_item.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/memory_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/memory_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/memory_item_my_memories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/memory_item_my_memories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +171,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="547" />
     <option name="y" value="197" />
     <option name="width" value="650" />
@@ -167,19 +183,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="OurStory" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\Users\doaa ziadat\Desktop\OurStory" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -212,6 +216,64 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="OurStory" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\doaa ziadat\Desktop\OurStory" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ourstory" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ourstory" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="StoryTeam" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ourstory" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="OurStory" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -494,8 +556,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16565809" />
@@ -513,7 +574,7 @@
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" x="351" y="263" width="663" height="201" id="Event Log" order="5" sideWeight="0.50226927" side_tool="true" type="WINDOWED" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3289689" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" visible="true" weight="0.32405892" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4977307" weight="0.32405892" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.3289689" />
       <window_info anchor="bottom" id="Thumbnails" order="10" weight="0.3289689" />
