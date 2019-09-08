@@ -52,8 +52,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
-        String tags="#";
-
        /* if(memory.getDescription().length == 0 && (memory.getTags().size()!=0)) {
                 for(Tag tag: memory.getTags())
                 {
@@ -108,7 +106,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView feeling,name, mem_date, descr ,num_of_likes, num_of_comments,location;
+        public TextView feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
         public MyMemoriesAdapter adapter;
 
@@ -120,8 +118,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             num_of_comments = itemView.findViewById(R.id.commentNum);
             num_of_likes = itemView.findViewById(R.id.likesNum);
             descr = itemView.findViewById(R.id.descr);
-            location = itemView.findViewById(R.id.locationtxt_mymemories);
-            feeling = itemView.findViewById(R.id.feelingtxt_mymemories);
+//            location = itemView.findViewById(R.id.locationtxt_mymemories);
+//            feeling = itemView.findViewById(R.id.feelingtxt_mymemories);
             profile = itemView.findViewById(R.id.picture_person);
             adapter = MyMemoriesAdapter;
 

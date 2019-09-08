@@ -42,7 +42,7 @@ public class MyMemoriesActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
-                Toast.makeText(getApplicationContext(),memories.size()+"",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                 adapter = new MyMemoriesAdapter(memories);
 
                 rv.setAdapter(adapter);

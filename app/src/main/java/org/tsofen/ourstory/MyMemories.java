@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyMemories extends Fragment {
-
+    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     AppHomePage parent;
     RecyclerView rv;
     ArrayList<MemoryA> memories;
@@ -44,7 +44,8 @@ public class MyMemories extends Fragment {
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
 
     public MyMemories() {
-       super();
+        super();
+
     }
 
     @Nullable

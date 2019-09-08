@@ -16,6 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -33,4 +34,12 @@ public interface OurStoryService {
     Call<Owner> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
+
+    @POST("memories/create")
+    Call<Memory> CreateMemory(@Body Memory memory);
+
+    // TODO: Maybe need to change that path.
+    @PUT("memories/create")
+    Call<Memory> EditMemory(@Body Memory memory);
+
 }
