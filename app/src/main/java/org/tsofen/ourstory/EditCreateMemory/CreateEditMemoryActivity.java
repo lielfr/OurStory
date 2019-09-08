@@ -249,9 +249,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         memory.setDescription(editTextDescription.getText().toString());
         memory.setFeeling(SelectedEmoji);
-        Calendar c = Calendar.getInstance();
-        c.setTime(MemDate);
-        //mem.setMemoryDate(c);
+        memory.setMemoryDate(MemDate);
         displayToast("Data saved.");
         OurStoryService service = WebFactory.getService();
         Intent intent = new Intent();
