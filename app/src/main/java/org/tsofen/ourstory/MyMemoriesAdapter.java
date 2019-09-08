@@ -13,7 +13,6 @@ import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.Tag;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,62 +45,35 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
-        String tags="#";
-        if(memory.getDescription()!=null && !(memory.getTags().isEmpty())) {
-                for(Tag tag: memory.getTags())
-                {
-                    tags += "#"+ tag.getLabel();
-                }
-                holder.descr.setText(memory.getDescription() + tags);
-            }
-        else if(memory.getTags().isEmpty() && memory.getDescription()!=null)
-                holder.descr.setText(memory.getDescription());
-        else if(!memory.getTags().isEmpty()&&memory.getDescription()==null)
-        {
-            for(Tag tag: memory.getTags())
-            {
-                tags += "#"+ tag.getLabel();
-            }
-            holder.descr.setText(tags);
-        }
-        else {
-            holder.descr.setVisibility(View.GONE);
-        }
-     //Todo get story name by id .   holder.name.setText(memory.getStoryId());
+        holder.descr.setText(memory.getDescription());
+        holder.name.setText(memory.getCreatorName());
+
+        String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) + "/" + (memory.getCreateDate().get(Calendar.MONTH)) +
+                "/" + (memory.getCreateDate().get(Calendar.YEAR));
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-            holder.mem_date.setText(memDate);
-        }
-        else
-            holder.mem_date.setVisibility(View.GONE);
-        if(memory.getLikes().isEmpty())
-            holder.num_of_likes.setVisibility(View.GONE);
-        else
-            holder.num_of_likes.setText(memory.getLikes().size());
-        if(memory.getComments().isEmpty())
-            holder.num_of_comments.setVisibility(View.GONE);
-        else
-            holder.num_of_comments.setText(memory.getComments().size());
-       if(memory.getLocation()!=null)
-           holder.location.setText(memory.getLocation());
-       else
-           holder.location.setVisibility(View.GONE);
-        if(memory.getFeeling()!=null)
-            holder.feeling.setText(memory.getFeeling().toString());
-        else
-            holder.feeling.setVisibility(View.GONE);
+        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
+        /*holder.num_of_shares.setText(memory.getLikes().size());
+        holder.num_of_shares.setText(memory.getShares().size());
+        holder.num_of_comments.setText(memory.getComments().size());*/
+//        holder.create_date.setText(createDate);
+        holder.mem_date.setText(memDate);
 
 
+    }
+
+    public void filterList(ArrayList<Memory> filteredList) {
+        mMemories = filteredList;
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
         return mMemories.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView feeling,name, mem_date, descr ,num_of_likes, num_of_comments,location;
-        public ImageView profile;
+        public TextView name, mem_date, create_date, descr;
+
         public MyMemoriesAdapter adapter;
 
 
@@ -109,15 +81,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             super(itemView);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-            num_of_comments = itemView.findViewById(R.id.commentNum);
-            num_of_likes = itemView.findViewById(R.id.likesNum);
+//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
-            location = itemView.findViewById(R.id.locationtxt_mymemories);
-            feeling = itemView.findViewById(R.id.feelingtxt_mymemories);
-            profile = itemView.findViewById(R.id.picture_person);
             adapter = MyMemoriesAdapter;
-
-
         }
     }
 

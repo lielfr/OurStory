@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2C3E50"
-    tools:context="org.tsofen.ourstory.StoryTeam.SearchStory"><![CDATA[
+    tools:context="org.tsofen.ourstory.StoryTeam.MainActivity">
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,31 +14,15 @@
     android:background="#2C3E50"
     tools:context=".MainActivity">
 
-
-
-    ]]>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="411dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/backgroundsecond" />
-
     <EditText
-        android:id="@+id/search"
+        android:id="@+id/editText"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
+        android:layout_width="299dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/searchbar"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/second1"
         android:ems="10"
         android:inputType="textPersonName"
         android:scrollbarStyle="outsideInset"
@@ -47,60 +31,65 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
         android:background="#2C3E50"
-        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:srcCompat="@drawable/second2" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#2C3E50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:srcCompat="@drawable/second3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="411dp"
+        android:layout_height="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/search"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/add_vs" />
+        app:srcCompat="@drawable/backgroundsecond" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="412dp"
-        android:layout_height="96dp"
-        android:background="#34495E"
+        android:layout_height="106dp"
+        android:background="@drawable/second1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/first" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageButton
-            android:id="@+id/button2"
-            android:layout_width="26dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="52dp"
-            android:background="@color/transparent"
-            android:onClick="finish"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/transparent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <RelativeLayout
         android:id="@+id/relative_layout"
-        android:layout_width="0dp"
-        android:layout_height="391dp"
+        android:layout_width="397dp"
+        android:layout_height="500dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/rectangle_background"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search">
+        app:layout_constraintTop_toBottomOf="@+id/editText">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -128,16 +117,6 @@
             android:layout_marginRight="16dp"
             app:tabIndicatorColor="#FFFFFF"
             app:tabTextColor="#FFFFFF" />
-
     </RelativeLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="409dp"
-        android:layout_height="51dp"
-        android:background="#2C3E58"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

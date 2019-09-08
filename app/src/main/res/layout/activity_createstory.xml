@@ -119,28 +119,13 @@
                     android:textColor="@color/colorGrayHint"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/error1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:background="@color/transparent"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/errorColor"
-                android:textSize="18dp"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/firstNameEditText" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lastNameHolder"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="28dp"
                 app:layout_constraintStart_toStartOf="@+id/firstNameHolder"
                 app:layout_constraintTop_toBottomOf="@+id/firstNameHolder">
 
@@ -173,26 +158,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/error2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:background="@color/transparent"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/errorColor"
-                android:textSize="18dp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
-                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText"/>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/holder3"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="28dp"
                 app:layout_constraintStart_toStartOf="@+id/lastNameHolder"
                 app:layout_constraintTop_toBottomOf="@+id/lastNameHolder">
 
@@ -290,38 +260,48 @@
                 android:id="@+id/holder4"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="28dp">
 
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/background_gradient"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="Date of Death"
+                    android:textColor="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header_create_story"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/app_bar_height"
-        android:background="@color/colorPrimary"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_legend_continuous"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/back_button_viewstory2"
-            android:layout_width="32dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.128"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        android:id="@+id/day_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:fontFamily="@font/quicksand"
+                        android:hint="@string/day"
+                        android:paddingLeft="5dp"
+                        android:textColorHint="@color/colorGrayHint"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.727" />
 
                     <EditText
                         android:id="@+id/year_2"
@@ -338,34 +318,40 @@
                         app:layout_constraintTop_toTopOf="@+id/day_2"
                         app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/text_create_story"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Create Story"
-            android:textColor="@color/colorWhite"
-            android:textSize="21sp"
-            app:fontFamily="@font/quicksand_bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                    <EditText
+                        android:id="@+id/month_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="64dp"
+                        android:layout_marginLeft="64dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:fontFamily="@font/quicksand"
+                        android:hint="@string/month"
+                        android:paddingLeft="5dp"
+                        android:textColorHint="@color/colorGrayHint"
+                        app:layout_constraintBottom_toBottomOf="@+id/day_2"
+                        app:layout_constraintStart_toEndOf="@+id/day_2"
+                        app:layout_constraintTop_toTopOf="@+id/day_2"
+                        app:layout_constraintVertical_bias="0.0" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="19dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:onClick="showDatePicker2"
+                        app:layout_constraintBottom_toBottomOf="@+id/month_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/year_2"
+                        app:layout_constraintTop_toTopOf="@+id/month_2"
+                        app:layout_constraintVertical_bias="0.142"
+                        app:srcCompat="@drawable/ic_calendar" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/error3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="@color/errorColor"
-                android:textSize="18dp"
-                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/add_profile_picture"
