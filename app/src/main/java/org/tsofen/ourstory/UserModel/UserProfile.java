@@ -1,14 +1,19 @@
 package org.tsofen.ourstory.UserModel;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.R;
 
@@ -18,6 +23,7 @@ public class UserProfile extends Fragment {
     public String userIndex;
     AppHomePage parent;
     int userIn;
+    ImageView pic;
 
     public UserProfile() {
         super();
@@ -57,6 +63,15 @@ public class UserProfile extends Fragment {
         email.setText(UsersList.usersList.get(userIn).getmEmail());
         TextView date = getView().findViewById(R.id.showDate);
         date.setText(UsersList.usersList.get(userIn).getmDateOfBirth());
+        pic = getView().findViewById(R.id.profilePictureImageView);
+        Uri pictureUri = Uri.parse(UsersList.usersList.get(userIn).getmProfilePicture());
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round);
+
+
+        Glide.with(this).load(pictureUri).apply(options).into(pic);
 
 
     }
