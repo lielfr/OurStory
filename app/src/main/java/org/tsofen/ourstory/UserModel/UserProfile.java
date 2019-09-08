@@ -67,8 +67,8 @@ public class UserProfile extends Fragment {
         Uri pictureUri = Uri.parse(UsersList.usersList.get(userIn).getmProfilePicture());
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .error(R.mipmap.ic_launcher_round);
+                .placeholder(R.drawable.defaultprofilepicture)
+                .error(R.drawable.defaultprofilepicture);
 
 
         Glide.with(this).load(pictureUri).apply(options).into(pic);
