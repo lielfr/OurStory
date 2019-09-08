@@ -57,6 +57,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private Button cnslbtn;
     private EditText DescriptionText;
     private EditText locationText;
+    public static final String KEY_EDIT = "CEMemoryEdit";
+    public static final String KEY_CREATE = "CEMemoryCreate";
+    public static final String KEY_MEMID = "CEMemoryMemoryID";
+    private Memory memory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +68,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_create_edit_memory);
 
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("AAA");
+        memory = (Memory) intent.getSerializableExtra(KEY_EDIT);
         TextView pageTitle = findViewById(R.id.text_cememory);
-        if (bundle == null)
+        if (memory == null)
             pageTitle.setText("Add Memory");
         else
             pageTitle.setText("Edit Memory");
@@ -235,32 +239,57 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         finish();
     }
 
+
     public void saveMemory(View view) {
-
-        Memory mem = new Memory();
+        boolean create = (memory == null);
+        if (memory == null)
+            memory = new Memory();
         locationText = findViewById(R.id.memLocation_cememory);
-        mem.setLocation(locationText.getText().toString());
+        memory.setLocation(locationText.getText().toString());
 
-        mem.setDescription(editTextDescription.getText().toString());
-        mem.setFeeling(SelectedEmoji);
+        memory.setDescription(editTextDescription.getText().toString());
+        memory.setFeeling(SelectedEmoji);
         Calendar c = Calendar.getInstance();
         c.setTime(MemDate);
         //mem.setMemoryDate(c);
         displayToast("Data saved.");
-
         OurStoryService service = WebFactory.getService();
-        service.CreateMemory(mem).enqueue(new Callback<Memory>() {
-            @Override
-            public void onResponse(Call<Memory> call, Response<Memory> response) {
-                Memory responseMem = response.body();
-                displayToast("Got ID: " + responseMem.getId());
-            }
+        Intent intent = new Intent();
 
-            @Override
-            public void onFailure(Call<Memory> call, Throwable t) {
+        if (create) {
+            service.CreateMemory(memory).enqueue(new Callback<Memory>() {
+                @Override
+                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                    if (response.code() != 200) {
+                        displayToast("Error " + response.code() + " : " + response.message());
+                        return;
+                    }
+                    Memory responseMem = response.body();
+                    long memId = responseMem.getId();
+                    intent.putExtra(KEY_MEMID, memId);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<Memory> call, Throwable t) {
+
+                }
+            });
+        } else {
+            service.EditMemory(memory).enqueue(new Callback<Memory>() {
+                @Override
+                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Memory> call, Throwable t) {
+
+                }
+            });
+        }
+
 
     }
 
