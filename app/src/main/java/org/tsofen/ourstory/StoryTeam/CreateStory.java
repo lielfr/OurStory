@@ -1,69 +1,66 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Intent;
-import android.content.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.IntegerRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-
-
-import com.google.gson.annotations.JsonAdapter;
-
-import org.json.JSONObject;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.Owner;
-import org.tsofen.ourstory.model.api.Search;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import java.util.ArrayList;
+import androidx.annotation.IntegerRes;
+import android.content.*;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import androidx.core.content.ContextCompat;
+import com.google.gson.annotations.JsonAdapter;
+import org.json.JSONObject;
+import org.tsofen.ourstory.model.api.ListOfStory;
+import org.tsofen.ourstory.model.api.Search;
 
 public class CreateStory extends AppCompatActivity implements Serializable {
 
-    ImageView image;
     int flag = 1;
+
     Bitmap bitmap;
     Uri filePath;
+
     Owner owner ;
     Story result;
 
+    ImageView image;
+    EditText firstName, lastName;
     TextView error1, error2, error3;
-
-    int errorColor;
-    final int version = Build.VERSION.SDK_INT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createstory);
+
+        firstName = findViewById(R.id.firstNameEditText);
+        lastName = findViewById(R.id.lastNameEditText);
 
         error1=findViewById(R.id.error1);
         error2=findViewById(R.id.error2);
@@ -71,48 +68,11 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
     }
 
+
+
+
     private boolean validateName(EditText edtTxt, String str, int i) {
-
-       ///////////////////////////////// Ether's way /////////////////////////////////
-
-//            if (str.length() == 0) {
-//            edtTxt.requestFocus();
-//
-//            if (version >= 23) {
-//                errorColor = ContextCompat.getColor(getApplicationContext(), R.color.errorColor);
-//            } else {
-//                errorColor = getResources().getColor(R.color.errorColor);
-//            }
-//
-//            String errorString = "Field cannot be empty";
-//            ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(errorColor);
-//            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(errorString);
-//            spannableStringBuilder.setSpan(foregroundColorSpan, 0, errorString.length(), 0);
-//            edtTxt.setError(spannableStringBuilder);
-//        }
-//        else if (!str.matches("[a-zA-Z ]")) {
-//            edtTxt.requestFocus();
-//
-//            if (version >= 23) {
-//                errorColor = ContextCompat.getColor(getApplicationContext(), R.color.errorColor);
-//            } else {
-//                errorColor = getResources().getColor(R.color.errorColor);
-//            }
-//
-//            String errorString = "Only Alphabetical characters allowed.";
-//            ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(errorColor);
-//            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(errorString);
-//            spannableStringBuilder.setSpan(foregroundColorSpan, 0, errorString.length(), 0);
-//            edtTxt.setError(spannableStringBuilder);
-//        } else { // all good
-//            return true;
-//        }
-//        return false;
-
-
-
-
-    ///////////////////////////// User Team /////////////////////////////////////
+        ///////////////////////////// User Team /////////////////////////////////////
         // code by Ether
         String errorText="";
         int flag=1;
@@ -127,29 +87,29 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             flag=0;
         }
 
-
-       if(flag==0)
-       {
-           if(i==1){
-               error1.setText(errorText);
-               error1.setVisibility(View.VISIBLE);
-               return false;
-           }else if(i==2){
-               error2.setText(errorText);
-               error2.setVisibility(View.VISIBLE);
-               return false;
-           }
-       }else{
-           if(i==1){
-               error1.setVisibility(View.INVISIBLE);
-               return true;
-           }else if(i==2){
-               error2.setVisibility(View.INVISIBLE);
-               return true;
-           }
-       }
-           return false;
+        if(flag==0)
+        {
+            if(i==1){
+                error1.setText(errorText);
+                error1.setVisibility(View.VISIBLE);
+                return false;
+            }else if(i==2){
+                error2.setText(errorText);
+                error2.setVisibility(View.VISIBLE);
+                return false;
+            }
+        }else{
+            if(i==1){
+                error1.setVisibility(View.INVISIBLE);
+                return true;
+            }else if(i==2){
+                error2.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        }
+        return false;
     }
+
 
 
     public void showDatePicker1(View view) {
@@ -157,7 +117,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         newFragment.show(getSupportFragmentManager(), "datePicker");
         flag = 1;
     }
-
     public void showDatePicker2(View view) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -250,10 +209,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         Intent i = new Intent(this, ViewStory.class);
 
         // Names Validation
-        EditText firstName = findViewById(R.id.firstNameEditText);
         String fns = firstName.getText().toString();
         f1 = validateName(firstName, fns, 1);
-        EditText lastName = findViewById(R.id.lastNameEditText);
         String lns = lastName.getText().toString();
         f2 = validateName(lastName, lns, 2);
 
@@ -370,8 +327,4 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
      }
 
-
-    }
-
-
-
+}
