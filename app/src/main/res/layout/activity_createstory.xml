@@ -119,13 +119,28 @@
                     android:textColor="@color/colorGrayHint"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/error1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/errorColor"
+                android:textSize="18dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/firstNameEditText" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lastNameHolder"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="@+id/firstNameHolder"
                 app:layout_constraintTop_toBottomOf="@+id/firstNameHolder">
 
@@ -158,11 +173,26 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/error2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/errorColor"
+                android:textSize="18dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/holder3"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="@+id/lastNameHolder"
                 app:layout_constraintTop_toBottomOf="@+id/lastNameHolder">
 
@@ -260,7 +290,7 @@
                 android:id="@+id/holder4"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -351,7 +381,19 @@
                         app:srcCompat="@drawable/ic_calendar" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/error3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/errorColor"
+                android:textSize="18dp"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/add_profile_picture"
