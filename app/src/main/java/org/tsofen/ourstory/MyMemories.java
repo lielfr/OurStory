@@ -41,8 +41,6 @@ public class MyMemories extends Fragment {
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
-    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-
     public MyMemories() {
         super();
 
