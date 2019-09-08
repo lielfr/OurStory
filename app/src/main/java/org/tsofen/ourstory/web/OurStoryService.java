@@ -32,4 +32,13 @@ public interface OurStoryService {
     Call<Owner> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
+    @GET("stories/findStoriesByDobFull")
+    Call<ArrayList<Story>> GetStoriesByDobFull (@Query("day") int d ,@Query("month") int m , @Query("year") int year);
+    @GET("stories/findStoriesByDobYearMonth")
+    Call<ArrayList<Story>> GetStoriesByDobYearMonth (@Query("month") int m, @Query("year") int y );
+    @GET("stories/findStoriesByDobYear")
+    Call<ArrayList<Story>> GetStoriesByDobYear (@Query("year") int y);
+
+
+
 }

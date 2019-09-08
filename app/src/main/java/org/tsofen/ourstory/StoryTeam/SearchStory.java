@@ -1,6 +1,9 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -19,6 +22,7 @@ public class SearchStory extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
+
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         // Set the text for each tab.
@@ -50,5 +54,10 @@ public class SearchStory extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+
+    public void finish(View view) {
+        finish();
     }
 }
