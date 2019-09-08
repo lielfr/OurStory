@@ -7,34 +7,35 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
 import org.tsofen.ourstory.R;
-
+import org.tsofen.ourstory.model.api.Story;
 import java.io.Serializable;
 
 public class ViewStory extends AppCompatActivity implements Serializable {
 
     ImageButton ib;
-
+    ImageButton share;
+    Story target_story ;
+    //Intent intent = getIntent() ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_view_story);
 
-        LinearLayout linearLayout=findViewById(R.id.linearLayout3);
+        LinearLayout linearLayout = findViewById(R.id.linearLayout3);
         linearLayout.setVisibility(View.INVISIBLE);
 
-        ConstraintLayout constraintLayout=findViewById(R.id.constrainlayout2);
+        ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
         constraintLayout.setVisibility(View.VISIBLE);
-
-        Intent intent = getIntent();
-
-        String fName = intent.getStringExtra("first name");
-        String lName = intent.getStringExtra("last name");
+        Intent intent = getIntent() ;
+        String fName = intent.getStringExtra("name");
         String date1 = intent.getStringExtra("date1");
         String tag1 = intent.getStringExtra("ttag3");
         String tag2 = intent.getStringExtra("ttag2");
@@ -44,44 +45,55 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         int ic1 = intent.getIntExtra("tag1", 0);
         int ic2 = intent.getIntExtra("tag2", 0);
         int ic3 = intent.getIntExtra("tag3", 0);
-
-       Story story = new Story(fName, lName, date1, date2/*, iv, tag1, tag2, tag3, ic1, ic2, ic3*/);
-
-
-
-        String FL_name;
-        FL_name = story.getFirstName() + " " + story.getLastName();
+        String nameofperson = intent.getStringExtra("name");
         TextView textView = (findViewById(R.id.textView));
-        textView.setText(FL_name);
+        textView.setText(nameofperson);
+
+//        Story story = new Story(fName, lName, date1, date2/*, iv, tag1, tag2, tag3, ic1, ic2, ic3*/);
+
+
         ImageView image4 = findViewById(R.id.imageView3);
         image4.setImageResource(R.drawable.nopicyet);
 
         String date;
-        date = story.getDate1() + " - " + story.getDate2();
+        date = date1 + "-" + date2;
         TextView textView2 = (findViewById(R.id.textView2));
         textView2.setText(date);
 
-        TextView textView4 = (findViewById(R.id.textView4));
-        textView4.setText(story.getTag1());
+//        TextView textView4 = (findViewById(R.id.textView4));
+//        textView4.setText(story.getTag1());
+//
+//        TextView textView5 = (findViewById(R.id.textView5));
+//        textView5.setText(story.getTag2());
+//
+//        TextView textView6 = (findViewById(R.id.textView6));
+//        textView6.setText(story.getTag3());
+//
+//        ImageView image1 = findViewById(R.id.imageView5);
+//        image1.setImageResource(story.getTag_icon1());
+//
+//        ImageView image2 = findViewById(R.id.imageView7);
+//        image2.setImageResource(story.getTag_icon2());
+//
+//        ImageView image3 = findViewById(R.id.imageView6);
+//        image3.setImageResource(story.getTag_icon3());
 
-        TextView textView5 = (findViewById(R.id.textView5));
-        textView5.setText(story.getTag2());
-
-        TextView textView6 = (findViewById(R.id.textView6));
-        textView6.setText(story.getTag3());
-
-        ImageView image1 = findViewById(R.id.imageView5);
-        image1.setImageResource(story.getTag_icon1());
-
-        ImageView image2 = findViewById(R.id.imageView7);
-        image2.setImageResource(story.getTag_icon2());
-
-        ImageView image3 = findViewById(R.id.imageView6);
-        image3.setImageResource(story.getTag_icon3());
     }
 
     public void launchSearchActivity(View view) {
         Intent i = new Intent(ViewStory.this, SearchStory.class);
         startActivity(i);
+    }
+
+    public void launchShare(View view) {
+//        share = findViewById(R.id.sharebtn);
+
+//        Intent myIntent = new Intent(Intent.ACTION_SEND);
+//        myIntent.setType("text/plain");
+//        String shareBody = "The Story of Pini Cohen";
+//        String sharesub = "Your subject here";
+//        myIntent.putExtra(Intent.EXTRA_SUBJECT, sharesub);
+//        myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+//        startActivity(Intent.createChooser(myIntent, "Share using: "));
     }
 }

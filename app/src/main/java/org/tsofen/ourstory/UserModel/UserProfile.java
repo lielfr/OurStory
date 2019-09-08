@@ -55,7 +55,7 @@ public class UserProfile extends Fragment {
         city.setText(UsersList.usersList.get(userIn).getmCity());
         TextView email = getView().findViewById(R.id.showEmail);
         email.setText(UsersList.usersList.get(userIn).getmEmail());
-         TextView date =getView().findViewById(R.id.showDate);
+        TextView date = getView().findViewById(R.id.showDate);
         date.setText(UsersList.usersList.get(userIn).getmDateOfBirth());
 
 

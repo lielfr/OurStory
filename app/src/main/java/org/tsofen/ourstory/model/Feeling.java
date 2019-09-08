@@ -5,8 +5,5 @@ import java.io.Serializable;
 public enum Feeling implements Serializable {
     HAPPY,
     SAD,
-    BLESSED,
     LOVE,
-    HAHA,
-    COOL
 }

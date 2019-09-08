@@ -1,8 +1,6 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Rect;
 import android.text.InputType;
 import android.util.TypedValue;
@@ -12,14 +10,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Tag;
 
 import java.util.List;
@@ -46,6 +43,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
         return viewHolder;
     }
 
+    // Unfortunately we need to calculate the text width manually for the autocompletetextview.
     public int calculateWidth(String text) {
         Rect bounds = new Rect();
         TextView textView = new TextView(ctx);
@@ -59,12 +57,13 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
         ImageView closeButton = holder.itemView.findViewById(R.id.imageView_tags_rv);
         AutoCompleteTextView editText = holder.itemView.findViewById(R.id.cememory_rv_text);
         if (position == tags.size()) {
+            // The last view holder allows the user to enter a new tag
             editText.setInputType(InputType.TYPE_CLASS_TEXT); // Enables input
             closeButton.setVisibility(View.GONE);
             editText.setOnEditorActionListener((textView, i, keyEvent) -> {
-                // This actually adds the tag whenever the user presses the enter.
-
-                if (i == EditorInfo.IME_ACTION_DONE && keyEvent == null) {
+                // This actually adds the tag whenever the user presses Done on the soft keyboard.
+                // TODO: This needs more fine tuning, like maybe allowing other events to trigger it
+                if ((i == EditorInfo.IME_ACTION_DONE && keyEvent == null)) {
                     Tag t = new Tag();
                     t.setLabel(editText.getText().toString());
                     tags.add(t);
@@ -75,24 +74,25 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                 }
                 return true;
             });
-            editText.setOnClickListener(view -> {
-                editText.showDropDown();
+
+            /* While this one may seem unnecessary, it actually isn't.
+             * This is because whenever the text box is already selected when a new tag was
+             * just added, the user may want to click on it to open the suggestions menu again.*/
+            editText.setOnClickListener(view -> editText.showDropDown());
+            editText.setOnFocusChangeListener((view, b) -> {
+                if (b) editText.showDropDown();
             });
             // TODO: Replace this with using a suggestion API
             final String[] suggestions = new String[]{"sunset", "beach", "water", "sky", "beer"};
             ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
                     R.layout.tags_dropdown_item, suggestions);
             editText.setAdapter(adapter);
-//            editText.showDropDown();
+            editText.showDropDown();
         } else {
             String text = tags.get(position).getLabel();
             editText.setText(text);
             editText.setInputType(InputType.TYPE_NULL);
-//            editText.setLayoutParams(new ConstraintLayout.LayoutParams(
-//                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-//                    ConstraintLayout.LayoutParams.WRAP_CONTENT
-//            ));
-            editText.setWidth((int) Math.ceil(calculateWidth(text)));
+            editText.setWidth(calculateWidth(text));
             closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
                 tags.remove(position);

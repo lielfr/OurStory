@@ -1,4 +1,4 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,19 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import org.tsofen.ourstory.R;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAdapter.ViewHolder> {
     Context ctx;
     Activity parent;
-    List<String> videos;
+    public List<String> data;
 
-    static final int ADDMEMORY_VIDEO = 959;
+    public static final int ADDMEMORY_VIDEO = 959;
 
     public AddMemoryVideoAdapter(Activity parent) {
         super();
-        videos = new LinkedList<>();
+        data = new LinkedList<>();
         this.parent = parent;
     }
 
@@ -56,8 +58,19 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
                             ADDMEMORY_VIDEO);
                 }
             });
+            holder.itemView.findViewById(R.id.deleteButtonRVMedia).setVisibility(View.GONE);
+
         } else {
-            String uri = videos.get(position - 1);
+            holder.itemView.findViewById(R.id.deleteButtonRVMedia).
+                    setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            data.remove(position - 1);
+                            notifyItemRemoved(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+            String uri = data.get(position - 1);
             Glide.with(holder.itemView)
                     .load(uri)
                     .into(imageView);
@@ -66,7 +79,7 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
 
     @Override
     public int getItemCount() {
-        return videos.size() + 1;
+        return data.size() + 1;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -26,6 +26,14 @@ public class Memory implements Serializable {
     ArrayList<Long> shares;
     boolean isPrivate;
 
+    public long getStoryId() {
+        return storyId;
+    }
+
+    public void setStoryId(long storyId) {
+        this.storyId = storyId;
+    }
+
     public String getDescription() {
         return description;
     }
