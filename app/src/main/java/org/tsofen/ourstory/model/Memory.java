@@ -1,30 +1,64 @@
 package org.tsofen.ourstory.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static java.util.Calendar.getInstance;
 
 public class Memory implements Serializable {
-    long id;
-    long storyId;
-    long creatorId;
+    private final static long serialVersionUID = -7521612754263171930L;
+    @SerializedName("memory_id")
+    @Expose
+    Long id;
+    @SerializedName("story")
+    Long storyId;
+    @SerializedName("contributer")
+    @Expose
+    Long creatorId;
     String creatorName;
     URI creatorPic;
+    @SerializedName("description")
+    @Expose
     String description;
+    @SerializedName("memory_date")
+    @Expose
     Calendar memoryDate;
+    @SerializedName("create_date")
+    @Expose
     Calendar createDate;
+    @SerializedName("feeling")
+    @Expose
     Feeling feeling;
+    @SerializedName("location")
+    @Expose
     String location;
+    @SerializedName("pictures")
+    @Expose
     ArrayList<URI> pictures;
+    @SerializedName("videos")
+    @Expose
     ArrayList<URI> videos;
     ArrayList<Tag> tags;
+    @SerializedName("likes")
+    @Expose
     ArrayList<Long> likes;
+    @SerializedName("comments")
+    @Expose
     ArrayList<Comment> comments;
     ArrayList<Long> shares;
+    @SerializedName("is_private")
+    @Expose
     boolean isPrivate;
+
+    public Long getId() {
+        return id;
+    }
 
     public long getStoryId() {
         return storyId;

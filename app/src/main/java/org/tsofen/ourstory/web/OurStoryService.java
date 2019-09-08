@@ -32,4 +32,7 @@ public interface OurStoryService {
     Call<Owner> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
+
+    @POST("memories/create")
+    Call<Memory> CreateMemory(@Body Memory memory);
 }

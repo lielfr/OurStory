@@ -19,12 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -211,11 +218,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         currentDate = day_string + "/" + month_string + "/" + year_string;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            MemDate = dateFormat.parse(currentDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Calendar c = Calendar.getInstance();
+        c.set(year, month + 1, day);
+        MemDate = c.getTime();
 
         TextView dayDate = findViewById(R.id.day_text_cememory);
         TextView monthDate = findViewById(R.id.month_text_cememory);
@@ -240,8 +245,22 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         mem.setFeeling(SelectedEmoji);
         Calendar c = Calendar.getInstance();
         c.setTime(MemDate);
-        mem.setMemoryDate(c);
+        //mem.setMemoryDate(c);
         displayToast("Data saved.");
+
+        OurStoryService service = WebFactory.getService();
+        service.CreateMemory(mem).enqueue(new Callback<Memory>() {
+            @Override
+            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                Memory responseMem = response.body();
+                displayToast("Got ID: " + responseMem.getId());
+            }
+
+            @Override
+            public void onFailure(Call<Memory> call, Throwable t) {
+
+            }
+        });
 
     }
 
