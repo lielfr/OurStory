@@ -49,6 +49,8 @@ public class LogIn extends AppCompatActivity {
         cityString = currIntent.getStringExtra("city");
         dateOfBirth = currIntent.getStringExtra("dateOfBirth");
         genderString = currIntent.getStringExtra("gender");
+        profilePictureString = currIntent.getStringExtra("profilePicture");
+
         User tempUser = new User(firstNameString, lastNameString, passwordString,
                 emailString, profilePictureString, genderString, dateOfBirth,
                 dateOfRegistration, dateOfLastSignIn, stateString, cityString);
