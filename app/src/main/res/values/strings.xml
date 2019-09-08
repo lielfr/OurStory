@@ -9,9 +9,9 @@
     <string name="location">Location</string>
     <string name="feeling">Feeling</string>
     <string name="this_was_at">This was at</string>
-    <string name="month">month</string>
-    <string name="year">year</string>
-    <string name="day">day</string>
+    <string name="month">mm</string>
+    <string name="year">yyyy</string>
+    <string name="day">dd</string>
     <string name="alert_message">Please Fill in</string>
     <string name="alert_title">Alert</string>
 

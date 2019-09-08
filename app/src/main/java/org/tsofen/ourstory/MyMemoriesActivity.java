@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -24,8 +25,8 @@ import retrofit2.Response;
 public class MyMemoriesActivity extends AppCompatActivity {
 
     RecyclerView rv;
-    ArrayList<Memory> memories;
-    OurStoryService memoryService;
+    ArrayList<MemoryA> memories;
+    OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
 
@@ -33,21 +34,23 @@ public class MyMemoriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_memories);
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();*/
        //TODO int user_id = intent.getStringExtra(AppHomePage.EXTRA_MESSAGE);
         rv = findViewById(R.id.recycler);
-        memoryService = WebFactory.getService();
-        memoryService.GetMemoriesByUser(3).enqueue(new Callback<ArrayList<Memory>>() {
+        MemoryAService = WebFactory.getService();
+        MemoryAService.GetMemoriesByUser(137).enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
-            public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
+            public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
+                Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                 adapter = new MyMemoriesAdapter(memories);
+
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(MyMemoriesActivity.this));
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
                 Log.d("Error", t.toString());
             }
         });
@@ -62,8 +65,8 @@ public class MyMemoriesActivity extends AppCompatActivity {
         ShareCompat.IntentBuilder
                 .from(this)
                 .setType(mimeType)
-                .setChooserTitle("Share this memory with: ")
-                .setText("This is a filler until we can integrate a memory object")
+                .setChooserTitle("Share this MemoryA with: ")
+                .setText("This is a filler until we can integrate a MemoryA object")
                 .startChooser();
 
     }

@@ -12,17 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.StoryTeam.Story;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 
-    public ArrayList<Memory> mMemories;
+    public ArrayList<MemoryA> mMemories;
 
-    public MyMemoriesAdapter(ArrayList<Memory> memories) {
+   /* public MyMemoriesAdapter(ArrayList<Memory> memories) {
+        this.mMemories = memories;
+    }*/
+
+    public MyMemoriesAdapter(ArrayList<MemoryA> memories) {
         this.mMemories = memories;
     }
 
@@ -45,18 +51,19 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Memory memory = mMemories.get(position);
-        String tags="#";
-        if(memory.getDescription()!=null && !(memory.getTags().isEmpty())) {
+        MemoryA memory = mMemories.get(position);
+        String tags = "#";
+
+       /* if(memory.getDescription().length == 0 && (memory.getTags().size()!=0)) {
                 for(Tag tag: memory.getTags())
                 {
                     tags += "#"+ tag.getLabel();
                 }
                 holder.descr.setText(memory.getDescription() + tags);
             }
-        else if(memory.getTags().isEmpty() && memory.getDescription()!=null)
+        else if(memory.getTags().size()==0 && memory.getDescription().length!=0)
                 holder.descr.setText(memory.getDescription());
-        else if(!memory.getTags().isEmpty()&&memory.getDescription()==null)
+        else if(!memory.getTags().size() ==0 && memory.getDescription().length==0)
         {
             for(Tag tag: memory.getTags())
             {
@@ -66,33 +73,34 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         }
         else {
             holder.descr.setVisibility(View.GONE);
-        }
-     //Todo get story name by id .   holder.name.setText(memory.getStoryId());
+        }*/
+     /*   holder.descr.setText((String)memory.getDescription());
+       Story story = (Story) memory.getStory();
+     holder.name.setText(story.getFirstName() + " " + story.getLastName());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
+            String memDate = monthNames[((Calendar)memory.getMemoryDate()).get(Calendar.MONTH)] + " " + ((Calendar)memory.getMemoryDate()).get(Calendar.DAY_OF_MONTH) + " , " + ((Calendar)memory.getMemoryDate()).get(Calendar.YEAR);
             holder.mem_date.setText(memDate);
         }
         else
-            holder.mem_date.setVisibility(View.GONE);
+            holder.mem_date.setText("");
         if(memory.getLikes().isEmpty())
-            holder.num_of_likes.setVisibility(View.GONE);
+            holder.num_of_likes.setText("");
         else
             holder.num_of_likes.setText(memory.getLikes().size());
         if(memory.getComments().isEmpty())
-            holder.num_of_comments.setVisibility(View.GONE);
+            holder.num_of_comments.setText("");
         else
             holder.num_of_comments.setText(memory.getComments().size());
        if(memory.getLocation()!=null)
-           holder.location.setText(memory.getLocation());
+           holder.location.setText((String) memory.getLocation());
        else
-           holder.location.setVisibility(View.GONE);
+           holder.location.setText("");
         if(memory.getFeeling()!=null)
             holder.feeling.setText(memory.getFeeling().toString());
         else
-            holder.feeling.setVisibility(View.GONE);
-
-
+            holder.feeling.setText("");
+*/
     }
     @Override
     public int getItemCount() {
@@ -100,7 +108,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView feeling,name, mem_date, descr ,num_of_likes, num_of_comments,location;
+        public TextView feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
         public MyMemoriesAdapter adapter;
 
@@ -112,8 +120,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             num_of_comments = itemView.findViewById(R.id.commentNum);
             num_of_likes = itemView.findViewById(R.id.likesNum);
             descr = itemView.findViewById(R.id.descr);
-            location = itemView.findViewById(R.id.locationtxt_mymemories);
-            feeling = itemView.findViewById(R.id.feelingtxt_mymemories);
+//            location = itemView.findViewById(R.id.locationtxt_mymemories);
+//            feeling = itemView.findViewById(R.id.feelingtxt_mymemories);
             profile = itemView.findViewById(R.id.picture_person);
             adapter = MyMemoriesAdapter;
 
