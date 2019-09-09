@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="comment_to_show" type="id">comment_in</item>
+    <item name="profile_comment" type="id">profile_comment</item>
+    <item name="name_comment" type="id">name_comment</item>
+</resources>

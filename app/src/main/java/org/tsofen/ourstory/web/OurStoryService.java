@@ -2,7 +2,7 @@ package org.tsofen.ourstory.web;
 
 
 import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.api.Comment;
+import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Owner;
@@ -24,9 +24,11 @@ public interface OurStoryService {
     @FormUrlEncoded
     @Headers("Content-Type: application/json")
     @POST("api/comments")
-    Call<Comment> newComment(@Body Comment comment);
+    Call<CommentA> newComment(@Body CommentA comment);
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<MemoryA>> GetMemoriesByUser(@Path("id") long id);
+    @GET("comments/findById/{id}")
+    Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
