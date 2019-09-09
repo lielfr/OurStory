@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+
+import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
@@ -65,6 +68,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         error1=findViewById(R.id.error1);
         error2=findViewById(R.id.error2);
         error3=findViewById(R.id.error3);
+
+
 
     }
 
@@ -181,6 +186,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     public void viewCreatedStory(View view) {
 
 
+
        /* Owner owner = new Owner(21);      //IN this section we will check the user/visitor and act accordingly Dont touch IT!!!!!
         t.GetUserById(2).enqueue(new Callback<Owner>() {
             @Override
@@ -208,6 +214,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         Date date1D, date2D, todayD;
 
         Intent i = new Intent(this, ViewStory.class);
+        Intent cm = new Intent(this, CreateEditMemoryActivity.class);
 
         // Names Validation
         String fns = firstName.getText().toString();
@@ -278,7 +285,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
         if (f1 && f2 && f3) {
             // Send data to next activity / creating local Story object and building a custom made dates
-            String nameofperson = fns + lns ; // name is done
+            String nameofperson = fns + " " + lns ; // name is done
             //adapting months and days
             if(Integer.valueOf(m1s)<10){m1s="0"+m1s;}
             if(Integer.valueOf(m2s)<10){m2s="0"+m2s;}
@@ -299,8 +306,14 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                         i.putExtra("date1", date1);
                         i.putExtra("date2", date2);
                         i.putExtra("name", nameofperson);
-                        startActivity(i);
+                        if(view.getId()==R.id.create){
+                            i.putExtra("Button","just_create");
+                        }else{
+                            i.putExtra("Button","createandadd");
+                            i.putExtra("id",Long.toString(result.getStoryId()));
 
+                        }
+                        startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();
                     }

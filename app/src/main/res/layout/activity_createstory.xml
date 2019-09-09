@@ -427,7 +427,7 @@
                 android:layout_marginBottom="30dp">
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/create"
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -442,7 +442,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/createand"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -451,10 +451,11 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/register_button"
                     android:text="CREATE &amp; ADD A MEMORY"
+                    android:onClick="viewCreatedStory"
                     android:textColor="@color/colorWhite"
-                    app:layout_constraintBottom_toBottomOf="@+id/button4"
-                    app:layout_constraintStart_toEndOf="@+id/button4"
-                    app:layout_constraintTop_toTopOf="@+id/button4" />
+                    app:layout_constraintBottom_toBottomOf="@+id/create"
+                    app:layout_constraintStart_toEndOf="@+id/create"
+                    app:layout_constraintTop_toTopOf="@+id/create" />
 
             </LinearLayout>
 
