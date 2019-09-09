@@ -1,6 +1,8 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -175,7 +179,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             {
-                displayToast("You should either enter an image or a viedeo or description for your memory!");
+               /* Drawable d = getResources().getDrawable(R.drawable.error_image_background);
+                RecycleImage.setBackground(d);*/
+                //  editTextDescription.setHintTextColor(@);
+                LinearLayout imageLiner = findViewById(R.id.LinerForImage);
+                imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+                displayToast("You should either enter an image or a video or description for your memory!");
                 return false;
             }
         }
