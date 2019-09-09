@@ -34,7 +34,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyMemories extends Fragment {
-
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     AppHomePage parent;
     RecyclerView rv;
@@ -42,19 +41,18 @@ public class MyMemories extends Fragment {
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
-
     public MyMemories() {
         super();
+
     }
 
     @Nullable
     @Override
-    public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView( @Nullable LayoutInflater inflater, @Nullable ViewGroup container,
+                              @Nullable Bundle savedInstanceState) {
         parent = (AppHomePage) getActivity();
         return inflater.inflate(R.layout.fragment_my_memories, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

@@ -25,7 +25,6 @@ public interface OurStoryService {
     @Headers("Content-Type: application/json")
     @POST("api/comments")
     Call<Comment> newComment(@Body Comment comment);
-
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<MemoryA>> GetMemoriesByUser(@Path("id") long id);
     @Headers({"Content-Type: application/json"})

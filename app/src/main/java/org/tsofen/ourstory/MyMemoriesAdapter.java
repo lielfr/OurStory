@@ -52,8 +52,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
-        String tags = "#";
-
        /* if(memory.getDescription().length == 0 && (memory.getTags().size()!=0)) {
                 for(Tag tag: memory.getTags())
                 {
