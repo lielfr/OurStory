@@ -82,7 +82,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         {
             errorText="Field cannot be empty!";
             flag=0;
-        }else if(!str.matches("[a-zA-Z ]")){
+        }else if(!str.matches("[a-zA-Z ]+")){
             errorText="Only Alphabetical characters allowed!";
             flag=0;
         }
