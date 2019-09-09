@@ -26,17 +26,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <ImageButton
-            android:id="@+id/sharebtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-
-            android:background="@color/colorPrimaryDark"
-            android:onClick="shareMemory"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:srcCompat="@drawable/sharenew" />
-
         <ImageView
             android:id="@+id/picture_person"
             android:layout_width="64dp"
@@ -106,23 +95,32 @@
             app:layout_constraintStart_toEndOf="@+id/name_txt_person"
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
-        <TextView
-            android:id="@+id/commentNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="24dp"
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/descr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/quicksand_bold"
-            android:text="9"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/likesNum"
-            app:layout_constraintStart_toEndOf="@+id/likesNum"
-            app:layout_constraintTop_toTopOf="@+id/likesNum"
-            app:layout_constraintVertical_bias="0.0" />
+            android:text="  Description about this memory"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
 
-        <ImageView
+            app:trimExpandedText="@string/showLess"
+            app:trimCollapsedText="@string/showMore"
+            app:trimMode="trimModeLength"
+            app:trimLength="120"
+
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toBottomOf="@+id/picture_person"
+            android:gravity="start"
+            android:layout_marginRight="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memory_pic"
             android:layout_width="0dp"
             android:layout_height="201dp"
@@ -182,6 +180,22 @@
             app:layout_constraintStart_toStartOf="@+id/likebtn" />
 
         <TextView
+            android:id="@+id/commentNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="9"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/likesNum"
+            app:layout_constraintStart_toEndOf="@+id/likesNum"
+            app:layout_constraintTop_toTopOf="@+id/likesNum"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
             android:id="@+id/postedattxt"
             android:layout_width="72dp"
             android:layout_height="23dp"
@@ -193,31 +207,6 @@
             app:layout_constraintHorizontal_bias="0.259"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_txt_person" />
-
-        <com.borjabravo.readmoretextview.ReadMoreTextView
-            android:id="@+id/descr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="  Description about this memory"
-            android:textAlignment="textStart"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-
-            app:trimCollapsedText="@string/showMore"
-            app:trimExpandedText="@string/showLess"
-            app:trimLength="120"
-            app:trimMode="trimModeLength"
-
-            app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/background"
-            app:layout_constraintTop_toBottomOf="@+id/picture_person"
-            android:gravity="start"
-            android:layout_marginRight="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
