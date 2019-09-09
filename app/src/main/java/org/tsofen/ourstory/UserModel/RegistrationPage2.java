@@ -68,6 +68,10 @@ public class RegistrationPage2 extends AppCompatActivity {
     private Button chooseButton;
     private ImageView profileImageView;
     private Uri filePath;
+    public static String profileImagePathUriString = null;
+
+    Intent regIntent3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -125,12 +129,11 @@ public class RegistrationPage2 extends AppCompatActivity {
 
 
     public void Go2RegistrationPage3andSave(View view) {
-        Intent regIntent3 = new Intent(this, LogIn.class);
+        regIntent3 = new Intent(this, LogIn.class);
         EditText6 = findViewById(R.id.showState);
         EditText7 = findViewById(R.id.showCity);
         stateString = EditText6.getText().toString();
         cityString = EditText7.getText().toString();
-
 
         regIntent3.putExtra("email", emailString);
         regIntent3.putExtra("first_name", firstNameString);
@@ -140,12 +143,11 @@ public class RegistrationPage2 extends AppCompatActivity {
         regIntent3.putExtra("city", cityString);
         regIntent3.putExtra("dateOfBirth", dateOfBirth);
         regIntent3.putExtra("gender", gender);
-        Log.d("log-saved", "values sent to registrationPage3:"
-                + emailString + " " + firstNameString + " "
-                + lastNameString + " " + passwordString + " "
-                + stateString + " " + cityString + " " + dateOfBirth + " " + gender);
-        uploadImage();
-        startActivity(regIntent3);
+
+        //Uploading the image to Firebase + passing Uri to next activity
+        uploadImage(); ///goes to upload image. Next activity is started from there.
+
+
     }
 
     public void Go2RegistrationPage3andDontSave(View view) {
@@ -215,8 +217,9 @@ public class RegistrationPage2 extends AppCompatActivity {
     }
 
     private void uploadImage() {
+
         if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
+            ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
@@ -225,8 +228,25 @@ public class RegistrationPage2 extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+                            Log.d("uri log", "the uri is " + downloadUrl.toString());
+                            profileImagePathUriString = downloadUrl.toString();
+                            Log.d("uri log", "the uri string is " + profileImagePathUriString);
                             progressDialog.dismiss();
+
                             Toast.makeText(RegistrationPage2.this, "Uploaded", Toast.LENGTH_SHORT).show();
+
+                            profilePicture = profileImagePathUriString;
+                            Log.d("profileString", "profile string is " + profilePicture);
+                            regIntent3.putExtra("profilePicture", profilePicture);
+
+
+                            Log.d("log-saved", "values sent to registrationPage3:"
+                                    + emailString + " " + firstNameString + " "
+                                    + lastNameString + " " + passwordString + " "
+                                    + stateString + " " + cityString + " " + dateOfBirth + " " + gender + " " + profilePicture);
+                            startActivity(regIntent3);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -244,8 +264,11 @@ public class RegistrationPage2 extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded " + (int) progress + "%");
                         }
                     });
+
         }
-    }
+
+
+    }//end of upload method
 
 
 }
