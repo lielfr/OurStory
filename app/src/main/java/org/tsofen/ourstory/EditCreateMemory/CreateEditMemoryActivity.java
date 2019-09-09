@@ -136,6 +136,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             case R.id.Cancelbtn_cememory:
                 finish();
                 break;
+            case R.id.back_button_cememory:
+                finish();
+                break;
+
         }
     }
 
