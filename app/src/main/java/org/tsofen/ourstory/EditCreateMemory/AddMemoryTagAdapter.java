@@ -1,28 +1,22 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.EditCreateMemory;
 
 import android.content.Context;
-import android.renderscript.ScriptGroup;
+import android.graphics.Rect;
 import android.text.InputType;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.KeyEvent;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ourstory.R;
-
+import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Tag;
 
 import java.util.List;
@@ -49,6 +43,14 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
         return viewHolder;
     }
 
+    public int calculateWidth(String text) {
+        Rect bounds = new Rect();
+        TextView textView = new TextView(ctx);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
+        return bounds.width();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageView closeButton = holder.itemView.findViewById(R.id.imageView_tags_rv);
@@ -66,7 +68,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                     notifyItemInserted(tags.size() - 1);
                     editText.setText("");
                     rv.scrollToPosition(tags.size());
-                    editText.dismissDropDown();
+
                 }
                 return true;
             });
@@ -78,10 +80,16 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
                     R.layout.tags_dropdown_item, suggestions);
             editText.setAdapter(adapter);
-            editText.showDropDown();
+//            editText.showDropDown();
         } else {
-            editText.setText(tags.get(position).getLabel());
+            String text = tags.get(position).getLabel();
+            editText.setText(text);
             editText.setInputType(InputType.TYPE_NULL);
+//            editText.setLayoutParams(new ConstraintLayout.LayoutParams(
+//                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+//                    ConstraintLayout.LayoutParams.WRAP_CONTENT
+//            ));
+            editText.setWidth((int) Math.ceil(calculateWidth(text)));
             closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
                 tags.remove(position);

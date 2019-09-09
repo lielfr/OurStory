@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AddMemory</string>
+    <string name="app_name">Our Story</string>
     <string name="save">SAVE</string>
     <string name="todo">TODO</string>
     <string name="tags">Tags</string>
@@ -12,6 +12,14 @@
     <string name="month">mm</string>
     <string name="year">yyyy</string>
     <string name="day">dd</string>
+    <string name="alert_message">Please Fill in</string>
+    <string name="alert_title">Alert</string>
+
+    <string name="showMore">" show more"</string>
+    <string name="showLess">" show less"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tap_to_add">Tap to add</string>
 
 
@@ -64,8 +72,6 @@
     <string name="State">State:</string>
     <string name="City">City:</string>
     <string name="Gender">Gender:</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="close">closeActivity</string>
     <string name="Create">Create a new acount</string>
     <string name="FIRSTNAME">First Name</string>
@@ -95,4 +101,52 @@
     <string name="myprofile">My Profile</string>
 
 
+    <string name="title_activity_view_story">ViewStory</string>
+    <string name="view_story_title">View Story</string>
+    <string name="CreateNewAcount">Create a new account</string>
+    <string name="deselect_tag">Deselect Tag</string>
+
+    <string-array name="names">
+        <item>Mance Raider</item>
+        <item>Robb Stark</item>
+        <item>Jon Snow</item>
+        <item>Robert Baratheon</item>
+        <item>Stannis Baratheon</item>
+        <item>Balon Greyjoy</item>
+        <item>Joffrey Baratheon</item>
+        <item>Tommen Baratheon</item>
+        <item>Night King</item>
+        <item>Aerys II Targaryen</item>
+        <item>Jaime Lannister</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>King Beyong The Wall</item>
+        <item>The King In The North</item>
+        <item>The King In The North</item>
+        <item>King Of Westeros</item>
+        <item>King Of Westeros</item>
+        <item>King Of Iron Islands</item>
+        <item>King Of Westeros</item>
+        <item>King Of Westeros</item>
+        <item>Night King</item>
+        <item>The Mad King</item>
+        <item>The Kingslayer</item>
+    </string-array>
+
+    <string-array name="dates">
+        <item>season2-season3</item>
+        <item>season1-season3</item>
+        <item>season1-season8</item>
+        <item>season1</item>
+        <item>season2-season6</item>
+        <item>season3-season5</item>
+        <item>season1-season5</item>
+        <item>season1-season7</item>
+        <item>season4-season8</item>
+        <item>season0</item>
+        <item>season1-season8</item>
+    </string-array>
+
 </resources>
+

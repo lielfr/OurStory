@@ -1,4 +1,5 @@
-package org.tsofen.ourstory;
+package org.tsofen.ourstory.StoryTeam;
+
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -7,11 +8,17 @@ import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
 
-public class DatePickerFragmentCEMemory extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener  {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+
+
+public class DatePickerFragment extends DialogFragment
+        implements DatePickerDialog.OnDateSetListener {        // Required empty public constructor
 
     @NonNull
     @Override
@@ -27,8 +34,8 @@ public class DatePickerFragmentCEMemory extends DialogFragment
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int day) {
-        CreateEditMemoryActivity activity = (CreateEditMemoryActivity) getActivity();
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        org.tsofen.ourstory.StoryTeam.CreateStory activity = (org.tsofen.ourstory.StoryTeam.CreateStory) getActivity();
         activity.processDatePickerResult(year, month, day);
     }
 }

@@ -11,18 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.ourstory.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.tsofen.ourstory.R;
 
 
 public class AppHomePage extends AppCompatActivity {
 
-    FragmentManager fragmentManager;
-    Fragment currentFragment;
-
     public static final String KEY_SELECTED = "OurStorySelected";
     public int selected;
-
+    FragmentManager fragmentManager;
+    Fragment currentFragment;
     BottomNavigationView nav;
 
     @Override
@@ -31,7 +30,7 @@ public class AppHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         selected = R.id.nav_home;
-        final TextView upText=findViewById(R.id.upText);
+        final TextView upText = findViewById(R.id.upText);
         // Fixing the icon tinting of the bottom navigation bar.
 
         nav = findViewById(R.id.nav_main);
@@ -41,7 +40,6 @@ public class AppHomePage extends AppCompatActivity {
 
         currentFragment = new HomeFragment();
         currentFragment.setArguments(getIntent().getExtras());
-
 
 
         fragmentManager = getSupportFragmentManager();
@@ -59,9 +57,9 @@ public class AppHomePage extends AppCompatActivity {
                         upText.setText("Home");
                         break;
                     case R.id.nav_profile:
-                        targetFragment=new UserProfile();
+                        targetFragment = new UserProfile();
                         upText.setText("My Profile");
-break;
+                        break;
                     default:
                         return true;
                 }

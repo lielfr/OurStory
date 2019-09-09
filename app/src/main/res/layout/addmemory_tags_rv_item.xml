@@ -4,41 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="48dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
-    android:background="@drawable/edit_round4">
+    android:layout_gravity="start|center_vertical"
+    android:background="@drawable/edit_round4"
+    app:layout_anchorGravity="start|center_vertical">
 
     <AutoCompleteTextView
         android:id="@+id/cememory_rv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:background="@color/colorPrimaryDark"
         android:completionThreshold="0"
+        android:dropDownWidth="wrap_content"
         android:fontFamily="@font/quicksand_bold"
         android:hint="@string/tap_to_add"
         android:inputType="none"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
         android:popupBackground="@drawable/tag_round"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_tags_rv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_min="0dp" />
 
     <ImageView
         android:id="@+id/imageView_tags_rv"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="37dp"
+        android:layout_height="25dp"
+        android:contentDescription="@string/deselect_tag"
+        android:foregroundGravity="left"
+        app:layout_constraintBottom_toBottomOf="@+id/cememory_rv_text"
+        app:layout_constraintStart_toEndOf="@+id/cememory_rv_text"
+        app:layout_constraintTop_toTopOf="@+id/cememory_rv_text"
         app:srcCompat="@drawable/ic_tags_x" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
