@@ -8,9 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8fd4f1ac-d77f-43ff-b41b-eeb077924d55" name="Default Changelist" comment="Merge branch 'master' into feautre-branch&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/layout/activity_createstory.xml&#10;#&#9;app/src/main/res/layout/activity_view_story.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/SearchStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/SearchStory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +37,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml">
           <provider editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="269">
               <caret line="98" column="39" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
+=======
+            <state relative-caret-position="-105">
+              <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+>>>>>>> Stashed changes
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer2" />
@@ -59,7 +67,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/StoryFragment.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="867">
+=======
+            <state relative-caret-position="197">
+>>>>>>> Stashed changes
               <caret line="51" column="51" lean-forward="true" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -71,8 +83,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="-1241">
               <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+=======
+            <state relative-caret-position="-136">
+              <caret line="154" column="12" selection-start-line="154" selection-start-column="12" selection-end-line="154" selection-end-column="12" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -80,12 +97,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/SearchStory.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="-398">
               <caret line="22" column="55" lean-forward="true" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
               <folding>
                 <element signature="e#1890#1891#0" expanded="true" />
                 <element signature="e#1914#1915#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="-296">
+              <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -482,7 +504,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+<<<<<<< Updated upstream
     <editor active="true" />
+=======
+>>>>>>> Stashed changes
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.15704697" />
@@ -526,10 +551,27 @@
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+<<<<<<< Updated upstream
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_createstory.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_memories.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+<<<<<<< Updated upstream
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/ViewStory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        </state>
+      </provider>
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_log_in.xml">
       <provider editor-type-id="text-editor" />
@@ -542,6 +584,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_view_story.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+<<<<<<< Updated upstream
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable-hdpi/01- Visitor Home.png" />
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_view_story.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable-hdpi/01- Visitor Home.png" />
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_home_page.xml">
@@ -580,6 +630,19 @@
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/memory_item_story.xml">
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="android-designer2" />
+<<<<<<< Updated upstream
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/StoryTeam/StoryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="51" column="51" lean-forward="true" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/story_item.xml">
       <provider editor-type-id="text-editor" />
@@ -606,6 +669,17 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_search_story.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/Story.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -615,6 +689,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/tsofen/ourstory/model/api/ListOfStory.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="875">
           <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
         </state>
@@ -631,6 +706,10 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="-296">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>

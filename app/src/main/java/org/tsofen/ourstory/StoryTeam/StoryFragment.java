@@ -39,7 +39,7 @@ public class StoryFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
         mRecyclerView = getView().findViewById(R.id.recyclerview);
-        editText = (EditText) inflatedView.findViewById(R.id.editText_search);
+        editText = (EditText) inflatedView.findViewById(R.id.editText);
 
         OurStoryService wepengine = WebFactory.getService();
         String n = editText.getText().toString(); /// please dont delete this
@@ -77,4 +77,5 @@ public class StoryFragment extends Fragment {
 
     }
 }
+
 
