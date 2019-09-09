@@ -327,4 +327,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
      }
 
+    public void closeActivity(View view) {
+        finish();
+    }
 }
