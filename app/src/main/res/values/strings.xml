@@ -152,5 +152,6 @@
         <item>season1-season8</item>
     </string-array>
 
+    <item name="editText_search" type="id">editText_search</item>
 </resources>
 

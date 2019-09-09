@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -55,5 +56,10 @@ public class SearchStory extends AppCompatActivity {
     }
     public void finish(View view) {
         finish();
+    }
+
+    public void ShowDatePicker(View view) {
+      //  DialogFragment newFragment = new DatePickerFragment();
+      //  newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
