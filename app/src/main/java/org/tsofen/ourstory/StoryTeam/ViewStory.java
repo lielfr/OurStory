@@ -2,19 +2,20 @@ package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-
+import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.Story;
+
 import java.io.Serializable;
 
 public class ViewStory extends AppCompatActivity implements Serializable {
@@ -26,7 +27,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_view_story);
 
         LinearLayout linearLayout = findViewById(R.id.linearLayout3);
@@ -35,6 +35,16 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
         constraintLayout.setVisibility(View.VISIBLE);
         Intent intent = getIntent() ;
+        Log.i("oncreat","onCrete has been access");
+        Log.i("oncreat","extra key is"+ intent.getStringExtra("button"));
+        if(intent.getStringExtra("Button").equals("createandadd")){
+            Log.i("oncreat","int if");
+            Intent i = new Intent(this, CreateEditMemoryActivity.class);
+            i.putExtra(CreateEditMemoryActivity.KEY_CREATE, intent.getSerializableExtra("id"));
+            startActivity(i);
+        }
+
+
         String fName = intent.getStringExtra("name");
         String date1 = intent.getStringExtra("date1");
         String tag1 = intent.getStringExtra("ttag3");

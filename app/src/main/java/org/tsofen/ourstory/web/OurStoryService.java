@@ -35,11 +35,9 @@ public interface OurStoryService {
     @GET("users/findById/{id}")
     Call<Owner> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
-    Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
-
+    Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String name);
     @POST("memories/create")
     Call<Memory> CreateMemory(@Body Memory memory);
-
     // TODO: Maybe need to change that path.
     @PUT("memories/create")
     Call<Memory> EditMemory(@Body Memory memory);

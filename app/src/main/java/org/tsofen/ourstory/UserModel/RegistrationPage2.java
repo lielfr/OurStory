@@ -26,7 +26,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.StoryTeam.MainActivity;
 
 import java.io.IOException;
 import java.util.UUID;

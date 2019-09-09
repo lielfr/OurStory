@@ -1,7 +1,6 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.StoryTeam.Story;
-import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 

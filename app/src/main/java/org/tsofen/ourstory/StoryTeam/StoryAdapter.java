@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,28 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.ListOfStory;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.List;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHolder> {
-    private final LinkedList<Story> mStoryList;
+    private final List<ListOfStory> mStoryList;
     private LayoutInflater mInflater;
 
-    public StoryAdapter(Context context, LinkedList<Story> storyList) {
+    public StoryAdapter(Context context, List<ListOfStory> storyList) {
         mInflater = LayoutInflater.from(context);
-        storyList.add(new Story(new ArrayList<Memory>(), "Malik", "Mr3e", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Somebody", "Mr3e", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Memo", "Mr3e", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Lolo", "Mr3e", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Soso", "Mr3e", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Flamengo", "Mr3e", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Sandoo", "fadvadf", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Laston", "Mgsdh", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Farnsis", "Mksd", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
-        storyList.add(new Story(new ArrayList<Memory>(), "Tnoyt", "Mrb", new Date(), new Date(), R.drawable.ic_launcher_foreground, 1, new Date(), "stam", 2));
+        Log.i("story ",storyList.get(0).getNameOfPerson());
         this.mStoryList = storyList;
     }
 
@@ -45,10 +35,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
 
     @Override
     public void onBindViewHolder(@NonNull StoryViewHolder holder, int position) {
-        Story mCurrent = mStoryList.get(position);
-        holder.firstName.setText(mCurrent.getFirstName());
-        holder.lastName.setText(mCurrent.getLastName());
-        holder.profilePic.setImageResource(mCurrent.getImg());
+        ListOfStory mCurrent = mStoryList.get(position);
+        holder.firstName.setText(mCurrent.getNameOfPerson());
+   //     holder.profilePic.setImageResource((int)mCurrent.getPicture());
     }
 
     @Override
@@ -76,7 +65,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
         @Override
         public void onClick(View view) {
             int mPosition = getLayoutPosition();
-            Story element = mStoryList.get(mPosition);
+            ListOfStory element = mStoryList.get(mPosition);
             mStoryList.set(mPosition, element);
             mAdapter.notifyDataSetChanged();
         }

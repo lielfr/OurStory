@@ -18,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <Button
             android:id="@+id/back_button_viewstory2"
             android:layout_width="32dp"
@@ -28,6 +29,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:onClick="closeActivity"
             android:background="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -77,7 +79,8 @@
             android:id="@+id/linearLayoutCS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
@@ -121,11 +124,25 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/error1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/errorColor"
+                android:textSize="@dimen/errorSize"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/firstNameEditText" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lastNameHolder"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="@+id/firstNameHolder"
                 app:layout_constraintTop_toBottomOf="@+id/firstNameHolder">
 
@@ -158,13 +175,28 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/error2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/errorColor"
+                android:textSize="@dimen/errorSize"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/holder3"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp"
-                app:layout_constraintStart_toStartOf="@+id/lastNameHolder"
-                app:layout_constraintTop_toBottomOf="@+id/lastNameHolder">
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/holder2"
+                app:layout_constraintTop_toBottomOf="@+id/error2">
 
                 <TextView
                     android:id="@+id/textView7"
@@ -199,7 +231,7 @@
                         android:layout_marginBottom="2dp"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
-                        android:hint="@string/day"
+                        android:hint="@string/dayTxt"
                         android:paddingLeft="5dp"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -211,11 +243,11 @@
                         android:id="@+id/year_1"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
-                        android:hint="@string/year"
+                        android:hint="@string/yearTxt"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/month_1"
                         app:layout_constraintStart_toEndOf="@+id/month_1"
@@ -226,11 +258,11 @@
                         android:id="@+id/month_1"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginStart="64dp"
-                        android:layout_marginLeft="64dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
-                        android:hint="@string/month"
+                        android:hint="@string/monthTxt"
                         android:paddingLeft="5dp"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/day_1"
@@ -245,7 +277,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="10dp"
                         android:onClick="showDatePicker1"
                         app:layout_constraintBottom_toBottomOf="@+id/year_1"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -260,7 +292,7 @@
                 android:id="@+id/holder4"
                 android:layout_width="328dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -278,6 +310,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/deathDateHandler"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="15dp"
@@ -295,7 +328,7 @@
                         android:layout_marginBottom="2dp"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
-                        android:hint="@string/day"
+                        android:hint="@string/dayTxt"
                         android:paddingLeft="5dp"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -307,11 +340,11 @@
                         android:id="@+id/year_2"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
-                        android:hint="@string/year"
+                        android:hint="@string/yearTxt"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/day_2"
                         app:layout_constraintStart_toEndOf="@+id/month_2"
@@ -322,11 +355,11 @@
                         android:id="@+id/month_2"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginStart="64dp"
+                        android:layout_marginStart="50dp"
                         android:layout_marginLeft="64dp"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/quicksand"
-                        android:hint="@string/month"
+                        android:hint="@string/monthTxt"
                         android:paddingLeft="5dp"
                         android:textColorHint="@color/colorGrayHint"
                         app:layout_constraintBottom_toBottomOf="@+id/day_2"
@@ -341,7 +374,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="10dp"
                         android:onClick="showDatePicker2"
                         app:layout_constraintBottom_toBottomOf="@+id/month_2"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -351,7 +384,22 @@
                         app:srcCompat="@drawable/ic_calendar" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/error3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:textColor="@color/errorColor"
+                android:textSize="@dimen/errorSize"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/deathDateHandler"
+                app:layout_constraintTop_toBottomOf="@+id/deathDateHandler"/>
+
 
             <TextView
                 android:id="@+id/add_profile_picture"
@@ -361,7 +409,7 @@
                 android:fontFamily="@font/quicksand_bold"
                 android:text="@string/add_profile"
                 android:textColor="@color/colorGrayHint"
-                app:layout_constraintTop_toBottomOf="@+id/holder4" />
+                app:layout_constraintTop_toBottomOf="@+id/error3" />
 
             <ImageView
                 android:id="@+id/profilePic"
@@ -379,7 +427,7 @@
                 android:layout_marginBottom="30dp">
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/create"
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -394,7 +442,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/createand"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -403,12 +451,14 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/register_button"
                     android:text="CREATE &amp; ADD A MEMORY"
+                    android:onClick="viewCreatedStory"
                     android:textColor="@color/colorWhite"
-                    app:layout_constraintBottom_toBottomOf="@+id/button4"
-                    app:layout_constraintStart_toEndOf="@+id/button4"
-                    app:layout_constraintTop_toTopOf="@+id/button4" />
+                    app:layout_constraintBottom_toBottomOf="@+id/create"
+                    app:layout_constraintStart_toEndOf="@+id/create"
+                    app:layout_constraintTop_toTopOf="@+id/create" />
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
