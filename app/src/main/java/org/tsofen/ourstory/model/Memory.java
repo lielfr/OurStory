@@ -1,5 +1,8 @@
 package org.tsofen.ourstory.model;
 
+import android.content.Intent;
+import android.view.View;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -277,5 +280,7 @@ public class Memory implements Serializable {
     public void setCreateDate(Calendar createDate) {
         this.createDate = createDate.getTime();
     }
+
+
 
 }

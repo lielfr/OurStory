@@ -12,6 +12,7 @@ import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class MyMemoriesActivity extends AppCompatActivity {
 
+    Memory mem;
     RecyclerView rv;
     ArrayList<MemoryA> memories;
     OurStoryService MemoryAService;
@@ -68,6 +70,13 @@ public class MyMemoriesActivity extends AppCompatActivity {
                 .setChooserTitle("Share this MemoryA with: ")
                 .setText("This is a filler until we can integrate a MemoryA object")
                 .startChooser();
+
+    }
+
+
+    public void editMemory(View view){
+        Intent i = new Intent();
+        i.putExtra("CEMemoryEdit", mem);
 
     }
 }

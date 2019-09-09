@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.model.api;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -20,13 +21,13 @@ public class MemoryA implements Serializable {
     private Contributer contributer;
     @SerializedName("description")
     @Expose
-    private Object description;
+    private String description;
     @SerializedName("memory_date")
     @Expose
-    private Object memoryDate;
+    private Calendar memoryDate;
     @SerializedName("create_date")
     @Expose
-    private Object createDate;
+    private Calendar createDate;
     @SerializedName("feeling")
     @Expose
     private Object feeling;
@@ -49,6 +50,7 @@ public class MemoryA implements Serializable {
     @Expose
     private List<Object> videos = null;
 
+
     /**
      * No args constructor for use in serialization
      */
@@ -70,7 +72,7 @@ public class MemoryA implements Serializable {
      * @param createDate
      * @param comments
      */
-    public MemoryA(Integer memoryId, Object story, Contributer contributer, Object description, Object memoryDate, Object createDate, Object feeling, Object location, List<Object> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos) {
+    public MemoryA(Integer memoryId, Object story, Contributer contributer, String description, Calendar memoryDate, Calendar createDate, Object feeling, Object location, List<Object> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos) {
         super();
         this.memoryId = memoryId;
         this.story = story;
@@ -111,27 +113,27 @@ public class MemoryA implements Serializable {
         this.contributer = contributer;
     }
 
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Object getMemoryDate() {
+    public Calendar getMemoryDate() {
         return memoryDate;
     }
 
-    public void setMemoryDate(Object memoryDate) {
+    public void setMemoryDate(Calendar memoryDate) {
         this.memoryDate = memoryDate;
     }
 
-    public Object getCreateDate() {
+    public Calendar getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Object createDate) {
+    public void setCreateDate(Calendar createDate) {
         this.createDate = createDate;
     }
 
