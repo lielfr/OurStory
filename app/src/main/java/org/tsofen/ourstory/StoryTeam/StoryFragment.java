@@ -44,7 +44,7 @@ public class StoryFragment extends Fragment {
         OurStoryService wepengine = WebFactory.getService();
         String n = editText.getText().toString(); /// please dont delete this
 
-        wepengine.GetStoriesByName("mal").enqueue(new Callback<ArrayList<ListOfStory>>() {
+        wepengine.GetStoriesByName("mali").enqueue(new Callback<ArrayList<ListOfStory>>() {
             @Override
             public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
                 arr = response.body();
