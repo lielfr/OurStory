@@ -3,6 +3,7 @@ package org.tsofen.ourstory.EditCreateMemory;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -78,9 +80,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         TextView monthDate = findViewById(R.id.month_text_cememory);
         TextView yearDate = findViewById(R.id.year_text_cememory);
 
-        if (memory == null)
+        if (memory == null) {
             pageTitle.setText("Add Memory");
-        else {
+            memory = new Memory();
+        } else {
             pageTitle.setText("Edit Memory");
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
@@ -95,6 +98,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             videoAdapter.notifyDataSetChanged();
             tagAdapter.tags.addAll(memory.getTags());
             tagAdapter.notifyDataSetChanged();
+        }
+
+        Story story = (Story) intent.getSerializableExtra(KEY_CREATE);
+        if (story != null) {
+            memory.setStory(story);
         }
 
         smileb.setOnClickListener(this);

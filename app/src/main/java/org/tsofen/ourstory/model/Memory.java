@@ -3,6 +3,8 @@ package org.tsofen.ourstory.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.tsofen.ourstory.model.api.Story;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class Memory implements Serializable {
     @Expose
     Long id;
     @SerializedName("story")
-    Long storyId;
+    Story story;
     @SerializedName("contributer")
     @Expose
     Long creatorId;
@@ -61,11 +63,19 @@ public class Memory implements Serializable {
     }
 
     public long getStoryId() {
-        return storyId;
+        return story.getStoryId();
     }
 
     public void setStoryId(long storyId) {
-        this.storyId = storyId;
+        story.setStoryId(storyId);
+    }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
     }
 
     public String getDescription() {
