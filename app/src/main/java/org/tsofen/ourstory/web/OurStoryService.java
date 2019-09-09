@@ -7,6 +7,7 @@ import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 
@@ -41,5 +42,8 @@ public interface OurStoryService {
     // TODO: Maybe need to change that path.
     @PUT("memories/create")
     Call<Memory> EditMemory(@Body Memory memory);
+    @GET("users/findByEmail/{email}")
+    Call<User> GetUserByEmail( @Path("email") String email);
+
 
 }

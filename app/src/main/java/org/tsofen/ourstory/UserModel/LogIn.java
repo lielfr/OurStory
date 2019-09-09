@@ -10,8 +10,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static org.tsofen.ourstory.UserModel.UsersList.usersList;
 
@@ -30,9 +36,12 @@ public class LogIn extends AppCompatActivity {
     public String dateOfLastSignIn = "0/0/00";
     EditText email;
     EditText password;
-    int flag1 = 0;
-    int flag2 = 0;
 
+    int flag1 = 1;
+    int flag2 = 1;
+    String userPass;
+    long userId;
+org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,31 +76,70 @@ public class LogIn extends AppCompatActivity {
 
 
     public void goLogin(View view) {
-        int index = 0;
-        String userIn;
+
+        //int index = 0;
+       // String userIn;
+        OurStoryService ss = WebFactory.getService();
         String inputEmail = String.valueOf(email.getText());
         String inputPassword = String.valueOf(password.getText());
-        for (int i = 0; i < UsersList.usersList.size(); i++) {
-            if (inputEmail.equals(UsersList.usersList.get(i).getmEmail()) && (inputPassword.equals(usersList.get(i).getmPassword()))) {
-                flag1 = 1;
-                flag2 = 1;
-                index = i;
+
+
+        ss.GetUserByEmail(inputEmail).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+
+
+            @Override
+            public void onResponse(Call<org.tsofen.ourstory.model.api.User> call, Response<org.tsofen.ourstory.model.api.User> response) {
+                myUser = response.body();
+                if (myUser == null) {
+                    flag1=0;
+
+
+
+                }
+                else {
+
+                    userId=myUser.getUserId();
+                    userPass=myUser.getPassword();
+
+                    if (!(userPass.equals(inputPassword)))
+                    {
+                        Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_LONG).show();
+                        flag2 = 0;
+                    }
+
+
+                }
             }
-        }
 
-        if (flag1 == 1 && flag2 == 1) {
-            SaveSharedPreference.setPrefUserStatus(LogIn.this,"not a visitor");
-            Intent signInDone = new Intent(this, AppHomePage.class);
-            signInDone.putExtra("email", inputEmail);
-            signInDone.putExtra("index", index);
+            @Override
+            public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
-            startActivity(signInDone);
-        } else {
-            Toast.makeText(this, "Check email or password and make sure that you are registered",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
+
+
+        if (flag1==0 ){
+            Toast.makeText(this, "This email address is invalid. Please tru a different one",
+                    Toast.LENGTH_SHORT).show();}
+
+          else  if (flag1 == 1 && flag2 == 1) {
+               UserStatusCheck.setUserStatus("not a visitor");
+                Intent signInDone = new Intent(this, AppHomePage.class);
+                signInDone.putExtra("email", inputEmail);
+                signInDone.putExtra("userId",userId);
+                signInDone.putExtra("user",myUser);
+               //signInDone.putExtra("index", index);
+
+                startActivity(signInDone);
+          }
+
+
+
+
+}
 
     public void goRegist(View view) {
         Intent registNow = new Intent(this, RegistrationPage1.class);
