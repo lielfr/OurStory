@@ -1,8 +1,10 @@
 package org.tsofen.ourstory;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +12,14 @@ import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.model.Memory;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MemoriesOfStoryActivity extends AppCompatActivity {
-
+    Context ctx;
     RecyclerView rv;
     ArrayList<Memory> data;
     MemoryAdapter adapter;
@@ -39,6 +42,17 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         filter(year);
         storyName.setText(name);
+
+
+        // search button
+        ImageButton btn = (ImageButton) findViewById(R.id.searchview);
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent myIntent = new Intent(MemoriesOfStoryActivity.this, SearchStory.class);
+                MemoriesOfStoryActivity.this.startActivity(myIntent);
+            }
+        });
 
     }
 
