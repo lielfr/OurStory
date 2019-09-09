@@ -22,7 +22,6 @@ import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,12 +30,10 @@ import java.util.LinkedList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    int flag = -1;
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
     AddMemoryVideoAdapter videoAdapter;
@@ -70,11 +67,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         Intent intent = getIntent();
         memory = (Memory) intent.getSerializableExtra(KEY_EDIT);
         TextView pageTitle = findViewById(R.id.text_cememory);
-        if (memory == null)
-            pageTitle.setText("Add Memory");
-        else
-            pageTitle.setText("Edit Memory");
-
         editTextDescription = findViewById(R.id.memDescription_cememory);
         editTextLocation = findViewById(R.id.memLocation_cememory);
         smileb = findViewById(R.id.smilebtn_cememory);
@@ -82,6 +74,28 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         loveb = findViewById(R.id.lovebtn_cememory);
         svbtn = findViewById(R.id.Savebtn_cememory);
         cnslbtn = findViewById(R.id.Cancelbtn_cememory);
+        TextView dayDate = findViewById(R.id.day_text_cememory);
+        TextView monthDate = findViewById(R.id.month_text_cememory);
+        TextView yearDate = findViewById(R.id.year_text_cememory);
+
+        if (memory == null)
+            pageTitle.setText("Add Memory");
+        else {
+            pageTitle.setText("Edit Memory");
+            editTextDescription.setText(memory.getDescription());
+            editTextLocation.setText(memory.getLocation());
+            dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+            monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+            yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
+            selectEmoji(memory.getFeeling());
+
+            imageAdapter.data.addAll(memory.getPictures());
+            imageAdapter.notifyDataSetChanged();
+            videoAdapter.data.addAll(memory.getVideos());
+            videoAdapter.notifyDataSetChanged();
+            tagAdapter.tags.addAll(memory.getTags());
+            tagAdapter.notifyDataSetChanged();
+        }
 
         smileb.setOnClickListener(this);
         sadb.setOnClickListener(this);
@@ -117,23 +131,17 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         switch (v.getId()) {
             case R.id.smilebtn_cememory:
                 SelectedEmoji = Feeling.HAPPY;
-                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back1).setVisibility(View.VISIBLE);
+                selectEmoji(SelectedEmoji);
 
                 break;
             case R.id.sadbtn_cememory:
                 SelectedEmoji = Feeling.SAD;
-                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back2).setVisibility(View.VISIBLE);
+                selectEmoji(SelectedEmoji);
                 break;
 
             case R.id.lovebtn_cememory:
                 SelectedEmoji = Feeling.LOVE;
-                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back3).setVisibility(View.VISIBLE);
+                selectEmoji(SelectedEmoji);
                 break;
 
             case R.id.Savebtn_cememory:
@@ -147,6 +155,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             case R.id.Cancelbtn_cememory:
                 finish();
                 break;
+            case R.id.back_button_cememory:
+                finish();
+                break;
+
         }
     }
 
@@ -287,11 +299,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 }
             });
         }
-
-
     }
 
+    public void selectEmoji(Feeling selected) {
+        switch (selected) {
+            case HAPPY:
+                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back1).setVisibility(View.VISIBLE);
+                break;
 
+            case SAD:
+                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back2).setVisibility(View.VISIBLE);
+                break;
+
+            case LOVE:
+                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back3).setVisibility(View.VISIBLE);
+                break;
+        }
+    }
 }
 
 
