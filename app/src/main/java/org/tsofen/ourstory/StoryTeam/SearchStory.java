@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -51,5 +52,8 @@ public class SearchStory extends AppCompatActivity {
             }
         });
 
+    }
+    public void finish(View view) {
+        finish();
     }
 }
