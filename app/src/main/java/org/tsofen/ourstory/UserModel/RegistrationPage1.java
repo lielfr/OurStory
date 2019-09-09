@@ -33,7 +33,7 @@ public class RegistrationPage1 extends AppCompatActivity {
     public String repeatPasswordString;
 
     public boolean emailFlag = false;
-    public boolean firstNameFlag ;
+    public boolean firstNameFlag;
     public boolean lastNameFlag;
     public boolean passwordFlag = false;
 

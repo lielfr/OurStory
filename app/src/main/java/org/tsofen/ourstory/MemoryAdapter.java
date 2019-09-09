@@ -54,7 +54,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
        /* holder.num_of_shares.setText(memory.getLikes().size());
         holder.num_of_shares.setText(memory.getShares().size());
         holder.num_of_comments.setText(memory.getComments().size());*/
-        holder.create_date.setText(createDate);
+//        holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
 
     }
@@ -78,7 +78,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             super(itemView);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-            create_date = itemView.findViewById(R.id.posted_date);
+//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
             pic = itemView.findViewById(R.id.picture_person);
            /* num_of_comments = itemView.findViewById(R.id.commentNum);

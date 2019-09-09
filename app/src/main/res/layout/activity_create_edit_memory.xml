@@ -421,7 +421,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tagsLayout_cememory"
                 android:layout_width="0dp"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
