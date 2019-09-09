@@ -7,6 +7,21 @@
     android:background="@drawable/background_gradient"
     tools:context="org.tsofen.ourstory.UserModel.RegistrationPage1">
 
+    <TextView
+        android:id="@+id/emptyView2"
+        android:layout_width="186dp"
+        android:layout_height="34dp"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/EmailHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FirstNameHolder"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/continue_button"
         android:layout_width="101dp"
@@ -44,27 +59,25 @@
 
     <TextView
         android:id="@+id/emptyView1"
-        android:layout_width="387dp"
-        android:layout_height="50dp"
-        android:text="Please enter a valid full name. Only alphabethic characters allowed"
+        android:layout_width="186dp"
+        android:layout_height="34dp"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/EmailHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FirstNameHolder"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/emptyView2"
+        android:id="@+id/emptyView3"
         android:layout_width="385dp"
         android:layout_height="50dp"
-        android:text="Please enter a valid email for example alexey19@gmail.com"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/passwordHolder"
@@ -74,12 +87,11 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/emptyView3"
+        android:id="@+id/emptyView4"
         android:layout_width="385dp"
         android:layout_height="50dp"
-        android:text="Passwords must be up to 8 characters"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/rePasswordHolder"
@@ -90,12 +102,11 @@
         app:layout_constraintVertical_bias="0.038" />
 
     <TextView
-        android:id="@+id/emptyView4"
+        android:id="@+id/emptyView5"
         android:layout_width="384dp"
         android:layout_height="50dp"
-        android:text="Passwords must match!"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/continue_button"
