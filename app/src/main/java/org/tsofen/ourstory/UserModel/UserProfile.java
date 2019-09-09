@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,12 @@ import androidx.fragment.app.Fragment;
 
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.User;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class UserProfile extends Fragment {
@@ -30,7 +37,8 @@ public class UserProfile extends Fragment {
     TextView city;
     TextView email;
     Uri pictureUri;
-    User userP;
+    String userEm;
+    User profileUser;
     public UserProfile() {
         super();
     }
@@ -49,12 +57,11 @@ public class UserProfile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // This is a little trick to make the search bar clickable and not just the icon in it.
         if (savedInstanceState != null) {
-         //   userIn = savedInstanceState.getInt("index");
-            //userP=savedInstanceState.getParcelable("user");
+           userEm= savedInstanceState.getString("email");
+          // // userP=savedInstanceState.getParcelable("user");
 
                     }
-
-         fName = getView().findViewById(R.id.showFirst);
+        fName = getView().findViewById(R.id.showFirst);
         lName = getView().findViewById(R.id.showLast);
         dOfBirth = getView().findViewById(R.id.showState);
         gender = getView().findViewById(R.id.showGender);
@@ -62,20 +69,48 @@ public class UserProfile extends Fragment {
         city = getView().findViewById(R.id.showCity);
         pic = getView().findViewById(R.id.profilePictureImageView);
         email = getView().findViewById(R.id.showEmail);
-     /*  if(userP.getFirstName()!=null)
-        fName.setText(userP.getFirstName());
-        if(userP.getLastName()!=null)
-        lName.setText(userP.getLastName());
-        if(userP.getDateOfBirth()!=null)
-        dOfBirth.setText(userP.getDateOfBirth());
-        if(userP.getGender()!=null)
-        gender.setText(userP.getGender());
-        if(userP.getState()!=null)
-        state.setText(userP.getState());
-        if(userP.getState()!=null)
-        city.setText(userP.getState());
-        if(userP.getEmail()!=null)
-        email.setText(userP.getEmail());
+
+
+        OurStoryService ss = WebFactory.getService();
+        ss.GetUserByEmail(userEm).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+            @Override
+            public void onResponse(Call<org.tsofen.ourstory.model.api.User> call, Response<org.tsofen.ourstory.model.api.User> response) {
+                profileUser = response.body();
+                Toast.makeText(getContext(),profileUser.getUserId()+"",
+                        Toast.LENGTH_SHORT).show();
+                if (profileUser.getEmail() == null) {
+                    Toast.makeText(getContext(),"This email address is invalid. Please tru a different one.",Toast.LENGTH_LONG);
+
+                } else {
+                    if(profileUser.getFirstName()!=null)
+                        fName.setText(profileUser.getFirstName());
+                    if(profileUser.getLastName()!=null)
+                        lName.setText(profileUser.getLastName());
+                    if(profileUser.getDateOfBirth()!=null)
+                        dOfBirth.setText(profileUser.getDateOfBirth());
+                    if(profileUser.getGender()!=null)
+                        gender.setText(profileUser.getGender());
+                    if(profileUser.getState()!=null)
+                        state.setText(profileUser.getState());
+                    if(profileUser.getState()!=null)
+                        city.setText(profileUser.getState());
+
+                        email.setText(userEm);}
+
+
+
+
+                }
+
+
+            @Override
+            public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
+             Toast.makeText(getContext(),"This email address is invalid. Please enter a different one.",Toast.LENGTH_LONG);
+            }
+
+
+        });
+
         /*fName.setText(UsersList.usersList.get(userIn).getmFirstName());
 
         lName.setText(UsersList.usersList.get(userIn).getmLastName());
