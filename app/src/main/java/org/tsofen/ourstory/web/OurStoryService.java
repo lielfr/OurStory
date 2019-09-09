@@ -42,4 +42,10 @@ public interface OurStoryService {
     @PUT("memories/create")
     Call<Memory> EditMemory(@Body Memory memory);
 
+
+    Call<ArrayList<Story>> GetStoriesByDobFull (@Query("day") int d ,@Query("month") int m , @Query("year") int year);
+    @GET("stories/findStoriesByDobYearMonth")
+    Call<ArrayList<Story>> GetStoriesByDobYearMonth (@Query("month") int m, @Query("year") int y );
+    @GET("stories/findStoriesByDobYear")
+    Call<ArrayList<Story>> GetStoriesByDobYear (@Query("year") int y);
 }
