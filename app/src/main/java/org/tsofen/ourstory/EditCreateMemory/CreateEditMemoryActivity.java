@@ -173,6 +173,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             {
+
                 displayToast("You should either enter an image or a viedeo or description for your memory!");
                 return false;
             }
