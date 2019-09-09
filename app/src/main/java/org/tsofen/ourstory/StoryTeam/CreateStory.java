@@ -202,16 +202,18 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             }
         });*/
-        int f1 = 0, f2 = 0, f3 = 0;  // flags
+
+
+        boolean f1 = false, f2 = false, f3=false;
         Date date1D, date2D, todayD;
 
         Intent i = new Intent(this, ViewStory.class);
 
         // Names Validation
         String fns = firstName.getText().toString();
-        f1 = validateName(firstName, fns, 1);
+        f1 = validateName(firstName, fns,1);
         String lns = lastName.getText().toString();
-        f2 = validateName(lastName, lns);
+        f2 = validateName(lastName, lns,2);
 
         // Dates Validation
         EditText d1 = findViewById(R.id.day_1);
@@ -239,18 +241,32 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             Calendar cal = Calendar.getInstance();
             todayD = cal.getTime();
 
-            if (date1D.after(date2D)) {
-                f3 = 0;
-                Toast.makeText(getApplicationContext(), "Invalid Dates", Toast.LENGTH_LONG).show();
-            } else if (todayD.before(date2D)) {
-                f3 = 0;
-                Toast.makeText(getApplicationContext(), "Invalid death date!", Toast.LENGTH_LONG).show();
+            if(d1s.length()==0 || d2s.length()==0 || m1s.length()==0 || m2s.length()==0
+            || y1s.length()==0 || y2s.length()==0){
+                error3.setText("Dates cannot be empty!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
+            } else if (date1D.after(date2D)) {
+                error3.setText("Invalid dates!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
+            } else if (todayD.before(date1D)) {
+                error3.setText("Invalid birth date!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
+            }else if (todayD.before(date2D)) {
+                error3.setText("Invalid death date!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
             } else { // all good
-                f3 = 1;
+                error3.setText("");
+                error3.setVisibility(View.INVISIBLE);
+                f3 = true;
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         int tag1 = R.drawable.family_vs, tag2 = R.drawable.sports_vs, tag3 = R.drawable.vacation_vs;
         i.putExtra("tag1", tag1);
         i.putExtra("tag2", tag2);
@@ -260,8 +276,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.putExtra("ttag1", ttag1);
         i.putExtra("ttag2", ttag2);
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
-        if (f1 == 1 && f2 == 1 && f3 == 1) {
-                                            // Send data to next activity / creating local Story object and building a custom made dates
+        if (f1 && f2 && f3) {
+            // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + lns ; // name is done
             //adapting months and days
             if(Integer.valueOf(m1s)<10){m1s="0"+m1s;}
