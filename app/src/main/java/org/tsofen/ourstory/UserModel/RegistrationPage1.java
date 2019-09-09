@@ -33,7 +33,15 @@ public class RegistrationPage1 extends AppCompatActivity {
     public String passwordString;
     public String repeatPasswordString;
 
-
+    String mess1="Field cannot be empty!";
+    String mess2="ENTER ONLY ALPHABETICAL CHARACTER";
+    String mess3="Please enter a valid email for example alexey19@gmail.com";
+    String mess4="WEAK";
+    String mess5="MEDIUM";
+    String mess6="Password Max Length less than 20";
+    String mess7="STRONG";
+    String mess8="Please write your password again!";
+    String mess9="Passwords must match!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
