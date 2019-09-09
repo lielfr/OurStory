@@ -6,11 +6,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -21,6 +21,7 @@ import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -28,19 +29,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import java.util.ArrayList;
-import androidx.annotation.IntegerRes;
-import android.content.*;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import androidx.core.content.ContextCompat;
-import com.google.gson.annotations.JsonAdapter;
-import org.json.JSONObject;
-import org.tsofen.ourstory.model.api.ListOfStory;
-import org.tsofen.ourstory.model.api.Search;
 
 public class CreateStory extends AppCompatActivity implements Serializable {
 
@@ -295,8 +287,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             String DeathDate = y2s+"-"+ m2s + "-"+d2s+"T14:17:53.763+0000" ; //dates has been updated succefuly
 
             OurStoryService Wepengine = WebFactory.getService();
-            Story story = new Story(123, owner, nameofperson, BirthDate, DeathDate, null);
-
+            Story story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
             Wepengine.CreateStory(story).enqueue(new Callback<Story>() {
                 @Override
                 public void onResponse(Call<Story> call, Response<Story> response) {

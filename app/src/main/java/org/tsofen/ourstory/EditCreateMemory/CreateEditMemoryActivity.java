@@ -60,6 +60,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
     private Memory memory;
+    private boolean create = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             pageTitle.setText("Add Memory");
             memory = new Memory();
         } else {
+            create = false;
             pageTitle.setText("Edit Memory");
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
@@ -261,9 +263,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
 
     public void saveMemory(View view) {
-        boolean create = (memory == null);
-        if (memory == null)
-            memory = new Memory();
         locationText = findViewById(R.id.memLocation_cememory);
         memory.setLocation(locationText.getText().toString());
 
