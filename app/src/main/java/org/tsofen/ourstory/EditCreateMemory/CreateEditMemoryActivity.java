@@ -19,12 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -50,6 +57,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private Button cnslbtn;
     private EditText DescriptionText;
     private EditText locationText;
+    public static final String KEY_EDIT = "CEMemoryEdit";
+    public static final String KEY_CREATE = "CEMemoryCreate";
+    public static final String KEY_MEMID = "CEMemoryMemoryID";
+    private Memory memory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +68,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_create_edit_memory);
 
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("AAA");
+        memory = (Memory) intent.getSerializableExtra(KEY_EDIT);
         TextView pageTitle = findViewById(R.id.text_cememory);
-        if (bundle == null)
+        if (memory == null)
             pageTitle.setText("Add Memory");
         else
             pageTitle.setText("Edit Memory");
@@ -215,11 +226,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         currentDate = day_string + "/" + month_string + "/" + year_string;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            MemDate = dateFormat.parse(currentDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Calendar c = Calendar.getInstance();
+        c.set(year, month + 1, day);
+        MemDate = c.getTime();
 
         TextView dayDate = findViewById(R.id.day_text_cememory);
         TextView monthDate = findViewById(R.id.month_text_cememory);
@@ -234,18 +243,55 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         finish();
     }
 
+
     public void saveMemory(View view) {
-
-        Memory mem = new Memory();
+        boolean create = (memory == null);
+        if (memory == null)
+            memory = new Memory();
         locationText = findViewById(R.id.memLocation_cememory);
-        mem.setLocation(locationText.getText().toString());
+        memory.setLocation(locationText.getText().toString());
 
-        mem.setDescription(editTextDescription.getText().toString());
-        mem.setFeeling(SelectedEmoji);
-        Calendar c = Calendar.getInstance();
-        c.setTime(MemDate);
-        mem.setMemoryDate(c);
+        memory.setDescription(editTextDescription.getText().toString());
+        memory.setFeeling(SelectedEmoji);
+        memory.setMemoryDate(MemDate);
         displayToast("Data saved.");
+        OurStoryService service = WebFactory.getService();
+        Intent intent = new Intent();
+
+        if (create) {
+            service.CreateMemory(memory).enqueue(new Callback<Memory>() {
+                @Override
+                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                    if (response.code() != 200) {
+                        displayToast("Error " + response.code() + " : " + response.message());
+                        return;
+                    }
+                    Memory responseMem = response.body();
+                    long memId = responseMem.getId();
+                    intent.putExtra(KEY_MEMID, memId);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Memory> call, Throwable t) {
+
+                }
+            });
+        } else {
+            service.EditMemory(memory).enqueue(new Callback<Memory>() {
+                @Override
+                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Memory> call, Throwable t) {
+
+                }
+            });
+        }
+
 
     }
 
