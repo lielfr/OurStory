@@ -1,5 +1,6 @@
 package org.tsofen.ourstory.UserModel;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -68,7 +70,8 @@ public class RegistrationPage2 extends AppCompatActivity {
     private Uri filePath;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page2);
         Intent currIntent = getIntent();
@@ -106,10 +109,18 @@ public class RegistrationPage2 extends AppCompatActivity {
         String month_string = Integer.toString(month + 1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-        String dateString = (month_string +
-                "/" + day_string + "/" + year_string);
-        dateOfBirth = dateString;
-        DateOfB.setText(dateOfBirth);
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+
+
+        TextView year1 = findViewById(R.id.year);
+        year1.setText(year_string);
+        TextView day1 = findViewById(R.id.day);
+        day1.setText(day_string);
+        TextView month1 = findViewById(R.id.month);
+        month1.setText(month_string);
+
+
+
     }
 
 
