@@ -12,13 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
+
+    public ArrayList<MemoryA> mMemories;
+
+    public MemoryAdapter(ArrayList<MemoryA> memories) {this.mMemories = memories}
+
     Context ctx;
-    public ArrayList<Memory> mMemories;
+ 
 
     public MemoryAdapter(ArrayList<org.tsofen.ourstory.model.Memory> memories) {
         this.mMemories = memories;
@@ -46,9 +52,9 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Memory memory = mMemories.get(position);
+        MemoryA memory = mMemories.get(position);
         holder.descr.setText(memory.getDescription());
-        holder.name.setText(memory.getCreatorName());
+        holder.name.setText(memory.getContributer().getFullName());
 
         String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) + "/" + (memory.getCreateDate().get(Calendar.MONTH)) +
                 "/" + (memory.getCreateDate().get(Calendar.YEAR));
@@ -86,6 +92,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
 
 
+
     }
 
     @Override
@@ -93,7 +100,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         return mMemories.size();
     }
 
-    public void filterList(ArrayList<Memory> filteredList) {
+    public void filterList(ArrayList<MemoryA> filteredList) {
         mMemories = filteredList;
         notifyDataSetChanged();
     }
