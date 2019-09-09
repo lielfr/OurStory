@@ -2,6 +2,8 @@ package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -10,6 +12,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
 
 public class SearchStory extends AppCompatActivity {
 
@@ -54,12 +61,34 @@ public class SearchStory extends AppCompatActivity {
         });
 
     }
+
     public void finish(View view) {
         finish();
     }
 
     public void ShowDatePicker(View view) {
-      //  DialogFragment newFragment = new DatePickerFragment();
-      //  newFragment.show(getSupportFragmentManager(), "datePicker");
+        DialogFragment newFragment = new DatePickerFragment2();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
+    }
+
+    public void processDatePickerResult1(int year, int month, int day) {
+        String month_string = Integer.toString(month + 1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+//
+
+        String currentDate = day_string + "/" + month_string + "/" + year_string;
+        Toast.makeText(this, currentDate,Toast.LENGTH_SHORT).show();
+
+
+        TextView Day = findViewById(R.id.Day);
+        TextView Month = findViewById(R.id.Month);
+        TextView Year = findViewById(R.id.Year);
+
+        Day.setText(day_string);
+        Month.setText(month_string);
+        Year.setText(year_string);
+
     }
 }
