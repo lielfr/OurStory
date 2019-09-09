@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/background"
             android:layout_width="414dp"
-            android:layout_height="522dp"
+            android:layout_height="450dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:clickable="false"
@@ -27,7 +27,20 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/locationtxt2"
+            android:id="@+id/feelingtxt_mymemories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="#FEELING"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/memory_date"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/memory_date"
+            app:layout_constraintTop_toBottomOf="@+id/memory_date" />
+
+        <TextView
+            android:id="@+id/locationtxt_mymemories"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -40,20 +53,6 @@
             app:layout_constraintHorizontal_bias="0.242"
             app:layout_constraintStart_toStartOf="@+id/descr"
             app:layout_constraintTop_toBottomOf="@+id/picture_person" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/feelingtoshow2"
-            android:layout_width="297dp"
-            android:layout_height="47dp"
-            android:background="@drawable/edit_round2"
-            app:layout_constraintBottom_toTopOf="@+id/commentbtn2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.07"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
-            app:layout_constraintVertical_bias="0.317">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/name_txt_person"
