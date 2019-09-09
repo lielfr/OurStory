@@ -1,7 +1,6 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Intent;
-import android.content.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -12,19 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.IntegerRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-
-import com.google.gson.annotations.JsonAdapter;
-
-import org.json.JSONObject;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.Owner;
-import org.tsofen.ourstory.model.api.Search;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -34,7 +26,6 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -164,6 +155,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             }
         });*/
+
         int f1 = 0, f2 = 0, f3 = 0;  // flags
         Date date1D, date2D, todayD;
 
@@ -225,7 +217,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.putExtra("ttag2", ttag2);
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
         if (f1 == 1 && f2 == 1 && f3 == 1) {
-                                            // Send data to next activity / creating local Story object and building a custom made dates
+            // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + lns ; // name is done
             //adapting months and days
             if(Integer.valueOf(m1s)<10){m1s="0"+m1s;}
@@ -239,49 +231,32 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             Story story = new Story(123, owner, nameofperson, BirthDate, DeathDate, null);
 
             Wepengine.CreateStory(story).enqueue(new Callback<Story>() {
-                @Override
-                public void onResponse(Call<Story> call, Response<Story> response) {
-                    result = response.body();
-                    if (result != null) {
-                        Toast.makeText(CreateStory.this, "the story "+ result.getNameOfPerson() +" was created succefully", Toast.LENGTH_SHORT).show();
-                        i.putExtra("date1", date1);
-                        i.putExtra("date2", date2);
-                        i.putExtra("name", nameofperson);
-                        startActivity(i);
+                                                     @Override
+                                                     public void onResponse(Call<Story> call, Response<Story> response) {
+                                                         result = response.body();
+                                                         if (result != null) {
+                                                             Toast.makeText(CreateStory.this, "the story "+ result.getNameOfPerson() +" was created succefully", Toast.LENGTH_SHORT).show();
+                                                             i.putExtra("date1", date1);
+                                                             i.putExtra("date2", date2);
+                                                             i.putExtra("name", nameofperson);
+                                                             startActivity(i);
 
-                    } else {
-                        Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                                                         } else {
+                                                             Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();
+                                                         }
+                                                     }
 
-                @Override
-                public void onFailure(Call<Story> call, Throwable t) {
-                    Toast.makeText(CreateStory.this, "onFailure story was failed", Toast.LENGTH_SHORT).show();
+                                                     @Override
+                                                     public void onFailure(Call<Story> call, Throwable t) {
+                                                         Toast.makeText(CreateStory.this, "onFailure story was failed", Toast.LENGTH_SHORT).show();
 
-                }
-            }
+                                                     }
+                                                 }
             );
-//        String n = "mali"; /// please dont delete this
-//            t.GetStoriesByName(n).enqueue(new Callback<ArrayList<ListOfStory>>() {
-//                @Override
-//                public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
-//                    ArrayList<ListOfStory> linked = response.body();
-//                    if (linked!=null) {
-//                          Toast.makeText(CreateStory.this, "size =" + linked.size(), Toast.LENGTH_SHORT).show();
-//                    }else{
-//                        Toast.makeText(CreateStory.this, "getting was failed", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-//
-//                }
-//            });
-           // startActivity(intent);
-        }
 
-     }
+            // startActivity(intent);
+        }
+    }
 
 
     }

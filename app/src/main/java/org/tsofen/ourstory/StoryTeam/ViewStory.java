@@ -7,14 +7,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.Story;
+
 import java.io.Serializable;
 
 public class ViewStory extends AppCompatActivity implements Serializable {
