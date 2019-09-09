@@ -48,6 +48,8 @@ public class LogIn extends AppCompatActivity {
         cityString = currIntent.getStringExtra("city");
         dateOfBirth = currIntent.getStringExtra("dateOfBirth");
         genderString = currIntent.getStringExtra("gender");
+        profilePictureString = currIntent.getStringExtra("profilePicture");
+
         User tempUser = new User(firstNameString, lastNameString, passwordString,
                 emailString, profilePictureString, genderString, dateOfBirth,
                 dateOfRegistration, dateOfLastSignIn, stateString, cityString);
@@ -78,7 +80,7 @@ public class LogIn extends AppCompatActivity {
         }
 
         if (flag1 == 1 && flag2 == 1) {
-            SaveSharedPreference.setUserName(LogIn.this,"not a visitor");
+            SaveSharedPreference.setPrefUserStatus(LogIn.this,"not a visitor");
             Intent signInDone = new Intent(this, AppHomePage.class);
             signInDone.putExtra("email", inputEmail);
             signInDone.putExtra("index", index);
