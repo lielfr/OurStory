@@ -2,6 +2,7 @@ package org.tsofen.ourstory;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -68,7 +70,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private Button cnslbtn;
     private EditText DescriptionText;
     private EditText locationText;
-
+    private RecyclerView RecycleImage;
+    private RecyclerView RecycleVideo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,16 +106,16 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         svbtn.setOnClickListener(this);
         cnslbtn.setOnClickListener(this);
 
-        RecyclerView rvp = findViewById(R.id.add_pictures_rv_cememory);
+        RecycleImage = findViewById(R.id.add_pictures_rv_cememory);
         imageAdapter = new AddMemoryImageAdapter(this);
-        rvp.setAdapter(imageAdapter);
-        rvp.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+        RecycleImage.setAdapter(imageAdapter);
+        RecycleImage.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
-        RecyclerView rvv = findViewById(R.id.add_videos_rv_cememory);
+        RecycleVideo = findViewById(R.id.add_videos_rv_cememory);
         videoAdapter = new AddMemoryVideoAdapter(this);
-        rvv.setAdapter(videoAdapter);
-        rvv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+        RecycleVideo.setAdapter(videoAdapter);
+        RecycleVideo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
         //   editTextDescription.addTextChangedListener(SaveTextWatcher);
@@ -194,6 +197,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.images.isEmpty()) && (videoAdapter.videos.isEmpty())) {
             {
+               /* Drawable d = getResources().getDrawable(R.drawable.error_image_background);
+                RecycleImage.setBackground(d);*/
+                //  editTextDescription.setHintTextColor(@);
                 displayToast("You should either enter an image or a viedeo or description for your memory!");
                 return false;
             }

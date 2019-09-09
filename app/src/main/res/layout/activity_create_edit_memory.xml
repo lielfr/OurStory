@@ -72,7 +72,11 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_memory_description_background"
                 android:ems="10"
+                android:hint="Add your Description ..."
                 android:inputType="textPersonName"
+                android:textColor="#001F1C1C"
+                android:textColorHint="#201E1E"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4_cememory" />
@@ -146,6 +150,27 @@
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" />
 
+            <LinearLayout
+                android:id="@+id/LinerForImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/error_image_background"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_cememory">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/add_pictures_rv_cememory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/textView_cememory"
                 android:layout_width="wrap_content"
@@ -180,7 +205,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_pictures_rv_cememory"
+                app:layout_constraintTop_toBottomOf="@id/LinerForImage"
                 tools:layout_conversion_absoluteHeight="0dp"
                 tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -420,22 +445,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView14_cememory">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/add_pictures_rv_cememory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_cememory" />
+                app:layout_constraintTop_toBottomOf="@id/textView14_cememory" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/add_videos_rv_cememory"
@@ -501,7 +511,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Add A Memory"
+            android:text="Add  Memory"
             android:textColor="@color/colorWhite"
             android:textSize="21sp"
             app:fontFamily="@font/quicksand_bold"
