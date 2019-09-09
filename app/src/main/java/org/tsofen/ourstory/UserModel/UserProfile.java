@@ -12,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.User;
 
 
 public class UserProfile extends Fragment {
@@ -24,7 +22,15 @@ public class UserProfile extends Fragment {
     AppHomePage parent;
     int userIn;
     ImageView pic;
-
+    TextView fName;
+    TextView lName;
+    TextView dOfBirth;
+    TextView gender;
+    TextView state;
+    TextView city;
+    TextView email;
+    Uri pictureUri;
+    User userP;
     public UserProfile() {
         super();
     }
@@ -43,35 +49,54 @@ public class UserProfile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // This is a little trick to make the search bar clickable and not just the icon in it.
         if (savedInstanceState != null) {
-            int index = savedInstanceState.getInt("index");
+         //   userIn = savedInstanceState.getInt("index");
+            //userP=savedInstanceState.getParcelable("user");
 
-            userIn = index;
-        }
-        TextView fName = getView().findViewById(R.id.showFirst);
-        fName.setText(UsersList.usersList.get(userIn).getmFirstName());
-        TextView lName = getView().findViewById(R.id.showLast);
-        lName.setText(UsersList.usersList.get(userIn).getmLastName());
-        TextView dOfBirth = getView().findViewById(R.id.showState);
-        dOfBirth.setText(UsersList.usersList.get(userIn).getmDateOfBirth());
-        TextView gender = getView().findViewById(R.id.showGender);
-        gender.setText(UsersList.usersList.get(userIn).getmGender());
-        TextView state = getView().findViewById(R.id.showState);
-        state.setText(UsersList.usersList.get(userIn).getmState());
-        TextView city = getView().findViewById(R.id.showCity);
-        city.setText(UsersList.usersList.get(userIn).getmCity());
-        TextView email = getView().findViewById(R.id.showEmail);
-        email.setText(UsersList.usersList.get(userIn).getmEmail());
-        TextView date = getView().findViewById(R.id.showDate);
-        date.setText(UsersList.usersList.get(userIn).getmDateOfBirth());
+                    }
+
+         fName = getView().findViewById(R.id.showFirst);
+        lName = getView().findViewById(R.id.showLast);
+        dOfBirth = getView().findViewById(R.id.showState);
+        gender = getView().findViewById(R.id.showGender);
+        state = getView().findViewById(R.id.showState);
+        city = getView().findViewById(R.id.showCity);
         pic = getView().findViewById(R.id.profilePictureImageView);
-        Uri pictureUri = Uri.parse(UsersList.usersList.get(userIn).getmProfilePicture());
+        email = getView().findViewById(R.id.showEmail);
+     /*  if(userP.getFirstName()!=null)
+        fName.setText(userP.getFirstName());
+        if(userP.getLastName()!=null)
+        lName.setText(userP.getLastName());
+        if(userP.getDateOfBirth()!=null)
+        dOfBirth.setText(userP.getDateOfBirth());
+        if(userP.getGender()!=null)
+        gender.setText(userP.getGender());
+        if(userP.getState()!=null)
+        state.setText(userP.getState());
+        if(userP.getState()!=null)
+        city.setText(userP.getState());
+        if(userP.getEmail()!=null)
+        email.setText(userP.getEmail());
+        /*fName.setText(UsersList.usersList.get(userIn).getmFirstName());
+
+        lName.setText(UsersList.usersList.get(userIn).getmLastName());
+
+        dOfBirth.setText(UsersList.usersList.get(userIn).getmDateOfBirth());
+
+        gender.setText(UsersList.usersList.get(userIn).getmGender());
+
+        state.setText(UsersList.usersList.get(userIn).getmState());
+        city.setText(UsersList.usersList.get(userIn).getmCity());
+
+        email.setText(UsersList.usersList.get(userIn).getmEmail());
+
+         pictureUri = Uri.parse(UsersList.usersList.get(userIn).getmProfilePicture());
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.drawable.defaultprofilepicture)
                 .error(R.drawable.defaultprofilepicture);
 
 
-        Glide.with(this).load(pictureUri).apply(options).into(pic);
+        Glide.with(this).load(pictureUri).apply(options).into(pic);*/
 
 
     }
