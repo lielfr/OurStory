@@ -40,7 +40,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         if(intent.getStringExtra("Button").equals("createandadd")){
             Log.i("oncreat","int if");
             Intent i = new Intent(this, CreateEditMemoryActivity.class);
-            i.putExtra(CreateEditMemoryActivity.KEY_CREATE, intent.getStringExtra("id"));
+            i.putExtra(CreateEditMemoryActivity.KEY_CREATE, intent.getSerializableExtra("id"));
             startActivity(i);
         }
 

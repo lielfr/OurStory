@@ -310,7 +310,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             i.putExtra("Button","just_create");
                         }else{
                             i.putExtra("Button","createandadd");
-                            i.putExtra("id",Long.toString(result.getStoryId()));
+                            i.putExtra("id", result);
 
                         }
                         startActivity(i);
