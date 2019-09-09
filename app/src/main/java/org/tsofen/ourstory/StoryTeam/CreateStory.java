@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -45,6 +44,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     int flag = 1;
 
     Bitmap bitmap;
+    String filepathS = null;
     Uri filePath;
 
     Owner owner ;
@@ -202,8 +202,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             }
         });*/
-
-        boolean f1 = false, f2 = false, f3 = false;  // flags
+        int f1 = 0, f2 = 0, f3 = 0;  // flags
         Date date1D, date2D, todayD;
 
         Intent i = new Intent(this, ViewStory.class);
@@ -212,7 +211,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         String fns = firstName.getText().toString();
         f1 = validateName(firstName, fns, 1);
         String lns = lastName.getText().toString();
-        f2 = validateName(lastName, lns, 2);
+        f2 = validateName(lastName, lns);
 
         // Dates Validation
         EditText d1 = findViewById(R.id.day_1);
@@ -241,24 +240,17 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             todayD = cal.getTime();
 
             if (date1D.after(date2D)) {
-                f3 = false;
-                //Toast.makeText(getApplicationContext(), "Invalid Dates", Toast.LENGTH_LONG).show();
-                error3.setText("Invalid Dates");
-                error3.setVisibility(View.VISIBLE);
+                f3 = 0;
+                Toast.makeText(getApplicationContext(), "Invalid Dates", Toast.LENGTH_LONG).show();
             } else if (todayD.before(date2D)) {
-                f3 = false;
-                //Toast.makeText(getApplicationContext(), "Invalid death date!", Toast.LENGTH_LONG).show();
-                error3.setText("Invalid death date!");
-                error3.setVisibility(View.VISIBLE);
+                f3 = 0;
+                Toast.makeText(getApplicationContext(), "Invalid death date!", Toast.LENGTH_LONG).show();
             } else { // all good
-                f3 = true;
-                error3.setVisibility(View.INVISIBLE);
+                f3 = 1;
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
         int tag1 = R.drawable.family_vs, tag2 = R.drawable.sports_vs, tag3 = R.drawable.vacation_vs;
         i.putExtra("tag1", tag1);
         i.putExtra("tag2", tag2);
@@ -268,16 +260,16 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.putExtra("ttag1", ttag1);
         i.putExtra("ttag2", ttag2);
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
-        if (f1 == true && f2 == true && f3 == true) {
-            // Send data to next activity / creating local Story object and building a custom made dates
-            String nameofperson = fns + " " + lns ; // name is done
+        if (f1 == 1 && f2 == 1 && f3 == 1) {
+                                            // Send data to next activity / creating local Story object and building a custom made dates
+            String nameofperson = fns + lns ; // name is done
             //adapting months and days
             if(Integer.valueOf(m1s)<10){m1s="0"+m1s;}
             if(Integer.valueOf(m2s)<10){m2s="0"+m2s;}
             if(Integer.valueOf(d1s)<10){d1s="0"+d1s;}
             if(Integer.valueOf(d2s)<10){d2s="0"+d2s;}
             String BirthDate = y1s+"-"+ m1s + "-"+d1s+"T14:17:53.763+0000" ;
-            String DeathDate = y2s+"-"+ m2s + "-"+d2s+"T14:17:53.763+0000" ; //dates has been updated successfully
+            String DeathDate = y2s+"-"+ m2s + "-"+d2s+"T14:17:53.763+0000" ; //dates has been updated succefuly
 
             OurStoryService Wepengine = WebFactory.getService();
             Story story = new Story(123, owner, nameofperson, BirthDate, DeathDate, null);
