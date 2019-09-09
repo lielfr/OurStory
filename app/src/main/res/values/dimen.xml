@@ -3,4 +3,5 @@
     <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
     <dimen name="app_bar_height">96dp</dimen>
+    <dimen name="errorSize">15dp</dimen>
 </resources>

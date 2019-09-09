@@ -1,7 +1,6 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Intent;
-import android.content.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -11,66 +10,106 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.IntegerRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
-
-import com.google.gson.annotations.JsonAdapter;
-
-import org.json.JSONObject;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.Owner;
-import org.tsofen.ourstory.model.api.Search;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import java.util.ArrayList;
+import androidx.annotation.IntegerRes;
+import android.content.*;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import androidx.core.content.ContextCompat;
+import com.google.gson.annotations.JsonAdapter;
+import org.json.JSONObject;
+import org.tsofen.ourstory.model.api.ListOfStory;
+import org.tsofen.ourstory.model.api.Search;
 
 public class CreateStory extends AppCompatActivity implements Serializable {
 
-    ImageView image;
     int flag = 1;
+
     Bitmap bitmap;
     String filepathS = null;
     Uri filePath;
+
     Owner owner ;
     Story result;
+
+    ImageView image;
+    EditText firstName, lastName;
+    TextView error1, error2, error3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createstory);
+
+        firstName = findViewById(R.id.firstNameEditText);
+        lastName = findViewById(R.id.lastNameEditText);
+
+        error1=findViewById(R.id.error1);
+        error2=findViewById(R.id.error2);
+        error3=findViewById(R.id.error3);
+
     }
 
-    private int validateName(EditText edtTxt, String str) {
-        // first and last name validation
-        if (str.length() == 0) {
-            edtTxt.requestFocus();
-            edtTxt.setError("Field cannot be empty!");
-        } else if (!str.matches("[a-zA-Z ]+")) {
-            edtTxt.requestFocus();
-            edtTxt.setError("ENTER ONLY ALPHABETICAL CHARACTER");
-        } else { // all good
-            return 1;
+
+
+
+    private boolean validateName(EditText edtTxt, String str, int i) {
+        ///////////////////////////// User Team /////////////////////////////////////
+        // code by Ether
+        String errorText="";
+        int flag=1;
+
+        str = str.trim();
+        if (str.length()==0)
+        {
+            errorText="Field cannot be empty!";
+            flag=0;
+        } else if (!str.matches("[a-zA-Z]+")) {
+            errorText="Only Alphabetical characters allowed!";
+            flag=0;
         }
-        return 0;
+
+        if(flag==0)
+        {
+            if(i==1){
+                error1.setText(errorText);
+                error1.setVisibility(View.VISIBLE);
+                return false;
+            }else if(i==2){
+                error2.setText(errorText);
+                error2.setVisibility(View.VISIBLE);
+                return false;
+            }
+        }else{
+            if(i==1){
+                error1.setVisibility(View.INVISIBLE);
+                return true;
+            }else if(i==2){
+                error2.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        }
+        return false;
     }
+
 
 
     public void showDatePicker1(View view) {
@@ -78,7 +117,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         newFragment.show(getSupportFragmentManager(), "datePicker");
         flag = 1;
     }
-
     public void showDatePicker2(View view) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
@@ -164,18 +202,18 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             }
         });*/
-        int f1 = 0, f2 = 0, f3 = 0;  // flags
+
+
+        boolean f1 = false, f2 = false, f3=false;
         Date date1D, date2D, todayD;
 
         Intent i = new Intent(this, ViewStory.class);
 
         // Names Validation
-        EditText firstName = findViewById(R.id.firstNameEditText);
         String fns = firstName.getText().toString();
-        f1 = validateName(firstName, fns);
-        EditText lastName = findViewById(R.id.lastNameEditText);
+        f1 = validateName(firstName, fns,1);
         String lns = lastName.getText().toString();
-        f2 = validateName(lastName, lns);
+        f2 = validateName(lastName, lns,2);
 
         // Dates Validation
         EditText d1 = findViewById(R.id.day_1);
@@ -203,18 +241,32 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             Calendar cal = Calendar.getInstance();
             todayD = cal.getTime();
 
-            if (date1D.after(date2D)) {
-                f3 = 0;
-                Toast.makeText(getApplicationContext(), "Invalid Dates", Toast.LENGTH_LONG).show();
-            } else if (todayD.before(date2D)) {
-                f3 = 0;
-                Toast.makeText(getApplicationContext(), "Invalid death date!", Toast.LENGTH_LONG).show();
+            if(d1s.length()==0 || d2s.length()==0 || m1s.length()==0 || m2s.length()==0
+            || y1s.length()==0 || y2s.length()==0){
+                error3.setText("Dates cannot be empty!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
+            } else if (date1D.after(date2D)) {
+                error3.setText("Invalid dates!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
+            } else if (todayD.before(date1D)) {
+                error3.setText("Invalid birth date!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
+            }else if (todayD.before(date2D)) {
+                error3.setText("Invalid death date!");
+                error3.setVisibility(View.VISIBLE);
+                f3 = false;
             } else { // all good
-                f3 = 1;
+                error3.setText("");
+                error3.setVisibility(View.INVISIBLE);
+                f3 = true;
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         int tag1 = R.drawable.family_vs, tag2 = R.drawable.sports_vs, tag3 = R.drawable.vacation_vs;
         i.putExtra("tag1", tag1);
         i.putExtra("tag2", tag2);
@@ -224,8 +276,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.putExtra("ttag1", ttag1);
         i.putExtra("ttag2", ttag2);
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
-        if (f1 == 1 && f2 == 1 && f3 == 1) {
-                                            // Send data to next activity / creating local Story object and building a custom made dates
+        if (f1 && f2 && f3) {
+            // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + lns ; // name is done
             //adapting months and days
             if(Integer.valueOf(m1s)<10){m1s="0"+m1s;}
@@ -283,8 +335,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
      }
 
-
+    public void closeActivity(View view) {
+        finish();
     }
-
-
-
+}

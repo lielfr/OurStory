@@ -8,7 +8,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import static java.util.Calendar.getInstance;
 
@@ -41,10 +40,10 @@ public class Memory implements Serializable {
     String location;
     @SerializedName("pictures")
     @Expose
-    ArrayList<URI> pictures;
+    ArrayList<String> pictures;
     @SerializedName("videos")
     @Expose
-    ArrayList<URI> videos;
+    ArrayList<String> videos;
     ArrayList<Tag> tags;
     @SerializedName("likes")
     @Expose
@@ -189,19 +188,19 @@ public class Memory implements Serializable {
         this.location = location;
     }
 
-    public ArrayList<URI> getPictures() {
+    public ArrayList<String> getPictures() {
         return pictures;
     }
 
-    public void setPictures(ArrayList<URI> pictures) {
+    public void setPictures(ArrayList<String> pictures) {
         this.pictures = pictures;
     }
 
-    public ArrayList<URI> getVideos() {
+    public ArrayList<String> getVideos() {
         return videos;
     }
 
-    public void setVideos(ArrayList<URI> videos) {
+    public void setVideos(ArrayList<String> videos) {
         this.videos = videos;
     }
 
