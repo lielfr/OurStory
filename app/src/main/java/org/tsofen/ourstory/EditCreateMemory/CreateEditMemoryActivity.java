@@ -1,6 +1,8 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -60,6 +64,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
     private Memory memory;
+    private boolean create = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             pageTitle.setText("Add Memory");
             memory = new Memory();
         } else {
+            create = false;
             pageTitle.setText("Edit Memory");
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
@@ -173,7 +179,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             {
-                displayToast("You should either enter an image or a viedeo or description for your memory!");
+               /* Drawable d = getResources().getDrawable(R.drawable.error_image_background);
+                RecycleImage.setBackground(d);*/
+                //  editTextDescription.setHintTextColor(@);
+                LinearLayout imageLiner = findViewById(R.id.LinerForImage);
+                imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+                displayToast("You should either enter an image or a video or description for your memory!");
                 return false;
             }
         }
@@ -261,9 +272,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
 
     public void saveMemory(View view) {
-        boolean create = (memory == null);
-        if (memory == null)
-            memory = new Memory();
         locationText = findViewById(R.id.memLocation_cememory);
         memory.setLocation(locationText.getText().toString());
 
