@@ -62,12 +62,13 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         //               flag 0 == by Year |||| flag 1 == by Tag
         if(stringExtra[0].equals("0")) {
 
-            MemoryAService.GetMemoriesByYear(10, 2000).enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByYear(258, 2019).enqueue(new Callback<ArrayList<MemoryA>>() {
                 @Override
                 public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                     memories = response.body();
                     Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(memories);
+                    rv.setAdapter(adapter);
                 }
 
                 @Override
@@ -78,12 +79,13 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         }
 
         else {
-            MemoryAService.GetMemoriesByTag(10, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByTag(16, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
                 @Override
                 public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                     memories = response.body();
                     Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(memories);
+
                 }
 
                 @Override
