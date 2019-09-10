@@ -1,28 +1,22 @@
 package org.tsofen.ourstory;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ShareCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.tsofen.ourstory.UserModel.AppHomePage;
-import org.tsofen.ourstory.UserModel.LogIn;
-import org.tsofen.ourstory.UserModel.RegistrationPage1;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -42,7 +36,7 @@ public class MyMemories extends Fragment {
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
-
+    Long user_id;
     public MyMemories() {
         super();
     }
@@ -53,16 +47,20 @@ public class MyMemories extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         parent = (AppHomePage) getActivity();
         return inflater.inflate(R.layout.fragment_my_memories, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       /* Intent intent = getIntent();
-        int user_id = intent.getStringExtra(AppHomePage.EXTRA_MESSAGE);*/
+        Activity a = getActivity();
+        Intent i = a.getIntent();
+        user_id =  i.getLongExtra("userId",0);
+
+       Toast.makeText(getActivity(),user_id+"h",Toast.LENGTH_LONG).show();
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(137).enqueue(new Callback<ArrayList<MemoryA>>() {
+        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
