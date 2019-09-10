@@ -50,8 +50,8 @@ org.tsofen.ourstory.model.api.User myUser;
         setContentView(R.layout.activity_log_in);
         email = findViewById(R.id.showEmail);
         password = findViewById(R.id.Password);
-        passErr=findViewById(R.id.PassError);
-        emailErr=findViewById(R.id.emailErr);
+        passErr = findViewById(R.id.PassError);
+        emailErr = findViewById(R.id.emailErr);
         Intent currIntent = getIntent();
         emailString = currIntent.getStringExtra("email");
         firstNameString = currIntent.getStringExtra("first_name");
@@ -92,7 +92,7 @@ org.tsofen.ourstory.model.api.User myUser;
             @Override
             public void onResponse(Call<org.tsofen.ourstory.model.api.User> call, Response<org.tsofen.ourstory.model.api.User> response) {
                 myUser = response.body();
-                Toast.makeText(getApplicationContext(),myUser.getUserId()+"",
+                Toast.makeText(getApplicationContext(), myUser.getUserId() + "",
                         Toast.LENGTH_SHORT).show();
                 userId = myUser.getUserId();
                 if (myUser.getEmail() == null) {
@@ -101,19 +101,16 @@ org.tsofen.ourstory.model.api.User myUser;
                 } else {
 
                     userPass = myUser.getPassword();
-                    if (userPass.equals(inputPassword))
-                    {
+                    if (userPass.equals(inputPassword)) {
                         UserStatusCheck.setUserStatus("not a visitor");
                         Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
                         signInDone.putExtra("email", inputEmail);
-                        signInDone.putExtra("userId",userId);
+                        signInDone.putExtra("userId", userId);
                         signInDone.putExtra("user", myUser);
                         //signInDone.putExtra("index", index);
 
                         startActivity(signInDone);
-                    }
-                    else
-                    {
+                    } else {
                         passErr.setText("Incorrect password!!");
                     }
 
@@ -123,7 +120,7 @@ org.tsofen.ourstory.model.api.User myUser;
 
             @Override
             public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
-            emailErr.setText("Failed");
+                emailErr.setText("Failed");
             }
 
 

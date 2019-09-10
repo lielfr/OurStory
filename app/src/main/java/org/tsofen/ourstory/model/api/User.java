@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class User implements Serializable
 {
 
+    private final static long serialVersionUID = -5085407755254667737L;
     @SerializedName("user_id")
     @Expose
     private Long userId;
@@ -48,17 +49,14 @@ public class User implements Serializable
     @SerializedName("profile_picture")
     @Expose
     private Object profilePicture;
-    private final static long serialVersionUID = -5085407755254667737L;
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public User() {
     }
 
     /**
-     *
      * @param dateOfBirth
      * @param lastName
      * @param dateOfSignUp

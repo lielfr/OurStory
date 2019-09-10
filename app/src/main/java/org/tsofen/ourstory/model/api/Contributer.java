@@ -1,7 +1,5 @@
 package org.tsofen.ourstory.model.api;
-
 import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,10 +14,10 @@ public class Contributer implements Serializable {
     private Object email;
     @SerializedName("first_name")
     @Expose
-    private Object firstName;
+    private String firstName;
     @SerializedName("last_name")
     @Expose
-    private Object lastName;
+    private String lastName;
     @SerializedName("password")
     @Expose
     private Object password;
@@ -69,7 +67,7 @@ public class Contributer implements Serializable {
      * @param firstName
      * @param dateOfLastSignIn
      */
-    public Contributer(Integer userId, Object email, Object firstName, Object lastName, Object password, Object gender, Object dateOfBirth, Object dateOfSignUp, Object dateOfLastSignIn, Object state, Object city, Boolean status, Object profilePicture) {
+    public Contributer(Integer userId, Object email, String firstName, String lastName, Object password, Object gender, Object dateOfBirth, Object dateOfSignUp, Object dateOfLastSignIn, Object state, Object city, Boolean status, Object profilePicture) {
         super();
         this.userId = userId;
         this.email = email;
@@ -102,19 +100,23 @@ public class Contributer implements Serializable {
         this.email = email;
     }
 
-    public Object getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(Object firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public Object getLastName() {
+    public String getFullName() {
+        return (firstName+" "+lastName);
+    }
+
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(Object lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 

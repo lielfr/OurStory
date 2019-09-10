@@ -149,9 +149,6 @@ public class RegistrationPage2 extends AppCompatActivity {
     }
 
 
-
-
-
     public void closeActivity(View view) {
         Intent back = new Intent(this, LogIn.class);
         startActivity(back);

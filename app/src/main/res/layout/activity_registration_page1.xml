@@ -37,10 +37,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rePasswordHolder"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <TextView
         android:id="@+id/getStarted_text"
@@ -193,6 +193,8 @@
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -238,6 +240,8 @@
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -286,6 +290,8 @@
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -337,6 +343,8 @@
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -384,6 +392,8 @@
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorWhite"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
