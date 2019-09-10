@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,11 +37,12 @@ public class LogIn extends AppCompatActivity {
     public String dateOfLastSignIn = "0/0/00";
     EditText email;
     EditText password;
-
+    TextView passErr;
+    TextView emailErr;
     int flag1 = 1;
     int flag2 = 1;
     String userPass;
-    long userId;
+    Long userId;
 org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ org.tsofen.ourstory.model.api.User myUser;
         setContentView(R.layout.activity_log_in);
         email = findViewById(R.id.showEmail);
         password = findViewById(R.id.Password);
+        passErr = findViewById(R.id.PassError);
+        emailErr = findViewById(R.id.emailErr);
         Intent currIntent = getIntent();
         emailString = currIntent.getStringExtra("email");
         firstNameString = currIntent.getStringExtra("first_name");
@@ -78,33 +82,36 @@ org.tsofen.ourstory.model.api.User myUser;
     public void goLogin(View view) {
 
         //int index = 0;
-       // String userIn;
-        OurStoryService ss = WebFactory.getService();
+        // String userIn;
+
         String inputEmail = String.valueOf(email.getText());
         String inputPassword = String.valueOf(password.getText());
 
-
+        OurStoryService ss = WebFactory.getService();
         ss.GetUserByEmail(inputEmail).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
-
-
             @Override
             public void onResponse(Call<org.tsofen.ourstory.model.api.User> call, Response<org.tsofen.ourstory.model.api.User> response) {
                 myUser = response.body();
-                if (myUser == null) {
-                    flag1=0;
+                Toast.makeText(getApplicationContext(), myUser.getUserId() + "",
+                        Toast.LENGTH_SHORT).show();
+                userId = myUser.getUserId();
+                if (myUser.getEmail() == null) {
+                    emailErr.setText("This email address is invalid. Please tru a different one.");
 
+                } else {
 
+                    userPass = myUser.getPassword();
+                    if (userPass.equals(inputPassword)) {
+                        UserStatusCheck.setUserStatus("not a visitor");
+                        Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
+                        signInDone.putExtra("email", inputEmail);
+                        signInDone.putExtra("userId", userId);
+                        signInDone.putExtra("user", myUser);
+                        //signInDone.putExtra("index", index);
 
-                }
-                else {
-
-                    userId=myUser.getUserId();
-                    userPass=myUser.getPassword();
-
-                    if (!(userPass.equals(inputPassword)))
-                    {
-                        Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_LONG).show();
-                        flag2 = 0;
+                        startActivity(signInDone);
+                    } else {
+                        passErr.setText("Incorrect password!!");
                     }
 
 
@@ -113,34 +120,14 @@ org.tsofen.ourstory.model.api.User myUser;
 
             @Override
             public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
-
+                emailErr.setText("Failed");
             }
+
+
         });
 
 
-
-
-        if (flag1==0 ){
-            Toast.makeText(this, "This email address is invalid. Please tru a different one",
-                    Toast.LENGTH_SHORT).show();}
-
-          else  if (flag1 == 1 && flag2 == 1) {
-               UserStatusCheck.setUserStatus("not a visitor");
-                Intent signInDone = new Intent(this, AppHomePage.class);
-                signInDone.putExtra("email", inputEmail);
-                signInDone.putExtra("userId",userId);
-                signInDone.putExtra("user",myUser);
-               //signInDone.putExtra("index", index);
-
-                startActivity(signInDone);
-          }
-
-
-
-
-}
-
+    }
     public void goRegist(View view) {
         Intent registNow = new Intent(this, RegistrationPage1.class);
         startActivity(registNow);
