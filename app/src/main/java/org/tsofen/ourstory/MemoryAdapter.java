@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Memory;
@@ -20,8 +21,14 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     public ArrayList<MemoryA> mMemories;
 
-    public MemoryAdapter(ArrayList<MemoryA> memories) {
+    public MemoryAdapter(ArrayList<MemoryA> memories) {this.mMemories = memories}
+
+    Context ctx;
+ 
+
+    public MemoryAdapter(ArrayList<org.tsofen.ourstory.model.Memory> memories) {
         this.mMemories = memories;
+        this.ctx=ctx;
     }
 
 
@@ -36,6 +43,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
 
         // return a new holder instance
+        ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
 
 
@@ -57,6 +65,32 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         holder.num_of_comments.setText(memory.getComments().size());*/
 //        holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
+        ///////////////////////////////
+
+
+        //ArrayList<ImgItem> images=Memory.getPictures();
+        ArrayList<ImgItem> images=new ArrayList<>();
+
+
+        //////////////////////////////////// fill images
+        ImgItem i1=new ImgItem("alex",R.drawable.alex);
+        ImgItem i2=new ImgItem("alex",R.drawable.pic);
+        ImgItem i3=new ImgItem("alex",R.drawable.alex);
+
+        images.add(i1);
+        images.add(i2);
+
+
+
+
+
+        ///////////////////////////////////
+        ImageAdapter imgAdapter=new ImageAdapter(ctx,images);
+        holder.rvMemory.setHasFixedSize(true);
+        holder.rvMemory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL,false));
+        holder.rvMemory.setAdapter(imgAdapter);
+
+
 
 
     }
@@ -72,6 +106,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        RecyclerView rvMemory;
         public TextView name, mem_date, create_date, descr, num_of_likes, num_of_comments, num_of_shares;
         public ImageView pic;
         public MemoryAdapter adapter;
@@ -87,6 +122,9 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             num_of_likes = itemView.findViewById(R.id.likesNum);
             num_of_shares = itemView.findViewById(R.id.shareNum);*/
             adapter = memoryAdapter;
+
+
+            rvMemory=(RecyclerView)itemView.findViewById(R.id.memory_pic);
         }
     }
 }
