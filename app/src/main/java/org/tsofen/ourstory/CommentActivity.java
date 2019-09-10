@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,16 +26,17 @@ public class CommentActivity extends AppCompatActivity {
 
     long userId;
     RecyclerView rv;
+    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     ArrayList<CommentA> comments;
     OurStoryService commentService;
-    CommentAdapter adapter;int mem_id;
+    CommentAdapter adapter;long mem_id;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
-       /* Intent intent = getIntent();
-        mem_id = intent.getStringExtra(MemoriesOfStoryActivity.EXTRA_MESSAGE);*/
+       Intent intent = getIntent();
+       mem_id= Long.parseLong(intent.getStringExtra(MemoryAdapter.EXTRA_MESSAGE));
        commentService = WebFactory.getService();
        commentService.GetCommentbyId(mem_id).enqueue(new Callback<ArrayList<CommentA>>() {
            @Override

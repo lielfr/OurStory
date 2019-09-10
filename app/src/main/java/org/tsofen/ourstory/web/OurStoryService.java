@@ -28,6 +28,10 @@ public interface OurStoryService {
     Call<CommentA> newComment(@Body CommentA comment);
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<MemoryA>> GetMemoriesByUser(@Path("id") long id);
+    @GET("memories/story/{story}/findMemoriesByTag/{tag}")
+    Call<ArrayList<MemoryA>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
+    @GET("memories/story/{story}/findMemoriesByYear/{year}")
+    Call<ArrayList<MemoryA>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
     @GET("comments/findById/{id}")
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
@@ -36,9 +40,11 @@ public interface OurStoryService {
     @GET("users/findById/{id}")
     Call<Owner> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
-    Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String name);
+    Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
+
     @POST("memories/create")
     Call<Memory> CreateMemory(@Body Memory memory);
+
     // TODO: Maybe need to change that path.
     @PUT("memories/create")
     Call<Memory> EditMemory(@Body Memory memory);
