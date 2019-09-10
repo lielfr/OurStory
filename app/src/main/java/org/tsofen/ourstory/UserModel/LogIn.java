@@ -42,7 +42,7 @@ public class LogIn extends AppCompatActivity {
     int flag1 = 1;
     int flag2 = 1;
     String userPass;
-    long userId;
+    Long userId;
 org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,18 +94,19 @@ org.tsofen.ourstory.model.api.User myUser;
                 myUser = response.body();
                 Toast.makeText(getApplicationContext(),myUser.getUserId()+"",
                         Toast.LENGTH_SHORT).show();
+                userId = myUser.getUserId();
                 if (myUser.getEmail() == null) {
                     emailErr.setText("This email address is invalid. Please tru a different one.");
 
                 } else {
-                    userId = myUser.getUserId();
+
                     userPass = myUser.getPassword();
                     if (userPass.equals(inputPassword))
                     {
                         UserStatusCheck.setUserStatus("not a visitor");
                         Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
                         signInDone.putExtra("email", inputEmail);
-                        signInDone.putExtra("userId", userId);
+                        signInDone.putExtra("userId",userId);
                         signInDone.putExtra("user", myUser);
                         //signInDone.putExtra("index", index);
 
@@ -122,7 +123,7 @@ org.tsofen.ourstory.model.api.User myUser;
 
             @Override
             public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
-            emailErr.setText("This email address is invalid. Please enter a different one.");
+            emailErr.setText("Failed");
             }
 
 

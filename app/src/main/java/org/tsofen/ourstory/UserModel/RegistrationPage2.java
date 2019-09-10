@@ -1,6 +1,5 @@
 package org.tsofen.ourstory.UserModel;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,7 +27,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.StoryTeam.MainActivity;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -150,22 +148,9 @@ public class RegistrationPage2 extends AppCompatActivity {
 
     }
 
-    public void Go2RegistrationPage3andDontSave(View view) {
-        Intent regIntent3 = new Intent(this, LogIn.class);
-        regIntent3.putExtra("email", emailString);
-        regIntent3.putExtra("first_name", firstNameString);
-        regIntent3.putExtra("last_name", lastNameString);
-        regIntent3.putExtra("password", passwordString);
 
-        Log.d("log-not saved", "values sent to registrationPage3:"
-                + emailString + " " + firstNameString + " "
-                + lastNameString + " " + passwordString + " ");
-        startActivity(regIntent3);
-    }
 
-    public void UploadPicture(View view) {
-        //still null
-    }
+
 
     public void closeActivity(View view) {
         Intent back = new Intent(this, LogIn.class);
