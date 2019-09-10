@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CommentActivity"></activity>
         <activity android:name=".UserModel.AppHomePage" />
+        <activity android:name=".StoryTeam.SearchStory" android:exported="true"/>
         <activity android:name=".UserModel.LogIn" />
         <activity android:name=".UserModel.RegistrationPage1" />
         <activity android:name=".UserModel.RegistrationPage2" />

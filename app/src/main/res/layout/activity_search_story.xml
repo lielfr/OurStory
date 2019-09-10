@@ -33,10 +33,10 @@
     <EditText
         android:id="@+id/editText"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="310dp"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/searchbar"
         android:ems="10"
@@ -67,6 +67,7 @@
         app:srcCompat="@drawable/first" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,8 +94,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="105dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginRight="44dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginRight="42dp"
             android:background="@drawable/calendar_icon"
             android:onClick="ShowDatePicker"
             app:layout_constraintEnd_toEndOf="parent"
@@ -135,6 +136,58 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Month" />
+
+        <TextView
+            android:id="@+id/ShowDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginRight="45dp"
+            android:text="--/--/--"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#3F51B5"
+            android:textStyle="bold|italic"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="312dp"
+            android:layout_marginLeft="312dp"
+            android:background="@android:color/transparent"
+            android:onClick="search"
+            android:text="Button"
+            android:textColor="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ShowDate" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="23dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="159dp"
+            android:layout_marginLeft="159dp"
+            android:layout_marginTop="105dp"
+            android:background="@mipmap/down"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/catg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="183dp"
+            android:layout_marginLeft="183dp"
+            android:layout_marginTop="2dp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/spinner" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout

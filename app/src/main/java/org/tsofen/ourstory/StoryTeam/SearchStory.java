@@ -2,6 +2,9 @@ package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,21 +17,55 @@ import com.google.android.material.tabs.TabLayout;
 import org.tsofen.ourstory.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class SearchStory extends AppCompatActivity {
 
     String s = "Story";
     String m = "Memory";
-
+    private Spinner spinner;
+    int flag;
+    String item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
+        spinner=findViewById(R.id.spinner);
+        List<String> categories = new ArrayList<>();
+        categories.add(0,"BD:--/DD:---");
+        categories.add("BirthDay: ");
+        categories.add("Death Day: ");
+        ArrayAdapter<String> dataAdapter;
+        dataAdapter=new ArrayAdapter(this,android.R.layout.simple_spinner_item,categories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner.setAdapter(dataAdapter);
+spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        TextView cat = findViewById(R.id.catg);
 
+        if (adapterView.getItemAtPosition(i).equals("BD:--/DD:---")) {
+            cat.setText("BD:/DD:");
+
+        } else
+        {
+            item = adapterView.getItemAtPosition(i).toString();
+        cat.setText(item );
+        Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
+    }
+// here we have the selected item
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+});
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         // Set the text for each tab.
         tabLayout.addTab(tabLayout.newTab().setText(s));
@@ -76,12 +113,13 @@ public class SearchStory extends AppCompatActivity {
         String month_string = Integer.toString(month + 1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-//
-
-        String currentDate = day_string + "/" + month_string + "/" + year_string;
-        Toast.makeText(this, currentDate,Toast.LENGTH_SHORT).show();
 
 
+        String Date = day_string + "/" + month_string + "/" + year_string;
+       // Toast.makeText(this, currentDate,Toast.LENGTH_SHORT).show();
+
+TextView ShowDate=findViewById(R.id.ShowDate);
+ShowDate.setText(Date);
         TextView Day = findViewById(R.id.Day);
         TextView Month = findViewById(R.id.Month);
         TextView Year = findViewById(R.id.Year);
@@ -89,6 +127,11 @@ public class SearchStory extends AppCompatActivity {
         Day.setText(day_string);
         Month.setText(month_string);
         Year.setText(year_string);
+
+    }
+
+    public void search(View view) {
+
 
     }
 }
