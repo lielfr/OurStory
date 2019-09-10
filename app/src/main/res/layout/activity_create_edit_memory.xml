@@ -85,7 +85,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4_cememory" />
+                app:layout_constraintTop_toBottomOf="@+id/AddDescriptionTV_cememory" />
 
             <EditText
                 android:id="@+id/memLocation_cememory"
@@ -138,7 +138,7 @@
                 tools:layout_conversion_absoluteWidth="0dp" />
 
             <TextView
-                android:id="@+id/textView4_cememory"
+                android:id="@+id/AddDescriptionTV_cememory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -157,7 +157,7 @@
                 tools:layout_conversion_absoluteWidth="0dp" />
 
             <TextView
-                android:id="@+id/textView_cememory"
+                android:id="@+id/AddPicTV_cememory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -184,7 +184,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_cememory">
+                app:layout_constraintTop_toBottomOf="@+id/AddPicTV_cememory">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/add_pictures_rv_cememory"
@@ -445,7 +445,7 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                android:id="@+id/textView3_cememory"
+                android:id="@+id/AddVidTV_cememory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -474,7 +474,19 @@
                 android:layout_marginRight="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3_cememory" />
+                app:layout_constraintTop_toBottomOf="@+id/AddVidTV_cememory" />
+
+            <TextView
+                android:id="@+id/error_cememory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:textColor="@color/colorError"
+                android:textSize="@dimen/errorSize"
+                android:visibility="invisible"
+
+                app:layout_constraintTop_toBottomOf="@+id/memDescription_cememory" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -527,7 +539,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Add A Memory"
+            android:text="Add Memory"
             android:textColor="@color/colorWhite"
             android:textSize="21sp"
             app:fontFamily="@font/quicksand_bold"
