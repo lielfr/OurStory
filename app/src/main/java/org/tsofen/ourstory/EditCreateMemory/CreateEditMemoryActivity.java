@@ -1,22 +1,29 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.widget.ScrollView;
+import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
@@ -60,7 +67,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
     private Memory memory;
-
+    private boolean create = true;
+    private TextView MemError;
+    private LinearLayout imageLiner;
+    private ScrollView ourScroller;
+    TextView AddPicTxV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +90,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         TextView dayDate = findViewById(R.id.day_text_cememory);
         TextView monthDate = findViewById(R.id.month_text_cememory);
         TextView yearDate = findViewById(R.id.year_text_cememory);
-
+        MemError = findViewById(R.id.error_cememory);
+        imageLiner = findViewById(R.id.LinerForImage);
+        ourScroller = findViewById(R.id.scrollView_cememory);
+        AddPicTxV = findViewById(R.id.AddPicTV_cememory);
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
         } else {
+            create = false;
             pageTitle.setText("Edit Memory");
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
@@ -154,9 +169,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
             case R.id.Savebtn_cememory:
                 if (CheckValidation(v)) {
+                    // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+                    //  imageLiner.removeAllViews();
                     this.svbtn.setEnabled(true);
                     saveMemory(v);
                 } else {
+
                     displayToast("Error , Please try filling out the fields again");
                 }
                 break;
@@ -172,17 +190,28 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
-            {
-
-                displayToast("You should either enter an image or a viedeo or description for your memory!");
+            MemError.setText("Enter at Least one of The above!");
+            MemError.setVisibility(View.VISIBLE);
+            ourScroller.fullScroll(ScrollView.FOCUS_UP);// .fullScroll(ScrollView.FOCUS_UP);
+            //return false;
+            // GradientDrawable gradientDrawable=new GradientDrawable();
+            //gradientDrawable.setStroke(4,getResources().getColor(R.color.colorError));
+            //Drawable d = getResources().getDrawable(R.drawable.error_image_background);
+            //imageLiner.setBackground(gradientDrawable);
+            // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+            return false;
+        }
+        /**displayToast("You should either enter an image or a video or description for your memory!");
                 return false;
             }
         }
-        if (today.before(MemDate)) {
+         /* if (today.before(MemDate)) {
             displayToast("You have selected invalid date , please choose valid date again ");
             return false;
-        }
-        if (MemDate.before(BirthDate)) {
+         }           RecycleImage.setBackground(d);*/
+        //  editTextDescription.setHintTextColor(@);
+
+        /**   if (MemDate.before(BirthDate)) {
             displayToast("You have selected invalid date ,Memory can't occur before birth date, please choose valid date again ");
             return false;
         }
@@ -190,7 +219,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             displayToast("You have selected invalid date ,Memory can't occur after Death date, please choose valid date again ");
             return false;
         } else
-            dateFlag = true;
+         dateFlag = true;*/
         return true;
     }
 
@@ -210,9 +239,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
                     imageAdapter.data.add(currentUri.toString());
+                    // imageLiner.removeView(getResources().getDrawable(R.drawable.error_image_background));
+
+                    /****/
+
                 }
             } else if (data.getData() != null) {
                 imageAdapter.data.add(data.getData().toString());
+
+
             }
             imageAdapter.notifyDataSetChanged();
         } else if (requestCode == AddMemoryVideoAdapter.ADDMEMORY_VIDEO) {
@@ -244,7 +279,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         currentDate = day_string + "/" + month_string + "/" + year_string;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
-        c.set(year, month + 1, day);
+        c.set(year, month, day);
         MemDate = c.getTime();
 
         TextView dayDate = findViewById(R.id.day_text_cememory);
@@ -262,9 +297,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
 
     public void saveMemory(View view) {
-        boolean create = (memory == null);
-        if (memory == null)
-            memory = new Memory();
         locationText = findViewById(R.id.memLocation_cememory);
         memory.setLocation(locationText.getText().toString());
 
