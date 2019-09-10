@@ -34,9 +34,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyMemories extends Fragment {
+    private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     AppHomePage parent;
     RecyclerView rv;
+    int user_id;
     ArrayList<MemoryA> memories;
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
@@ -56,17 +58,17 @@ public class MyMemories extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       /* Intent intent = getIntent();
-        int user_id = intent.getStringExtra(AppHomePage.EXTRA_MESSAGE);*/
+        user_id = savedInstanceState.getInt("UserId");
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(137).enqueue(new Callback<ArrayList<MemoryA>>() {
+        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
                 adapter = new MyMemoriesAdapter(memories);
                 rv.setAdapter(adapter);
-                rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
             }
 
             @Override
@@ -75,20 +77,9 @@ public class MyMemories extends Fragment {
             }
         });
 
-      /*  final Button sharebtn = view.findViewById(R.id.sharebtn);
-       sharebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String mimeType = "text/plain"; // For the share func to know which type is the sharing
-                // content so it can offer the right apps
-                ShareCompat.IntentBuilder
-                        .from(getActivity())
-                        .setType(mimeType)
-                        .setChooserTitle("Share this MemoryA with: ")
-                        .setText("This is a filler until we can integrate a MemoryA object")
-                        .startChooser();
-            }
-        });*/
+
+
+
     }
 
 }

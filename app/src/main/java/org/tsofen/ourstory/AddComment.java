@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 
-import org.tsofen.ourstory.model.api.Comment;
+import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -33,7 +33,7 @@ public class AddComment extends Fragment {
     public void SendCmnt(View view) {
 
         Activity activity = getActivity();
-        Comment comment = new Comment();
+        CommentA comment = new CommentA();
         TextView txtview = activity.findViewById(R.id.AddComment);
         comment.setText(txtview.getText().toString());
         comment.setUser(userId);
