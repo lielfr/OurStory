@@ -29,14 +29,8 @@ public class CommentActivity extends AppCompatActivity {
 
     long userId;
     RecyclerView rv;
-    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     MemoryA memoryA;
-    TextView comment,name;
-    ImageView profile;
     CommentAdapter adapter;
-  /*  ArrayList<CommentA> comments;
-    OurStoryService commentService;
-    CommentAdapter adapter;long mem_id;*/
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {

@@ -72,6 +72,7 @@ public class MyMemories extends Fragment {
             @Override
             public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
                 Log.d("Error", t.toString());
+                Toast.makeText(getActivity(), "Failed", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -55,6 +55,16 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         MemoryA memory = mMemories.get(position);
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                intent.putExtra("memory", memory);
+                ctx.startActivity(intent);
+
+            }
+        });
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     }
@@ -62,7 +72,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
      holder.name.setText(story.getNameOfPerson());*/
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[(memory.getMemoryDate()).get(Calendar.MONTH)] + " " + (memory.getMemoryDate()).get(Calendar.DAY_OF_MONTH) + " , " + ((Calendar)memory.getMemoryDate()).get(Calendar.YEAR);
+       String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
             holder.mem_date.setText(memDate);
         }
         else

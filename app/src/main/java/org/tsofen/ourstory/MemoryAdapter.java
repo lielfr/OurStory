@@ -55,7 +55,6 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
                 Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
                intent.putExtra("memory", memory);
-                //signInDone.putExtra("index", index);
                 ctx.startActivity(intent);
 
             }
@@ -74,14 +73,19 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
      if(memory.getContributer()!=null && memory.getContributer().getFullName()!=null ){
         holder.name.setText(memory.getContributer().getFullName());}
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-       String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-       if(memory.getLikes()!=null) {
+        if(memory.getMemoryDate()!=null) {
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
+            holder.mem_date.setText(memDate);
+        }
+        else
+            holder.mem_date.setVisibility(View.GONE);
+        if(memory.getLikes()!=null) {
            holder.num_of_likes.setText(memory.getLikes().size());
        }
        if(memory.getComments()!=null) {
            holder.num_of_comments.setText(memory.getComments().size());
        }
-      if(memory.getMemoryDate()!=null){  holder.mem_date.setText(memDate);}
+
 
         ///////////////////////////////
 
