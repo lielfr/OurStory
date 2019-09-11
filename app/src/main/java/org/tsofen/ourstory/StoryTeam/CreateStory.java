@@ -172,6 +172,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.setType("image/*");
         startActivityForResult(Intent.createChooser(i, "Pick an image"), 1);
+
     }
 
     @Override
@@ -186,6 +187,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 image.setImageBitmap(bitmap); // setting a new image
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
