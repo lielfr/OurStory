@@ -9,10 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.tsofen.ourstory.model.Comment;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
+import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -27,17 +30,25 @@ public class CommentActivity extends AppCompatActivity {
     long userId;
     RecyclerView rv;
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-    ArrayList<CommentA> comments;
+    MemoryA memoryA;
+    TextView comment,name;
+    ImageView profile;
+    CommentAdapter adapter;
+  /*  ArrayList<CommentA> comments;
     OurStoryService commentService;
-    CommentAdapter adapter;long mem_id;
+    CommentAdapter adapter;long mem_id;*/
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
-       Intent intent = getIntent();
-       mem_id= Long.parseLong(intent.getStringExtra(MemoryAdapter.EXTRA_MESSAGE));
-       commentService = WebFactory.getService();
+        Intent i = getIntent();
+        memoryA= (MemoryA) i.getSerializableExtra("memory");
+        rv = findViewById(R.id.recycler_comment);
+        adapter = new CommentAdapter(memoryA.getComments());
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
+      /* commentService = WebFactory.getService();
        commentService.GetCommentbyId(mem_id).enqueue(new Callback<ArrayList<CommentA>>() {
            @Override
            public void onResponse(Call<ArrayList<CommentA>> call, Response<ArrayList<CommentA>> response) {
@@ -52,7 +63,7 @@ public class CommentActivity extends AppCompatActivity {
            public void onFailure(Call<ArrayList<CommentA>> call, Throwable t) {
                Log.d("Error", t.toString());
            }
-       });
+       });*/
 
 
     }

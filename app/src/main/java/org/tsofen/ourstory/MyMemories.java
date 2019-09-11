@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,9 +61,11 @@ public class MyMemories extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
-                adapter = new MyMemoriesAdapter(memories);
+                Toast.makeText(getActivity(), "Fadi", Toast.LENGTH_LONG).show();
+                adapter = new MyMemoriesAdapter(getActivity(),memories);
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter.notifyDataSetChanged();
 
             }
 

@@ -1,5 +1,6 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.StoryTeam.Story;
+import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +27,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public final ArrayList<MemoryA> mMemories;
+    MemoryA memoryA;
     Context ctx;
     LayoutInflater mInflater;
     public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
@@ -45,15 +49,17 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
-   /*     holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ctx,CommentActivity.class);
-                String message = String.valueOf(memory.getMemoryId());
-                intent.putExtra(EXTRA_MESSAGE, message);
+
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+               intent.putExtra("memory", memory);
+                //signInDone.putExtra("index", index);
                 ctx.startActivity(intent);
+
             }
-        });*/
+        });
      if(memory.getDescription()!=null) {
          holder.descr.setText(memory.getDescription());
      }

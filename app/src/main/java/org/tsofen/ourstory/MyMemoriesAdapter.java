@@ -28,17 +28,16 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public ArrayList<MemoryA> mMemories;
-    Context context;
-   /* public MyMemoriesAdapter(ArrayList<Memory> memories) {
-        this.mMemories = memories;
-    }*/
+    Context ctx;
+    LayoutInflater mInflater;
 
-    public MyMemoriesAdapter(ArrayList<MemoryA> memories) {
+    public MyMemoriesAdapter(Context context,ArrayList<MemoryA> memories) {
         this.mMemories = memories;
+        mInflater = LayoutInflater.from(context);
     }
 
     public MyMemoriesAdapter(Context context) {
-        this.context = context;
+        this.ctx = context;
     }
 
     @NonNull
@@ -46,15 +45,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
-
-        // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item_my_memories, parent, false);
-
-
-        // return a new holder instance
+        ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
-
         return viewHolder;
     }
 
@@ -106,7 +99,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
-            context = itemView.getContext();
+            ctx = itemView.getContext();
 
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
