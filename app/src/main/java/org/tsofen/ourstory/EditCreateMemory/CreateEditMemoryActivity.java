@@ -383,55 +383,51 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
         List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
-        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); ++i) {
-            Log.d("MOO", "Added " + imageAdapter.data.get(i));
+        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); i++) {
             String uri = imageAdapter.data.get(i);
             int finalI = i;
             tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
                 imageAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
-                Log.d("MOO", "Successfully uploaded: " + finalI);
             }));
         }
 
-        Tasks.whenAll(tasks).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                ArrayList<String> pictures = new ArrayList<>();
-                pictures.addAll(imageAdapter.data);
-                memory.setPictures(pictures);
-                if (create) {
-                    service.CreateMemory(memory).enqueue(new Callback<Memory>() {
-                        @Override
-                        public void onResponse(Call<Memory> call, Response<Memory> response) {
-                            if (response.code() != 200) {
-                                displayToast("Error " + response.code() + " : " + response.message());
-                                return;
-                            }
-                            Memory responseMem = response.body();
-                            long memId = responseMem.getId();
-                            intent.putExtra(KEY_MEMID, memId);
-                            setResult(RESULT_OK, intent);
-                            finish();
-                        }
 
-                        @Override
-                        public void onFailure(Call<Memory> call, Throwable t) {
-
+        Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
+            ArrayList<String> pictures = new ArrayList<>();
+            pictures.addAll(imageAdapter.data);
+            memory.setPictures(pictures);
+            if (create) {
+                service.CreateMemory(memory).enqueue(new Callback<Memory>() {
+                    @Override
+                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+                        if (response.code() != 200) {
+                            displayToast("Error " + response.code() + " : " + response.message());
+                            return;
                         }
-                    });
-                } else {
-                    service.EditMemory(memory).enqueue(new Callback<Memory>() {
-                        @Override
-                        public void onResponse(Call<Memory> call, Response<Memory> response) {
-                            finish();
-                        }
+                        Memory responseMem = response.body();
+                        long memId = responseMem.getId();
+                        intent.putExtra(KEY_MEMID, memId);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
 
-                        @Override
-                        public void onFailure(Call<Memory> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<Memory> call, Throwable t) {
 
-                        }
-                    });
-                }
+                    }
+                });
+            } else {
+                service.EditMemory(memory).enqueue(new Callback<Memory>() {
+                    @Override
+                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Memory> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
