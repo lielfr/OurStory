@@ -42,7 +42,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:scrollbarStyle="outsideInset"
-        android:text="Story name"
+        android:text="Story/Memory name"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
@@ -111,8 +111,8 @@
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="60dp"
-            android:text="TextView"
-            android:visibility="invisible"
+            android:text="0"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -123,8 +123,8 @@
             android:layout_marginStart="14dp"
             android:layout_marginLeft="14dp"
             android:layout_marginBottom="60dp"
-            android:text="TextView"
-            android:visibility="invisible"
+            android:text="0"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Day" />
 
@@ -135,8 +135,8 @@
             android:layout_marginStart="13dp"
             android:layout_marginLeft="13dp"
             android:layout_marginBottom="60dp"
-            android:text="TextView"
-            android:visibility="invisible"
+            android:text="0"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Month" />
 

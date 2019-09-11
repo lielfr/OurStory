@@ -22,7 +22,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
 
     public StoryAdapter(Context context, List<ListOfStory> storyList) {
         mInflater = LayoutInflater.from(context);
-        Log.i("story ",storyList.get(0).getNameOfPerson());
+        //Log.i("story ",storyList.get(0).getNameOfPerson());
         this.mStoryList = storyList;
     }
 

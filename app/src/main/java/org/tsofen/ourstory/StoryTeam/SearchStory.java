@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,12 +14,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.api.ListOfStory;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,13 +32,18 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class SearchStory extends AppCompatActivity {
 
     String s = "Story";
     String m = "Memory";
     private Spinner spinner;
-    String item;
+   String item;
+
 
 
     @Override
@@ -107,18 +118,23 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onClick (View view){
                 StoryFragment testS=(StoryFragment) getSupportFragmentManager().findFragmentByTag("InStory");
-                StoryFragment testM=(StoryFragment) getSupportFragmentManager().findFragmentByTag("InMemory");
+                MemoryFragment testM=(MemoryFragment) getSupportFragmentManager().findFragmentByTag("InMemory");
 
                 if(testS!=null && testS.isVisible()) {
+                    Log.d("Check","shcek");
                     Fragment fragment = new StoryFragment();
+
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.pager, fragment).commit();
-                }
+
+
+                    }
                 if(testM!=null && testM.isVisible())
                     {
                     Fragment fragment = new MemoryFragment();
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.pager, fragment).commit();
+
                 }
             }
         });
