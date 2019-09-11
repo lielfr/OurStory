@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.StoryTeam.SearchStory;
-import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,7 +21,7 @@ import java.util.Calendar;
 public class MemoriesOfStoryActivity extends AppCompatActivity {
     Context ctx;
     RecyclerView rv;
-    ArrayList<Memory> data;
+    ArrayList<MemoryA> data;
     MemoryAdapter adapter;
     TextView storyName;
 
@@ -36,7 +36,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         int year = Integer.parseInt(m[0]);
         rv = findViewById(R.id.recycler);
         storyName = findViewById(R.id.storyname);
-        data = Memory.createContactsList();
+       // data = MemoryA.createContactsList();
         adapter = new MemoryAdapter(data);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -57,8 +57,8 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     }
 
     private void filter(int text) {
-        ArrayList<Memory> filteredList = new ArrayList<>();
-        for (Memory memory : data) {
+        ArrayList<MemoryA> filteredList = new ArrayList<>();
+        for (MemoryA memory : data) {
 
             int year2 = memory.getMemoryDate().get(Calendar.YEAR);
             if (year2 == text)

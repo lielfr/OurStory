@@ -1,7 +1,5 @@
 package org.tsofen.ourstory.StoryTeam;
 
-import org.tsofen.ourstory.model.Memory;
-
 import java.util.ArrayList;
 import java.util.Date;
 

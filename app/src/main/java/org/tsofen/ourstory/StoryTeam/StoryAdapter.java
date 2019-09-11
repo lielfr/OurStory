@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.Memory;
 
 import java.util.ArrayList;
 import java.util.Date;

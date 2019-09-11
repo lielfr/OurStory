@@ -1,7 +1,6 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +8,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 
-    public ArrayList<Memory> mMemories;
+    public ArrayList<MemoryA> mMemories;
 
-    public MyMemoriesAdapter(ArrayList<Memory> memories) {
+   /* public MyMemoriesAdapter(ArrayList<Memory> memories) {
+        this.mMemories = memories;
+    }*/
+
+    public MyMemoriesAdapter(ArrayList<MemoryA> memories) {
         this.mMemories = memories;
     }
 
@@ -44,36 +45,63 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Memory memory = mMemories.get(position);
-        holder.descr.setText(memory.getDescription());
-        holder.name.setText(memory.getCreatorName());
-
-        String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) + "/" + (memory.getCreateDate().get(Calendar.MONTH)) +
-                "/" + (memory.getCreateDate().get(Calendar.YEAR));
+        MemoryA memory = mMemories.get(position);
+       /* if(memory.getDescription().length == 0 && (memory.getTags().size()!=0)) {
+                for(Tag tag: memory.getTags())
+                {
+                    tags += "#"+ tag.getLabel();
+                }
+                holder.descr.setText(memory.getDescription() + tags);
+            }
+        else if(memory.getTags().size()==0 && memory.getDescription().length!=0)
+                holder.descr.setText(memory.getDescription());
+        else if(!memory.getTags().size() ==0 && memory.getDescription().length==0)
+        {
+            for(Tag tag: memory.getTags())
+            {
+                tags += "#"+ tag.getLabel();
+            }
+            holder.descr.setText(tags);
+        }
+        else {
+            holder.descr.setVisibility(View.GONE);
+        }*/
+     /*   holder.descr.setText((String)memory.getDescription());
+       Story story = (Story) memory.getStory();
+     holder.name.setText(story.getFirstName() + " " + story.getLastName());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-        /*holder.num_of_shares.setText(memory.getLikes().size());
-        holder.num_of_shares.setText(memory.getShares().size());
-        holder.num_of_comments.setText(memory.getComments().size());*/
-        holder.create_date.setText(createDate);
-        holder.mem_date.setText(memDate);
-
-
-    }
-
-    public void filterList(ArrayList<Memory> filteredList) {
-        mMemories = filteredList;
-        notifyDataSetChanged();
+        if(memory.getMemoryDate()!=null) {
+            String memDate = monthNames[((Calendar)memory.getMemoryDate()).get(Calendar.MONTH)] + " " + ((Calendar)memory.getMemoryDate()).get(Calendar.DAY_OF_MONTH) + " , " + ((Calendar)memory.getMemoryDate()).get(Calendar.YEAR);
+            holder.mem_date.setText(memDate);
+        }
+        else
+            holder.mem_date.setText("");
+        if(memory.getLikes().isEmpty())
+            holder.num_of_likes.setText("");
+        else
+            holder.num_of_likes.setText(memory.getLikes().size());
+        if(memory.getComments().isEmpty())
+            holder.num_of_comments.setText("");
+        else
+            holder.num_of_comments.setText(memory.getComments().size());
+       if(memory.getLocation()!=null)
+           holder.location.setText((String) memory.getLocation());
+       else
+           holder.location.setText("");
+        if(memory.getFeeling()!=null)
+            holder.feeling.setText(memory.getFeeling().toString());
+        else
+            holder.feeling.setText("");
+*/
     }
     @Override
     public int getItemCount() {
         return mMemories.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, mem_date, create_date, descr;
-
+        public TextView feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
+        public ImageView profile;
         public MyMemoriesAdapter adapter;
 
 
@@ -81,9 +109,15 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             super(itemView);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-            create_date = itemView.findViewById(R.id.posted_date);
+            num_of_comments = itemView.findViewById(R.id.commentNum);
+            num_of_likes = itemView.findViewById(R.id.likesNum);
             descr = itemView.findViewById(R.id.descr);
+//            location = itemView.findViewById(R.id.locationtxt_mymemories);
+//            feeling = itemView.findViewById(R.id.feelingtxt_mymemories);
+            profile = itemView.findViewById(R.id.picture_person);
             adapter = MyMemoriesAdapter;
+
+
         }
     }
 
