@@ -25,14 +25,18 @@
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
         <activity android:name="org.tsofen.ourstory.MyMemoriesActivity" />
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
-        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg"/>
+            <activity
+                android:name ="org.tsofen.ourstory.CommentActivity"
+                android:theme="@style/AppTheme.CustomTheme"
+                />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+
         <activity
             android:name=".MemoriesOfStoryActivity"
             android:label="Memories"
