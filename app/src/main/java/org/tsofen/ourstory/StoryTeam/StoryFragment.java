@@ -43,6 +43,9 @@ public class StoryFragment extends Fragment {
 
         OurStoryService wepengine = WebFactory.getService();
         String n = editText.getText().toString(); /// please dont delete this
+        //Toast.makeText(getActivity() , "the extra name is :"+ getString("searchinpute"), Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getActivity() , "the extra name is : null ", Toast.LENGTH_SHORT).show();
 
         wepengine.GetStoriesByName("mali").enqueue(new Callback<ArrayList<ListOfStory>>() {
             @Override
@@ -66,6 +69,20 @@ public class StoryFragment extends Fragment {
 
             }
         });
+
+
+        editText.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity() , "the edit text is .. ", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+            }
+        });
+
 
     }
 

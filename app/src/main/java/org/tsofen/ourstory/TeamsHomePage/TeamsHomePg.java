@@ -38,6 +38,7 @@ public class TeamsHomePg extends AppCompatActivity {
 
     public void showStoryPart(View view) {
         Intent intent = new Intent(TeamsHomePg.this, CreateStory.class);
+        intent.putExtra("tybe","visitor");
         startActivity(intent);
     }
 }
