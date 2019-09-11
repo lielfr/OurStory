@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -22,9 +23,7 @@ public class Memory implements Serializable {
     Story story;
     @SerializedName("contributer")
     @Expose
-    Long creatorId;
-    String creatorName;
-    URI creatorPic;
+    User user;
     @SerializedName("description")
     @Expose
     String description;
@@ -42,14 +41,14 @@ public class Memory implements Serializable {
     String location;
     @SerializedName("pictures")
     @Expose
-    ArrayList<String> pictures;
+    ArrayList<Picture> pictures = null;
     @SerializedName("videos")
     @Expose
-    ArrayList<String> videos;
-    ArrayList<Tag> tags;
+    ArrayList<String> videos = new ArrayList<>();
+    ArrayList<Tag> tags = new ArrayList<>();
     @SerializedName("likes")
     @Expose
-    ArrayList<Long> likes;
+    ArrayList<Long> likes = new ArrayList<>();
     @SerializedName("comments")
     @Expose
     ArrayList<Comment> comments;
@@ -90,9 +89,8 @@ public class Memory implements Serializable {
 //        return memoryDate;
 //    }
 
-    public Memory(String creatorName, URI creatorPic, String description, Date createDate, Date memoryDate) {
-        this.creatorName = creatorName;
-        this.creatorPic = creatorPic;
+    public Memory(User user, String description, Date createDate, Date memoryDate) {
+        this.user = user;
         this.description = description;
         this.memoryDate = memoryDate;
         this.createDate = createDate;
@@ -120,12 +118,12 @@ public class Memory implements Serializable {
         d8.set(2000, 2, 12);
         d9.set(2000, 2, 12);
         d10.set(1999, 11, 5);
-        memories.add(new Memory("Hazar", null, "Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you ", d1.getTime(), d2.getTime()));
-        memories.add(new Memory("Hazar", null, "Wish you were here. Wish you were here. Wish you were here. Wish you were here. Wish you were here. Wish you were here. ", d3.getTime(), d4.getTime()));
-        memories.add(new Memory("Oron", null, "Wanted to share all the day with you.", d5.getTime(), d6.getTime()));
-        memories.add(new Memory("Aya", null, "Missing you. just sat on our beach and thought about you", d7.getTime(), d8.getTime()
-        ));
-        memories.add(new Memory("Orwa", null, "Wish you were celebrating my birthday with me this YearActivity.", d9.getTime(), d10.getTime()));
+//        memories.add(new Memory("Hazar", null, "Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you ", d1.getTime(), d2.getTime()));
+//        memories.add(new Memory("Hazar", null, "Wish you were here. Wish you were here. Wish you were here. Wish you were here. Wish you were here. Wish you were here. ", d3.getTime(), d4.getTime()));
+//        memories.add(new Memory("Oron", null, "Wanted to share all the day with you.", d5.getTime(), d6.getTime()));
+//        memories.add(new Memory("Aya", null, "Missing you. just sat on our beach and thought about you", d7.getTime(), d8.getTime()
+//        ));
+//        memories.add(new Memory("Orwa", null, "Wish you were celebrating my birthday with me this YearActivity.", d9.getTime(), d10.getTime()));
        /* memories.add(new Memory("Oron",null,"Celebrating our friend's wedding",date = setDa(2019,03,13),date = setDa(2019,7,6)));
         memories.add(new Memory("Hazar",null,"Our trip to Rome.",date = setDa(2016,02,7),date = setDa(2017,4,1)));
         memories.add(new Memory("Aya",null,"Missed our camping trips.",date = setDa(2015,01,8),date = setDa(2015,3,11)));
@@ -156,11 +154,11 @@ public class Memory implements Serializable {
         d8.set(2000, 2, 12);
         d9.set(2000, 2, 12);
         d10.set(1999, 11, 5);
-        memories.add(new Memory("Hazar Nakhleh", null, "Missing you. just sat on our beach and thought about you.Missing you. just sat on our beach and thought about you.Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you", d1.getTime(), d2.getTime()));
-        memories.add(new Memory("Hazar Nakhleh", null, "Wish you were here.", d3.getTime(), d4.getTime()));
-        memories.add(new Memory("Oron Werner", null, "Wanted to share all the day with you.", d5.getTime(), d6.getTime()));
-        memories.add(new Memory("Aya Abed", null, "Missing you. just sat on our beach and thought about you", d7.getTime(), d8.getTime()));
-        memories.add(new Memory("Orwa Watad", null, "Wish you were celebrating my birthday with me this YearActivity.", d9.getTime(), d10.getTime()));
+//        memories.add(new Memory("Hazar Nakhleh", null, "Missing you. just sat on our beach and thought about you.Missing you. just sat on our beach and thought about you.Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you Missing you. just sat on our beach and thought about you", d1.getTime(), d2.getTime()));
+//        memories.add(new Memory("Hazar Nakhleh", null, "Wish you were here.", d3.getTime(), d4.getTime()));
+//        memories.add(new Memory("Oron Werner", null, "Wanted to share all the day with you.", d5.getTime(), d6.getTime()));
+//        memories.add(new Memory("Aya Abed", null, "Missing you. just sat on our beach and thought about you", d7.getTime(), d8.getTime()));
+//        memories.add(new Memory("Orwa Watad", null, "Wish you were celebrating my birthday with me this YearActivity.", d9.getTime(), d10.getTime()));
         return memories;
     }
 
@@ -169,6 +167,8 @@ public class Memory implements Serializable {
 //    }
 
     public Calendar getMemoryDate() {
+        if (memoryDate == null)
+            return null;
         Calendar c = getInstance();
         c.setTime(memoryDate);
         return c;
@@ -198,12 +198,18 @@ public class Memory implements Serializable {
         this.location = location;
     }
 
-    public ArrayList<String> getPictures() {
+    public ArrayList<Picture> getPictures() {
         return pictures;
     }
 
     public void setPictures(ArrayList<String> pictures) {
-        this.pictures = pictures;
+        if (this.pictures == null)
+            this.pictures = new ArrayList<>();
+        for (String p : pictures) {
+            Picture pic = new Picture();
+            pic.setLink(p);
+            this.pictures.add(pic);
+        }
     }
 
     public ArrayList<String> getVideos() {
@@ -254,17 +260,17 @@ public class Memory implements Serializable {
         isPrivate = aPrivate;
     }
 
-    public String getCreatorName() {
-        return creatorName;
-    }
+//    public String getCreatorName() {
+//        return creatorName;
+//    }
 
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
-    }
+//    public void setCreatorName(String creatorName) {
+//        this.creatorName = creatorName;
+//    }
 
-    public URI getCreatorPic() {
-        return creatorPic;
-    }
+//    public URI getCreatorPic() {
+//        return creatorPic;
+//    }
 
     public Calendar getCreateDate() {
         Calendar c = getInstance();
@@ -275,9 +281,9 @@ public class Memory implements Serializable {
     public Memory() {
     }
 
-    public void setCreatorPic(URI creatorPic) {
-        this.creatorPic = creatorPic;
-    }
+//    public void setCreatorPic(URI creatorPic) {
+//        this.creatorPic = creatorPic;
+//    }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -287,4 +293,11 @@ public class Memory implements Serializable {
         this.createDate = createDate.getTime();
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
