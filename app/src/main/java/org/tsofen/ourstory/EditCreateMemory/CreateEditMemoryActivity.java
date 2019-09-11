@@ -24,6 +24,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.UploadTask;
+
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
@@ -107,7 +112,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
             selectEmoji(memory.getFeeling());
 
-            imageAdapter.data.addAll(memory.getPictures());
+            imageAdapter.data.addAll(Uploadable.fromServerList(memory.getPictures()));
             imageAdapter.notifyDataSetChanged();
             videoAdapter.data.addAll(memory.getVideos());
             videoAdapter.notifyDataSetChanged();
@@ -238,14 +243,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    imageAdapter.data.add(currentUri.toString());
+                    imageAdapter.data.add(new Uploadable(currentUri.toString()));
                     // imageLiner.removeView(getResources().getDrawable(R.drawable.error_image_background));
 
                     /****/
 
                 }
             } else if (data.getData() != null) {
-                imageAdapter.data.add(data.getData().toString());
+                imageAdapter.data.add(new Uploadable(data.getData().toString()));
 
 
             }
@@ -306,6 +311,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         displayToast("Data saved.");
         OurStoryService service = WebFactory.getService();
         Intent intent = new Intent();
+
+        FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
+        for (Uploadable image : imageAdapter.data) {
+            if (!image.isUploaded)
+                image.upload();
+        }
 
         if (create) {
             service.CreateMemory(memory).enqueue(new Callback<Memory>() {
