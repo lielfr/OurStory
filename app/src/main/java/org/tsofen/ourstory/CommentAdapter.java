@@ -20,6 +20,7 @@ import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +28,7 @@ import retrofit2.Response;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
-    public ArrayList<CommentA> comments;
+    public List<Comment> comments;
     OurStoryService user_comment;
     Owner user;
     @NonNull
@@ -47,15 +48,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return viewHolder;
     }
 
-    public CommentAdapter(ArrayList<CommentA> comments) {
+    public CommentAdapter(List<Comment> comments) {
         this.comments = comments;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
-        CommentA comment = comments.get(position);
+        Comment comment = comments.get(position);
         user_comment = WebFactory.getService();
-        user_comment.GetUserById((Long) comment.getUser()).enqueue(new Callback<Owner>() {
+        user_comment.GetUserById( comment.getUser()).enqueue(new Callback<Owner>() {
             @Override
             public void onResponse(Call<Owner> call, Response<Owner> response) {
                 user = response.body();

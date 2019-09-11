@@ -28,17 +28,16 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public ArrayList<MemoryA> mMemories;
-    Context context;
-   /* public MyMemoriesAdapter(ArrayList<Memory> memories) {
-        this.mMemories = memories;
-    }*/
+    Context ctx;
+    LayoutInflater mInflater;
 
-    public MyMemoriesAdapter(ArrayList<MemoryA> memories) {
+    public MyMemoriesAdapter(Context context,ArrayList<MemoryA> memories) {
         this.mMemories = memories;
+        mInflater = LayoutInflater.from(context);
     }
 
     public MyMemoriesAdapter(Context context) {
-        this.context = context;
+        this.ctx = context;
     }
 
     @NonNull
@@ -46,15 +45,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
-
-        // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item_my_memories, parent, false);
-
-
-        // return a new holder instance
+        ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
-
         return viewHolder;
     }
 
@@ -62,6 +55,16 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         MemoryA memory = mMemories.get(position);
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                intent.putExtra("memory", memory);
+                ctx.startActivity(intent);
+
+            }
+        });
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     }
@@ -69,7 +72,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
      holder.name.setText(story.getNameOfPerson());*/
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[(memory.getMemoryDate()).get(Calendar.MONTH)] + " " + (memory.getMemoryDate()).get(Calendar.DAY_OF_MONTH) + " , " + ((Calendar)memory.getMemoryDate()).get(Calendar.YEAR);
+       String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
             holder.mem_date.setText(memDate);
         }
         else
@@ -106,7 +109,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
-            context = itemView.getContext();
+            ctx = itemView.getContext();
 
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
