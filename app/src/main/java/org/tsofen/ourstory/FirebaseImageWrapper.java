@@ -29,4 +29,8 @@ public class FirebaseImageWrapper {
     public UploadTask uploadImg(Uri path) {
         return ref.putFile(path);
     }
+
+    public void removeImg(String path) {
+        // TODO: Right now we don't do that.
+    }
 }

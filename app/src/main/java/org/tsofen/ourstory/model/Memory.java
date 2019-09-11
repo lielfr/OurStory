@@ -41,14 +41,14 @@ public class Memory implements Serializable {
     String location;
     @SerializedName("pictures")
     @Expose
-    ArrayList<String> pictures;
+    ArrayList<Picture> pictures = null;
     @SerializedName("videos")
     @Expose
-    ArrayList<String> videos;
-    ArrayList<Tag> tags;
+    ArrayList<String> videos = new ArrayList<>();
+    ArrayList<Tag> tags = new ArrayList<>();
     @SerializedName("likes")
     @Expose
-    ArrayList<Long> likes;
+    ArrayList<Long> likes = new ArrayList<>();
     @SerializedName("comments")
     @Expose
     ArrayList<Comment> comments;
@@ -167,6 +167,8 @@ public class Memory implements Serializable {
 //    }
 
     public Calendar getMemoryDate() {
+        if (memoryDate == null)
+            return null;
         Calendar c = getInstance();
         c.setTime(memoryDate);
         return c;
@@ -196,12 +198,18 @@ public class Memory implements Serializable {
         this.location = location;
     }
 
-    public ArrayList<String> getPictures() {
+    public ArrayList<Picture> getPictures() {
         return pictures;
     }
 
     public void setPictures(ArrayList<String> pictures) {
-        this.pictures = pictures;
+        if (this.pictures == null)
+            this.pictures = new ArrayList<>();
+        for (String p : pictures) {
+            Picture pic = new Picture();
+            pic.setLink(p);
+            this.pictures.add(pic);
+        }
     }
 
     public ArrayList<String> getVideos() {
