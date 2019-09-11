@@ -23,7 +23,7 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
     Context ctx;
     Activity parent;
     List<String> data;
-
+    int upload_start = 0;
 
     static final int ADDMEMORY_IMAGE = 1;
 

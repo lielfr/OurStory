@@ -33,6 +33,7 @@ import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -71,11 +72,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_EDIT = "CEMemoryEdit";
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
+    public static final String KEY_USER = "CEMemoryUser";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
     private LinearLayout imageLiner;
     private ScrollView ourScroller;
+    private User user;
     TextView AddPicTxV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +105,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
+            user = (User) intent.getSerializableExtra(KEY_USER);
         } else {
             create = false;
             pageTitle.setText("Edit Memory");
+            user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
             dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
@@ -313,14 +318,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         Intent intent = new Intent();
 
         FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
-        for (String s : imageAdapter.data) {
-            wrapper.uploadImg(Uri.parse(s))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        }
-                    });
+        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); ++i) {
+            
         }
 
         if (create) {
