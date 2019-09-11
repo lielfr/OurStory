@@ -1,28 +1,21 @@
 package org.tsofen.ourstory;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ShareCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.UserModel.AppHomePage;
-import org.tsofen.ourstory.UserModel.LogIn;
-import org.tsofen.ourstory.UserModel.RegistrationPage1;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -38,7 +31,7 @@ public class MyMemories extends Fragment {
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     AppHomePage parent;
     RecyclerView rv;
-    int user_id;
+    Long user_id;
     ArrayList<MemoryA> memories;
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
@@ -58,7 +51,9 @@ public class MyMemories extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        user_id = savedInstanceState.getInt("UserId");
+        Activity a = getActivity();
+        Intent i = a.getIntent();
+        user_id=i.getLongExtra("userId",0);
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
         MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {
