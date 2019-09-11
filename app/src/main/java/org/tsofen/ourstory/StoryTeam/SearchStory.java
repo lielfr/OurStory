@@ -4,17 +4,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.Tag;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,44 +32,54 @@ public class SearchStory extends AppCompatActivity {
     String s = "Story";
     String m = "Memory";
     private Spinner spinner;
-    int flag;
     String item;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
-        spinner=findViewById(R.id.spinner);
-        List<String> categories = new ArrayList<>();
-        categories.add(0,"BD:--/DD:---");
+        spinner = findViewById(R.id.spinner);
+        final Button S = findViewById(R.id.button4);
+        S.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                Fragment fragment = new StoryFragment();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.FrameLayout, fragment).commit();
+            }
+        });
+        List<String> categories = new ArrayList<String>();
+        categories.add(0, "BD:--/DD:---");
         categories.add("BirthDay: ");
         categories.add("Death Day: ");
+
         ArrayAdapter<String> dataAdapter;
-        dataAdapter=new ArrayAdapter(this,android.R.layout.simple_spinner_item,categories);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, categories);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(dataAdapter);
-spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        TextView cat = findViewById(R.id.catg);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView cat = findViewById(R.id.catg);
 
-        if (adapterView.getItemAtPosition(i).equals("BD:--/DD:---")) {
-            cat.setText("BD:/DD:");
+                if (adapterView.getItemAtPosition(i).equals("BD:--/DD:---")) {
+                    cat.setText("BD:/DD:");
 
-        } else
-        {
-            item = adapterView.getItemAtPosition(i).toString();
-        cat.setText(item );
-        Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
-    }
+                } else {
+                    item = adapterView.getItemAtPosition(i).toString();
+                    cat.setText(item);
+                    Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
+                }
 // here we have the selected item
-    }
+            }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
+            }
 
-});
+        });
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         // Set the text for each tab.
         tabLayout.addTab(tabLayout.newTab().setText(s));
@@ -99,6 +113,7 @@ spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
     }
 
+
     public void finish(View view) {
         finish();
     }
@@ -116,10 +131,10 @@ spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 
         String Date = day_string + "/" + month_string + "/" + year_string;
-       // Toast.makeText(this, currentDate,Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, currentDate,Toast.LENGTH_SHORT).show();
 
-TextView ShowDate=findViewById(R.id.ShowDate);
-ShowDate.setText(Date);
+        TextView ShowDate = findViewById(R.id.ShowDate);
+        ShowDate.setText(Date);
         TextView Day = findViewById(R.id.Day);
         TextView Month = findViewById(R.id.Month);
         TextView Year = findViewById(R.id.Year);
@@ -130,8 +145,8 @@ ShowDate.setText(Date);
 
     }
 
-    public void search(View view) {
 
 
-    }
+
+
 }
