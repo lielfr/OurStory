@@ -71,13 +71,13 @@
                 android:id="@+id/memDescription_cememory"
                 android:layout_width="344dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_memory_description_background"
                 android:ems="10"
                 android:fontFamily="@font/quicksand_bold"
                 android:gravity="top|left"
-                android:hint="Add your Description ..."
                 android:inputType="textLongMessage|textMultiLine|textPersonName"
+                android:paddingLeft="5dp"
                 android:singleLine="true"
                 android:textColor="#FFFFFF"
                 android:textColorHint="@color/colorWhite"
@@ -85,7 +85,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4_cememory" />
+                app:layout_constraintTop_toBottomOf="@+id/AddDescriptionTV_cememory" />
 
             <EditText
                 android:id="@+id/memLocation_cememory"
@@ -93,7 +93,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/ic_location_background"
+                android:fontFamily="@font/quicksand_bold"
                 android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12_cememory" />
@@ -138,12 +141,12 @@
                 tools:layout_conversion_absoluteWidth="0dp" />
 
             <TextView
-                android:id="@+id/textView4_cememory"
+                android:id="@+id/AddDescriptionTV_cememory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/quicksand_bold"
                 android:text="@string/write_your_memory"
                 android:textColor="@android:color/background_light"
@@ -157,7 +160,7 @@
                 tools:layout_conversion_absoluteWidth="0dp" />
 
             <TextView
-                android:id="@+id/textView_cememory"
+                android:id="@+id/AddPicTV_cememory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -184,7 +187,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_cememory">
+                app:layout_constraintTop_toBottomOf="@+id/AddPicTV_cememory">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/add_pictures_rv_cememory"
@@ -193,7 +196,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
@@ -445,12 +448,12 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                android:id="@+id/textView3_cememory"
+                android:id="@+id/AddVidTV_cememory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/quicksand_bold"
                 android:text="@string/add_video"
                 android:textColor="@android:color/background_light"
@@ -469,12 +472,12 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3_cememory" />
+                app:layout_constraintTop_toBottomOf="@+id/AddVidTV_cememory" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
