@@ -26,6 +26,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 
 import java.io.IOException;
@@ -56,12 +57,13 @@ public class RegistrationPage2 extends AppCompatActivity {
     public EditText EditText6;
     public EditText EditText7;
     public EditText EditText8;
-    public EditText DateOfB;
+//    public EditText DateOfB;
 
     private final int PICK_IMAGE_REQUEST = 71;
     //Firebase
-    FirebaseStorage storage;
-    StorageReference storageReference;
+//    FirebaseStorage storage;
+//    StorageReference storageReference;
+    FirebaseImageWrapper wrapper;
     //profile picture part
     private Button chooseButton;
     private ImageView profileImageView;
@@ -81,12 +83,12 @@ public class RegistrationPage2 extends AppCompatActivity {
         firstNameString = currIntent.getStringExtra("first_name");
         lastNameString = currIntent.getStringExtra("last_name");
         passwordString = currIntent.getStringExtra("password");
-        DateOfB = findViewById(R.id.showDate);
+//        DateOfB = findViewById(R.id.showDate);
         Log.d("log4", "values received from registrationPage1:"
                 + emailString + " " + firstNameString + " "
                 + lastNameString + " " + passwordString);
 
-        //Initialize proifle picture Views
+        //Initialize profile picture Views
         chooseButton = findViewById(R.id.choose_button);
         profileImageView = findViewById(R.id.profileImageView);
         chooseButton.setOnClickListener(new View.OnClickListener() {
@@ -96,9 +98,9 @@ public class RegistrationPage2 extends AppCompatActivity {
             }
         });
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
+//        storage = FirebaseStorage.getInstance();
+//        storageReference = storage.getReference();
+        wrapper = new FirebaseImageWrapper();
     }
 
 
@@ -205,8 +207,9 @@ public class RegistrationPage2 extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
-            ref.putFile(filePath)
+//            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
+//            ref.putFile(filePath)
+            wrapper.uploadImg(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

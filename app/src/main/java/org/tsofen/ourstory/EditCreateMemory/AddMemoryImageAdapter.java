@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import org.tsofen.ourstory.R;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,12 +23,13 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
     Context ctx;
     Activity parent;
     List<String> data;
+    int upload_start = 0;
 
     static final int ADDMEMORY_IMAGE = 1;
 
     public AddMemoryImageAdapter(Activity parent) {
         super();
-        data = new LinkedList<>();
+        data = new ArrayList<>();
         this.parent = parent;
     }
 

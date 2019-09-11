@@ -4,7 +4,7 @@
     <corners
         android:bottomLeftRadius="@dimen/ef_margin_small"
         android:radius="2dp"
-        android:topLeftRadius="@dimen/ef_margin_small"
+        android:topLeftRadius="@dimen/ef_margin_small" />
 
         />
 
