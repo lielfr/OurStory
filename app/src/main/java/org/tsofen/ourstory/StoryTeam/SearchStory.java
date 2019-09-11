@@ -41,14 +41,7 @@ public class SearchStory extends AppCompatActivity {
         setContentView(R.layout.activity_search_story);
         spinner = findViewById(R.id.spinner);
         final Button S = findViewById(R.id.button4);
-        S.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view){
-                Fragment fragment = new StoryFragment();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.FrameLayout, fragment).commit();
-            }
-        });
+
         List<String> categories = new ArrayList<String>();
         categories.add(0, "BD:--/DD:---");
         categories.add("BirthDay: ");
@@ -110,7 +103,25 @@ public class SearchStory extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+        S.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                StoryFragment testS=(StoryFragment) getSupportFragmentManager().findFragmentByTag("InStory");
+                StoryFragment testM=(StoryFragment) getSupportFragmentManager().findFragmentByTag("InMemory");
 
+                if(testS!=null && testS.isVisible()) {
+                    Fragment fragment = new StoryFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.pager, fragment).commit();
+                }
+                if(testM!=null && testM.isVisible())
+                    {
+                    Fragment fragment = new MemoryFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.pager, fragment).commit();
+                }
+            }
+        });
     }
 
 

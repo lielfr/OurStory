@@ -4,7 +4,8 @@
     android:id="@+id/FrameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.tsofen.ourstory.StoryTeam.StoryFragment">
+    tools:context="org.tsofen.ourstory.StoryTeam.StoryFragment"
+    android:tag="InStory">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
