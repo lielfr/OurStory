@@ -16,13 +16,23 @@ import org.tsofen.ourstory.model.Memory;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static java.util.Calendar.getInstance;
+
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
     Context ctx;
     public ArrayList<Memory> mMemories;
 
     public MemoryAdapter(ArrayList<org.tsofen.ourstory.model.Memory> memories) {
-        this.mMemories = memories;
-        this.ctx=ctx;
+        //    example
+        Calendar d3 = getInstance();
+        Calendar d4 = getInstance();
+
+        d3.set(2004, 11, 1);
+        d4.set(2000, 10, 1);
+        Memory testMemory=(new Memory("orwah",null,"Wish you were here.", d3.getTime(), d4.getTime()));
+
+        mMemories=testMemory.createContactsList();
+        // end example
     }
 
 
@@ -34,6 +44,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
         // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item, parent, false);
+
 
 
         // return a new holder instance
@@ -57,7 +68,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
        /* holder.num_of_shares.setText(memory.getLikes().size());
         holder.num_of_shares.setText(memory.getShares().size());
         holder.num_of_comments.setText(memory.getComments().size());*/
-        holder.create_date.setText(createDate);
+//        holder.create_date.setText(createDate);
         holder.mem_date.setText(memDate);
         ///////////////////////////////
 
@@ -67,13 +78,15 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
 
         //////////////////////////////////// fill images
+
+        // images in memories example
         ImgItem i1=new ImgItem("alex",R.drawable.alex);
         ImgItem i2=new ImgItem("alex",R.drawable.pic);
         ImgItem i3=new ImgItem("alex",R.drawable.alex);
 
         images.add(i1);
         images.add(i2);
-
+        // end of example
 
 
 
@@ -108,7 +121,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             super(itemView);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-            create_date = itemView.findViewById(R.id.posted_date);
+//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
             pic = itemView.findViewById(R.id.picture_person);
            /* num_of_comments = itemView.findViewById(R.id.commentNum);
