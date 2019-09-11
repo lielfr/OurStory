@@ -347,7 +347,10 @@
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorError"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -390,7 +393,10 @@
             android:hint="@string/Email1"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorError"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@color/colorError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

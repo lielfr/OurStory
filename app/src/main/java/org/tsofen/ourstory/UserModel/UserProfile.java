@@ -55,7 +55,7 @@ public class UserProfile extends Fragment {
 
         fName = getView().findViewById(R.id.showFirst);
         lName = getView().findViewById(R.id.showLast);
-        dOfBirth = getView().findViewById(R.id.showState);
+        dOfBirth = getView().findViewById(R.id.showDate);
         gender = getView().findViewById(R.id.showGender);
         state = getView().findViewById(R.id.showState);
         city = getView().findViewById(R.id.showCity);
@@ -77,7 +77,7 @@ public class UserProfile extends Fragment {
         if (profileUser.getState() != null)
             state.setText(profileUser.getState());
         if (profileUser.getState() != null)
-            city.setText(profileUser.getState());
+            city.setText(profileUser.getCity());
         if (profileUser.getEmail() != null)
             email.setText(profileUser.getEmail());
     }

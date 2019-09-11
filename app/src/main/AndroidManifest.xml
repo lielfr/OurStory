@@ -26,13 +26,18 @@
         <activity android:name="org.tsofen.ourstory.MyMemoriesActivity" />
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+            <activity
+                android:name ="org.tsofen.ourstory.CommentActivity"
+                />
+
+
+
         <activity
             android:name=".MemoriesOfStoryActivity"
             android:label="Memories"
