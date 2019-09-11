@@ -1,5 +1,8 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -179,15 +182,51 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 }
                 break;
             case R.id.Cancelbtn_cememory:
-                finish();
+                ShowAlertDialog(this, "", "Are you sure you want to cancel ?");
+                // finish();
                 break;
             case R.id.back_button_cememory:
-                finish();
+                ShowAlertDialog(this, "", "Are you sure you want to leave ?");
+                // finish();
                 break;
 
         }
     }
 
+    public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /**
+     * AlertDialog.Builder builder = new AlertDialog.Builder(this);
+     * builder.setMessage("Are you sure you want to exit?")
+     * .setCancelable(false)
+     * .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+     * public void onClick(DialogInterface dialog, int id) {
+     * MyActivity.this.finish();
+     * }
+     * })
+     * .setNegativeButton("No", new DialogInterface.OnClickListener() {
+     * public void onClick(DialogInterface dialog, int id) {
+     * dialog.cancel();
+     * }
+     * });
+     * AlertDialog alert = builder.create();
+     * alert.show();
+     **/
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             MemError.setText("Enter at Least one of The above!");
@@ -202,23 +241,23 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             return false;
         }
         /**displayToast("You should either enter an image or a video or description for your memory!");
-                return false;
-            }
-        }
+         return false;
+         }
+         }
          /* if (today.before(MemDate)) {
-            displayToast("You have selected invalid date , please choose valid date again ");
-            return false;
+         displayToast("You have selected invalid date , please choose valid date again ");
+         return false;
          }           RecycleImage.setBackground(d);*/
         //  editTextDescription.setHintTextColor(@);
 
         /**   if (MemDate.before(BirthDate)) {
-            displayToast("You have selected invalid date ,Memory can't occur before birth date, please choose valid date again ");
-            return false;
-        }
-        if (MemDate.after(DeathDate)) {
-            displayToast("You have selected invalid date ,Memory can't occur after Death date, please choose valid date again ");
-            return false;
-        } else
+         displayToast("You have selected invalid date ,Memory can't occur before birth date, please choose valid date again ");
+         return false;
+         }
+         if (MemDate.after(DeathDate)) {
+         displayToast("You have selected invalid date ,Memory can't occur after Death date, please choose valid date again ");
+         return false;
+         } else
          dateFlag = true;*/
         return true;
     }
