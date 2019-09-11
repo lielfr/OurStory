@@ -3,7 +3,6 @@ package org.tsofen.ourstory.EditCreateMemory;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +15,22 @@ import com.bumptech.glide.Glide;
 
 import org.tsofen.ourstory.R;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAdapter.ViewHolder> {
     Context ctx;
     Activity parent;
-    List<Uploadable> data;
+    List<String> data;
+    
+
 
     static final int ADDMEMORY_IMAGE = 1;
 
     public AddMemoryImageAdapter(Activity parent) {
         super();
-        data = new LinkedList<>();
+        data = new ArrayList<>();
         this.parent = parent;
     }
 
@@ -71,12 +73,7 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
                             notifyDataSetChanged();
                         }
                     });
-            Uploadable img = data.get(position - 1);
-            Uri uri;
-
-            if (img.isUploaded) {
-                uri = img.localUri;
-            } else uri = img.remoteUri;
+            String uri = data.get(position - 1);
             Glide.with(holder.itemView)
                     .load(uri)
                     .into(imageView);
