@@ -1,26 +1,13 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.widget.ScrollView;
-import android.widget.Toast;
-
-import androidx.annotation.ColorInt;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import androidx.annotation.Nullable;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +62,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
-    private LinearLayout imageLiner;
     private ScrollView ourScroller;
     TextView AddPicTxV;
     @Override
@@ -97,7 +83,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         TextView monthDate = findViewById(R.id.month_text_cememory);
         TextView yearDate = findViewById(R.id.year_text_cememory);
         MemError = findViewById(R.id.error_cememory);
-        imageLiner = findViewById(R.id.LinerForImage);
         ourScroller = findViewById(R.id.scrollView_cememory);
         AddPicTxV = findViewById(R.id.AddPicTV_cememory);
         if (memory == null) {
