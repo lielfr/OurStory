@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
@@ -37,6 +38,7 @@ public class TeamsHomePg extends AppCompatActivity {
 
     public void showStoryPart(View view) {
         Intent intent = new Intent(TeamsHomePg.this, CreateStory.class);
+        intent.putExtra("tybe","visitor");
         startActivity(intent);
     }
 }

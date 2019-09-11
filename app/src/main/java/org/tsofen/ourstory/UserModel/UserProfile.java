@@ -1,5 +1,7 @@
 package org.tsofen.ourstory.UserModel;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,7 +32,9 @@ public class UserProfile extends Fragment {
     TextView city;
     TextView email;
     Uri pictureUri;
-    User userP;
+
+    User profileUser;
+
     public UserProfile() {
         super();
     }
@@ -48,34 +52,39 @@ public class UserProfile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // This is a little trick to make the search bar clickable and not just the icon in it.
-        if (savedInstanceState != null) {
-         //   userIn = savedInstanceState.getInt("index");
-            //userP=savedInstanceState.getParcelable("user");
 
-                    }
-
-         fName = getView().findViewById(R.id.showFirst);
+        fName = getView().findViewById(R.id.showFirst);
         lName = getView().findViewById(R.id.showLast);
-        dOfBirth = getView().findViewById(R.id.showState);
+        dOfBirth = getView().findViewById(R.id.showDate);
         gender = getView().findViewById(R.id.showGender);
         state = getView().findViewById(R.id.showState);
         city = getView().findViewById(R.id.showCity);
         pic = getView().findViewById(R.id.profilePictureImageView);
         email = getView().findViewById(R.id.showEmail);
-     /*  if(userP.getFirstName()!=null)
-        fName.setText(userP.getFirstName());
-        if(userP.getLastName()!=null)
-        lName.setText(userP.getLastName());
-        if(userP.getDateOfBirth()!=null)
-        dOfBirth.setText(userP.getDateOfBirth());
-        if(userP.getGender()!=null)
-        gender.setText(userP.getGender());
-        if(userP.getState()!=null)
-        state.setText(userP.getState());
-        if(userP.getState()!=null)
-        city.setText(userP.getState());
-        if(userP.getEmail()!=null)
-        email.setText(userP.getEmail());
+
+        Activity a = getActivity();
+        Intent i = a.getIntent();
+        profileUser = (User) i.getSerializableExtra("user");
+
+        if (profileUser.getFirstName() != null)
+            fName.setText(profileUser.getFirstName());
+        if (profileUser.getLastName() != null)
+            lName.setText(profileUser.getLastName());
+        if (profileUser.getDateOfBirth() != null)
+            dOfBirth.setText(profileUser.getDateOfBirth());
+        if (profileUser.getGender() != null)
+            gender.setText(profileUser.getGender());
+        if (profileUser.getState() != null)
+            state.setText(profileUser.getState());
+        if (profileUser.getState() != null)
+            city.setText(profileUser.getCity());
+        if (profileUser.getEmail() != null)
+            email.setText(profileUser.getEmail());
+    }
+}
+
+
+
         /*fName.setText(UsersList.usersList.get(userIn).getmFirstName());
 
         lName.setText(UsersList.usersList.get(userIn).getmLastName());
@@ -97,7 +106,3 @@ public class UserProfile extends Fragment {
 
 
         Glide.with(this).load(pictureUri).apply(options).into(pic);*/
-
-
-    }
-}

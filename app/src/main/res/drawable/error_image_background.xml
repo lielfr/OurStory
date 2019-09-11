@@ -6,6 +6,8 @@
         android:radius="2dp"
         android:topLeftRadius="@dimen/ef_margin_small" />
 
+        />
+
     <stroke
         android:width="@dimen/ef_margin_small"
         android:color="@color/colorError"

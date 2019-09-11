@@ -478,6 +478,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/AddVidTV_cememory" />
+                app:layout_constraintTop_toBottomOf="@+id/AddVidTV_cememory" />
+
+            <TextView
+                android:id="@+id/error_cememory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:textColor="@color/colorError"
+                android:textSize="@dimen/errorSize"
+                android:visibility="invisible"
+
+                app:layout_constraintTop_toBottomOf="@+id/memDescription_cememory" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -530,7 +543,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Add A Memory"
+            android:text="Add Memory"
             android:textColor="@color/colorWhite"
             android:textSize="21sp"
             app:fontFamily="@font/quicksand_bold"
