@@ -2,6 +2,7 @@ package org.tsofen.ourstory.EditCreateMemory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -33,6 +34,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
@@ -48,7 +50,9 @@ import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -381,6 +385,16 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         OurStoryService service = WebFactory.getService();
         Intent intent = new Intent();
 
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading media...");
+        progressDialog.show();
+
+        double[] progress = new double[imageAdapter.data.size()];
+
+        for (int i = 0; i < progress.length; i++) {
+            progress[i] = 0;
+        }
+
         FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
         List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
         for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); i++) {
@@ -388,11 +402,23 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             int finalI = i;
             tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
                 imageAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+                progress[finalI] = 100;
+            }).addOnProgressListener(taskSnapshot -> {
+                // We need to set the progress relative to both the current file and the other files
+                double currentFileProgress = taskSnapshot.getBytesTransferred() /
+                        taskSnapshot.getTotalByteCount();
+                progress[finalI] = currentFileProgress * 100;
+                double progressAvg = 0;
+                for (double p : progress)
+                    progressAvg += p;
+                progressAvg /= (progress.length - imageAdapter.upload_start);
+                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
             }));
         }
 
 
         Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
+            progressDialog.dismiss();
             ArrayList<String> pictures = new ArrayList<>();
             pictures.addAll(imageAdapter.data);
             memory.setPictures(pictures);
