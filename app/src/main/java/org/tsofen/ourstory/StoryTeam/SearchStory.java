@@ -14,27 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.Tag;
-import org.tsofen.ourstory.model.api.ListOfStory;
-import org.tsofen.ourstory.web.OurStoryService;
-import org.tsofen.ourstory.web.WebFactory;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Calendar;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class SearchStory extends AppCompatActivity {
@@ -51,7 +38,7 @@ public class SearchStory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
         spinner = findViewById(R.id.spinner);
-        final Button S = findViewById(R.id.button4);
+        final Button S = findViewById(R.id.show);
 
         List<String> categories = new ArrayList<String>();
         categories.add(0, "BD:--/DD:---");
