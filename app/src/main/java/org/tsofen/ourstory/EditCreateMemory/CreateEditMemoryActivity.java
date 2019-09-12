@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,22 +29,30 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Function;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,6 +97,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
 
+        imageAdapter = new AddMemoryImageAdapter(this);
+        videoAdapter = new AddMemoryVideoAdapter(this);
+        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
+        tagAdapter = new AddMemoryTagAdapter(new LinkedList<>(), tagsRV);
+
         Intent intent = getIntent();
         memory = (Memory) intent.getSerializableExtra(KEY_EDIT);
         TextView pageTitle = findViewById(R.id.text_cememory);
@@ -115,12 +129,24 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
-            dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-            monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-            yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
-            selectEmoji(memory.getFeeling());
+            if (memory.getMemoryDate() != null) {
+                dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+                monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+                yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
+            }
 
-            imageAdapter.data.addAll(memory.getPictures());
+            if (memory.getFeeling() != null)
+                selectEmoji(memory.getFeeling());
+
+            List<String> uris = new ArrayList<>();
+            if (memory.getPictures() != null) {
+                for (Picture p : memory.getPictures()) {
+                    uris.add(p.getLink());
+                    ++imageAdapter.upload_start;
+                }
+            }
+
+            imageAdapter.data.addAll(uris);
             imageAdapter.notifyDataSetChanged();
             videoAdapter.data.addAll(memory.getVideos());
             videoAdapter.notifyDataSetChanged();
@@ -141,13 +167,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         cnslbtn.setOnClickListener(this);
 
         RecyclerView rvp = findViewById(R.id.add_pictures_rv_cememory);
-        imageAdapter = new AddMemoryImageAdapter(this);
+
         rvp.setAdapter(imageAdapter);
         rvp.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
         RecyclerView rvv = findViewById(R.id.add_videos_rv_cememory);
-        videoAdapter = new AddMemoryVideoAdapter(this);
+
         rvv.setAdapter(videoAdapter);
         rvv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
@@ -155,8 +181,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         //   editTextDescription.addTextChangedListener(SaveTextWatcher);
         // editTextLocation.addTextChangedListener(SaveTextWatcher);
 
-        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
-        tagAdapter = new AddMemoryTagAdapter(new LinkedList<>(), tagsRV);
+
         tagsRV.setAdapter(tagAdapter);
         tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
@@ -357,43 +382,56 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         Intent intent = new Intent();
 
         FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
-        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); ++i) {
-            
+        List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
+        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); i++) {
+            String uri = imageAdapter.data.get(i);
+            int finalI = i;
+            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
+                imageAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+            }));
         }
 
-        if (create) {
-            service.CreateMemory(memory).enqueue(new Callback<Memory>() {
-                @Override
-                public void onResponse(Call<Memory> call, Response<Memory> response) {
-                    if (response.code() != 200) {
-                        displayToast("Error " + response.code() + " : " + response.message());
-                        return;
+
+        Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
+            ArrayList<String> pictures = new ArrayList<>();
+            pictures.addAll(imageAdapter.data);
+            memory.setPictures(pictures);
+            if (create) {
+                service.CreateMemory(memory).enqueue(new Callback<Memory>() {
+                    @Override
+                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+                        if (response.code() != 200) {
+                            displayToast("Error " + response.code() + " : " + response.message());
+                            return;
+                        }
+                        Memory responseMem = response.body();
+                        long memId = responseMem.getId();
+                        intent.putExtra(KEY_MEMID, memId);
+                        setResult(RESULT_OK, intent);
+                        finish();
                     }
-                    Memory responseMem = response.body();
-                    long memId = responseMem.getId();
-                    intent.putExtra(KEY_MEMID, memId);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
 
-                @Override
-                public void onFailure(Call<Memory> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<Memory> call, Throwable t) {
 
-                }
-            });
-        } else {
-            service.EditMemory(memory).enqueue(new Callback<Memory>() {
-                @Override
-                public void onResponse(Call<Memory> call, Response<Memory> response) {
-                    finish();
-                }
+                    }
+                });
+            } else {
+                service.EditMemory(memory).enqueue(new Callback<Memory>() {
+                    @Override
+                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+                        finish();
+                    }
 
-                @Override
-                public void onFailure(Call<Memory> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<Memory> call, Throwable t) {
 
-                }
-            });
-        }
+                    }
+                });
+            }
+        });
+
+
     }
 
     public void selectEmoji(Feeling selected) {
