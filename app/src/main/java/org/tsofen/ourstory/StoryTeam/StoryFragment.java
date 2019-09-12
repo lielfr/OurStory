@@ -80,7 +80,7 @@ public class StoryFragment extends Fragment {
 
 
 
-        D=11; M=5; Y=1943;
+       // D=11; M=5; Y=1943;
 
         if (D != 0 && flag == 0) {//search by date
             Toast.makeText(getActivity(), "search by date", Toast.LENGTH_SHORT).show();
