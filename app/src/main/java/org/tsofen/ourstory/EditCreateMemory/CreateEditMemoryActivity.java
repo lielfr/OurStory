@@ -443,7 +443,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     }
                 });
             } else {
-                service.EditMemory(memory).enqueue(new Callback<Memory>() {
+                service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
                     @Override
                     public void onResponse(Call<Memory> call, Response<Memory> response) {
                         finish();
