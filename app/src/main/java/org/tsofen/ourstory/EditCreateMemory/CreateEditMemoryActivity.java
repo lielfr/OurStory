@@ -1,5 +1,8 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -178,10 +181,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
                 break;
             case R.id.Cancelbtn_cememory:
-                finish();
+                ShowAlertDialog(this, "", "Are you sure you want to cancel ?");
+                // finish();
                 break;
             case R.id.back_button_cememory:
-                finish();
+                ShowAlertDialog(this, "", "Are you sure you want to leave ?");
+                // finish();
                 break;
 
         }
@@ -288,6 +293,23 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         dayDate.setText(day_string);
         monthDate.setText(month_string);
         yearDate.setText(year_string);
+    }
+
+    public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public void closeActivity(View view) {
