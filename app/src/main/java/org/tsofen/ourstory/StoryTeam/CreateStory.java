@@ -1,5 +1,6 @@
 package org.tsofen.ourstory.StoryTeam;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import androidx.fragment.app.DialogFragment;
 
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -60,6 +62,24 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         error1=findViewById(R.id.error1);
         error2=findViewById(R.id.error2);
         error3=findViewById(R.id.error3);
+        Intent intent = getIntent();
+        if (intent.getStringExtra("tybe").equals("visitor")){
+//            AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
+//            alertDialog.setTitle("log in isnt detected") ;
+//            alertDialog.setMessage("you need to log in before creating a new story ");
+//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "SIGN IN",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
+//                            startActivity(movetocreateaccount);
+//                        }
+//                    });
+//            alertDialog.show();
+            Toast.makeText(this, "you need to log in before creating an new Story ", Toast.LENGTH_SHORT).show();
+            Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
+            startActivity(movetocreateaccount);
+        }
+
 
 
 

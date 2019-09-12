@@ -19,11 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Tag;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapter.ViewHolder> {
 
-    List<Tag> tags;
+    List<Tag> tags = new ArrayList<>();
     Context ctx;
     RecyclerView rv;
 
