@@ -329,7 +329,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         yearDate.setText(year_string);
     }
 
-    public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+    /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -345,7 +345,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         AlertDialog alert = builder.create();
         alert.show();
     }
-
+     **/
     public void closeActivity(View view) {
         finish();
     }
