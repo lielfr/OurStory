@@ -43,7 +43,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         searchtext = (EditText) findViewById(R.id.edit);
         Intent intent = getIntent() ;
 
-        Log.i("oncreat","onCrete has been access");
+        Log.i("oncreat","onCreate has been access");
         Log.i("oncreat","extra key is"+ intent.getStringExtra("button"));
         if(intent.getStringExtra("Button").equals("createandadd")){
             Log.i("oncreat","int if");
