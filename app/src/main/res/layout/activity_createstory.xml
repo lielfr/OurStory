@@ -309,12 +309,13 @@
                         android:id="@+id/deathDatePicker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:calendarTextColor="@color/colorGrayHint"
+
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner"
+                        android:calendarTextColor="@color/colorGrayHint"
+                        android:spinnersShown="true"
                         android:endYear="2019"
                         android:maxDate="11/09/2019"
-                        android:spinnersShown="true" />
+                        android:datePickerMode="spinner" />
 
                     <TextView
                         android:id="@+id/error4"
