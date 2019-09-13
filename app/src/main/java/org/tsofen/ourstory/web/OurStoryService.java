@@ -43,7 +43,7 @@ public interface OurStoryService {
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
 
-    @POST("memories/create")
+    @POST("memories/createMemory")
     Call<Memory> CreateMemory(@Body Memory memory);
 
     // TODO: Maybe need to change that path.
