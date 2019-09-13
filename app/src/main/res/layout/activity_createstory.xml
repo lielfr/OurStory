@@ -309,6 +309,7 @@
                         android:id="@+id/deathDatePicker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:calendarViewShown="false"
                         android:calendarTextColor="@color/colorGrayHint"
                         android:spinnersShown="true"
