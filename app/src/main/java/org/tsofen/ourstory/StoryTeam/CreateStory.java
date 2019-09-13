@@ -20,7 +20,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.UploadTask;
+
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.api.Owner;
@@ -361,6 +365,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.setType("image/*");
         startActivityForResult(Intent.createChooser(i, "Pick an image"), 1);
+
     }
 
     @Override
@@ -375,6 +380,14 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 image.setImageBitmap(bitmap); // setting a new image
+                FirebaseImageWrapper imageup = new FirebaseImageWrapper();
+                imageup.uploadImg(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(CreateStory.this, "upload image has been completed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
