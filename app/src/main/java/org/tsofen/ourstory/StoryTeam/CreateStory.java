@@ -67,6 +67,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     String BirthDate, DeathDate;
     DatePicker birthDatePicker, deathDatePicker;
     int birthDateFields = 3, deathDateFields = 3;
+    Date today = new Date();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +185,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         day1 = birthCal.get(Calendar.DAY_OF_MONTH);
 
         birthDatePicker = findViewById(R.id.birthDatePicker);
+        birthDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
         birthDatePicker.init(year1 - 50, month1, day1, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker birthDatePicker, int year, int month, int day) {
@@ -205,6 +208,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         day2 = deathCal.get(Calendar.DAY_OF_MONTH);
 
         deathDatePicker = findViewById(R.id.deathDatePicker);
+        deathDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
         deathDatePicker.init(year2, month2, day2, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker deathDatePicker, int year, int month, int day) {
@@ -464,7 +468,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
-        Date today = new Date();
+
+
         Toast.makeText(this, today.toString(), Toast.LENGTH_LONG).show();
         Date d1 = new Date(year1 - 1900, month1, day1);
         Date d2 = new Date(year2 - 1900, month2, day2);
