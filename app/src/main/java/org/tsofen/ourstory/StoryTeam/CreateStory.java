@@ -183,7 +183,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         year1 = birthCal.get(Calendar.YEAR);
         month1 = birthCal.get(Calendar.MONTH);
         day1 = birthCal.get(Calendar.DAY_OF_MONTH);
-
+//
         birthDatePicker = findViewById(R.id.birthDatePicker);
         birthDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
         birthDatePicker.init(year1 - 50, month1, day1, new DatePicker.OnDateChangedListener() {
