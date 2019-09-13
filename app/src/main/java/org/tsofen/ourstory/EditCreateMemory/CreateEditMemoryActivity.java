@@ -369,6 +369,23 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         yearDate.setText(year_string);
     }
 
+    /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+     **/
     public void closeActivity(View view) {
         finish();
     }
