@@ -31,6 +31,7 @@ import org.tsofen.ourstory.web.WebFactory;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,10 +56,10 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     boolean f1 = false, f2 = false, f3=false, f4=false;
 
     TextView showBirthDate, showDeathDate;
-    private int year1, month1=0, day1=0, year2, month2=0, day2=0;
+    private int year1, month1=1, day1=1, year2, month2=1, day2=1;
     CheckBox monthChckBx1, monthChckBx2, dayChckBx1, dayChckBx2;
     boolean checked1=false, checked2=false, checked3=false, checked4=false;
-    String d1s, d2s, m1s, m2s, y1s, y2s;
+    String d1s="", d2s="", m1s="", m2s="", y1s="", y2s="";
     String BirthDate, DeathDate;
     DatePicker birthDatePicker, deathDatePicker;
 
@@ -422,61 +423,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         String lns = lastName.getText().toString();
         f2 = validateName(lastName, lns,2);
 
-        // Dates Validation
-//        EditText d1 = findViewById(R.id.day_1);
-//        EditText d2 = findViewById(R.id.day_2);
-//        String d1s = d1.getText().toString();              //check that out
-//        String d2s = d2.getText().toString();
-//
-//        EditText m1 = findViewById(R.id.month_1);
-//        EditText m2 = findViewById(R.id.month_2);
-//        String m1s = m1.getText().toString();
-//        String m2s = m2.getText().toString();
-//
-//        EditText y1 = findViewById(R.id.year_1);
-//        EditText y2 = findViewById(R.id.year_2);
-//        String y1s = y1.getText().toString();
-//        String y2s = y2.getText().toString();
-//        String date1 = d1s + "/" + m1s + "/" + y1s;
-//        String date2 = d2s + "/" + m2s + "/" + y2s;
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            date1D = sdf.parse(y1s + "-" + m1s + "-" + d1s);
-//            date2D = sdf.parse(y2s + "-" + m2s + "-" + d2s);
-//
-//            Calendar cal = Calendar.getInstance();
-//            todayD = cal.getTime();
-//
-//            if(d1s.length()==0 || d2s.length()==0 || m1s.length()==0 || m2s.length()==0
-//            || y1s.length()==0 || y2s.length()==0){
-//                error3.setText("Dates cannot be empty!");
-//                error3.setVisibility(View.VISIBLE);
-//                f3 = false;
-//            } else if (date1D.after(date2D)) {
-//                error3.setText("Invalid dates!");
-//                error3.setVisibility(View.VISIBLE);
-//                f3 = false;
-//            } else if (todayD.before(date1D)) {
-//                error3.setText("Invalid birth date!");
-//                error3.setVisibility(View.VISIBLE);
-//                f3 = false;
-//            }else if (todayD.before(date2D)) {
-//                error3.setText("Invalid death date!");
-//                error3.setVisibility(View.VISIBLE);
-//                f3 = false;
-//            } else { // all good
-//                error3.setText("");
-//                error3.setVisibility(View.GONE);
-//                f3 = true;
-//            }
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
 
         // dates validation
 
@@ -510,31 +456,43 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
-
+        Date dsds = new Date();
+        Toast.makeText(this,dsds.toString(),Toast.LENGTH_LONG).show();
+        Date d1 = new Date(year1-1900,month1,day1);
+        Date d2 = new Date(year2-1900,month2,day2);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        DateFormat dfForIntent = new SimpleDateFormat("yyyy/MM/dd");
+        BirthDate  = df.format(d1);
+        DeathDate =  df.format(d2);
+        if(d2.after(dsds)){
+            error4.setText("Please enter a valid date");
+            error4.setVisibility(View.VISIBLE);
+            f4=false;
+        }
 
         if (f1 && f2 && f3 && f4) {
             // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + " " + lns ; // name is done
 
             //adapting months and days
-            if(Integer.valueOf(m1s)<10 && m1s!=""){m1s="0"+m1s;}
-            if(Integer.valueOf(m2s)<10 && m2s!=""){m2s="0"+m2s;}
-            if(Integer.valueOf(d1s)<10 && d1s!=""){d1s="0"+d1s;}
-            if(Integer.valueOf(d2s)<10 && d2s!=""){d2s="0"+d2s;}
-
-            if(!m1s.equals("") && !m2s.equals("") && !d1s.equals("") && !d2s.equals("")){
-                // three fields in date
-                BirthDate = y1s + "/" + m1s + "/" + d1s + "T14:17:53.763+0000" ;
-                DeathDate = y2s + "/" + m2s + "/" + d2s + "T14:17:53.763+0000" ; //dates has been updated successfully
-            }else if(!m1s.equals("") && !m2s.equals("") && d1s.equals("") && d2s.equals("")){
-                // two fields in date
-                BirthDate = y1s + "/" + m1s + "T14:17:53.763+0000" ;
-                DeathDate = y2s + "/" + m2s + "T14:17:53.763+0000" ;
-            }else if(m1s.equals("") && m2s.equals("") && d1s.equals("") && d2s.equals("")){
-                // one field in date
-                BirthDate = y1s + "T14:17:53.763+0000" ;
-                DeathDate = y2s + "T14:17:53.763+0000" ;
-            }
+//            if(m1s!="" && Integer.valueOf(m1s)<10){m1s="0"+m1s;}
+//            if(m2s!="" && Integer.valueOf(m2s)<10){m2s="0"+m2s;}
+//            if(d1s!="" && Integer.valueOf(d1s)<10){d1s="0"+d1s;}
+//            if(d2s!="" && Integer.valueOf(d2s)<10){d2s="0"+d2s;}
+//
+//            if(!m1s.equals("") && !m2s.equals("") && !d1s.equals("") && !d2s.equals("")){
+//                // three fields in date
+//                BirthDate = y1s + "/" + m1s + "/" + d1s + "T14:17:53.763+0000" ;
+//                DeathDate = y2s + "/" + m2s + "/" + d2s + "T14:17:53.763+0000" ; //dates has been updated successfully
+//            }else if(!m1s.equals("") && !m2s.equals("") && d1s.equals("") && d2s.equals("")){
+//                // two fields in date
+//                BirthDate = y1s + "/" + m1s + "T14:17:53.763+0000" ;
+//                DeathDate = y2s + "/" + m2s + "T14:17:53.763+0000" ;
+//            }else if(m1s.equals("") && m2s.equals("") && d1s.equals("") && d2s.equals("")){
+//                // one field in date
+//                BirthDate = y1s + "T14:17:53.763+0000" ;
+//                DeathDate = y2s + "T14:17:53.763+0000" ;
+//            }
 
 
             OurStoryService Wepengine = WebFactory.getService();
@@ -545,8 +503,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                                                          result = response.body();
                                                          if (result != null) {
                                                              Toast.makeText(CreateStory.this, "the story "+ result.getNameOfPerson() +" was created succefully", Toast.LENGTH_SHORT).show();
-                                                             i.putExtra("date1", BirthDate);
-                                                             i.putExtra("date2", DeathDate);
+                                                             i.putExtra("date1", dfForIntent.format(d1)); // pass it as a Date
+                                                             i.putExtra("date2", dfForIntent.format(d2));
                                                              i.putExtra("name", nameofperson);
                                                              if(view.getId()==R.id.create){
                                                                  i.putExtra("Button","just_create");
