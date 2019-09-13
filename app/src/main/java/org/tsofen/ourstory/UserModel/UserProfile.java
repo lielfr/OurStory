@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.User;
 
+import java.util.Date;
+
 
 public class UserProfile extends Fragment {
 
@@ -71,7 +73,10 @@ public class UserProfile extends Fragment {
         if (profileUser.getLastName() != null)
             lName.setText(profileUser.getLastName());
         if (profileUser.getDateOfBirth() != null)
-            dOfBirth.setText(profileUser.getDateOfBirth());
+        {
+            Date date=profileUser.getDateOfBirth();
+            dOfBirth.setText(date.getDay()+"/"+date.getMonth()+"/"+date.getYear());
+        }
         if (profileUser.getGender() != null)
             gender.setText(profileUser.getGender());
         if (profileUser.getState() != null)
