@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static org.tsofen.ourstory.R.*;
+import static org.tsofen.ourstory.R.layout.*;
+
 public class StoryFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private StoryAdapter mAdapter;
     private EditText editText;
-    private SearchView searchView;
+    private SearchView searchView ;
     private ArrayList<ListOfStory> arr = new ArrayList<>();
 
     public StoryFragment() {
@@ -37,9 +41,13 @@ public class StoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
-        mRecyclerView = getView().findViewById(R.id.recyclerview);
-        editText = (EditText) inflatedView.findViewById(R.id.editText);
+        mRecyclerView = view.findViewById(id.recyclerview);
+        if (mRecyclerView==null){
+            Log.i("checknull", "the mrecycleview is null ");
+        }
+             Log.i("checknull", "the mrecycleview isnt null");
+        View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story,null);
+        editText = (EditText) inflatedView.findViewById(id.editText);
 
         OurStoryService wepengine = WebFactory.getService();
         String n = editText.getText().toString(); /// please dont delete this
@@ -50,13 +58,14 @@ public class StoryFragment extends Fragment {
         wepengine.GetStoriesByName("mali").enqueue(new Callback<ArrayList<ListOfStory>>() {
             @Override
             public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
-                arr = response.body();
-                mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
-                mAdapter.notifyDataSetChanged();
+
 
                 if (arr != null) {
+                    arr = response.body();
+                    mAdapter = new StoryAdapter(inflatedView.getContext() , arr);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
+                    mAdapter.notifyDataSetChanged();
                     Toast.makeText(getActivity(), "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
@@ -90,7 +99,7 @@ public class StoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        return inflater.inflate(R.layout.fragment_story, container, false);
+        return inflater.inflate(fragment_story, container, false);
 
     }
 }

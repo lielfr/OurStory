@@ -67,7 +67,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         error2=findViewById(R.id.error2);
         error3=findViewById(R.id.error3);
         Intent intent = getIntent();
-        if (intent.getStringExtra("tybe").equals("visitor")){
+        String tybe = intent.getStringExtra("tybe");
+        if (tybe!=null ){
+            if(tybe.equals("visitor")) {
 //            AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
 //            alertDialog.setTitle("log in isnt detected") ;
 //            alertDialog.setMessage("you need to log in before creating a new story ");
@@ -79,9 +81,12 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 //                        }
 //                    });
 //            alertDialog.show();
-            Toast.makeText(this, "you need to log in before creating an new Story ", Toast.LENGTH_SHORT).show();
-            Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
-            startActivity(movetocreateaccount);
+                Toast.makeText(this, "you need to log in before creating an new Story ", Toast.LENGTH_SHORT).show();
+                Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
+                startActivity(movetocreateaccount);
+            }else{
+                Toast.makeText(this, "the intent is null ", Toast.LENGTH_SHORT).show();
+            }
         }
 
 

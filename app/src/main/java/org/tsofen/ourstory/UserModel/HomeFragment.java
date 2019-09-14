@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CreateStory.class);
+                intent.putExtra("tybe" , "visitor");
                 startActivity(intent);
                 }
         });
