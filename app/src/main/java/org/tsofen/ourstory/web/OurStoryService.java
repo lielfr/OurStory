@@ -10,6 +10,8 @@ import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -43,7 +45,11 @@ public interface OurStoryService {
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
 
-    @POST("memories/createMemory")
+    @POST("memories/addMediaToMemory/{id}")
+    Call<Memory> AddMediaToMemory(@Path("id") long id, @Body HashMap<String, List<String>> hm);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("memories/create")
     Call<Memory> CreateMemory(@Body Memory memory);
 
     // TODO: Maybe need to change that path.

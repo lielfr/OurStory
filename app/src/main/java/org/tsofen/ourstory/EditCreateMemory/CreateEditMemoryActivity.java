@@ -30,6 +30,7 @@ import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -39,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -441,8 +443,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             ArrayList<String> videos = new ArrayList<>();
             pictures.addAll(imageAdapter.data);
             videos.addAll(videoAdapter.data);
-            memory.setPictures(pictures);
-            memory.setVideos(videos);
+
+            ArrayList<String> tags = new ArrayList<>();
+            for (Tag t : tagAdapter.tags) {
+                tags.add(t.getLabel());
+            }
             if (create) {
                 service.CreateMemory(memory).enqueue(new Callback<Memory>() {
                     @Override
@@ -452,10 +457,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                             return;
                         }
                         Memory responseMem = response.body();
+                        if (responseMem == null) {
+                            displayToast("Error: Got null object from the server");
+                            return;
+                        }
                         long memId = responseMem.getId();
-                        intent.putExtra(KEY_MEMID, memId);
-                        setResult(RESULT_OK, intent);
-                        finish();
+                        HashMap<String, List<String>> hm = new HashMap<>();
+                        hm.put("pictures", pictures);
+                        hm.put("videos", videos);
+                        hm.put("tags", tags);
+
+                        service.AddMediaToMemory(memId, hm).enqueue(new Callback<Memory>() {
+                            @Override
+                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                intent.putExtra(KEY_MEMID, memId);
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Memory> call, Throwable t) {
+
+                            }
+                        });
                     }
 
                     @Override
