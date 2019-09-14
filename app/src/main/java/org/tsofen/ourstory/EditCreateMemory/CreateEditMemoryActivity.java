@@ -30,7 +30,9 @@ import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.Video;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -75,12 +77,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
     public static final String KEY_USER = "CEMemoryUser";
+    public static final String KEY_STORY = "CEMemoryStory";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
     private LinearLayout imageLiner;
     private ScrollView ourScroller;
     private User user;
+    private Story story;
     TextView AddPicTxV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,19 +124,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
             if (memory.getMemoryDate() != null) {
-                dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-                monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-                yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
+                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
+                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
+                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
+                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
             }
 
             if (memory.getFeeling() != null)
                 selectEmoji(memory.getFeeling());
 
-            List<String> uris = memory.getPictures();
+            List<String> image_uris = new ArrayList();
+            List<String> video_uris = new ArrayList<>();
+            for (Picture p : memory.getPictures()) {
+                image_uris.add(p.getLink());
+                imageAdapter.upload_start++;
+            }
+            for (Video v : memory.getVideos()) {
+                video_uris.add(v.getLink());
+                videoAdapter.upload_start++;
+            }
 
-            imageAdapter.data.addAll(uris);
+            imageAdapter.data.addAll(image_uris);
             imageAdapter.notifyDataSetChanged();
-            videoAdapter.data.addAll(memory.getVideos());
+            videoAdapter.data.addAll(video_uris);
             videoAdapter.notifyDataSetChanged();
             tagAdapter.tags.addAll(memory.getTags());
             tagAdapter.notifyDataSetChanged();
@@ -142,6 +156,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         if (story != null) {
             memory.setStory(story);
         }
+        memory.setUser(user);
 
         smileb.setOnClickListener(this);
         sadb.setOnClickListener(this);
@@ -488,10 +503,30 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     }
                 });
             } else {
+                memory.getPictures().clear();
+                memory.getVideos().clear();
+                memory.getTags().clear();
                 service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
                     @Override
                     public void onResponse(Call<Memory> call, Response<Memory> response) {
-                        finish();
+                        HashMap<String, List<String>> hm = new HashMap<>();
+                        hm.put("pictures", pictures);
+                        hm.put("videos", videos);
+                        hm.put("tags", tags);
+
+                        service.AddMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
+                            @Override
+                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                intent.putExtra(KEY_MEMID, memory.getId());
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Memory> call, Throwable t) {
+
+                            }
+                        });
                     }
 
                     @Override

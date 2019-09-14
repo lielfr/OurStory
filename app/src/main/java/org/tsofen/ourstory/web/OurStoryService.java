@@ -52,8 +52,10 @@ public interface OurStoryService {
     @POST("memories/create")
     Call<Memory> CreateMemory(@Body Memory memory);
 
-    // TODO: Maybe need to change that path.
-    @PATCH("/api/memories/{id}")
+    @GET("memories/findById/{id}")
+    Call<Memory> GetMemoryById(@Path("id") long id);
+
+    @PUT("memories/update/{id}")
     Call<Memory> EditMemory(@Path("id") long id, @Body Memory memory);
     @GET("users/findByEmail/{email}")
     Call<User> GetUserByEmail( @Path("email") String email);

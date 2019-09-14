@@ -40,10 +40,10 @@ public class Memory implements Serializable {
     private String location;
     @SerializedName("pictures")
     @Expose
-    private ArrayList<String> pictures = new ArrayList<>();
+    private ArrayList<Picture> pictures = new ArrayList<>();
     @SerializedName("videos")
     @Expose
-    private ArrayList<String> videos = new ArrayList<>();
+    private ArrayList<Video> videos = new ArrayList<>();
     private ArrayList<Tag> tags = new ArrayList<>();
     @SerializedName("likes")
     @Expose
@@ -123,19 +123,19 @@ public class Memory implements Serializable {
         this.location = location;
     }
 
-    public ArrayList<String> getPictures() {
+    public ArrayList<Picture> getPictures() {
         return pictures;
     }
 
-    public void setPictures(ArrayList<String> pictures) {
+    public void setPictures(ArrayList<Picture> pictures) {
         this.pictures = pictures;
     }
 
-    public ArrayList<String> getVideos() {
+    public ArrayList<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(ArrayList<String> videos) {
+    public void setVideos(ArrayList<Video> videos) {
         this.videos = videos;
     }
 
@@ -195,5 +195,9 @@ public class Memory implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
