@@ -240,8 +240,6 @@
                         android:calendarViewShown="false"
                         android:datePickerMode="spinner"
                         android:startYear="1800"
-                        android:endYear="2019"
-                        android:maxDate="11/09/2019"
                         android:minDate="01/01/1800"
                         android:spinnersShown="true" />
 
@@ -309,12 +307,12 @@
                         android:id="@+id/deathDatePicker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:calendarTextColor="@color/colorGrayHint"
                         android:calendarViewShown="false"
-                        android:datePickerMode="spinner"
-                        android:endYear="2019"
-                        android:maxDate="11/09/2019"
-                        android:spinnersShown="true" />
+                        android:calendarTextColor="@color/colorGrayHint"
+                        android:spinnersShown="true"
+                        android:minDate="01/01/1800"
+                        android:startYear="1800"
+                        android:datePickerMode="spinner" />
 
                     <TextView
                         android:id="@+id/error4"
@@ -347,6 +345,7 @@
                 android:id="@+id/profilePic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:contentDescription="add profile picture image view"
                 android:onClick="pickPic"
                 app:layout_constraintTop_toBottomOf="@+id/add_profile_picture"

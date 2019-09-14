@@ -179,6 +179,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header_layout">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showFirst"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -191,10 +192,10 @@
             android:hint="@string/Fname"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
-            android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textColorLink="@color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -227,6 +228,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header_layout">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showLast"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -238,10 +240,10 @@
             android:hint="@string/last_name"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
-            android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textColorLink="@color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -277,6 +279,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LastNameHolder">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showEmail"
             android:layout_width="380dp"
             android:layout_height="44dp"
@@ -288,10 +291,10 @@
             android:hint="@string/Email1"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
-            android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textColorLink="@android:color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -330,6 +333,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EmailHolder">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/password_editText"
             android:layout_width="378dp"
             android:layout_height="48dp"
@@ -341,10 +345,10 @@
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
-            android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textColorLink="@color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -378,6 +382,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordHolder">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/repeatpassword_editText"
             android:layout_width="376dp"
             android:layout_height="48dp"
@@ -390,10 +395,10 @@
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
-            android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textColorLink="@android:color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
