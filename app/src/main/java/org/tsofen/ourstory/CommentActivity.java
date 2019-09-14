@@ -17,6 +17,7 @@ import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -28,7 +29,7 @@ import retrofit2.Response;
 
 public class CommentActivity extends Activity {
 
-    long userId;
+    User user;
     RecyclerView rv;
     MemoryA memoryA;
     CommentAdapter adapter;
@@ -69,10 +70,10 @@ public class CommentActivity extends Activity {
     }
     public void SendCmnt(View view) {
 
-        CommentA comment = new CommentA();
+        Comment comment = new Comment();
         TextView txtview = findViewById(R.id.AddComment);
         comment.setText(txtview.getText().toString());
-        comment.setUser(userId);
+        comment.setUser(user);
         OurStoryService service = WebFactory.getService();
         service.newComment(comment);
 
