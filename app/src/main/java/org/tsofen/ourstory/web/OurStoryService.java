@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.web;
 
 
+import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.ListOfStory;
@@ -10,6 +11,8 @@ import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,7 +29,7 @@ public interface OurStoryService {
     @FormUrlEncoded
     @Headers("Content-Type: application/json")
     @POST("api/comments")
-    Call<CommentA> newComment(@Body CommentA comment);
+    Call<Comment> newComment(@Body Comment comment);
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<MemoryA>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
@@ -43,11 +46,17 @@ public interface OurStoryService {
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
 
+    @POST("memories/setMediaToMemory/{id}")
+    Call<Memory> SetMediaToMemory(@Path("id") long id, @Body HashMap<String, List<String>> hm);
+
+    @Headers({"Content-Type: application/json"})
     @POST("memories/create")
     Call<Memory> CreateMemory(@Body Memory memory);
 
-    // TODO: Maybe need to change that path.
-    @PATCH("/api/memories/{id}")
+    @GET("memories/findById/{id}")
+    Call<Memory> GetMemoryById(@Path("id") long id);
+
+    @PUT("memories/update/{id}")
     Call<Memory> EditMemory(@Path("id") long id, @Body Memory memory);
     @GET("users/findByEmail/{email}")
     Call<User> GetUserByEmail( @Path("email") String email);

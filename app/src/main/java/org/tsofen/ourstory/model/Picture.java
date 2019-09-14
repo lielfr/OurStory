@@ -29,4 +29,9 @@ public class Picture implements Serializable {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public Picture(String link) {
+        super();
+        this.link = link;
+    }
 }

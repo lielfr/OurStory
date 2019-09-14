@@ -5,36 +5,24 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.widget.ScrollView;
-import android.widget.Toast;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import androidx.annotation.Nullable;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
@@ -43,6 +31,8 @@ import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Picture;
+import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.Video;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -50,13 +40,11 @@ import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -95,6 +83,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private LinearLayout imageLiner;
     private ScrollView ourScroller;
     private User user;
+    private Story story;
     TextView AddPicTxV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,25 +123,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
             if (memory.getMemoryDate() != null) {
-                dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-                monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-                yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
+                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
+                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
+                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
+                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
             }
 
             if (memory.getFeeling() != null)
                 selectEmoji(memory.getFeeling());
 
-            List<String> uris = new ArrayList<>();
-            if (memory.getPictures() != null) {
-                for (Picture p : memory.getPictures()) {
-                    uris.add(p.getLink());
-                    ++imageAdapter.upload_start;
-                }
+            List<String> image_uris = new ArrayList();
+            List<String> video_uris = new ArrayList<>();
+            for (Picture p : memory.getPictures()) {
+                image_uris.add(p.getLink());
+                imageAdapter.upload_start++;
+            }
+            for (Video v : memory.getVideos()) {
+                video_uris.add(v.getLink());
+                videoAdapter.upload_start++;
             }
 
-            imageAdapter.data.addAll(uris);
+            imageAdapter.data.addAll(image_uris);
             imageAdapter.notifyDataSetChanged();
-            videoAdapter.data.addAll(memory.getVideos());
+            videoAdapter.data.addAll(video_uris);
             videoAdapter.notifyDataSetChanged();
             tagAdapter.tags.addAll(memory.getTags());
             tagAdapter.notifyDataSetChanged();
@@ -162,6 +155,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         if (story != null) {
             memory.setStory(story);
         }
+        memory.setUser(user);
 
         smileb.setOnClickListener(this);
         sadb.setOnClickListener(this);
@@ -369,6 +363,23 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         yearDate.setText(year_string);
     }
 
+    /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+     **/
     public void closeActivity(View view) {
         finish();
     }
@@ -389,14 +400,17 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         progressDialog.setTitle("Uploading media...");
         progressDialog.show();
 
-        double[] progress = new double[imageAdapter.data.size()];
+        double[] progress = new double
+                [(imageAdapter.data.size() - imageAdapter.upload_start) +
+                (videoAdapter.data.size() - videoAdapter.upload_start)];
 
         for (int i = 0; i < progress.length; i++) {
             progress[i] = 0;
         }
 
-        FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
+        FirebaseImageWrapper wrapper = new FirebaseImageWrapper("memory_media");
         List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
+
         for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); i++) {
             String uri = imageAdapter.data.get(i);
             int finalI = i;
@@ -411,7 +425,27 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 double progressAvg = 0;
                 for (double p : progress)
                     progressAvg += p;
-                progressAvg /= (progress.length - imageAdapter.upload_start);
+                progressAvg /= progress.length;
+                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
+            }));
+        }
+
+        // TODO: Maybe we can avoid this code duplication
+        for (int i = videoAdapter.upload_start; i < videoAdapter.data.size(); i++) {
+            String uri = videoAdapter.data.get(i);
+            int finalI = i;
+            int offset = (imageAdapter.data.size() - imageAdapter.upload_start);
+            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
+                videoAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+                progress[finalI + offset] = 100;
+            }).addOnProgressListener(taskSnapshot -> {
+                double currentFileProgress = taskSnapshot.getBytesTransferred() /
+                        taskSnapshot.getTotalByteCount();
+                progress[finalI + offset] = currentFileProgress * 100;
+                double progressAvg = 0;
+                for (double p : progress)
+                    progressAvg += p;
+                progressAvg /= progress.length;
                 progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
             }));
         }
@@ -420,8 +454,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
             progressDialog.dismiss();
             ArrayList<String> pictures = new ArrayList<>();
+            ArrayList<String> videos = new ArrayList<>();
             pictures.addAll(imageAdapter.data);
-            memory.setPictures(pictures);
+            videos.addAll(videoAdapter.data);
+
+            ArrayList<String> tags = new ArrayList<>();
+            for (Tag t : tagAdapter.tags) {
+                tags.add(t.getLabel());
+            }
             if (create) {
                 service.CreateMemory(memory).enqueue(new Callback<Memory>() {
                     @Override
@@ -431,10 +471,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                             return;
                         }
                         Memory responseMem = response.body();
+                        if (responseMem == null) {
+                            displayToast("Error: Got null object from the server");
+                            return;
+                        }
                         long memId = responseMem.getId();
-                        intent.putExtra(KEY_MEMID, memId);
-                        setResult(RESULT_OK, intent);
-                        finish();
+                        HashMap<String, List<String>> hm = new HashMap<>();
+                        hm.put("pictures", pictures);
+                        hm.put("videos", videos);
+                        hm.put("tags", tags);
+
+                        service.SetMediaToMemory(memId, hm).enqueue(new Callback<Memory>() {
+                            @Override
+                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                intent.putExtra(KEY_MEMID, memId);
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Memory> call, Throwable t) {
+
+                            }
+                        });
                     }
 
                     @Override
@@ -443,10 +502,30 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     }
                 });
             } else {
+                memory.getPictures().clear();
+                memory.getVideos().clear();
+                memory.getTags().clear();
                 service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
                     @Override
                     public void onResponse(Call<Memory> call, Response<Memory> response) {
-                        finish();
+                        HashMap<String, List<String>> hm = new HashMap<>();
+                        hm.put("pictures", pictures);
+                        hm.put("videos", videos);
+                        hm.put("tags", tags);
+
+                        service.SetMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
+                            @Override
+                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                intent.putExtra(KEY_MEMID, memory.getId());
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Memory> call, Throwable t) {
+
+                            }
+                        });
                     }
 
                     @Override

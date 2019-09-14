@@ -6,6 +6,10 @@
     android:layout_height="48dp"
     android:layout_gravity="start|center_vertical"
     android:layout_margin="4dp"
+    android:paddingStart="8dp"
+    android:paddingLeft="8dp"
+    android:paddingEnd="8dp"
+    android:paddingRight="8dp"
     android:background="@drawable/edit_round4"
     app:layout_anchorGravity="start|center_vertical">
 
@@ -15,6 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:padding="4dp"
         android:background="@color/colorPrimaryDark"
         android:completionThreshold="0"
         android:dropDownWidth="wrap_content"
