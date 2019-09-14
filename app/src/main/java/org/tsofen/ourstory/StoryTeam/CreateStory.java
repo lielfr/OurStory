@@ -40,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateStory extends AppCompatActivity implements Serializable {
+public class CreateStory extends AppCompatActivity implements Serializable {  //we need to connect this class to user class
 
     int flag = 1;
 
@@ -70,18 +70,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         String tybe = intent.getStringExtra("tybe");
         if (tybe!=null ){
             if(tybe.equals("visitor")) {
-//            AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
-//            alertDialog.setTitle("log in isnt detected") ;
-//            alertDialog.setMessage("you need to log in before creating a new story ");
-//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "SIGN IN",
-//                    new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
-//                            startActivity(movetocreateaccount);
-//                        }
-//                    });
-//            alertDialog.show();
-                Toast.makeText(this, "you need to log in before creating an new Story ", Toast.LENGTH_SHORT).show();
                 Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
                 startActivity(movetocreateaccount);
             }else{

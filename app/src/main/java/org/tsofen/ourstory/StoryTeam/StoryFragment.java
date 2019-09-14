@@ -1,6 +1,9 @@
 package org.tsofen.ourstory.StoryTeam;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +25,7 @@ import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,66 +33,74 @@ import retrofit2.Response;
 
 public class StoryFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private StoryAdapter mAdapter;
-    private EditText editText;
-    private SearchView searchView;
-    private ArrayList<ListOfStory> arr = new ArrayList<>();
+    static RecyclerView mRecyclerView;
+    static StoryAdapter mAdapter;
+    static EditText editText;
+    static ArrayList<ListOfStory> arr = new ArrayList<>();
+    int flag = 0;
+    int op = 0;
+    OurStoryService wb;
+    static View inflatedView;
 
     public StoryFragment() {
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
+        inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
         mRecyclerView = getView().findViewById(R.id.recyclerview);
-        editText = inflatedView.findViewById(R.id.editText);
-        int flag=0;
-        int op = 0;
-        TextView D1 = inflatedView.findViewById(R.id.Day);
-        String D2 = D1.getText().toString();
-        int D = Integer.parseInt(D2);
-        Toast.makeText(getActivity(), "the value is " + D, Toast.LENGTH_SHORT).show();
+        Log.i("fragment", "hello from onViewCreated !!1");
 
-        TextView M1 = inflatedView.findViewById(R.id.Month);
-        String M2 = M1.getText().toString();
-        int M = Integer.parseInt(M2);
+    }
 
-        TextView Y1 = inflatedView.findViewById(R.id.Year);
-        String Y2 = Y1.getText().toString();
-        int Y = Integer.parseInt(Y2);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i("fragment", "hello from onCreatedView");
+        return inflater.inflate(R.layout.fragment_story, container, false);
 
-        TextView cat = inflatedView.findViewById(R.id.catg);
-        String option = cat.getText().toString();
-        if (option == "BirthDay: ")
-            op = 1;
-        else if (option == "Death Day: ")
-            op = 2;
-        //OurStoryService wepengine = WebFactory.getService();
-        String n = editText.getText().toString(); /// please dont delete this
+    }
 
-        OurStoryService wb = WebFactory.getService();
+    void CommitSearch(Context context, String searchinput, int flag, int op, int D, int M, int Y, int SearchBy) {
+        Toast.makeText(context, "the Value from fragment is " + searchinput, Toast.LENGTH_SHORT).show();
+        wb = WebFactory.getService();
 
-        if (editText.getText().toString().matches("")) flag = 0;
-       else {
-            if (editText.getText().toString().matches( "Story/Memory name")) flag = 0;
-            else {
-                flag = 1;
-                Toast.makeText(getActivity(), "why!!", Toast.LENGTH_SHORT).show();
+        if (SearchBy == 0) {//this mean that the user want to Search by name
 
-            }
-        }
+            //  Toast.makeText(getContext(), "search by name", Toast.LENGTH_SHORT).show();
 
+            wb.GetStoriesByName(searchinput).enqueue(new Callback<ArrayList<ListOfStory>>() {
+                @Override
+                public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
 
+                    arr = response.body();
+                    if (arr == null) {
+                        Log.d("rrr", "arr is null");
+                    } else {
+                        mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
+                        mAdapter.notifyDataSetChanged();
 
-       // D=11; M=5; Y=1943;
-
-        if (D != 0 && flag == 0) {//search by date
-            Toast.makeText(getActivity(), "search by date", Toast.LENGTH_SHORT).show();
+                        if (arr != null) {
+                            Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
 
 
-            if (op == 1) {
-                Toast.makeText(getActivity(), "search by Birthday", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
+                    Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+
+        } else if (flag == 0) {//this mean that the user want to search by DATE
+            if (op == 1) {//search by birthday
+                Toast.makeText(context, "search by Birthday", Toast.LENGTH_SHORT).show();
 
                 wb.GetStoriesByDobFull(D, M, Y).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
@@ -103,9 +116,9 @@ public class StoryFragment extends Fragment {
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(getActivity(), "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -113,12 +126,15 @@ public class StoryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
-            } else if (op == 2) {
+            } else if (op == 2) { //search by Deathday
+
+                Toast.makeText(context, "search by Deathday from API", Toast.LENGTH_SHORT).show();
+
                 wb.GetStoriesByDodFull(D, M, Y).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
@@ -133,95 +149,28 @@ public class StoryFragment extends Fragment {
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(getActivity(), "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
 
-
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
             }
 
-        } else if (D == 0 && flag == 1) //search by name
-        {
-            Toast.makeText(getActivity(), "search by name", Toast.LENGTH_SHORT).show();
 
-            wb.GetStoriesByName(n).enqueue(new Callback<ArrayList<ListOfStory>>() {
-                @Override
-                public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
+        } else { //search by both!!! activating the search by name
 
-                    arr = response.body();
-                    if (arr == null) {
-                        Log.d("rrr", "arr is null");
-                    } else {
-                        mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
-                        mAdapter.notifyDataSetChanged();
+            if (op == 1) {//search by birthday and name
+                Toast.makeText(context, "search by BirthDay and name from API", Toast.LENGTH_SHORT).show();
 
-                        if (arr != null) {
-                            Toast.makeText(getActivity(), "size =" + arr.size(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-
-                @Override
-                public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                    Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-
-        } else {
-
-
-            if (D != 0 && flag == 1) { // search by name and date
-                Toast.makeText(getActivity(), "search by date and name", Toast.LENGTH_SHORT).show();
-
-                if (op == 1) {
-                    wb.GetStoriesByDateOfBirth(D, M, Y, n).enqueue(new Callback<ArrayList<ListOfStory>>() {
-                        @Override
-                        public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
-
-                            arr = response.body();
-                            if (arr == null) {
-                                Log.d("rrr", "arr is null");
-                            } else {
-                                mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
-                                mRecyclerView.setAdapter(mAdapter);
-                                mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
-                                mAdapter.notifyDataSetChanged();
-
-                                if (arr != null) {
-                                    Toast.makeText(getActivity(), "size =" + arr.size(), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-
-                        @Override
-                        public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                            Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-                }
-            } else if (op == 2) {
-                wb.GetStoriesByDateOfDeath(D, M, Y, n).enqueue(new Callback<ArrayList<ListOfStory>>() {
+                wb.GetStoriesByDateOfBirth(D, M, Y, searchinput).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
 
@@ -235,9 +184,9 @@ public class StoryFragment extends Fragment {
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(getActivity(), "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -245,34 +194,47 @@ public class StoryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(getActivity(), "getting was failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
+            } else if (op == 2) { //search by Deathday and activating seachByName
+
+                Toast.makeText(context, "search by Deathday and Name from API", Toast.LENGTH_SHORT).show();
+
+                wb.GetStoriesByDateOfDeath(D, M, Y, searchinput).enqueue(new Callback<ArrayList<ListOfStory>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
+
+                        arr = response.body();
+                        if (arr == null) {
+                            Log.d("rrr", "arr is null");
+                        } else {
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mRecyclerView.setAdapter(mAdapter);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
+                            mAdapter.notifyDataSetChanged();
+
+                            if (arr != null) {
+                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
+                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
+
         }
 
 
     }
-
-
-
-
-
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-        return inflater.inflate(R.layout.fragment_story, container, false);
-
-    }
 }
-
-
-
-
-
-

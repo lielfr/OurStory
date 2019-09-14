@@ -53,10 +53,10 @@ public interface OurStoryService {
     Call<User> GetUserByEmail( @Path("email") String email);
 
 
-@GET("stories/findStoriesByDobFull")
+    @GET("stories/findStoriesByDobFull")
     Call<ArrayList<ListOfStory>> GetStoriesByDobFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
 
-    @GET("stories/findStoriesByDobFull")
+    @GET("stories/findStoriesByDodFull")
     Call<ArrayList<ListOfStory>> GetStoriesByDodFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
 
 
