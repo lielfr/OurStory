@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.StoryTeam.Story;
+
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;

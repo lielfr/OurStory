@@ -20,7 +20,6 @@
     <string name="yearTxt">year</string>
 
     <string name="showMore">" show more"</string>
-
     <string name="showLess">" show less"</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -152,8 +151,6 @@
         <item>season0</item>
         <item>season1-season8</item>
     </string-array>
-
-    <string name="image_inside_memory">image inside memory</string>
 
 
 </resources>
