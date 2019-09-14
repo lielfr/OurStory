@@ -53,4 +53,20 @@ public interface OurStoryService {
     Call<User> GetUserByEmail( @Path("email") String email);
 
 
+@GET("stories/findStoriesByDobFull")
+    Call<ArrayList<ListOfStory>> GetStoriesByDobFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
+
+    @GET("stories/findStoriesByDobFull")
+    Call<ArrayList<ListOfStory>> GetStoriesByDodFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
+
+
+    @GET("stories/findStoriesByDobYearMonth")
+    Call<ArrayList<ListOfStory>> GetStoriesByDobYearMonth (@Query("m") int month, @Query("y") int year );
+    @GET("stories/findStoriesByDobYear")
+    Call<ArrayList<Story>> GetStoriesByDobYear (@Query("y") int year);
+    @GET("stories/findStoriesByDateOfBirth")
+    Call<ArrayList<ListOfStory>> GetStoriesByDateOfBirth (@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
+    @GET("stories/findStoriesByDateOfDeath")
+    Call<ArrayList<ListOfStory>> GetStoriesByDateOfDeath(@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
+
 }
