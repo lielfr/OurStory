@@ -1,16 +1,16 @@
 package org.tsofen.ourstory.model.api;
 
-import android.provider.CalendarContract;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.tsofen.ourstory.model.Comment;
+import org.tsofen.ourstory.model.Tag;
 
 public class MemoryA implements Serializable {
 
@@ -30,10 +30,10 @@ public class MemoryA implements Serializable {
     private String description;
     @SerializedName("memory_date")
     @Expose
-    private Calendar memoryDate;
+    private Date memoryDate;
     @SerializedName("create_date")
     @Expose
-    private Calendar createDate;
+    private Date createDate;
     @SerializedName("feeling")
     @Expose
     private String feeling;
@@ -55,6 +55,9 @@ public class MemoryA implements Serializable {
     @SerializedName("videos")
     @Expose
     private List<Object> videos = null;
+    @SerializedName("tags")
+    @Expose
+    private List<Tag> tags = null;
 
 
     /**
@@ -77,8 +80,9 @@ public class MemoryA implements Serializable {
      * @param likes
      * @param createDate
      * @param comments
+     * @param tags
      */
-    public MemoryA(Long memoryId, Story story, Contributer contributer, String description, Calendar memoryDate, Calendar createDate,String feeling, String location, List<Comment> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos) {
+    public MemoryA(Long memoryId, Story story, Contributer contributer, String description, Date memoryDate, Date createDate, String feeling, String location, List<Comment> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos,List<Tag> tags) {
         super();
         this.memoryId = memoryId;
         this.story = story;
@@ -93,6 +97,7 @@ public class MemoryA implements Serializable {
         this.likes = likes;
         this.pictures = pictures;
         this.videos = videos;
+        this.tags = tags;
     }
 
     public Long getMemoryId() {
@@ -127,19 +132,19 @@ public class MemoryA implements Serializable {
         this.description = description;
     }
 
-    public Calendar getMemoryDate() {
+    public Date getMemoryDate() {
         return memoryDate;
     }
 
-    public void setMemoryDate(Calendar memoryDate) {
+    public void setMemoryDate(Date memoryDate) {
         this.memoryDate = memoryDate;
     }
 
-    public Calendar getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -199,4 +204,11 @@ public class MemoryA implements Serializable {
         this.videos = videos;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }
