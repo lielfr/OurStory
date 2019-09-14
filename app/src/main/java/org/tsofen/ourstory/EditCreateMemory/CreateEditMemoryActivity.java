@@ -77,7 +77,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
     public static final String KEY_USER = "CEMemoryUser";
-    public static final String KEY_STORY = "CEMemoryStory";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
@@ -482,7 +481,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                         hm.put("videos", videos);
                         hm.put("tags", tags);
 
-                        service.AddMediaToMemory(memId, hm).enqueue(new Callback<Memory>() {
+                        service.SetMediaToMemory(memId, hm).enqueue(new Callback<Memory>() {
                             @Override
                             public void onResponse(Call<Memory> call, Response<Memory> response) {
                                 intent.putExtra(KEY_MEMID, memId);
@@ -514,7 +513,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                         hm.put("videos", videos);
                         hm.put("tags", tags);
 
-                        service.AddMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
+                        service.SetMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
                             @Override
                             public void onResponse(Call<Memory> call, Response<Memory> response) {
                                 intent.putExtra(KEY_MEMID, memory.getId());
