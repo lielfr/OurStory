@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ourstory">
+    package="org.tsofen.ourstory">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +13,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="org.tsofen.ourstory.CreateEditMemoryActivity">
+        <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
+        <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
+        <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
+        <activity
+            android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
+            android:label="CreateStory"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
+        <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
+        <activity android:name="org.tsofen.ourstory.MyMemoriesActivity" />
+        <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
+        </activity>
+        <activity android:name="org.tsofen.ourstory.CommentActivity" />
+
+
+        <activity
+            android:name=".MemoriesOfStoryActivity"
+            android:label="Memories"
+            android:parentActivityName=".YearActivity" />
+        <activity android:name=".YearActivity" />
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="org.tsofen.ourstory.YearActivity" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

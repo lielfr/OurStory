@@ -1,27 +1,80 @@
 package org.tsofen.ourstory.model;
 
-import java.net.URI;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
-public class Memory {
-    long id;
-    long storyId;
-    long creatorId;
-    String creatorName;
-    URI creatorPic;
-    String description;
-    Date memoryDate;
-    Date createDate;
-    Feeling feeling;
-    String location;
-    ArrayList<URI> pictures;
-    ArrayList<URI> videos;
-    ArrayList<Tag> tags;
-    ArrayList<Long> likes;
-    ArrayList<Comment> comments;
-    ArrayList<Long> shares;
+import static java.util.Calendar.getInstance;
+
+public class Memory implements Serializable {
+    private final static long serialVersionUID = -7521612754263171930L;
+    @SerializedName("memory_id")
+    @Expose
+    private Long id;
+    @SerializedName("story")
+    private Story story;
+    @SerializedName("contributer")
+    @Expose
+    private User user;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("memory_date")
+    @Expose
+    private Date memoryDate;
+    @SerializedName("create_date")
+    @Expose
+    private Date createDate;
+    @SerializedName("feeling")
+    @Expose
+    private Feeling feeling;
+    @SerializedName("location")
+    @Expose
+    private String location;
+    @SerializedName("pictures")
+    @Expose
+    private ArrayList<Picture> pictures = new ArrayList<>();
+    @SerializedName("videos")
+    @Expose
+    private ArrayList<Video> videos = new ArrayList<>();
+    private ArrayList<Tag> tags = new ArrayList<>();
+    @SerializedName("likes")
+    @Expose
+    private ArrayList<Long> likes = new ArrayList<>();
+    @SerializedName("comments")
+    @Expose
+    private ArrayList<Comment> comments;
+    private ArrayList<Long> shares;
+    @SerializedName("is_private")
+    @Expose
     boolean isPrivate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public long getStoryId() {
+        return story.getStoryId();
+    }
+
+    public void setStoryId(long storyId) {
+        story.setStoryId(storyId);
+    }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
 
     public String getDescription() {
         return description;
@@ -31,20 +84,27 @@ public class Memory {
         this.description = description;
     }
 
-    public Date getMemoryDate() {
-        return memoryDate;
+    public Memory(User user, String description, Date createDate, Date memoryDate) {
+        this.user = user;
+        this.description = description;
+        this.memoryDate = memoryDate;
+        this.createDate = createDate;
+    }
+
+    public Calendar getMemoryDate() {
+        if (memoryDate == null)
+            return null;
+        Calendar c = getInstance();
+        c.setTime(memoryDate);
+        return c;
     }
 
     public void setMemoryDate(Date memoryDate) {
         this.memoryDate = memoryDate;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setMemoryDate(Calendar memoryDate) {
+        this.memoryDate = memoryDate.getTime();
     }
 
     public Feeling getFeeling() {
@@ -63,19 +123,19 @@ public class Memory {
         this.location = location;
     }
 
-    public ArrayList<URI> getPictures() {
+    public ArrayList<Picture> getPictures() {
         return pictures;
     }
 
-    public void setPictures(ArrayList<URI> pictures) {
+    public void setPictures(ArrayList<Picture> pictures) {
         this.pictures = pictures;
     }
 
-    public ArrayList<URI> getVideos() {
+    public ArrayList<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(ArrayList<URI> videos) {
+    public void setVideos(ArrayList<Video> videos) {
         this.videos = videos;
     }
 
@@ -119,5 +179,25 @@ public class Memory {
         isPrivate = aPrivate;
     }
 
+    public Calendar getCreateDate() {
+        Calendar c = getInstance();
+        c.setTime(createDate);
+        return c;
+    }
 
+    public Memory() {
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

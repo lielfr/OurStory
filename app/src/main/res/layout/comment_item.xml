@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="395dp"
+        android:layout_height="84dp"
+
+        android:background="@drawable/edit_round4">
+
+        <ImageView
+            android:id="@+id/profile_comment"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/comment_to_show"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/alex" />
+
+        <TextView
+            android:id="@+id/comment_to_show"
+            android:layout_width="261dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorPrimaryDark"
+            android:ems="10"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center|start"
+            android:inputType="textMultiLine"
+            android:paddingLeft="2dp"
+            android:text="Comment"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/profile_comment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="264dp"
+            android:layout_marginRight="264dp"
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/profile_comment"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

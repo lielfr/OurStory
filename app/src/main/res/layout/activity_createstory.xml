@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context="org.tsofen.ourstory.StoryTeam.CreateStory">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_create_story"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/back_button_viewstory2"
+            android:layout_width="32dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="closeActivity"
+            android:background="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.128"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="51.33dp"
+            android:layout_height="23.85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/text_create_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Create Story"
+            android:textColor="@color/colorWhite"
+            android:textSize="21sp"
+            app:fontFamily="@font/quicksand_bold"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@+id/header_create_story"
+        app:layout_constraintTop_toBottomOf="@+id/header_create_story">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/header_create_story">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/firstNameHolder"
+                android:layout_width="328dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toBottomOf="@+id/header_create_story">
+
+                <EditText
+                    android:id="@+id/firstNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/edittext_legend_continuous"
+                    android:fontFamily="@font/quicksand"
+                    android:hint="@string/first_name"
+                    android:inputType="text|textCapSentences|textPersonName"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:textColorHint="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/firstNameTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/background_gradient"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="First Name"
+                    android:textColor="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/error1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorError"
+                android:textSize="@dimen/errorSize"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/firstNameEditText" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lastNameHolder"
+                android:layout_width="328dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="@+id/firstNameHolder"
+                app:layout_constraintTop_toBottomOf="@+id/firstNameHolder">
+
+                <EditText
+                    android:id="@+id/lastNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_legend_continuous"
+                    android:fontFamily="@font/quicksand"
+                    android:hint="@string/last_name"
+                    android:inputType="text|textCapSentences|textPersonName"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:textColorHint="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lastNameTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/background_gradient"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="Last Name"
+                    android:textColor="@color/colorGrayHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/error2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorError"
+                android:textSize="@dimen/errorSize"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
+                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText"/>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <LinearLayout
+                    android:id="@+id/birthHandler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:id="@+id/showBirthDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:calendarTextColor="@color/colorGrayHint"
+                        android:text=""
+                        android:textSize="@dimen/textSize" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <CheckBox
+                            android:id="@+id/monthChckBx1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Month Unknown"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorError"
+                            android:textColor="@color/colorGrayHint"/>
+
+                        <CheckBox
+                            android:id="@+id/dayChckBx1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Day Unknown"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorError"
+                            android:textColor="@color/colorGrayHint"/>
+                    </LinearLayout>
+
+                    <DatePicker
+                        android:id="@+id/birthDatePicker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:calendarTextColor="@color/colorGrayHint"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:startYear="1800"
+                        android:minDate="01/01/1800"
+                        android:spinnersShown="true" />
+
+                    <TextView
+                        android:id="@+id/error3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="@color/transparent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/colorError"
+                        android:textSize="@dimen/errorSize"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/birthDatePicker"
+                        app:layout_constraintTop_toBottomOf="@+id/birthDatePicker"/>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <LinearLayout
+                    android:id="@+id/deathHandler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp" >
+
+                    <TextView
+                        android:id="@+id/showDeathDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:calendarTextColor="@color/colorGrayHint"
+                        android:textSize="@dimen/textSize"
+                        android:text="" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <CheckBox
+                            android:id="@+id/monthChckBx2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Month Unknown"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorError"
+                            android:textColor="@color/colorGrayHint"/>
+
+                        <CheckBox
+                            android:id="@+id/dayChckBx2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Day Unknown"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorError"
+                            android:textColor="@color/colorGrayHint"/>
+                    </LinearLayout>
+
+                    <DatePicker
+                        android:id="@+id/deathDatePicker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:calendarViewShown="false"
+                        android:calendarTextColor="@color/colorGrayHint"
+                        android:spinnersShown="true"
+                        android:minDate="01/01/1800"
+                        android:startYear="1800"
+                        android:datePickerMode="spinner" />
+
+                    <TextView
+                        android:id="@+id/error4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="@color/transparent"
+                        android:textColor="@color/colorError"
+                        android:textSize="@dimen/errorSize"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/deathDatePicker"
+                        app:layout_constraintTop_toBottomOf="@+id/deathDatePicker"/>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+            <TextView
+                android:id="@+id/add_profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/quicksand_bold"
+                android:text="@string/add_profile"
+                android:textColor="@color/colorGrayHint"
+                app:layout_constraintTop_toBottomOf="@+id/error4" />
+
+            <ImageView
+                android:id="@+id/profilePic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:contentDescription="add profile picture image view"
+                android:onClick="pickPic"
+                app:layout_constraintTop_toBottomOf="@+id/add_profile_picture"
+                app:srcCompat="@drawable/add_photo" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="30dp">
+
+                <Button
+                    android:id="@+id/create"
+                    android:layout_width="112dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/login_button"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:onClick="viewCreatedStory"
+                    android:text="CREATE"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/add_profile_picture"
+                    app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+
+                <Button
+                    android:id="@+id/createand"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/register_button"
+                    android:text="CREATE &amp; ADD A MEMORY"
+                    android:onClick="viewCreatedStory"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/create"
+                    app:layout_constraintStart_toEndOf="@+id/create"
+                    app:layout_constraintTop_toTopOf="@+id/create" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
