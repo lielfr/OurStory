@@ -16,8 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import org.tsofen.ourstory.UserModel.AppHomePage;
+import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -52,9 +56,10 @@ public class MyMemories extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Activity a = getActivity();
-        Intent i = a.getIntent();
-        user_id=i.getLongExtra("userId",0);
+        Gson gson = new Gson();
+        String userJsonString = LogIn.mPrefs.getString("myUser","");
+        User userObj = gson.fromJson(userJsonString,User.class);
+        user_id=userObj.getUserId();
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
         MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {

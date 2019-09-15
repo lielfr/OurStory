@@ -2,25 +2,17 @@ package org.tsofen.ourstory.TeamsHomePage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
-import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
-import org.tsofen.ourstory.YearActivity;
-import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,10 +52,10 @@ public class TeamsHomePg extends AppCompatActivity {
         });
     }
 
-    public void showMem2Part(View view) {
+/*    public void showMem2Part(View view) {
         Intent intent = new Intent(this, YearActivity.class);
         startActivity(intent);
-    }
+    }*/
 
     public void showStoryPart(View view) {
         Intent intent = new Intent(TeamsHomePg.this, CreateStory.class);
