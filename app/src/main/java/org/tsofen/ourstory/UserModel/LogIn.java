@@ -3,7 +3,6 @@ package org.tsofen.ourstory.UserModel;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,16 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static org.tsofen.ourstory.UserModel.UsersList.usersList;
 
 
 public class LogIn extends AppCompatActivity {
@@ -36,7 +34,7 @@ public class LogIn extends AppCompatActivity {
     public String cityString;
     public String genderString = "Null";
     public String profilePictureString = "#FTGFHFJJY";
-    public String dateOfBirth;
+    public Date dateOfBirth;
     public String dateOfRegistration = "0/0/00";
     public String dateOfLastSignIn = "0/0/00";
     EditText email;
@@ -47,12 +45,16 @@ public class LogIn extends AppCompatActivity {
     int flag2 = 1;
     String userPass;
     Long userId;
+    int year;
+    int month;
+    int day;
 org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
         email = findViewById(R.id.showEmail);
         password = findViewById(R.id.Password);
         passErr = findViewById(R.id.PassError);
@@ -64,22 +66,38 @@ org.tsofen.ourstory.model.api.User myUser;
         passwordString = currIntent.getStringExtra("password");
         stateString = currIntent.getStringExtra("state");
         cityString = currIntent.getStringExtra("city");
-        dateOfBirth = currIntent.getStringExtra("dateOfBirth");
+       month=currIntent.getIntExtra("month",0);
+       day=currIntent.getIntExtra("day",0);
+       year=currIntent.getIntExtra("year",0);
+       dateOfBirth=new Date(year,month,day);
         genderString = currIntent.getStringExtra("gender");
         profilePictureString = currIntent.getStringExtra("profilePicture");
+        OurStoryService saveUser = WebFactory.getService();
+        User  newUser= new User();
+        newUser.setFirstName(firstNameString);
+        newUser.setLastName(lastNameString);
+        newUser.setProfilePicture(profilePictureString);
+        newUser.setDateOfBirth(dateOfBirth);
+        newUser.setEmail(emailString);
+        newUser.setPassword(passwordString);
+        newUser.setCity(cityString);
+        newUser.setState(stateString);
+        newUser.setGender(genderString);
+        saveUser.CreateUser(newUser).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Toast.makeText(LogIn.this,"UserSaved Check Database",Toast.LENGTH_LONG).show();
+            }
 
-        User tempUser = new User(firstNameString, lastNameString, passwordString,
-                emailString, profilePictureString, genderString, dateOfBirth,
-                dateOfRegistration, dateOfLastSignIn, stateString, cityString);
-        UsersList.usersList = new ArrayList<User>();
-        UsersList.usersList.add(tempUser);
-        String text = "User Created with:" + usersList.get(0).getmFirstName() + " "
-                + usersList.get(0).getmLastName() + " " + usersList.get(0).getmPassword() + " "
-                + usersList.get(0).getmEmail() + " " + usersList.get(0).getmProfilePicture() + " "
-                + usersList.get(0).getmGender() + " " + usersList.get(0).getmDateOfBirth() + " "
-                + usersList.get(0).getmDateOfRegistration() + " " + usersList.get(0).getmDateOfLastSignIn() + " "
-                + usersList.get(0).getmState() + " " + usersList.get(0).getmCity() + " ";
-        Log.d("tag", text);
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(LogIn.this,"Saving user Failed",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+
 
     }
 

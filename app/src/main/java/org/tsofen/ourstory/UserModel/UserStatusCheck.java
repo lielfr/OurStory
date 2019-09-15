@@ -6,7 +6,7 @@ public class UserStatusCheck {
     {
         userStatus=status;
     }
-    static String getUserStatus()
+    public static String getUserStatus()
     {
         return userStatus;
     }
