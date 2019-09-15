@@ -143,13 +143,13 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     Glide.with(aa).load(uri).apply(options).into(pic);
                 }
 
-                if (story_full.getMemories().size()>0) {
+                if (story_full.getMemories().size()==0) {
                     LinearLayout linearLayout = findViewById(R.id.linearLayout3);
                     linearLayout.setVisibility(View.INVISIBLE);
 
                     ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
                     constraintLayout.setVisibility(View.VISIBLE);
-
+                    Toast.makeText(aa, "dsflkhjvfkd", Toast.LENGTH_SHORT).show();
 //            ImageView image4 = findViewById(R.id.imageView3);
 //            image4.setImageResource(R.drawable.nopicyet);
 //
