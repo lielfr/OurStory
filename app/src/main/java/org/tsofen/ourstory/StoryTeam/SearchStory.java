@@ -49,6 +49,7 @@ public class SearchStory extends AppCompatActivity {
     int D;
     int M ;
     int Y ;
+    int Taplayout ;
 
 
 
@@ -102,6 +103,7 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                Taplayout = tab.getPosition() ;
 //                if (adapter.getItem(0)!=null){
 //                    CurrentFragment =adapter.getItem(0);
 //                    Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -138,6 +140,7 @@ public class SearchStory extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               // if (tabLayout)
                 SendSearchResToFragment(searchresult.getText().toString(),0,CurrentFragment);
 
             }
