@@ -58,5 +58,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:9.2.1'
     implementation 'com.google.firebase:firebase-auth:9.2.1'
 
+    implementation 'com.itkacher.okhttpprofiler:okhttpprofiler:1.0.4'
+
 
 }

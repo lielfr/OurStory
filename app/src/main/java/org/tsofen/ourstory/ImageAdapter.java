@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-    private ArrayList<ImgItem> images;
+    private ArrayList<ImgItem> images = new ArrayList<>();
     Context context;
 
     @NonNull

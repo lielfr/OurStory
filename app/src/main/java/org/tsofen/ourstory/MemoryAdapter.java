@@ -1,7 +1,9 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.StoryTeam.Story;
+
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.User;
 
@@ -26,6 +30,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public final ArrayList<MemoryA> mMemories;
+    MemoryA memoryA;
     Context ctx;
     LayoutInflater mInflater;
     public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
@@ -43,29 +48,29 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         mMemories=testMemory.createContactsList();*/
         // end example
     }
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
-
-        // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item, parent, false);
-
-
-        // return a new holder instance
         ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
+        Contributer contributer = memory.getContributer();
+        if(memory.getContributer().getProfilePicture()!=null)
+        {
+            holder.pic.setImageURI((Uri) memory.getContributer().getProfilePicture());
+        }
+        else {
+            holder.pic.setImageLevel(R.drawable.defaultprofilepicture);
+        }
+        holder.name.setText(memory.getContributer().getFullName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,9 +104,28 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         if(memory.getLikes()!=null) {
            holder.num_of_likes.setText(memory.getLikes().size());
        }
+        else
+        {
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
+        }
        if(memory.getComments()!=null) {
            holder.num_of_comments.setText(memory.getComments().size());
        }
+       else
+       {
+           holder.num_of_comments.setVisibility(View.INVISIBLE);
+       }
+        if(memory.getTags()!=null)
+        {
+            String s = "#";
+            for(Tag tag : memory.getTags() )
+            {
+                s +=tag.getLabel();
+            }
+            holder.tags.setText(s);
+        }
+        else
+            holder.tags.setVisibility(View.INVISIBLE);
         ArrayList<ImgItem> images=new ArrayList<>();
 
 
@@ -116,7 +140,6 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
 
         ///////////////////////////////
-
 
         //ArrayList<ImgItem> images=Memory.getPictures();
        // ArrayList<ImgItem> images=new ArrayList<>();
@@ -150,11 +173,9 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public int getItemCount() {
         return mMemories.size();
     }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvMemory;
-        public TextView feeling,location,name, mem_date, descr, num_of_likes, num_of_comments, num_of_shares;
+        public TextView tags,feeling,location,name, mem_date, descr, num_of_likes, num_of_comments;
         public ImageView pic;
         public ImageButton commentbtn;
         public MemoryAdapter adapter;
@@ -171,11 +192,12 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             pic = itemView.findViewById(R.id.picture_person);
             num_of_comments = itemView.findViewById(R.id.commentNum);
             num_of_likes = itemView.findViewById(R.id.likesNum);
-           // num_of_shares = itemView.findViewById(R.id.shareNum);
-            adapter = memoryAdapter;
+            tags = itemView.findViewById(R.id.tags_text);
+            this.adapter = memoryAdapter;
 
 
             rvMemory=(RecyclerView)itemView.findViewById(R.id.memory_pic);
+
         }
     }
 }

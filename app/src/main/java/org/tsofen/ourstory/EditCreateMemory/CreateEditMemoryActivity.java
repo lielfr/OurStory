@@ -1,40 +1,50 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.widget.ScrollView;
-import android.widget.Toast;
-
-import androidx.annotation.ColorInt;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import androidx.annotation.Nullable;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Picture;
+import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.Video;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,16 +76,24 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_EDIT = "CEMemoryEdit";
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
+    public static final String KEY_USER = "CEMemoryUser";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
     private LinearLayout imageLiner;
     private ScrollView ourScroller;
+    private User user;
+    private Story story;
     TextView AddPicTxV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
+
+        imageAdapter = new AddMemoryImageAdapter(this);
+        videoAdapter = new AddMemoryVideoAdapter(this);
+        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
+        tagAdapter = new AddMemoryTagAdapter(new LinkedList<>(), tagsRV);
 
         Intent intent = getIntent();
         memory = (Memory) intent.getSerializableExtra(KEY_EDIT);
@@ -97,19 +115,37 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
+            user = (User) intent.getSerializableExtra(KEY_USER);
         } else {
             create = false;
             pageTitle.setText("Edit Memory");
+            user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
-            dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-            monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-            yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
-            selectEmoji(memory.getFeeling());
+            if (memory.getMemoryDate() != null) {
+                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
+                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
+                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
+                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
+            }
 
-            imageAdapter.data.addAll(memory.getPictures());
+            if (memory.getFeeling() != null)
+                selectEmoji(memory.getFeeling());
+
+            List<String> image_uris = new ArrayList();
+            List<String> video_uris = new ArrayList<>();
+            for (Picture p : memory.getPictures()) {
+                image_uris.add(p.getLink());
+                imageAdapter.upload_start++;
+            }
+            for (Video v : memory.getVideos()) {
+                video_uris.add(v.getLink());
+                videoAdapter.upload_start++;
+            }
+
+            imageAdapter.data.addAll(image_uris);
             imageAdapter.notifyDataSetChanged();
-            videoAdapter.data.addAll(memory.getVideos());
+            videoAdapter.data.addAll(video_uris);
             videoAdapter.notifyDataSetChanged();
             tagAdapter.tags.addAll(memory.getTags());
             tagAdapter.notifyDataSetChanged();
@@ -119,6 +155,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         if (story != null) {
             memory.setStory(story);
         }
+        memory.setUser(user);
 
         smileb.setOnClickListener(this);
         sadb.setOnClickListener(this);
@@ -128,13 +165,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         cnslbtn.setOnClickListener(this);
 
         RecyclerView rvp = findViewById(R.id.add_pictures_rv_cememory);
-        imageAdapter = new AddMemoryImageAdapter(this);
+
         rvp.setAdapter(imageAdapter);
         rvp.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
 
         RecyclerView rvv = findViewById(R.id.add_videos_rv_cememory);
-        videoAdapter = new AddMemoryVideoAdapter(this);
+
         rvv.setAdapter(videoAdapter);
         rvv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
@@ -142,8 +179,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         //   editTextDescription.addTextChangedListener(SaveTextWatcher);
         // editTextLocation.addTextChangedListener(SaveTextWatcher);
 
-        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
-        tagAdapter = new AddMemoryTagAdapter(new LinkedList<>(), tagsRV);
+
         tagsRV.setAdapter(tagAdapter);
         tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
@@ -179,15 +215,51 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 }
                 break;
             case R.id.Cancelbtn_cememory:
-                finish();
+                ShowAlertDialog(this, "", "Are you sure you want to cancel ?");
+                // finish();
                 break;
             case R.id.back_button_cememory:
-                finish();
+                ShowAlertDialog(this, "", "Are you sure you want to leave ?");
+                // finish();
                 break;
 
         }
     }
 
+    public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /**
+     * AlertDialog.Builder builder = new AlertDialog.Builder(this);
+     * builder.setMessage("Are you sure you want to exit?")
+     * .setCancelable(false)
+     * .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+     * public void onClick(DialogInterface dialog, int id) {
+     * MyActivity.this.finish();
+     * }
+     * })
+     * .setNegativeButton("No", new DialogInterface.OnClickListener() {
+     * public void onClick(DialogInterface dialog, int id) {
+     * dialog.cancel();
+     * }
+     * });
+     * AlertDialog alert = builder.create();
+     * alert.show();
+     **/
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             MemError.setText("Enter at Least one of The above!");
@@ -291,6 +363,23 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         yearDate.setText(year_string);
     }
 
+    /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+     **/
     public void closeActivity(View view) {
         finish();
     }
@@ -307,39 +396,147 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         OurStoryService service = WebFactory.getService();
         Intent intent = new Intent();
 
-        if (create) {
-            service.CreateMemory(memory).enqueue(new Callback<Memory>() {
-                @Override
-                public void onResponse(Call<Memory> call, Response<Memory> response) {
-                    if (response.code() != 200) {
-                        displayToast("Error " + response.code() + " : " + response.message());
-                        return;
-                    }
-                    Memory responseMem = response.body();
-                    long memId = responseMem.getId();
-                    intent.putExtra(KEY_MEMID, memId);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading media...");
+        progressDialog.show();
 
-                @Override
-                public void onFailure(Call<Memory> call, Throwable t) {
+        double[] progress = new double
+                [(imageAdapter.data.size() - imageAdapter.upload_start) +
+                (videoAdapter.data.size() - videoAdapter.upload_start)];
 
-                }
-            });
-        } else {
-            service.EditMemory(memory).enqueue(new Callback<Memory>() {
-                @Override
-                public void onResponse(Call<Memory> call, Response<Memory> response) {
-                    finish();
-                }
-
-                @Override
-                public void onFailure(Call<Memory> call, Throwable t) {
-
-                }
-            });
+        for (int i = 0; i < progress.length; i++) {
+            progress[i] = 0;
         }
+
+        FirebaseImageWrapper wrapper = new FirebaseImageWrapper("memory_media");
+        List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
+
+        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); i++) {
+            String uri = imageAdapter.data.get(i);
+            int finalI = i;
+            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
+                imageAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+                progress[finalI] = 100;
+            }).addOnProgressListener(taskSnapshot -> {
+                // We need to set the progress relative to both the current file and the other files
+                double currentFileProgress = taskSnapshot.getBytesTransferred() /
+                        taskSnapshot.getTotalByteCount();
+                progress[finalI] = currentFileProgress * 100;
+                double progressAvg = 0;
+                for (double p : progress)
+                    progressAvg += p;
+                progressAvg /= progress.length;
+                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
+            }));
+        }
+
+        // TODO: Maybe we can avoid this code duplication
+        for (int i = videoAdapter.upload_start; i < videoAdapter.data.size(); i++) {
+            String uri = videoAdapter.data.get(i);
+            int finalI = i;
+            int offset = (imageAdapter.data.size() - imageAdapter.upload_start);
+            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
+                videoAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+                progress[finalI + offset] = 100;
+            }).addOnProgressListener(taskSnapshot -> {
+                double currentFileProgress = taskSnapshot.getBytesTransferred() /
+                        taskSnapshot.getTotalByteCount();
+                progress[finalI + offset] = currentFileProgress * 100;
+                double progressAvg = 0;
+                for (double p : progress)
+                    progressAvg += p;
+                progressAvg /= progress.length;
+                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
+            }));
+        }
+
+
+        Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
+            progressDialog.dismiss();
+            ArrayList<String> pictures = new ArrayList<>();
+            ArrayList<String> videos = new ArrayList<>();
+            pictures.addAll(imageAdapter.data);
+            videos.addAll(videoAdapter.data);
+
+            ArrayList<String> tags = new ArrayList<>();
+            for (Tag t : tagAdapter.tags) {
+                tags.add(t.getLabel());
+            }
+            if (create) {
+                service.CreateMemory(memory).enqueue(new Callback<Memory>() {
+                    @Override
+                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+                        if (response.code() != 200) {
+                            displayToast("Error " + response.code() + " : " + response.message());
+                            return;
+                        }
+                        Memory responseMem = response.body();
+                        if (responseMem == null) {
+                            displayToast("Error: Got null object from the server");
+                            return;
+                        }
+                        long memId = responseMem.getId();
+                        HashMap<String, List<String>> hm = new HashMap<>();
+                        hm.put("pictures", pictures);
+                        hm.put("videos", videos);
+                        hm.put("tags", tags);
+
+                        service.SetMediaToMemory(memId, hm).enqueue(new Callback<Memory>() {
+                            @Override
+                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                intent.putExtra(KEY_MEMID, memId);
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Memory> call, Throwable t) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<Memory> call, Throwable t) {
+
+                    }
+                });
+            } else {
+                memory.getPictures().clear();
+                memory.getVideos().clear();
+                memory.getTags().clear();
+                service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
+                    @Override
+                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+                        HashMap<String, List<String>> hm = new HashMap<>();
+                        hm.put("pictures", pictures);
+                        hm.put("videos", videos);
+                        hm.put("tags", tags);
+
+                        service.SetMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
+                            @Override
+                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                intent.putExtra(KEY_MEMID, memory.getId());
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Memory> call, Throwable t) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<Memory> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+
     }
 
     public void selectEmoji(Feeling selected) {

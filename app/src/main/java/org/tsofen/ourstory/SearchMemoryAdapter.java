@@ -45,7 +45,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
     public class MemoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView firstName;
-        public final TextView lastName;
+     //   public final TextView lastName;
         public final ImageView profilePic;
         final SearchMemoryAdapter mAdapter;
 
@@ -53,7 +53,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
         public MemoryViewHolder(@NonNull View itemView, SearchMemoryAdapter adapter) {
             super(itemView);
             firstName = itemView.findViewById(R.id.profile_name_id);
-            lastName = itemView.findViewById(R.id.last_name_id);
+           // lastName = itemView.findViewById(R.id.last_name_id);
             profilePic = itemView.findViewById(R.id.profile_pic);
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);

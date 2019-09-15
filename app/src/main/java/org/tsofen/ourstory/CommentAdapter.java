@@ -56,7 +56,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
         Comment comment = comments.get(position);
         user_comment = WebFactory.getService();
-        user_comment.GetUserById( comment.getUser()).enqueue(new Callback<Owner>() {
+        user_comment.GetUserById(comment.getUser().getUserId()).enqueue(new Callback<Owner>() {
             @Override
             public void onResponse(Call<Owner> call, Response<Owner> response) {
                 user = response.body();
