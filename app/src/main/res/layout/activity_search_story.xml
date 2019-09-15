@@ -144,7 +144,7 @@
             app:layout_constraintTop_toTopOf="@+id/ShowDate" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/sp"
             android:layout_width="28dp"
             android:layout_height="35dp"
             android:layout_marginStart="152dp"
@@ -180,7 +180,7 @@
             android:layout_marginTop="2dp"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/spinner" />
+            app:layout_constraintTop_toTopOf="@+id/sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
