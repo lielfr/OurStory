@@ -148,6 +148,7 @@ public class RegistrationPage1 extends AppCompatActivity {
         } else if (str1.length() < 10) {
             edtTxt1.setText(mess5);
             edtTxt1.setVisibility(View.VISIBLE);
+            return 1;
         } else if (str1.length() > 20) {
             edtTxt1.setText(mess6);
             edtTxt1.setVisibility(View.VISIBLE);

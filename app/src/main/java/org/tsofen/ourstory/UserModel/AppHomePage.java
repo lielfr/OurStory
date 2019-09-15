@@ -56,7 +56,7 @@ public class AppHomePage extends AppCompatActivity {
                 Fragment targetFragment;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        if(UserStatusCheck.getUserStatus()=="visitor") {
+                        if(UserStatusCheck.getUserStatus().equals("visitor")) {
                             targetFragment = new HomeFragment();
                             upText.setText("Home");
                         }
