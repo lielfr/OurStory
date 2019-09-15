@@ -50,7 +50,7 @@ public class MyMemoriesActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
                 Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
-                adapter = new MyMemoriesAdapter(memories);
+                adapter = new MyMemoriesAdapter(MyMemoriesActivity.this, memories);
 
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(MyMemoriesActivity.this));

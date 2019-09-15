@@ -61,6 +61,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_comment"
         android:layout_width="405dp"
         android:layout_height="585dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -3,6 +3,7 @@ package org.tsofen.ourstory;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.Tags;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,17 +30,16 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public ArrayList<MemoryA> mMemories;
-    Context context;
-   /* public MyMemoriesAdapter(ArrayList<Memory> memories) {
-        this.mMemories = memories;
-    }*/
+    Context ctx;
+    LayoutInflater mInflater;
 
-    public MyMemoriesAdapter(ArrayList<MemoryA> memories) {
+    public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories) {
         this.mMemories = memories;
+        mInflater = LayoutInflater.from(context);
     }
 
     public MyMemoriesAdapter(Context context) {
-        this.context = context;
+        this.ctx = context;
     }
 
     @NonNull
@@ -46,15 +47,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
-
-        // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item_my_memories, parent, false);
-
-
-        // return a new holder instance
+        ctx = parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
-
         return viewHolder;
     }
 
@@ -62,35 +57,57 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         MemoryA memory = mMemories.get(position);
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                intent.putExtra("memory", memory);
+                ctx.startActivity(intent);
+
+            }
+        });
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
-    }
-    /*   Story story = (Story) memory.getStory();
-     holder.name.setText(story.getNameOfPerson());*/
+    } else
+        holder.descr.setVisibility(View.INVISIBLE);
+        if (memory.getTags() != null) {
+            String s = "#";
+            for (Tag tag : memory.getTags()) {
+                s += tag.getLabel();
+            }
+            holder.tags.setText(s);
+        } else
+            holder.tags.setVisibility(View.INVISIBLE);
+        Story story = memory.getStory();
+        holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[(memory.getMemoryDate()).get(Calendar.MONTH)] + " " + (memory.getMemoryDate()).get(Calendar.DAY_OF_MONTH) + " , " + ((Calendar)memory.getMemoryDate()).get(Calendar.YEAR);
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
             holder.mem_date.setText(memDate);
         }
         else
-            holder.mem_date.setVisibility(View.GONE);
+            holder.mem_date.setVisibility(View.INVISIBLE);
 
+        if (memory.getStory().getPicture() != null) {
+            holder.profile.setImageURI((Uri) memory.getStory().getPicture());
+        }
         if(memory.getLikes().isEmpty())
-            holder.num_of_likes.setText("");
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
             holder.num_of_likes.setText(memory.getLikes().size());
         if(memory.getComments().isEmpty())
-            holder.num_of_comments.setVisibility(View.GONE);
+            holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
             holder.num_of_comments.setText(memory.getComments().size());
        if(memory.getLocation()!=null)
            holder.location.setText((String) memory.getLocation());
        else
-           holder.location.setVisibility(View.GONE);
+           holder.location.setVisibility(View.INVISIBLE);
         if(memory.getFeeling()!=null)
-            holder.feeling.setText(memory.getFeeling().toString());
+            holder.feeling.setText(memory.getFeeling());
         else
-            holder.feeling.setVisibility(View.GONE);
+            holder.feeling.setVisibility(View.INVISIBLE);
     }
     @Override
     public int getItemCount() {
@@ -98,7 +115,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
+        public TextView tags, feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
         ImageButton sharebtn,commentbtn;
         public MyMemoriesAdapter adapter;
@@ -106,8 +123,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
-            context = itemView.getContext();
+            ctx = itemView.getContext();
 
+            tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
             name = itemView.findViewById(R.id.name_txt_person);
