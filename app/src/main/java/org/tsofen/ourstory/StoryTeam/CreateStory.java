@@ -72,6 +72,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     Date today = new Date();
     OurStoryService Wepengine ;
     Long userid ;
+    Long Storyid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -443,6 +444,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
 
         Intent i = new Intent(this, ViewStory.class);
+
         Intent cm = new Intent(this, CreateEditMemoryActivity.class);
 
         // Names Validation
@@ -542,32 +544,33 @@ if(fileURI==null){
                     result = response.body();
                     if (result != null) {
                         Toast.makeText(CreateStory.this, "the story " + result.getNameOfPerson() + " was created succefully", Toast.LENGTH_SHORT).show();
-
-                        // pass birth date to the next activity
-                        if (birthDateFields == 3) {
-                            i.putExtra("date1", df3.format(d1));
-                        } else if (birthDateFields == 2) {
-                            i.putExtra("date1", df2.format(d1));
-                        } else if (birthDateFields == 1) {
-                            i.putExtra("date1", df1.format(d1));
-                        }
-
-                        // pass death date to thr next activity
-                        if (deathDateFields == 3) {
-                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
-                        } else if (deathDateFields == 2) {
-                            i.putExtra("date2", df2.format(d2));
-                        } else if (deathDateFields == 1) {
-                            i.putExtra("date2", df1.format(d2));
-                        }
-
-                        i.putExtra("name", nameofperson);
-                        if (view.getId() == R.id.create) {
-                            i.putExtra("Button", "just_create");
-                        } else {
-                            i.putExtra("Button", "createandadd");
-                            i.putExtra("id", result);
-                        }
+//
+//                        // pass birth date to the next activity
+//                        if (birthDateFields == 3) {
+//                            i.putExtra("date1", df3.format(d1));
+//                        } else if (birthDateFields == 2) {
+//                            i.putExtra("date1", df2.format(d1));
+//                        } else if (birthDateFields == 1) {
+//                            i.putExtra("date1", df1.format(d1));
+//                        }
+//
+//                        // pass death date to thr next activity
+//                        if (deathDateFields == 3) {
+//                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
+//                        } else if (deathDateFields == 2) {
+//                            i.putExtra("date2", df2.format(d2));
+//                        } else if (deathDateFields == 1) {
+//                            i.putExtra("date2", df1.format(d2));
+//                        }
+//
+//                        i.putExtra("name", nameofperson);
+//                        if (view.getId() == R.id.create) {
+//                            i.putExtra("Button", "just_create");
+//                        } else {
+//                            i.putExtra("Button", "createandadd");
+//                            i.putExtra("id", result);
+//                        }
+                        i.putExtra("id", String.valueOf(result.getStoryId()));
                         startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();

@@ -4,6 +4,7 @@ package org.tsofen.ourstory.web;
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
+import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Owner;
@@ -69,7 +70,8 @@ public interface OurStoryService {
 
     @GET("stories/findStoriesByDodFull")
     Call<ArrayList<ListOfStory>> GetStoriesByDodFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
-
+    @GET("stories/ViewStoryFull/{id}")
+    Call<FullViewStory> GetFullViewStoryById(@Path("id") long id);
 
     @GET("stories/findStoriesByDobYearMonth")
     Call<ArrayList<ListOfStory>> GetStoriesByDobYearMonth (@Query("m") int month, @Query("y") int year );
