@@ -36,6 +36,6 @@ public class DatePickerFragment extends DialogFragment
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         org.tsofen.ourstory.StoryTeam.CreateStory activity = (org.tsofen.ourstory.StoryTeam.CreateStory) getActivity();
-        activity.processDatePickerResult(year, month, day);
+      //  activity.processDatePickerResult(year, month, day);
     }
 }

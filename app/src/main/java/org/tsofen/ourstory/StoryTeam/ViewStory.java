@@ -43,7 +43,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         searchtext = (EditText) findViewById(R.id.edit);
         Intent intent = getIntent() ;
 
-        Log.i("oncreat","onCrete has been access");
+        Log.i("oncreat","onCreate has been access");
         Log.i("oncreat","extra key is"+ intent.getStringExtra("button"));
         if(intent.getStringExtra("Button").equals("createandadd")){
             Log.i("oncreat","int if");
@@ -67,7 +67,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         TextView textView = (findViewById(R.id.textView));
         textView.setText(nameofperson);
 
-//        Story story = new Story(fName, lName, date1, date2/*, iv, tag1, tag2, tag3, ic1, ic2, ic3*/);
 
 
         ImageView image4 = findViewById(R.id.imageView3);
