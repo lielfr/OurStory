@@ -72,6 +72,9 @@ public interface OurStoryService {
     @GET("stories/findStoriesByDodFull")
     Call<ArrayList<ListOfStory>> GetStoriesByDodFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
 
+    @GET("stories/findById/{id}")
+    Call<Story> GetStoryById(@Path("id") long id);
+
 
     @GET("stories/findStoriesByDobYearMonth")
     Call<ArrayList<ListOfStory>> GetStoriesByDobYearMonth (@Query("m") int month, @Query("y") int year );
