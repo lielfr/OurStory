@@ -2,6 +2,7 @@ package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.api.ListOfStory;
 
 import java.util.List;
@@ -21,6 +26,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     private final List<ListOfStory> mStoryList;
     private LayoutInflater mInflater;
     public Context context ;
+    Uri uri ;
 
     public StoryAdapter(Context context, List<ListOfStory> storyList) {
         mInflater = LayoutInflater.from(context);
@@ -41,6 +47,16 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
         ListOfStory mCurrent = mStoryList.get(position);
         holder.firstName.setText(mCurrent.getNameOfPerson());
         holder.dates.setText("From "+mCurrent.getDateOfBirth().substring(0,9)+" To "+ mCurrent.getDateOfDeath().substring(0,9));
+        Object p = mCurrent.getPicture();
+        if (p == null) return;
+        String SP = p.toString();
+        uri = Uri.parse(SP);
+        RequestOptions options = new RequestOptions()
+                .override(300, 300)
+                .centerCrop()
+                .placeholder(R.drawable.nopicyet)
+                .error(R.drawable.nopicyet);
+        Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.profilePic);
 
    //     holder.profilePic.setImageResource((int)mCurrent.getPicture()); //just need to set the pic from the firebase!!
     }
@@ -75,8 +91,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
             mAdapter.notifyDataSetChanged();
             Intent showStory = new Intent(view.getContext(), ViewStory.class);
             if (showStory!=null) {
-                Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
-                //context.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
+                showStory.putExtra("id",element.getStoryId().toString());
+                //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
+                context.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
             }else{
                 Toast.makeText(context, "Warning intent is null ", Toast.LENGTH_SHORT).show();
             }

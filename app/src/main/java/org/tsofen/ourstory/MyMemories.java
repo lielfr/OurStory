@@ -25,6 +25,7 @@ import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -42,7 +43,7 @@ public class MyMemories extends Fragment {
     AppHomePage parent;
     RecyclerView rv;
     Long user_id;
-    ArrayList<MemoryA> memories;
+    ArrayList<Memory> memories;
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
@@ -67,9 +68,9 @@ public class MyMemories extends Fragment {
         user_id=userObj.getUserId();
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {
+        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<Memory>>() {
             @Override
-            public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+            public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                 memories = response.body();
                 adapter = new MyMemoriesAdapter(getActivity(), memories, userObj);
                 rv.setAdapter(adapter);
@@ -79,7 +80,7 @@ public class MyMemories extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
                 Log.d("Error", t.toString());
             }
         });
