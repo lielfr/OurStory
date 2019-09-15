@@ -47,7 +47,7 @@ public class Memory implements Serializable {
     private ArrayList<Tag> tags = new ArrayList<>();
     @SerializedName("likes")
     @Expose
-    private ArrayList<Long> likes = new ArrayList<>();
+    private ArrayList<Object> likes = new ArrayList<Object>();
     @SerializedName("comments")
     @Expose
     private ArrayList<Comment> comments;
@@ -147,11 +147,11 @@ public class Memory implements Serializable {
         this.tags = tags;
     }
 
-    public ArrayList<Long> getLikes() {
+    public ArrayList<Object> getLikes() {
         return likes;
     }
 
-    public void setLikes(ArrayList<Long> likes) {
+    public void setLikes(ArrayList<Object> likes) {
         this.likes = likes;
     }
 
