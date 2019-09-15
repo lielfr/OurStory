@@ -1,6 +1,8 @@
 package org.tsofen.ourstory;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -9,9 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.MemoryA;
@@ -31,6 +37,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     User user;
     LayoutInflater mInflater;
     MemoryA mem;
+
 
 
     public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories, User userObj) {
@@ -61,8 +68,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             public void onClick(View view) {
 
                 Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
-                intent.putExtra("memory", memory);
-                intent.putExtra("user", user);
+                intent.putExtra("memory",memory);
+                intent.putExtra("user",user);
                 ctx.startActivity(intent);
 
             }
@@ -81,9 +88,10 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 OurStoryService deleteMemory;
                 deleteMemory = WebFactory.getService();
-                deleteMemory.DeleteMemory(memory.getMemoryId());
+                deleteMemory.DeleteMemory((memory.getMemoryId()));
 
             }
         });
@@ -91,15 +99,15 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     } else
-        holder.descr.setVisibility(View.GONE);
+        holder.descr.setVisibility(View.INVISIBLE);
         if (memory.getTags() != null) {
-            String s = "#";
+            String s = "";
             for (Tag tag : memory.getTags()) {
-                s += "#" + tag.getLabel();
+                s += "#"+tag.getLabel();
             }
             holder.tags.setText(s);
         } else
-            holder.tags.setVisibility(View.GONE);
+            holder.tags.setVisibility(View.INVISIBLE);
         Story story = memory.getStory();
         holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -108,30 +116,37 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             holder.mem_date.setText(memDate);
         }
         else
-            holder.mem_date.setVisibility(View.GONE);
+            holder.mem_date.setVisibility(View.INVISIBLE);
 
         if (memory.getStory().getPicture() != null) {
-                holder.profile.setImageURI(Uri.parse(memory.getStory().getPicture().toString()));
+
+            Uri uri = Uri.parse(memory.getStory().getPicture().toString());
+            RequestOptions options = new RequestOptions()
+                    .override(300, 300)
+                    .centerCrop()
+                    .placeholder(R.drawable.nopicyet)
+                    .error(R.drawable.nopicyet);
+            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.profile);
         }
         else {
-            holder.profile.setImageLevel(R.drawable.defaultprofilepicture);
+            holder.profile.setImageResource(R.drawable.defaultprofilepicture);
         }
         if(memory.getLikes().isEmpty())
-            holder.num_of_likes.setVisibility(View.GONE);
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
             holder.num_of_likes.setText(memory.getLikes().size() + "");
         if(memory.getComments().isEmpty())
-            holder.num_of_comments.setVisibility(View.GONE);
+            holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
             holder.num_of_comments.setText(memory.getComments().size()+"");
        if(memory.getLocation()!=null)
            holder.location.setText(memory.getLocation());
        else
-           holder.location.setVisibility(View.GONE);
+           holder.location.setVisibility(View.INVISIBLE);
         if(memory.getFeeling()!=null)
-            holder.feeling.setText("#" + memory.getFeeling());
+            holder.feeling.setText("#"+memory.getFeeling());
         else
-            holder.feeling.setVisibility(View.GONE);
+            holder.feeling.setVisibility(View.INVISIBLE);
        /* ArrayList<ImgItem> images=new ArrayList<>();
         if(memory.getPictures()!=null) {
             images.add((ImgItem) memory.getPictures());
@@ -142,7 +157,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         }
         else
         {
-            holder.imagesrv.setVisibility(View.GONE);
+            holder.imagesrv.setVisibility(View.INVISIBLE);
         }*/
     }
     @Override
@@ -153,7 +168,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tags, feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
-        ImageButton sharebtn, commentbtn, editbtn, deletebtn;
+        ImageButton sharebtn,commentbtn, editbtn,deletebtn;
         public MyMemoriesAdapter adapter;
         //RecyclerView imagesrv;
 
@@ -161,8 +176,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
             ctx = itemView.getContext();
-            // imagesrv = itemView.findViewById(R.id.my_memoriesRv);
-            deletebtn = itemView.findViewById(R.id.deletebtn);
+           // imagesrv = itemView.findViewById(R.id.my_memoriesRv);
+            deletebtn =itemView.findViewById(R.id.deletebtn);
             tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);

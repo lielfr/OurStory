@@ -83,5 +83,7 @@ public interface OurStoryService {
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfBirth (@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
     @GET("stories/findStoriesByDateOfDeath")
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfDeath(@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
+    @POST("users/create")
+    Call<User> CreateUser(@Body User newUser);
 
 }
