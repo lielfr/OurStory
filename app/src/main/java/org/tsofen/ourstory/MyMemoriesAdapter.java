@@ -22,6 +22,8 @@ import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.Tags;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -106,16 +108,19 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             holder.mem_date.setVisibility(View.INVISIBLE);
 
         if (memory.getStory().getPicture() != null) {
-            holder.profile.setImageURI((Uri) memory.getStory().getPicture());
+                holder.profile.setImageURI(Uri.parse(memory.getStory().getPicture().toString()));
+        }
+        else {
+            holder.profile.setImageLevel(R.drawable.defaultprofilepicture);
         }
         if(memory.getLikes().isEmpty())
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
-            holder.num_of_likes.setText(memory.getLikes().size());
+            holder.num_of_likes.setText(memory.getLikes().size() + "");
         if(memory.getComments().isEmpty())
             holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
-            holder.num_of_comments.setText(memory.getComments().size());
+            holder.num_of_comments.setText(memory.getComments().size()+"");
        if(memory.getLocation()!=null)
            holder.location.setText(memory.getLocation());
        else
