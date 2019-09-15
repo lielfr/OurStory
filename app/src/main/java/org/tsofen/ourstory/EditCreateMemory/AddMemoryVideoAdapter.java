@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 
 import java.util.LinkedList;
@@ -22,6 +23,7 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
     Context ctx;
     Activity parent;
     public List<String> data;
+    int upload_start = 0;
 
     public static final int ADDMEMORY_VIDEO = 959;
 
@@ -65,9 +67,15 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
                     setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            String item = data.get(position - 1);
                             data.remove(position - 1);
                             notifyItemRemoved(position);
                             notifyDataSetChanged();
+                            if (position - 1 < upload_start) {
+                                --upload_start;
+                                FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
+                                wrapper.removeImg(item);
+                            }
                         }
                     });
             String uri = data.get(position - 1);

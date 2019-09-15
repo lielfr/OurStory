@@ -1,5 +1,6 @@
 package org.tsofen.ourstory.UserModel;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,7 +14,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.tsofen.ourstory.MyMemories;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.TeamsHomePage.TeamsHomePg;
 
 
 public class AppHomePage extends AppCompatActivity {
@@ -28,7 +31,7 @@ public class AppHomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
+        Intent currIntent = getIntent();
         selected = R.id.nav_home;
         final TextView upText = findViewById(R.id.upText);
         // Fixing the icon tinting of the bottom navigation bar.
@@ -53,13 +56,25 @@ public class AppHomePage extends AppCompatActivity {
                 Fragment targetFragment;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        targetFragment = new HomeFragment();
-                        upText.setText("Home");
+                        if(UserStatusCheck.getUserStatus()=="visitor") {
+                            targetFragment = new HomeFragment();
+                            upText.setText("Home");
+                        }
+                        else
+                        {
+                            targetFragment = new MyMemories();
+                            upText.setText("My Memories");
+                        }
                         break;
                     case R.id.nav_profile:
-                        targetFragment = new UserProfile();
+                       /* if(UserStatusCheck.getUserStatus()=="not a visitor")
+                        {targetFragment = new UserProfile();
                         upText.setText("My Profile");
-                        break;
+                        break;}*/
+
+                        targetFragment = new UserProfile();
+                            upText.setText("My Profile");
+                            break;
                     default:
                         return true;
                 }
@@ -92,5 +107,11 @@ public class AppHomePage extends AppCompatActivity {
     }
 
     public void closeActivity(View view) {
+
+    }
+
+    public void movetoteamsactivity(View view) {
+        Intent intent = new Intent(AppHomePage.this , TeamsHomePg.class);
+        startActivity(intent);
     }
 }

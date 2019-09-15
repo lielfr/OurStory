@@ -1,20 +1,21 @@
 package org.tsofen.ourstory.UserModel;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.StoryTeam.CreateStory;
+import org.tsofen.ourstory.StoryTeam.SearchStory;
 
 
 public class HomeFragment extends Fragment {
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         parent = (AppHomePage) getActivity();
         return inflater.inflate(R.layout.fragment_main_visitor, container, false);
+
     }
 
     @Override
@@ -41,7 +43,8 @@ public class HomeFragment extends Fragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), SearchStory.class);
+                startActivity(intent);
             }
         });
 
@@ -49,30 +52,16 @@ public class HomeFragment extends Fragment {
         createStory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder myAlertBuilder = new
-                        AlertDialog.Builder(getActivity());
-                // Set the dialog title and message.
-                myAlertBuilder.setTitle("OOPS!!");
-                myAlertBuilder.setMessage("Hello visitor; You must login to create a story for a dear one!!");
-                // Add the dialog buttons.
-                myAlertBuilder.setPositiveButton("Login", new
-                        DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Intent intent = new Intent(getActivity(), LogIn.class);
-                                startActivity(intent);
-                            }
-                        });
-                myAlertBuilder.setNegativeButton("Cancel", new
-                        DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-
-                            }
-                        });
-                //Create and show the AlertDialog.
-                myAlertBuilder.show();
-
+                Intent Create = new Intent(getActivity(), CreateStory.class);
+                Intent Login = new Intent(getActivity(), LogIn.class);
+                Login.putExtra("tybe", "ComingFromCreate");
+                if (UserStatusCheck.getUserStatus().equals("visitor")) {
+                    Toast.makeText(getContext(), "you need to Log in In Order to Create Story ", Toast.LENGTH_SHORT).show();
+                    startActivity(Login);
+                } else {
+                    Create.putExtra("tybe", UserStatusCheck.getUserStatus());
+                    startActivity(Create);
+                }
             }
         });
         final Button login = view.findViewById(R.id.login_button);

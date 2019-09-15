@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/background"
             android:layout_width="414dp"
-            android:layout_height="450dp"
+            android:layout_height="550dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:clickable="false"
@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/quicksand_bold"
+            android:paddingLeft="20dp"
             android:text="@string/location"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
@@ -122,7 +123,7 @@
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
         <ImageButton
-            android:id="@+id/deletebtn2"
+            android:id="@+id/sharebtn"
             android:layout_width="48dp"
             android:layout_height="48dp"
 
@@ -155,9 +156,9 @@
 
             android:layout_marginLeft="196dp"
             android:background="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="@+id/deletebtn2"
+            app:layout_constraintBottom_toBottomOf="@+id/sharebtn"
             app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/deletebtn2"
+            app:layout_constraintTop_toTopOf="@+id/sharebtn"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/delete" />
 
@@ -179,7 +180,7 @@
             android:layout_height="17dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
             android:fontFamily="@font/quicksand_bold"
             android:text="15"
             android:textColor="@color/colorLogin"
@@ -195,7 +196,7 @@
             android:layout_height="17dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
 
             android:fontFamily="@font/quicksand_bold"
             android:text="9"
@@ -211,6 +212,7 @@
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
 
+            android:onClick="editMemory"
             app:layout_constraintBottom_toBottomOf="@+id/deletebtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -228,21 +230,46 @@
             android:layout_marginRight="8dp"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="start"
+            android:paddingLeft="20dp"
             android:text="  Description about this memory"
             android:textAlignment="textStart"
-            android:textColor="#FFFFFF"
 
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintHorizontal_bias="1.0"
 
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/background"
             app:layout_constraintTop_toBottomOf="@+id/picture_person"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
             app:trimLength="120"
-            app:trimMode="trimModeLength" />
+            app:trimMode="trimModeLength"
+            app:colorClickableText="@color/colorGrayHint" />
+
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/tags_text"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edit_round3"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="#TAG"
+            android:textColor="@color/colorName"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
+            app:trimCollapsedText="@string/showMore"
+            app:trimExpandedText="@string/showLess"
+            app:trimLength="40"
+            app:trimMode="trimModeLength"
+            app:colorClickableText="@color/colorGrayHint" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
