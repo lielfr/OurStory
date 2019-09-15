@@ -131,21 +131,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Month" />
 
-        <TextView
-            android:id="@+id/ShowDate"
-            android:layout_width="45dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginEnd="44dp"
-            android:layout_marginRight="44dp"
-            android:text="--/--/--"
-            android:textColor="#FFFFFF"
-            android:textColorLink="#3F51B5"
-            android:textStyle="bold|italic"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/show"
             android:layout_width="33dp"
@@ -169,6 +154,21 @@
             android:popupBackground="@drawable/asd"
             android:spinnerMode="dropdown"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ShowDate"
+            android:layout_width="45dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginRight="44dp"
+            android:text="--/--/--"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#3F51B5"
+            android:textStyle="bold|italic"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toStartOf="@+id/button3"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

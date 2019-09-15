@@ -71,7 +71,7 @@ public class MyMemories extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
-                adapter = new MyMemoriesAdapter(getActivity(), memories ,userObj);
+                adapter = new MyMemoriesAdapter(getActivity(), memories, userObj);
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter.notifyDataSetChanged();
@@ -85,21 +85,20 @@ public class MyMemories extends Fragment {
         });
 
         final Button create_story = view.findViewById(R.id.createStroyBtn);
-        create_story.setOnClickListener(new View.OnClickListener()
-        {
+        create_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent Create = new Intent(getActivity(), CreateStory.class);
-                Create.putExtra("userId" , userObj.getUserId().toString());
+                Create.putExtra("userId", userObj.getUserId().toString());
                 startActivity(Create);
             }
         });
         ImageButton btn = view.findViewById(R.id.searchview2);
-        btn.setOnClickListener(new View.OnClickListener(){
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent myIntent = new Intent(getActivity(), SearchStory.class);
-               startActivity(myIntent);
+                startActivity(myIntent);
             }
         });
 

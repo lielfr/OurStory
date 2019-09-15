@@ -256,8 +256,7 @@ date=new Date(year,month,day);
                         }
                     });
 
-        }
-        else{
+        } else {
             startActivity(regIntent3);
         }
 

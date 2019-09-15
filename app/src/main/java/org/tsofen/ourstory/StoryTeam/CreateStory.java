@@ -67,7 +67,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     DatePicker birthDatePicker, deathDatePicker;
     int birthDateFields = 3, deathDateFields = 3;
     Date today = new Date();
-    OurStoryService Wepengine ;
+    OurStoryService Wepengine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,16 +222,16 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         });
 
         Intent intent = getIntent();  //getting the user from the server
-        if (UserStatusCheck.getUserStatus().equals("not a visitor")||true) {
-            if(/*intent.getStringExtra("userId")!= null||*/true) {
+        if (UserStatusCheck.getUserStatus().equals("not a visitor") || true) {
+            if (/*intent.getStringExtra("userId")!= null||*/true) {
                 //int userid = Integer.parseInt(intent.getStringExtra("userId"));
                 Wepengine.GetUserById(3).enqueue(new Callback<Owner>() {
                     @Override
                     public void onResponse(Call<Owner> call, Response<Owner> response) {
-                        if (response.body()!=null){
-                            owner = response.body() ;
-                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName() , Toast.LENGTH_SHORT).show();
-                        }else{
+                        if (response.body() != null) {
+                            owner = response.body();
+                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
+                        } else {
                             Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
                         }
 
@@ -242,7 +242,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                         Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }else{
+            } else {
                 Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
             }
         }
@@ -530,12 +530,12 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 //                DeathDate = y2s + "T14:17:53.763+0000" ;
 //            }
 
-Story story;
-if(fileURI==null){
-     story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
-}else{
-     story = new Story(owner, nameofperson, BirthDate, DeathDate, fileURI);
-}
+            Story story;
+            if (fileURI == null) {
+                story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
+            } else {
+                story = new Story(owner, nameofperson, BirthDate, DeathDate, fileURI);
+            }
             Wepengine.CreateStory(story).enqueue(new Callback<Story>() {
                 @Override
                 public void onResponse(Call<Story> call, Response<Story> response) {
