@@ -48,6 +48,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -452,14 +453,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             int finalI = i;
             int offset = imageAdapter.data.size();
             tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
-                Uploadable uploadable = new Uploadable(taskSnapshot.getDownloadUrl().toString());
-                uploadable.setUploaded(true);
-                videoAdapter.data.set(finalI, uploadable);
-                progress[finalI + offset] = 100;
+                u.setUrl(taskSnapshot.getDownloadUrl().toString());
+                u.setUploaded(true);
+//                videoAdapter.data.set(finalI, uploadable);
+                progress[finalI] = 100;
             }).addOnProgressListener(taskSnapshot -> {
                 double currentFileProgress = taskSnapshot.getBytesTransferred() /
                         taskSnapshot.getTotalByteCount();
-                progress[finalI + offset] = currentFileProgress * 100;
+                progress[finalI] = currentFileProgress * 100;
                 double progressAvg = 0;
                 for (double p : progress)
                     progressAvg += p;
@@ -485,76 +486,73 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 tags.add(t.getLabel());
             }
             if (create) {
-                service.CreateMemory(memory).enqueue(new Callback<Memory>() {
-                    @Override
-                    public void onResponse(Call<Memory> call, Response<Memory> response) {
-                        if (response.code() != 200) {
-                            displayToast("Error " + response.code() + " : " + response.message());
-                            return;
-                        }
-                        Memory responseMem = response.body();
-                        if (responseMem == null) {
-                            displayToast("Error: Got null object from the server");
-                            return;
-                        }
-                        long memId = responseMem.getId();
-                        HashMap<String, List<String>> hm = new HashMap<>();
-                        hm.put("pictures", pictures);
-                        hm.put("videos", videos);
-                        hm.put("tags", tags);
+                service.CreateMemory(memory)
+                        .subscribeOn(Schedulers.newThread())
+                        .flatMap(mem -> {
+                            if (mem == null) return null;
+                            long memId = mem.getId();
+                            HashMap<String, List<String>> hm = new HashMap<>();
+                            hm.put("pictures", pictures);
+                            hm.put("videos", videos);
+                            hm.put("tags", tags);
 
-                        service.SetMediaToMemory(memId, hm).enqueue(new Callback<Memory>() {
-                            @Override
-                            public void onResponse(Call<Memory> call, Response<Memory> response) {
-                                intent.putExtra(KEY_MEMID, memId);
-                                setResult(RESULT_OK, intent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onFailure(Call<Memory> call, Throwable t) {
-
-                            }
+                            return service.SetMediaToMemory(memId, hm);
+                        })
+                        .subscribe(finalResult -> {
+                            intent.putExtra(KEY_MEMID, finalResult.getId());
+                            setResult(RESULT_OK, intent);
+                            finish();
                         });
-                    }
 
-                    @Override
-                    public void onFailure(Call<Memory> call, Throwable t) {
-
-                    }
-                });
             } else {
                 memory.getPictures().clear();
                 memory.getVideos().clear();
                 memory.getTags().clear();
-                service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
-                    @Override
-                    public void onResponse(Call<Memory> call, Response<Memory> response) {
-                        HashMap<String, List<String>> hm = new HashMap<>();
-                        hm.put("pictures", pictures);
-                        hm.put("videos", videos);
-                        hm.put("tags", tags);
+                service.EditMemory(memory.getId(), memory)
+                        .subscribeOn(Schedulers.newThread())
+                        .flatMap(mem -> {
+                            if (mem == null) return null;
+                            long memId = mem.getId();
+                            HashMap<String, List<String>> hm = new HashMap<>();
+                            hm.put("pictures", pictures);
+                            hm.put("videos", videos);
+                            hm.put("tags", tags);
 
-                        service.SetMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
-                            @Override
-                            public void onResponse(Call<Memory> call, Response<Memory> response) {
-                                intent.putExtra(KEY_MEMID, memory.getId());
-                                setResult(RESULT_OK, intent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onFailure(Call<Memory> call, Throwable t) {
-
-                            }
+                            return service.SetMediaToMemory(memId, hm);
+                        })
+                        .subscribe(finalResult -> {
+                            intent.putExtra(KEY_MEMID, finalResult.getId());
+                            setResult(RESULT_OK, intent);
+                            finish();
                         });
-                    }
-
-                    @Override
-                    public void onFailure(Call<Memory> call, Throwable t) {
-
-                    }
-                });
+//                service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
+//                    @Override
+//                    public void onResponse(Call<Memory> call, Response<Memory> response) {
+//                        HashMap<String, List<String>> hm = new HashMap<>();
+//                        hm.put("pictures", pictures);
+//                        hm.put("videos", videos);
+//                        hm.put("tags", tags);
+//
+////                        service.SetMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
+////                            @Override
+////                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+////                                intent.putExtra(KEY_MEMID, memory.getId());
+////                                setResult(RESULT_OK, intent);
+////                                finish();
+////                            }
+////
+////                            @Override
+////                            public void onFailure(Call<Memory> call, Throwable t) {
+////
+////                            }
+////                        });
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Memory> call, Throwable t) {
+//
+//                    }
+//                });
             }
         });
 
