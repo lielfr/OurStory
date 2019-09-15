@@ -82,7 +82,7 @@ public class MemoryA implements Serializable {
      * @param comments
      * @param tags
      */
-    public MemoryA(Long memoryId, Story story, Contributer contributer, String description, Date memoryDate, Date createDate, String feeling, String location, List<Comment> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos,List<Tag> tags) {
+    public MemoryA(Long memoryId, Story story, Contributer contributer, String description, Date memoryDate, Date createDate, String feeling, String location, List<Comment> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos, List<Tag> tags) {
         super();
         this.memoryId = memoryId;
         this.story = story;

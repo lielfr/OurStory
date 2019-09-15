@@ -1,6 +1,5 @@
 package org.tsofen.ourstory;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,16 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import org.tsofen.ourstory.UserModel.AppHomePage;
-import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
-import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
@@ -53,11 +47,9 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
         Contributer contributer = memory.getContributer();
-        if(memory.getContributer().getProfilePicture()!=null)
-        {
+        if (memory.getContributer().getProfilePicture() != null) {
             holder.pic.setImageURI((Uri) memory.getContributer().getProfilePicture());
-        }
-        else {
+        } else {
             holder.pic.setImageLevel(R.drawable.defaultprofilepicture);
         }
         holder.name.setText(memory.getContributer().getFullName());
@@ -66,7 +58,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             public void onClick(View view) {
 
                 Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
-               intent.putExtra("memory", memory);
+                intent.putExtra("memory", memory);
                 ctx.startActivity(intent);
 
             }
@@ -83,36 +75,28 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
          holder.feeling.setText(memory.getFeeling());
      }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
+        if (memory.getMemoryDate() != null) {
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
             holder.mem_date.setText(memDate);
-        }
-        else
+        } else
             holder.mem_date.setVisibility(View.GONE);
-        if(memory.getLikes()!=null) {
+        if (memory.getLikes() != null) {
            holder.num_of_likes.setText(memory.getLikes().size());
-       }
-        else
-        {
+        } else {
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         }
        if(memory.getComments()!=null) {
            holder.num_of_comments.setText(memory.getComments().size());
-       }
-       else
-       {
+       } else {
            holder.num_of_comments.setVisibility(View.INVISIBLE);
        }
-        if(memory.getTags()!=null)
-        {
+        if (memory.getTags() != null) {
             String s = "#";
-            for(Tag tag : memory.getTags() )
-            {
-                s +=tag.getLabel();
+            for (Tag tag : memory.getTags()) {
+                s += tag.getLabel();
             }
             holder.tags.setText(s);
-        }
-        else
+        } else
             holder.tags.setVisibility(View.INVISIBLE);
 
 
@@ -150,7 +134,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvMemory;
-        public TextView tags,feeling,location,name, mem_date, descr, num_of_likes, num_of_comments;
+        public TextView tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
         public ImageView pic;
         public ImageButton commentbtn;
         public MemoryAdapter adapter;

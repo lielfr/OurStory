@@ -21,16 +21,13 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 
 import java.io.IOException;
-import java.util.UUID;
 
 
 public class RegistrationPage2 extends AppCompatActivity {
@@ -250,6 +247,9 @@ public class RegistrationPage2 extends AppCompatActivity {
                         }
                     });
 
+        }
+        else{
+            startActivity(regIntent3);
         }
 
 

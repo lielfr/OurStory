@@ -34,13 +34,13 @@ public class RegistrationPage1 extends AppCompatActivity {
     public String repeatPasswordString;
 
     String mess1="Field cannot be empty!";
-    String mess2="ENTER only alphabetic characters";
+    String mess2 = "ENTER only alphabetic characters";
     String mess3="Please enter a valid email for example alexey19@gmail.com";
-    String mess4="Weak password";
-    String mess5="Medium password";
-    String mess6="Password cannot be longer than 20 characters";
-    String mess7="Strong password";
-    String mess8="Please write your password again";
+    String mess4 = "Weak password";
+    String mess5 = "Medium password";
+    String mess6 = "Password cannot be longer than 20 characters";
+    String mess7 = "Strong password";
+    String mess8 = "Please write your password again";
     String mess9="Passwords must match!";
 
     @Override
@@ -148,6 +148,7 @@ public class RegistrationPage1 extends AppCompatActivity {
         } else if (str1.length() < 10) {
             edtTxt1.setText(mess5);
             edtTxt1.setVisibility(View.VISIBLE);
+            return 1;
         } else if (str1.length() > 20) {
             edtTxt1.setText(mess6);
             edtTxt1.setVisibility(View.VISIBLE);

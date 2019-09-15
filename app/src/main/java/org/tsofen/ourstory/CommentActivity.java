@@ -43,8 +43,8 @@ public class CommentActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8),(int)(height*.8));
-        memoryA= (MemoryA) i.getSerializableExtra("memory");
+        getWindow().setLayout((int) (width * .8), (int) (height * .8));
+        memoryA = (MemoryA) i.getSerializableExtra("memory");
         rv = findViewById(R.id.recycler_comment);
         adapter = new CommentAdapter(memoryA.getComments());
         rv.setAdapter(adapter);

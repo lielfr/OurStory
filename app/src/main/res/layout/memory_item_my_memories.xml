@@ -246,7 +246,7 @@
             app:trimExpandedText="@string/showLess"
             app:trimLength="120"
             app:trimMode="trimModeLength"
-            app:colorClickableText="@color/colorGrayHint"/>
+            app:colorClickableText="@color/colorGrayHint" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
@@ -269,8 +269,7 @@
             app:trimExpandedText="@string/showLess"
             app:trimLength="40"
             app:trimMode="trimModeLength"
-            app:colorClickableText="@color/colorGrayHint"
-            />
+            app:colorClickableText="@color/colorGrayHint" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
