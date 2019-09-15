@@ -32,11 +32,11 @@ public interface OurStoryService {
     @POST("api/comments")
     Call<Comment> newComment(@Body Comment comment);
     @GET("memories/getUserMemories/{id}")
-    Call<ArrayList<MemoryA>> GetMemoriesByUser(@Path("id") long id);
+    Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
-    Call<ArrayList<MemoryA>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
+    Call<ArrayList<Memory>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
     @GET("memories/story/{story}/findMemoriesByYear/{year}")
-    Call<ArrayList<MemoryA>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
+    Call<ArrayList<Memory>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
     @GET("comments/findById/{id}")
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})

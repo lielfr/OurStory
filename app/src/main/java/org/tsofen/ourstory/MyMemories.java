@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -37,7 +38,7 @@ public class MyMemories extends Fragment {
     AppHomePage parent;
     RecyclerView rv;
     Long user_id;
-    ArrayList<MemoryA> memories;
+    ArrayList<Memory> memories;
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
@@ -62,9 +63,9 @@ public class MyMemories extends Fragment {
         user_id=userObj.getUserId();
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {
+        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<Memory>>() {
             @Override
-            public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+            public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                 memories = response.body();
                 Toast.makeText(getActivity(), "Fadi", Toast.LENGTH_LONG).show();
                 adapter = new MyMemoriesAdapter(getActivity(), memories);
@@ -75,7 +76,7 @@ public class MyMemories extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
                 Log.d("Error", t.toString());
                 Toast.makeText(getActivity(), "Failed", Toast.LENGTH_LONG).show();
             }

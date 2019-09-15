@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.Tags;
 
@@ -31,12 +32,12 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-    public ArrayList<MemoryA> mMemories;
+    public ArrayList<Memory> mMemories;
     Context ctx;
     LayoutInflater mInflater;
-    MemoryA mem;
+    Memory mem;
 
-    public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories) {
+    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
     }
@@ -61,7 +62,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        MemoryA memory = mMemories.get(position);
+        Memory memory = mMemories.get(position);
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +102,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH+1)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
         }
         else
@@ -126,7 +127,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
        else
            holder.location.setVisibility(View.INVISIBLE);
         if(memory.getFeeling()!=null)
-            holder.feeling.setText(memory.getFeeling());
+            holder.feeling.setText(memory.getFeeling().toString());
         else
             holder.feeling.setVisibility(View.INVISIBLE);
     }

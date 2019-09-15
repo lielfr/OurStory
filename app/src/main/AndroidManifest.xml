@@ -39,11 +39,11 @@
         <activity
             android:name=".MemoriesOfStoryActivity"
             android:label="Memories"
-            />
+            android:parentActivityName=".YearActivity" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            />
+            android:value="org.tsofen.ourstory.YearActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

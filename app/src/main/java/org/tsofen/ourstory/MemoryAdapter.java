@@ -17,19 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.Memory;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-    public final ArrayList<MemoryA> mMemories;
-    MemoryA memoryA;
+    public final ArrayList<Memory> mMemories;
+    Memory memory;
     Context ctx;
     LayoutInflater mInflater;
-    MemoryA mem;
+    Memory mem;
 
-    public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
+    public MemoryAdapter(Context context,ArrayList<Memory> memories)
     {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
@@ -47,7 +49,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MemoryA memory = mMemories.get(position);
+        Memory memory = mMemories.get(position);
         Contributer contributer = memory.getContributer();
         if (memory.getContributer().getProfilePicture() != null) {
             holder.pic.setImageURI((Uri) memory.getContributer().getProfilePicture());
@@ -74,11 +76,11 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
      }
      if(memory.getFeeling()!=null)
      {
-         holder.feeling.setText(memory.getFeeling());
+         holder.feeling.setText(memory.getFeeling().toString());
      }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
-            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH+1)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
         } else
             holder.mem_date.setVisibility(View.GONE);

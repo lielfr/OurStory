@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
+
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -32,7 +33,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     ArrayList<Memory> data;
     MemoryAdapter adapter;
     TextView storyName;
-    private ArrayList<MemoryA> memories;
+    private ArrayList<Memory> memories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,32 +64,32 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         //               flag 0 == by Year |||| flag 1 == by Tag
         if(stringExtra[0].equals("0")) {
 
-            MemoryAService.GetMemoriesByYear(10, 2000).enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByYear(10, 2000).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
                     Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
         }
 
         else {
-            MemoryAService.GetMemoriesByTag(10, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByTag(10, "happy").enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
                     Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
