@@ -30,7 +30,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public List<Comment> comments;
     OurStoryService user_comment;
+    Context ctx;
+    LayoutInflater mInflater;
     Owner user;
+
+    public CommentAdapter(Context context, List<Comment> comments) {
+        this.comments = comments;
+        mInflater = LayoutInflater.from(context);
+    }
+
     @NonNull
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,13 +51,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         // return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
+        ctx = parent.getContext();
 
         return viewHolder;
-    }
-
-    public CommentAdapter(List<Comment> comments) {
-        this.comments = comments;
     }
 
     @Override

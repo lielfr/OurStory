@@ -26,9 +26,16 @@ import com.google.firebase.storage.UploadTask;
 
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.User;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.io.IOException;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RegistrationPage2 extends AppCompatActivity {
@@ -237,7 +244,7 @@ date=new Date(year,month,day);
                                     + emailString + " " + firstNameString + " "
                                     + lastNameString + " " + passwordString + " "
                                     + stateString + " " + cityString + " " + date + " " + gender + " " + profilePicture);
-                            startActivity(regIntent3);
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -257,9 +264,31 @@ date=new Date(year,month,day);
                     });
 
         }
-        else{
+        OurStoryService saveUser = WebFactory.getService();
+        org.tsofen.ourstory.model.api.User newUser= new org.tsofen.ourstory.model.api.User();
+        newUser.setFirstName(firstNameString);
+        newUser.setLastName(lastNameString);
+        newUser.setProfilePicture(profilePicture);
+        newUser.setDateOfBirth(date);
+        newUser.setEmail(emailString);
+        newUser.setPassword(passwordString);
+        newUser.setCity(cityString);
+        newUser.setState(stateString);
+        newUser.setGender(gender);
+        saveUser.CreateUser(newUser).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Toast.makeText(RegistrationPage2.this,"UserSaved Check Database",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(RegistrationPage2.this,"Saving user Failed",Toast.LENGTH_LONG).show();
+
+            }
+        });
             startActivity(regIntent3);
-        }
+
 
 
     }//end of upload method
