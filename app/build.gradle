@@ -57,5 +57,7 @@ dependencies {
 
     implementation 'com.itkacher.okhttpprofiler:okhttpprofiler:1.0.4'
 
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0-RC2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.6.1'
 
 }
