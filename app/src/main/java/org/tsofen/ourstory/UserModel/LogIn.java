@@ -106,7 +106,8 @@ org.tsofen.ourstory.model.api.User myUser;
 
                     userPass = myUser.getPassword();
                     if (userPass.equals(inputPassword)) {
-                        UserStatusCheck.setUserStatus("not a visitor");
+                        UserStatusCheck.setUserStatus("not a visitor"); //TODO move the user id to the home page and then move it to create story intent (move it under name=("userId"))
+                        //
                         Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
                         signInDone.putExtra("email", inputEmail);
                         signInDone.putExtra("userId", userId);

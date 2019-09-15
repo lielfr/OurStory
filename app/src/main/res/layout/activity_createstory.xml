@@ -70,9 +70,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_below="@+id/header_create_story"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_create_story">
 
         <LinearLayout
@@ -81,9 +82,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/header_create_story">
@@ -188,19 +189,20 @@
                 android:textSize="@dimen/errorSize"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
-                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText"/>
+                app:layout_constraintTop_toBottomOf="@+id/lastNameEditText" />
 
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
+
                 <LinearLayout
                     android:id="@+id/birthHandler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/showBirthDate"
@@ -213,23 +215,24 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <CheckBox
                             android:id="@+id/monthChckBx1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Month Unknown"
                             android:layout_weight="1"
                             android:buttonTint="@color/colorError"
-                            android:textColor="@color/colorGrayHint"/>
+                            android:text="Month Unknown"
+                            android:textColor="@color/colorGrayHint" />
 
                         <CheckBox
                             android:id="@+id/dayChckBx1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Day Unknown"
                             android:layout_weight="1"
                             android:buttonTint="@color/colorError"
-                            android:textColor="@color/colorGrayHint"/>
+                            android:text="Day Unknown"
+                            android:textColor="@color/colorGrayHint" />
                     </LinearLayout>
 
                     <DatePicker
@@ -239,9 +242,9 @@
                         android:calendarTextColor="@color/colorGrayHint"
                         android:calendarViewShown="false"
                         android:datePickerMode="spinner"
-                        android:startYear="1800"
                         android:minDate="01/01/1800"
-                        android:spinnersShown="true" />
+                        android:spinnersShown="true"
+                        android:startYear="1800" />
 
                     <TextView
                         android:id="@+id/error3"
@@ -256,7 +259,7 @@
                         android:textSize="@dimen/errorSize"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="@+id/birthDatePicker"
-                        app:layout_constraintTop_toBottomOf="@+id/birthDatePicker"/>
+                        app:layout_constraintTop_toBottomOf="@+id/birthDatePicker" />
 
                 </LinearLayout>
             </ScrollView>
@@ -264,21 +267,22 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:id="@+id/deathHandler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="12dp" >
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/showDeathDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:calendarTextColor="@color/colorGrayHint"
-                        android:textSize="@dimen/textSize"
-                        android:text="" />
+                        android:text=""
+                        android:textSize="@dimen/textSize" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -288,31 +292,31 @@
                             android:id="@+id/monthChckBx2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Month Unknown"
                             android:layout_weight="1"
                             android:buttonTint="@color/colorError"
-                            android:textColor="@color/colorGrayHint"/>
+                            android:text="Month Unknown"
+                            android:textColor="@color/colorGrayHint" />
 
                         <CheckBox
                             android:id="@+id/dayChckBx2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Day Unknown"
                             android:layout_weight="1"
                             android:buttonTint="@color/colorError"
-                            android:textColor="@color/colorGrayHint"/>
+                            android:text="Day Unknown"
+                            android:textColor="@color/colorGrayHint" />
                     </LinearLayout>
 
                     <DatePicker
                         android:id="@+id/deathDatePicker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:calendarViewShown="false"
                         android:calendarTextColor="@color/colorGrayHint"
-                        android:spinnersShown="true"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
                         android:minDate="01/01/1800"
-                        android:startYear="1800"
-                        android:datePickerMode="spinner" />
+                        android:spinnersShown="true"
+                        android:startYear="1800" />
 
                     <TextView
                         android:id="@+id/error4"
@@ -325,7 +329,7 @@
                         android:textSize="@dimen/errorSize"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="@+id/deathDatePicker"
-                        app:layout_constraintTop_toBottomOf="@+id/deathDatePicker"/>
+                        app:layout_constraintTop_toBottomOf="@+id/deathDatePicker" />
 
                 </LinearLayout>
             </ScrollView>
@@ -354,8 +358,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/create"
@@ -381,8 +385,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/register_button"
-                    android:text="CREATE &amp; ADD A MEMORY"
                     android:onClick="viewCreatedStory"
+                    android:text="CREATE &amp; ADD A MEMORY"
                     android:textColor="@color/colorWhite"
                     app:layout_constraintBottom_toBottomOf="@+id/create"
                     app:layout_constraintStart_toEndOf="@+id/create"
