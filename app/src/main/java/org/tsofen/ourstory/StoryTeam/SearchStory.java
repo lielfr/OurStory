@@ -43,7 +43,9 @@ public class SearchStory extends AppCompatActivity {
     private Spinner spinner;
     String item ;
     TextView searchresult ;
-    StoryFragment CurrentFragment = null ;
+    StoryFragment CurrentFragment = null;
+    MemoryFragment memoryFragment = null;
+    int currTab;
     int flag = 0;
     int op = 0;
     int D;
@@ -87,7 +89,7 @@ public class SearchStory extends AppCompatActivity {
         }
         final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-
+        memoryFragment = (MemoryFragment) adapter.getItem(1);
         CurrentFragment = (StoryFragment) adapter.getItem(0);
         if (CurrentFragment!=null){
             Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -102,6 +104,7 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                currTab=tab.getPosition();
 //                if (adapter.getItem(0)!=null){
 //                    CurrentFragment =adapter.getItem(0);
 //                    Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -138,8 +141,11 @@ public class SearchStory extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                SendSearchResToFragment(searchresult.getText().toString(),0,CurrentFragment);
 
+                if(currTab==0) {//check which fragment we in
+                    SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
+                }else{
+                    SendSearchResToMemoryFragment(searchresult.getText().toString(),0,memoryFragment) ;               }
             }
 
             @Override
@@ -243,6 +249,18 @@ public class SearchStory extends AppCompatActivity {
 
     }
 
+    public void SendSearchResToMemoryFragment(String searchresult,int SearchBy,MemoryFragment fragment) {
+
+        Log.i("fragment","trying to catch fragment");
+
+        if(fragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+            //this section for STORYTEAM Use
+            fragment.CommitSearch(getApplicationContext(), searchresult);
+        }else{
+            Log.i("fragment","fragment is null");
+        }
+
+    }
 
     public void finish(View view) {
         finish();

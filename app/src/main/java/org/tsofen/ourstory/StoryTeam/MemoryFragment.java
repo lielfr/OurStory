@@ -24,9 +24,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static org.tsofen.ourstory.StoryTeam.StoryFragment.inflatedView;
+
 
 public class MemoryFragment extends Fragment {
-    public ArrayList<MemoryA> memories;
+    public ArrayList<MemoryA> memories = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MemoryAdapter mAdapter;
     OurStoryService MemoryAService;
@@ -48,16 +50,22 @@ public class MemoryFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
         mRecyclerView = getView().findViewById(R.id.recyclerview);
+    }
 
+    public void CommitSearch(Context context, String searchinput){
         OurStoryService wepengine = WebFactory.getService();
         wepengine.GetMemoriesByKeyword("description").enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
-                mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(MemoryFragment.this.getContext()));
-                mAdapter.notifyDataSetChanged();
+                if(memories==null) {
+                    Log.d("err", "No Memories");
+                }else {
+                    mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(MemoryFragment.this.getContext()));
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -65,18 +73,12 @@ public class MemoryFragment extends Fragment {
                 Log.d("Error", t.toString());
             }
         });
-        mRecyclerView = getView().findViewById(R.id.recyclerview);
-        memories = new ArrayList<>();
-
-        mAdapter = new MemoryAdapter(ctx,memories);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
         int MemoryListSize = memories.size();
         mRecyclerView.getAdapter().notifyItemInserted(MemoryListSize);
         mRecyclerView.smoothScrollToPosition(MemoryListSize);
-
     }
 
-
 }
+
+
+
