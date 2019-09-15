@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
@@ -50,9 +53,15 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         MemoryA memory = mMemories.get(position);
         Contributer contributer = memory.getContributer();
         if (memory.getContributer().getProfilePicture() != null) {
-            holder.pic.setImageURI(Uri.parse( memory.getContributer().getProfilePicture().toString()));
+            Uri uri = Uri.parse(memory.getContributer().getProfilePicture().toString());
+            RequestOptions options = new RequestOptions()
+                    .override(300, 300)
+                    .centerCrop()
+                    .placeholder(R.drawable.nopicyet)
+                    .error(R.drawable.nopicyet);
+            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
         } else {
-            holder.pic.setImageLevel(R.drawable.defaultprofilepicture);
+            holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
         holder.name.setText(memory.getContributer().getFullName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
@@ -81,25 +90,25 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
             holder.mem_date.setText(memDate);
         } else
-            holder.mem_date.setVisibility(View.GONE);
+            holder.mem_date.setVisibility(View.INVISIBLE);
         if (memory.getLikes() != null) {
            holder.num_of_likes.setText(memory.getLikes().size()+"");
         } else {
-            holder.num_of_likes.setVisibility(View.GONE);
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
         }
        if(memory.getComments()!=null) {
            holder.num_of_comments.setText(memory.getComments().size()+"");
        } else {
-           holder.num_of_comments.setVisibility(View.GONE);
+           holder.num_of_comments.setVisibility(View.INVISIBLE);
        }
         if (memory.getTags() != null) {
-            String s = "#";
+            String s = "";
             for (Tag tag : memory.getTags()) {
                 s += "#" +tag.getLabel();
             }
             holder.tags.setText(s);
         } else
-            holder.tags.setVisibility(View.GONE);
+            holder.tags.setVisibility(View.INVISIBLE);
 
        /* ArrayList<ImgItem> images=new ArrayList<>();
         if(memory.getPictures()!=null) {
@@ -111,7 +120,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         }
         else
         {
-            holder.rvMemory.setVisibility(View.GONE);
+            holder.rvMemory.setVisibility(View.INVISIBLE);
         }*/
 
     }
