@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.api.ListOfStory;
 
 import java.util.List;
@@ -46,7 +47,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
         ListOfStory mCurrent = mStoryList.get(position);
         holder.firstName.setText(mCurrent.getNameOfPerson());
         holder.dates.setText("From "+mCurrent.getDateOfBirth().substring(0,9)+" To "+ mCurrent.getDateOfDeath().substring(0,9));
-        String SP = mCurrent.getPicture().toString();
+        Object p = mCurrent.getPicture();
+        if (p == null) return;
+        String SP = p.toString();
         uri = Uri.parse(SP);
         RequestOptions options = new RequestOptions()
                 .override(300, 300)
