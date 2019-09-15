@@ -71,6 +71,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     int birthDateFields = 3, deathDateFields = 3;
     Date today = new Date();
     OurStoryService Wepengine ;
+    Long userid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,10 +226,10 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         });
 
         Intent intent = getIntent();  //getting the user from the server
-        if (UserStatusCheck.getUserStatus().equals("not a visitor")||true) {
-            if(/*intent.getStringExtra("userId")!= null||*/true) {
-                //int userid = Integer.parseInt(intent.getStringExtra("userId"));
-                Wepengine.GetUserById(3).enqueue(new Callback<Owner>() {
+        if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
+            if(intent.getStringExtra("userId")!= null) {
+                userid = Long.parseLong(intent.getStringExtra("userId"));
+                Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
                     @Override
                     public void onResponse(Call<Owner> call, Response<Owner> response) {
                         if (response.body()!=null){
