@@ -263,6 +263,7 @@
             android:textSize="26sp"
             android:textStyle="bold"
             app:colorClickableText="@color/colorGrayHint"
+            app:layout_constraintBottom_toTopOf="@+id/sharebtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/my_memoriesRv"
             app:trimCollapsedText="@string/showMore"

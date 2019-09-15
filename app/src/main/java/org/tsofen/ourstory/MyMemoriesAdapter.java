@@ -1,5 +1,6 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,11 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ShareCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Story;
@@ -27,6 +31,10 @@ import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 
@@ -84,18 +92,28 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
             }
         });
-
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 OurStoryService deleteMemory;
                 deleteMemory = WebFactory.getService();
-                deleteMemory.DeleteMemory((memory.getMemoryId()));
+                deleteMemory.DeleteMemory(((memory).getMemoryId())).enqueue(new Callback<Object>() {
+
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        Toast.makeText(ctx.getApplicationContext(),"Succeded",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+                        Toast.makeText(ctx.getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
+                    }
+                });
+
 
             }
         });
-
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     } else
