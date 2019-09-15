@@ -54,6 +54,8 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
 
         MemoryAService = WebFactory.getService();
+        ////
+        /////
 
         Intent call = getIntent();
         String userCall = call.getStringExtra("UserCall");
@@ -73,6 +75,8 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+
+                    //
 
                 }
             });
