@@ -27,6 +27,8 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     MemoryA memoryA;
     Context ctx;
     LayoutInflater mInflater;
+    MemoryA mem;
+
     public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
     {
         this.mMemories = memories;
@@ -155,5 +157,11 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             this.adapter = memoryAdapter;
 
         }
+    }
+
+    public void editMemory(View view){
+        Intent i = new Intent();
+        i.putExtra("CEMemoryEdit", mem);
+
     }
 }

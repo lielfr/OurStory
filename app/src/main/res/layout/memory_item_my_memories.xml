@@ -212,7 +212,6 @@
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
 
-            android:onClick="editMemory"
             app:layout_constraintBottom_toBottomOf="@+id/deletebtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

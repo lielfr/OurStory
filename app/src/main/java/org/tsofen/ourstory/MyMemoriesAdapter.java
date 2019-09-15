@@ -34,6 +34,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public ArrayList<MemoryA> mMemories;
     Context ctx;
     LayoutInflater mInflater;
+    MemoryA mem;
 
     public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories) {
         this.mMemories = memories;
@@ -53,6 +54,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         ctx = parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
         return viewHolder;
+
+
     }
 
     @Override
@@ -69,6 +72,19 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
             }
         });
+
+        holder.editbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent();
+                mem = memory;
+                i.putExtra("CEMemoryEdit", mem);
+
+            }
+        });
+
+
+
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     } else
@@ -122,7 +138,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tags, feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
-        ImageButton sharebtn,commentbtn;
+        ImageButton sharebtn,commentbtn, editbtn;
         public MyMemoriesAdapter adapter;
 
 
@@ -133,6 +149,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
+            editbtn = itemView.findViewById(R.id.editbtn);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
             num_of_comments = itemView.findViewById(R.id.commentNum);
