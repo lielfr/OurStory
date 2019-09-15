@@ -72,10 +72,9 @@ public class UserProfile extends Fragment {
             fName.setText(profileUser.getFirstName());
         if (profileUser.getLastName() != null)
             lName.setText(profileUser.getLastName());
-        if (profileUser.getDateOfBirth() != null)
-        {
-            Date date=profileUser.getDateOfBirth();
-            dOfBirth.setText(date.getDay()+"/"+date.getMonth()+"/"+date.getYear());
+        if (profileUser.getDateOfBirth() != null) {
+            Date date = profileUser.getDateOfBirth();
+            dOfBirth.setText(date.getDay() + "/" + date.getMonth() + "/" + date.getYear());
         }
         if (profileUser.getGender() != null)
             gender.setText(profileUser.getGender());

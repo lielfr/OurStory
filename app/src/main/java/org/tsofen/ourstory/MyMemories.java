@@ -62,7 +62,7 @@ public class MyMemories extends Fragment {
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
                 Toast.makeText(getActivity(), "Fadi", Toast.LENGTH_LONG).show();
-                adapter = new MyMemoriesAdapter(getActivity(),memories);
+                adapter = new MyMemoriesAdapter(getActivity(), memories);
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter.notifyDataSetChanged();

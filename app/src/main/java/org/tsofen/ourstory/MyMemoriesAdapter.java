@@ -33,7 +33,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     Context ctx;
     LayoutInflater mInflater;
 
-    public MyMemoriesAdapter(Context context,ArrayList<MemoryA> memories) {
+    public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
     }
@@ -48,7 +48,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
         View contactView = inflater.inflate(R.layout.memory_item_my_memories, parent, false);
-        ctx=parent.getContext();
+        ctx = parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
         return viewHolder;
     }
@@ -69,32 +69,27 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         });
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
-    }
-    else
+    } else
         holder.descr.setVisibility(View.INVISIBLE);
-    if(memory.getTags()!=null)
-    {
-        String s = "#";
-        for(Tag tag : memory.getTags() )
-        {
-             s +=tag.getLabel();
-        }
-        holder.tags.setText(s);
-    }
-    else
-        holder.tags.setVisibility(View.INVISIBLE);
-      Story story = memory.getStory();
-      holder.name.setText(story.getNameOfPerson());
+        if (memory.getTags() != null) {
+            String s = "#";
+            for (Tag tag : memory.getTags()) {
+                s += tag.getLabel();
+            }
+            holder.tags.setText(s);
+        } else
+            holder.tags.setVisibility(View.INVISIBLE);
+        Story story = memory.getStory();
+        holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-       String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
             holder.mem_date.setText(memDate);
         }
         else
             holder.mem_date.setVisibility(View.INVISIBLE);
 
-        if(memory.getStory().getPicture()!=null)
-        {
+        if (memory.getStory().getPicture() != null) {
             holder.profile.setImageURI((Uri) memory.getStory().getPicture());
         }
         if(memory.getLikes().isEmpty())
@@ -106,7 +101,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         else
             holder.num_of_comments.setText(memory.getComments().size());
        if(memory.getLocation()!=null)
-           holder.location.setText((String) memory.getLocation());
+           holder.location.setText(memory.getLocation());
        else
            holder.location.setVisibility(View.INVISIBLE);
         if(memory.getFeeling()!=null)
@@ -120,7 +115,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tags,feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
+        public TextView tags, feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
         ImageButton sharebtn,commentbtn;
         public MyMemoriesAdapter adapter;
