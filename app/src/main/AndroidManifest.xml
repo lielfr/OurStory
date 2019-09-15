@@ -31,8 +31,7 @@
         <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
-        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg">
-        </activity>
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg"/>
         <activity android:name="org.tsofen.ourstory.CommentActivity" />
 
 
@@ -40,11 +39,6 @@
             android:name=".MemoriesOfStoryActivity"
             android:label="Memories"
             />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
