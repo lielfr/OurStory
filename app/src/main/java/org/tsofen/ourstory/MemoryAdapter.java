@@ -1,61 +1,127 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.model.Memory;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.api.Contributer;
+import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
-    public ArrayList<Memory> mMemories;
+    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
+    public final ArrayList<MemoryA> mMemories;
+    MemoryA memoryA;
+    Context ctx;
+    LayoutInflater mInflater;
+    MemoryA mem;
 
-    public MemoryAdapter(ArrayList<Memory> memories) {
+    public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
+    {
         this.mMemories = memories;
+        mInflater = LayoutInflater.from(context);
     }
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
-
-        // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item, parent, false);
-
-
-        // return a new holder instance
+        ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Memory memory = mMemories.get(position);
-        holder.descr.setText(memory.getDescription());
-        holder.name.setText(memory.getCreatorName());
+        MemoryA memory = mMemories.get(position);
+        Contributer contributer = memory.getContributer();
+        if (memory.getContributer().getProfilePicture() != null) {
+            Uri uri = Uri.parse(memory.getContributer().getProfilePicture().toString());
+            RequestOptions options = new RequestOptions()
+                    .override(300, 300)
+                    .centerCrop()
+                    .placeholder(R.drawable.nopicyet)
+                    .error(R.drawable.nopicyet);
+            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
+        } else {
+            holder.pic.setImageResource(R.drawable.defaultprofilepicture);
+        }
+        holder.name.setText(memory.getContributer().getFullName());
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) + "/" + (memory.getCreateDate().get(Calendar.MONTH)) +
-                "/" + (memory.getCreateDate().get(Calendar.YEAR));
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                intent.putExtra("memory", memory);
+                ctx.startActivity(intent);
+
+            }
+        });
+     if(memory.getDescription()!=null) {
+         holder.descr.setText(memory.getDescription());
+     }
+     if(memory.getLocation()!=null)
+     {
+         holder.location.setText(memory.getLocation());
+     }
+     if(memory.getFeeling()!=null)
+     {
+         holder.feeling.setText("#"+memory.getFeeling());
+     }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-       /* holder.num_of_shares.setText(memory.getLikes().size());
-        holder.num_of_shares.setText(memory.getShares().size());
-        holder.num_of_comments.setText(memory.getComments().size());*/
-//        holder.create_date.setText(createDate);
-        holder.mem_date.setText(memDate);
+        if (memory.getMemoryDate() != null) {
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
+            holder.mem_date.setText(memDate);
+        } else
+            holder.mem_date.setVisibility(View.INVISIBLE);
+        if (memory.getLikes() != null) {
+           holder.num_of_likes.setText(memory.getLikes().size()+"");
+        } else {
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
+        }
+       if(memory.getComments()!=null) {
+           holder.num_of_comments.setText(memory.getComments().size()+"");
+       } else {
+           holder.num_of_comments.setVisibility(View.INVISIBLE);
+       }
+        if (memory.getTags() != null) {
+            String s = "";
+            for (Tag tag : memory.getTags()) {
+                s += "#" +tag.getLabel();
+            }
+            holder.tags.setText(s);
+        } else
+            holder.tags.setVisibility(View.INVISIBLE);
+
+       /* ArrayList<ImgItem> images=new ArrayList<>();
+        if(memory.getPictures()!=null) {
+            images.add((ImgItem) memory.getPictures());
+            ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
+            holder.rvMemory.setHasFixedSize(true);
+            holder.rvMemory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
+            holder.rvMemory.setAdapter(imgAdapter);
+        }
+        else
+        {
+            holder.rvMemory.setVisibility(View.INVISIBLE);
+        }*/
 
     }
 
@@ -63,28 +129,34 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public int getItemCount() {
         return mMemories.size();
     }
-
-    public void filterList(ArrayList<Memory> filteredList) {
-        mMemories = filteredList;
-        notifyDataSetChanged();
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, mem_date, create_date, descr, num_of_likes, num_of_comments, num_of_shares;
+        RecyclerView rvMemory;
+        public TextView tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
         public ImageView pic;
+        public ImageButton commentbtn;
         public MemoryAdapter adapter;
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
+            rvMemory = itemView.findViewById(R.id.memory_pic);
+            commentbtn = itemView.findViewById(R.id.commentbtn2);
+            feeling = itemView.findViewById(R.id.feelingtxt);
+            location = itemView.findViewById(R.id.locationtxt);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
             pic = itemView.findViewById(R.id.picture_person);
-           /* num_of_comments = itemView.findViewById(R.id.commentNum);
+            num_of_comments = itemView.findViewById(R.id.commentNum);
             num_of_likes = itemView.findViewById(R.id.likesNum);
-            num_of_shares = itemView.findViewById(R.id.shareNum);*/
-            adapter = memoryAdapter;
+            tags = itemView.findViewById(R.id.tags_text);
+            this.adapter = memoryAdapter;
+
         }
+    }
+
+    public void editMemory(View view){
+        Intent i = new Intent();
+        i.putExtra("CEMemoryEdit", mem);
+
     }
 }

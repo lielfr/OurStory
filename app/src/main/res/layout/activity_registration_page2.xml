@@ -175,6 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/genderHolder">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showState"
             android:layout_width="180dp"
             android:layout_height="39dp"
@@ -185,8 +186,10 @@
             android:hint="@string/State1"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
-            android:textColorHint="@color/colorGrayHint"
+            android:textColorHighlight="@color/colorRegister"
+            android:textColorHint="@color/transparent"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -219,6 +222,7 @@
         app:layout_constraintTop_toBottomOf="@+id/genderHolder">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showCity"
             android:layout_width="180dp"
             android:layout_height="39dp"
@@ -229,8 +233,10 @@
             android:hint="@string/ct"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
-            android:textColorHint="@color/colorGrayHint"
+            android:textColorHighlight="@color/colorRegister"
+            android:textColorHint="@color/transparent"
+            android:textColorLink="@color/colorError"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -267,7 +273,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/showDate"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
@@ -276,6 +282,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:theme="@style/EditText"
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -287,13 +294,18 @@
                 android:fontFamily="@font/quicksand"
                 android:hint="@string/day"
                 android:paddingLeft="5dp"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorError"
                 android:textColorHint="@color/colorGrayHint"
+                android:textColorLink="@color/colorError"
+                android:textCursorDrawable="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.727" />
 
             <EditText
+                android:theme="@style/EditText"
                 android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -302,13 +314,18 @@
                 android:background="@color/colorPrimaryDark"
                 android:fontFamily="@font/quicksand"
                 android:hint="@string/year"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorError"
                 android:textColorHint="@color/colorGrayHint"
+                android:textColorLink="@color/colorError"
+                android:textCursorDrawable="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="@+id/month"
                 app:layout_constraintStart_toEndOf="@+id/month"
                 app:layout_constraintTop_toTopOf="@+id/month"
                 app:layout_constraintVertical_bias="1.0" />
 
             <EditText
+                android:theme="@style/EditText"
                 android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -318,7 +335,11 @@
                 android:fontFamily="@font/quicksand"
                 android:hint="@string/month"
                 android:paddingLeft="5dp"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorError"
                 android:textColorHint="@color/colorGrayHint"
+                android:textColorLink="@color/colorError"
+                android:textCursorDrawable="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="@+id/day"
                 app:layout_constraintStart_toEndOf="@+id/day"
                 app:layout_constraintTop_toTopOf="@+id/day"
@@ -381,6 +402,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/profileImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -388,22 +410,27 @@
             android:id="@+id/profileImageView"
             android:layout_width="59dp"
             android:layout_height="59dp"
-            android:layout_marginEnd="160dp"
-            android:layout_marginRight="160dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginRight="120dp"
+            android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toBottomOf="@+id/profilePic"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/defaultprofilepicture" />
 
         <TextView
             android:id="@+id/profilePic"
             android:layout_width="150dp"
             android:layout_height="56dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/background_gradient"
             android:fontFamily="@font/quicksand_bold"
             android:text="@string/proPic"
             android:textColor="@color/colorGrayHint"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/profileImageView"
+            app:layout_constraintHorizontal_bias="0.347"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

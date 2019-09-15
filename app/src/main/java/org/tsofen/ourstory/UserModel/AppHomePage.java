@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.tsofen.ourstory.MyMemories;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.TeamsHomePage.TeamsHomePg;
 
 
 public class AppHomePage extends AppCompatActivity {
@@ -55,7 +56,7 @@ public class AppHomePage extends AppCompatActivity {
                 Fragment targetFragment;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        if(UserStatusCheck.getUserStatus()=="visitor") {
+                        if (UserStatusCheck.getUserStatus().equals("visitor")) {
                             targetFragment = new HomeFragment();
                             upText.setText("Home");
                         }
@@ -106,5 +107,11 @@ public class AppHomePage extends AppCompatActivity {
     }
 
     public void closeActivity(View view) {
+
+    }
+
+    public void movetoteamsactivity(View view) {
+        Intent intent = new Intent(AppHomePage.this , TeamsHomePg.class);
+        startActivity(intent);
     }
 }

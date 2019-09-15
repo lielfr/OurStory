@@ -20,6 +20,7 @@ import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,9 +28,17 @@ import retrofit2.Response;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
-    public ArrayList<CommentA> comments;
+    public List<Comment> comments;
     OurStoryService user_comment;
+    Context ctx;
+    LayoutInflater mInflater;
     Owner user;
+
+    public CommentAdapter(Context context, List<Comment> comments) {
+        this.comments = comments;
+        mInflater = LayoutInflater.from(context);
+    }
+
     @NonNull
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,25 +51,23 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         // return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
+        ctx = parent.getContext();
 
         return viewHolder;
     }
 
-    public CommentAdapter(ArrayList<CommentA> comments) {
-        this.comments = comments;
-    }
-
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
-        CommentA comment = comments.get(position);
+        Comment comment = comments.get(position);
         user_comment = WebFactory.getService();
-        user_comment.GetUserById((Long) comment.getUser()).enqueue(new Callback<Owner>() {
+        user_comment.GetUserById(comment.getUser().getUserId()).enqueue(new Callback<Owner>() {
             @Override
             public void onResponse(Call<Owner> call, Response<Owner> response) {
                 user = response.body();
-                holder.name.setText(user.getFirstName() + " " + user.getLastName());
-                holder.profile.setImageURI((Uri) user.getProfilePicture());
+                if(user.getLastName()!=null && user.getFirstName()!=null){
+                holder.name.setText(user.getFirstName() + " " + user.getLastName());}
+                if(user.getProfilePicture()!=null)
+                {holder.profile.setImageURI((Uri) user.getProfilePicture());}
 
             }
 
@@ -70,7 +77,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             }
         });
 
-        holder.comment.setText(comment.getText());
+
+        if(comment.getText()!=null){
+        holder.comment.setText(comment.getText());}
 
     }
 

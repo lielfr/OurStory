@@ -1,29 +1,32 @@
 package org.tsofen.ourstory;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ShareCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
+
+import org.tsofen.ourstory.StoryTeam.CreateStory;
+import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.UserModel.LogIn;
-import org.tsofen.ourstory.UserModel.RegistrationPage1;
+import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -34,9 +37,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyMemories extends Fragment {
+    private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     AppHomePage parent;
     RecyclerView rv;
+    Long user_id;
     ArrayList<MemoryA> memories;
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
@@ -56,17 +61,21 @@ public class MyMemories extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       /* Intent intent = getIntent();
-        int user_id = intent.getStringExtra(AppHomePage.EXTRA_MESSAGE);*/
+        Gson gson = new Gson();
+        String userJsonString = LogIn.mPrefs.getString("myUser","");
+        User userObj = gson.fromJson(userJsonString,User.class);
+        user_id=userObj.getUserId();
         rv = view.findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(137).enqueue(new Callback<ArrayList<MemoryA>>() {
+        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
-                adapter = new MyMemoriesAdapter(memories);
+                adapter = new MyMemoriesAdapter(getActivity(), memories, userObj);
                 rv.setAdapter(adapter);
-                rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -75,20 +84,28 @@ public class MyMemories extends Fragment {
             }
         });
 
-      /*  final Button sharebtn = view.findViewById(R.id.sharebtn);
-       sharebtn.setOnClickListener(new View.OnClickListener() {
+        final Button create_story = view.findViewById(R.id.createStroyBtn);
+        create_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mimeType = "text/plain"; // For the share func to know which type is the sharing
-                // content so it can offer the right apps
-                ShareCompat.IntentBuilder
-                        .from(getActivity())
-                        .setType(mimeType)
-                        .setChooserTitle("Share this MemoryA with: ")
-                        .setText("This is a filler until we can integrate a MemoryA object")
-                        .startChooser();
+                Intent Create = new Intent(getActivity(), CreateStory.class);
+                Create.putExtra("userId", userObj.getUserId().toString());
+                startActivity(Create);
             }
-        });*/
+        });
+        ImageButton btn = view.findViewById(R.id.searchview2);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getActivity(), SearchStory.class);
+                startActivity(myIntent);
+            }
+        });
+
     }
 
-}
+
+
+    }
+
+
