@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -72,29 +71,7 @@ org.tsofen.ourstory.model.api.User myUser;
        dateOfBirth=new Date(year,month,day);
         genderString = currIntent.getStringExtra("gender");
         profilePictureString = currIntent.getStringExtra("profilePicture");
-        OurStoryService saveUser = WebFactory.getService();
-        User  newUser= new User();
-        newUser.setFirstName(firstNameString);
-        newUser.setLastName(lastNameString);
-        newUser.setProfilePicture(profilePictureString);
-        newUser.setDateOfBirth(dateOfBirth);
-        newUser.setEmail(emailString);
-        newUser.setPassword(passwordString);
-        newUser.setCity(cityString);
-        newUser.setState(stateString);
-        newUser.setGender(genderString);
-        saveUser.CreateUser(newUser).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(LogIn.this,"UserSaved Check Database",Toast.LENGTH_LONG).show();
-            }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LogIn.this,"Saving user Failed",Toast.LENGTH_LONG).show();
-
-            }
-        });
 
 
 
