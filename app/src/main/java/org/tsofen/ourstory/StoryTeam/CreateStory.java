@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.UploadTask;
@@ -37,7 +35,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -417,7 +414,11 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     // launch ViewStoryActivity
     public void viewCreatedStory(View view) {
 
-
+        if (UserStatusCheck.getUserStatus().equals("visitor")) {
+            //Toast.makeText(CreateStory.this, "you need to Log in In Order to Create Story ", Toast.LENGTH_SHORT).show();
+           Intent goLog= new Intent(this,LogIn.class);
+           startActivity(goLog);
+        }
        /* Owner owner = new Owner(21);      //IN this section we will check the user/visitor and act accordingly Dont touch IT!!!!!
         t.GetUserById(2).enqueue(new Callback<Owner>() {
             @Override

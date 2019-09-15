@@ -35,7 +35,6 @@ public class User {
         this.mEmail = Email;
         this.mProfilePicture = ProfilePicture;
         this.mGender = Gender;
-
         this.mDateOfBirth = DateOfBirth;
         this.mDateOfRegistration = DateOfRegistration;
         this.mDateOfLastSignIn = DateOfLastSignIn;
