@@ -32,7 +32,7 @@ public interface OurStoryService {
     @POST("api/comments")
     Call<Comment> newComment(@Body Comment comment);
     @GET("memories/getUserMemories/{id}")
-    Call<ArrayList<MemoryA>> GetMemoriesByUser(@Path("id") long id);
+    Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
     Call<ArrayList<MemoryA>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
     @GET("memories/story/{story}/findMemoriesByYear/{year}")
