@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
@@ -115,7 +117,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
-            user = (User) intent.getSerializableExtra(KEY_USER);
+//            user = (User) intent.getSerializableExtra(KEY_USER);
+            SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+            Gson gson = new Gson();
+            String userStr = preferences.getString("myUser", "ERR");
+            if (userStr != "ERR")
+                user = gson.fromJson(userStr, User.class);
         } else {
             create = false;
             pageTitle.setText("Edit Memory");
@@ -132,15 +139,19 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (memory.getFeeling() != null)
                 selectEmoji(memory.getFeeling());
 
-            List<String> image_uris = new ArrayList();
-            List<String> video_uris = new ArrayList<>();
+            List<Uploadable> image_uris = new ArrayList();
+            List<Uploadable> video_uris = new ArrayList<>();
             for (Picture p : memory.getPictures()) {
-                image_uris.add(p.getLink());
-                imageAdapter.upload_start++;
+                Uploadable u = new Uploadable(p.getLink());
+                u.setUploaded(true);
+                image_uris.add(u);
+//                imageAdapter.upload_start++;
             }
             for (Video v : memory.getVideos()) {
-                video_uris.add(v.getLink());
-                videoAdapter.upload_start++;
+                Uploadable u = new Uploadable(v.getLink());
+                u.setUploaded(true);
+                video_uris.add(u);
+//                videoAdapter.upload_start++;
             }
 
             imageAdapter.data.addAll(image_uris);
@@ -310,14 +321,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    imageAdapter.data.add(currentUri.toString());
+                    imageAdapter.data.add(new Uploadable(currentUri.toString()));
                     // imageLiner.removeView(getResources().getDrawable(R.drawable.error_image_background));
 
                     /****/
 
                 }
             } else if (data.getData() != null) {
-                imageAdapter.data.add(data.getData().toString());
+                imageAdapter.data.add(new Uploadable(data.getData().toString()));
 
 
             }
@@ -327,10 +338,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 int count = data.getClipData().getItemCount();
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
-                    videoAdapter.data.add(currentUri.toString());
+                    videoAdapter.data.add(new Uploadable(currentUri.toString()));
                 }
             } else if (data.getData() != null) {
-                videoAdapter.data.add(data.getData().toString());
+                videoAdapter.data.add(new Uploadable(data.getData().toString()));
             }
             videoAdapter.notifyDataSetChanged();
         }
@@ -401,8 +412,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         progressDialog.show();
 
         double[] progress = new double
-                [(imageAdapter.data.size() - imageAdapter.upload_start) +
-                (videoAdapter.data.size() - videoAdapter.upload_start)];
+                [imageAdapter.data.size() + videoAdapter.data.size()];
 
         for (int i = 0; i < progress.length; i++) {
             progress[i] = 0;
@@ -411,11 +421,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         FirebaseImageWrapper wrapper = new FirebaseImageWrapper("memory_media");
         List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
 
-        for (int i = imageAdapter.upload_start; i < imageAdapter.data.size(); i++) {
-            String uri = imageAdapter.data.get(i);
+        for (int i = 0; i < imageAdapter.data.size(); i++) {
+            Uploadable u = imageAdapter.data.get(i);
+            if (u.isUploaded()) continue;
+            String uri = u.getUrl();
             int finalI = i;
             tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
-                imageAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+                Uploadable uploadable = imageAdapter.data.get(finalI);
+                uploadable.setUploaded(true);
+                uploadable.setUrl(taskSnapshot.getDownloadUrl().toString());
                 progress[finalI] = 100;
             }).addOnProgressListener(taskSnapshot -> {
                 // We need to set the progress relative to both the current file and the other files
@@ -431,12 +445,16 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
 
         // TODO: Maybe we can avoid this code duplication
-        for (int i = videoAdapter.upload_start; i < videoAdapter.data.size(); i++) {
-            String uri = videoAdapter.data.get(i);
+        for (int i = imageAdapter.data.size(); i < progress.length; i++) {
+            Uploadable u = videoAdapter.data.get(i - imageAdapter.data.size());
+            if (u.isUploaded()) continue;
+            String uri = u.getUrl();
             int finalI = i;
-            int offset = (imageAdapter.data.size() - imageAdapter.upload_start);
+            int offset = imageAdapter.data.size();
             tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
-                videoAdapter.data.set(finalI, taskSnapshot.getDownloadUrl().toString());
+                Uploadable uploadable = new Uploadable(taskSnapshot.getDownloadUrl().toString());
+                uploadable.setUploaded(true);
+                videoAdapter.data.set(finalI, uploadable);
                 progress[finalI + offset] = 100;
             }).addOnProgressListener(taskSnapshot -> {
                 double currentFileProgress = taskSnapshot.getBytesTransferred() /
@@ -455,8 +473,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             progressDialog.dismiss();
             ArrayList<String> pictures = new ArrayList<>();
             ArrayList<String> videos = new ArrayList<>();
-            pictures.addAll(imageAdapter.data);
-            videos.addAll(videoAdapter.data);
+            for (Uploadable u : imageAdapter.data) {
+                pictures.add(u.getUrl());
+            }
+            for (Uploadable u : videoAdapter.data) {
+                videos.add(u.getUrl());
+            }
 
             ArrayList<String> tags = new ArrayList<>();
             for (Tag t : tagAdapter.tags) {
