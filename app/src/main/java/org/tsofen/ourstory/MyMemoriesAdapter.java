@@ -93,7 +93,9 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
         if (memory.getStory().getPicture() != null) {
                 holder.profile.setImageURI(Uri.parse(memory.getStory().getPicture().toString()));
-
+        }
+        else {
+            holder.profile.setImageLevel(R.drawable.defaultprofilepicture);
         }
         if(memory.getLikes().isEmpty())
             holder.num_of_likes.setVisibility(View.INVISIBLE);
