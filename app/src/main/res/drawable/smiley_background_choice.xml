@@ -3,7 +3,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <solid android:color="#A4FFFFFF" />
+    <solid android:color="#526B84" />
 
     <size
         android:width="48dp"

@@ -50,7 +50,7 @@ public class MemoryFragment extends Fragment {
         mRecyclerView = getView().findViewById(R.id.recyclerview);
 
         OurStoryService wepengine = WebFactory.getService();
-        wepengine.GetMemoryByKeyword("description").enqueue(new Callback<ArrayList<MemoryA>>() {
+        wepengine.GetMemoriesByKeyword("description").enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();

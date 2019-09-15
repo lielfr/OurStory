@@ -13,6 +13,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.StoryTeam.CreateStory;
+import org.tsofen.ourstory.StoryTeam.SearchStory;
 
 
 public class HomeFragment extends Fragment {
@@ -40,7 +42,8 @@ public class HomeFragment extends Fragment {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), SearchStory.class);
+                startActivity(intent);
             }
         });
 
@@ -48,7 +51,8 @@ public class HomeFragment extends Fragment {
         createStory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), CreateStory.class);
+                startActivity(intent);
                 }
         });
         final Button login = view.findViewById(R.id.login_button);

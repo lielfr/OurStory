@@ -25,7 +25,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
     @NonNull
     @Override
     public MemoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.memory_search_item, parent, false);
+        View mItemView = mInflater.inflate(R.layout.memory_item, parent, false);
         return new MemoryViewHolder(mItemView, this);
     }
 

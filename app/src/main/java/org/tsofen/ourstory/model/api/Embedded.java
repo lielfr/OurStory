@@ -10,13 +10,13 @@ public class Embedded {
 
     @SerializedName("comments")
     @Expose
-    private List<Comment> comments = null;
+    private List<CommentA> comments = null;
 
-    public List<Comment> getComments() {
+    public List<CommentA> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<CommentA> comments) {
         this.comments = comments;
     }
 

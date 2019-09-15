@@ -1,17 +1,21 @@
+
 package org.tsofen.ourstory.model.api;
-import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Contributer implements Serializable {
+import java.io.Serializable;
 
-    private final static long serialVersionUID = -6492193173105400755L;
+public class User implements Serializable
+{
+
+    private final static long serialVersionUID = -5085407755254667737L;
     @SerializedName("user_id")
     @Expose
-    private Integer userId;
+    private Long userId;
     @SerializedName("email")
     @Expose
-    private Object email;
+    private String email;
     @SerializedName("first_name")
     @Expose
     private String firstName;
@@ -20,13 +24,13 @@ public class Contributer implements Serializable {
     private String lastName;
     @SerializedName("password")
     @Expose
-    private Object password;
+    private String password;
     @SerializedName("gender")
     @Expose
-    private Object gender;
+    private String gender;
     @SerializedName("date_of_birth")
     @Expose
-    private Object dateOfBirth;
+    private String dateOfBirth;
     @SerializedName("date_of_sign_up")
     @Expose
     private Object dateOfSignUp;
@@ -35,10 +39,10 @@ public class Contributer implements Serializable {
     private Object dateOfLastSignIn;
     @SerializedName("state")
     @Expose
-    private Object state;
+    private String state;
     @SerializedName("city")
     @Expose
-    private Object city;
+    private String city;
     @SerializedName("status")
     @Expose
     private Boolean status;
@@ -49,7 +53,7 @@ public class Contributer implements Serializable {
     /**
      * No args constructor for use in serialization
      */
-    public Contributer() {
+    public User() {
     }
 
     /**
@@ -67,7 +71,7 @@ public class Contributer implements Serializable {
      * @param firstName
      * @param dateOfLastSignIn
      */
-    public Contributer(Integer userId, Object email, String firstName, String lastName, Object password, Object gender, Object dateOfBirth, Object dateOfSignUp, Object dateOfLastSignIn, Object state, Object city, Boolean status, Object profilePicture) {
+    public User(Long userId, String email, String firstName, String lastName, String password, String gender, String dateOfBirth, Object dateOfSignUp, Object dateOfLastSignIn, String state, String city, Boolean status, Object profilePicture) {
         super();
         this.userId = userId;
         this.email = email;
@@ -84,19 +88,19 @@ public class Contributer implements Serializable {
         this.profilePicture = profilePicture;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -108,10 +112,6 @@ public class Contributer implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getFullName() {
-        return (firstName+" "+lastName);
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -120,27 +120,27 @@ public class Contributer implements Serializable {
         this.lastName = lastName;
     }
 
-    public Object getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Object password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public Object getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Object gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public Object getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Object dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -160,19 +160,19 @@ public class Contributer implements Serializable {
         this.dateOfLastSignIn = dateOfLastSignIn;
     }
 
-    public Object getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Object state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public Object getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(Object city) {
+    public void setCity(String city) {
         this.city = city;
     }
 

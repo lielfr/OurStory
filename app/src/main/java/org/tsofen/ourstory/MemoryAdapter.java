@@ -1,9 +1,11 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,18 +13,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.StoryTeam.Story;
+import org.tsofen.ourstory.UserModel.AppHomePage;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static java.util.Calendar.getInstance;
-
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
-    Context ctx;
-    public ArrayList<MemoryA> mMemories;
 
-    public MemoryAdapter(Context ctx,ArrayList<MemoryA> memories) {
+    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
+    public final ArrayList<MemoryA> mMemories;
+    Context ctx;
+    LayoutInflater mInflater;
+    public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
+    {
+        this.mMemories = memories;
+        mInflater = LayoutInflater.from(context);
         //    example
        /* Calendar d3 = getInstance();
         Calendar d4 = getInstance();
@@ -46,7 +55,6 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         View contactView = inflater.inflate(R.layout.memory_item, parent, false);
 
 
-
         // return a new holder instance
         ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
@@ -58,25 +66,71 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+               intent.putExtra("memory", memory);
+                ctx.startActivity(intent);
+
+            }
+        });
+     if(memory.getDescription()!=null) {
+         holder.descr.setText(memory.getDescription());
+     }
+     if(memory.getLocation()!=null)
+     {
+         holder.location.setText(memory.getLocation());
+     }
+     if(memory.getFeeling()!=null)
+     {
+         holder.feeling.setText(memory.getFeeling());
+     }
+     if(memory.getContributer()!=null && memory.getContributer().getFullName()!=null ){
+        holder.name.setText(memory.getContributer().getFullName());}
+        String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        if(memory.getMemoryDate()!=null) {
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
+            holder.mem_date.setText(memDate);
+        }
+        else
+            holder.mem_date.setVisibility(View.GONE);
+        if(memory.getLikes()!=null) {
+           holder.num_of_likes.setText(memory.getLikes().size());
+       }
+       if(memory.getComments()!=null) {
+           holder.num_of_comments.setText(memory.getComments().size());
+       }
+        ArrayList<ImgItem> images=new ArrayList<>();
+
+
+       if(memory.getPictures()!=null){
+        /*   for(int i=0; i<memory.getPictures().size(); i++) {
+               if(((ArrayList)memory.getPictures()).get(i)!=null) {
+                   holder.rvMemory.add((ImgItem)(((ArrayList)memory.getPictures()).get(i)));
+               }
+           }*/
+           images=(ArrayList)memory.getPictures();
+       }
 
 
         ///////////////////////////////
 
 
         //ArrayList<ImgItem> images=Memory.getPictures();
-        ArrayList<ImgItem> images=new ArrayList<>();
+       // ArrayList<ImgItem> images=new ArrayList<>();
 
 
         //////////////////////////////////// fill images
 
         // images in memories example
-        ImgItem i1=new ImgItem("alex",R.drawable.alex);
+        /*ImgItem i1=new ImgItem("alex",R.drawable.alex);
         ImgItem i2=new ImgItem("alex",R.drawable.pic);
         ImgItem i3=new ImgItem("alex",R.drawable.alex);
 
         images.add(i1);
-        images.add(i2);
+        images.add(i2);*/
         // end of example
 
 
@@ -97,27 +151,27 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         return mMemories.size();
     }
 
-    public void filterList(ArrayList<MemoryA> filteredList) {
-        mMemories = filteredList;
-        notifyDataSetChanged();
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvMemory;
-        public TextView name, mem_date, create_date, descr, num_of_likes, num_of_comments, num_of_shares;
+        public TextView feeling,location,name, mem_date, descr, num_of_likes, num_of_comments, num_of_shares;
         public ImageView pic;
+        public ImageButton commentbtn;
         public MemoryAdapter adapter;
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
+
+            commentbtn = itemView.findViewById(R.id.commentbtn2);
+            feeling = itemView.findViewById(R.id.feelingtxt);
+            location = itemView.findViewById(R.id.locationtxt);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
             pic = itemView.findViewById(R.id.picture_person);
-           /* num_of_comments = itemView.findViewById(R.id.commentNum);
+            num_of_comments = itemView.findViewById(R.id.commentNum);
             num_of_likes = itemView.findViewById(R.id.likesNum);
-            num_of_shares = itemView.findViewById(R.id.shareNum);*/
+           // num_of_shares = itemView.findViewById(R.id.shareNum);
             adapter = memoryAdapter;
 
 

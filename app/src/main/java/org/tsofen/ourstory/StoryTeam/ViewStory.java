@@ -1,8 +1,12 @@
 package org.tsofen.ourstory.StoryTeam;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,21 +16,23 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-
+import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.api.Story;
+
 import java.io.Serializable;
 
 public class ViewStory extends AppCompatActivity implements Serializable {
 
     ImageButton ib;
-    ImageButton share;
+    ImageButton share;;
     Story target_story ;
     //Intent intent = getIntent() ;
+    TextView searchtext ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_view_story);
 
         LinearLayout linearLayout = findViewById(R.id.linearLayout3);
@@ -34,7 +40,19 @@ public class ViewStory extends AppCompatActivity implements Serializable {
 
         ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
         constraintLayout.setVisibility(View.VISIBLE);
+        searchtext = (EditText) findViewById(R.id.edit);
         Intent intent = getIntent() ;
+
+        Log.i("oncreat","onCrete has been access");
+        Log.i("oncreat","extra key is"+ intent.getStringExtra("button"));
+        if(intent.getStringExtra("Button").equals("createandadd")){
+            Log.i("oncreat","int if");
+            Intent i = new Intent(this, CreateEditMemoryActivity.class);
+            i.putExtra(CreateEditMemoryActivity.KEY_CREATE, intent.getSerializableExtra("id"));
+            startActivity(i);
+        }
+
+
         String fName = intent.getStringExtra("name");
         String date1 = intent.getStringExtra("date1");
         String tag1 = intent.getStringExtra("ttag3");
@@ -78,11 +96,20 @@ public class ViewStory extends AppCompatActivity implements Serializable {
 //        ImageView image3 = findViewById(R.id.imageView6);
 //        image3.setImageResource(story.getTag_icon3());
 
+
+        searchtext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ViewStory.this, "search is "+ searchtext.getText().toString() , Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ViewStory.this, SearchStory.class);
+                i.putExtra("searchinpute", searchtext.getText().toString());
+                startActivity(i);
+            }
+        });
     }
 
     public void launchSearchActivity(View view) {
-        Intent i = new Intent(ViewStory.this, SearchStory.class);
-        startActivity(i);
+
     }
 
     public void launchShare(View view) {

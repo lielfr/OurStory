@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/background"
             android:layout_width="414dp"
-            android:layout_height="522dp"
+            android:layout_height="450dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:clickable="false"
@@ -25,7 +25,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-
 
         <ImageView
             android:id="@+id/picture_person"
@@ -80,6 +79,19 @@
             app:layout_constraintStart_toEndOf="@+id/name_txt_person"
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
+        <TextView
+            android:id="@+id/feelingtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="#FEELING"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/memory_date"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/memory_date"
+            app:layout_constraintTop_toBottomOf="@+id/memory_date" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memory_pic"
             android:layout_width="0dp"
@@ -88,12 +100,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:foregroundGravity="left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descr"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.034"
             app:srcCompat="@drawable/pic" />
 
         <ImageButton
@@ -107,48 +120,19 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/comment" />
 
-        <ImageButton
-            android:id="@+id/sharebtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-
-            android:background="@color/colorPrimaryDark"
-            android:onClick="shareMemory"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:srcCompat="@drawable/sharenew" />
-
-        <TextView
-            android:id="@+id/likesNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="15"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/commentbtn2"
-            app:layout_constraintHorizontal_bias="0.214"
-            app:layout_constraintStart_toStartOf="@+id/likebtn" />
-
         <TextView
             android:id="@+id/commentNum"
             android:layout_width="22dp"
             android:layout_height="17dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="36dp"
             android:fontFamily="@font/quicksand_bold"
             android:text="9"
             android:textColor="@color/colorLogin"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/likesNum"
-            app:layout_constraintTop_toTopOf="@+id/likesNum"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toEndOf="@+id/sharebtn" />
 
         <ImageButton
             android:id="@+id/likebtn"
@@ -162,14 +146,25 @@
             app:layout_constraintHorizontal_bias="0.021"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/memory_pic"
-            app:layout_constraintVertical_bias="0.831"
+            app:layout_constraintVertical_bias="0.571"
             app:srcCompat="@drawable/like" />
+
+        <ImageButton
+            android:id="@+id/sharebtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:background="@color/colorPrimaryDark"
+            android:onClick="shareMemory"
+            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
+            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
+            app:srcCompat="@drawable/sharenew" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
-            android:layout_width="370dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:fontFamily="@font/quicksand_bold"
@@ -181,7 +176,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintHorizontal_bias="0.471"
 
             app:layout_constraintStart_toStartOf="@+id/background"
             app:layout_constraintTop_toBottomOf="@+id/picture_person"
@@ -192,7 +187,7 @@
 
         <TextView
             android:id="@+id/locationtxt"
-            android:layout_width="370dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/quicksand_bold"
@@ -201,23 +196,9 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/descr"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/descr"
             app:layout_constraintTop_toBottomOf="@+id/picture_person" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/feelingtoshow"
-            android:layout_width="297dp"
-            android:layout_height="47dp"
-            android:background="@drawable/edit_round2"
-            app:layout_constraintBottom_toTopOf="@+id/commentbtn2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.07"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
-            app:layout_constraintVertical_bias="0.317">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
