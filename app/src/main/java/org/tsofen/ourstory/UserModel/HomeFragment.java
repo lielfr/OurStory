@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,16 +52,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent Create = new Intent(getActivity(), CreateStory.class);
-                Intent Login = new Intent(getActivity(), LogIn.class);
-                Login.putExtra("tybe", "ComingFromCreate");
-                if (UserStatusCheck.getUserStatus().equals("visitor")) {
-                    Toast.makeText(getContext(), "you need to Log in In Order to Create Story ", Toast.LENGTH_SHORT).show();
-                    startActivity(Login);
-                } else {
-                    Create.putExtra("tybe", UserStatusCheck.getUserStatus());
+
                     startActivity(Create);
                 }
-            }
+
         });
         final Button login = view.findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
