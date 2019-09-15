@@ -45,27 +45,12 @@ public class CommentActivity extends Activity {
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * .8), (int) (height * .8));
         memoryA = (MemoryA) i.getSerializableExtra("memory");
+        user = (User) i.getSerializableExtra("user");
         rv = findViewById(R.id.recycler_comment);
-        adapter = new CommentAdapter(memoryA.getComments());
+        adapter = new CommentAdapter(this , memoryA.getComments());
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
-      /* commentService = WebFactory.getService();
-       commentService.GetCommentbyId(mem_id).enqueue(new Callback<ArrayList<CommentA>>() {
-           @Override
-           public void onResponse(Call<ArrayList<CommentA>> call, Response<ArrayList<CommentA>> response) {
-               comments = response.body();
-               adapter = new CommentAdapter(comments);
-               rv.setAdapter(adapter);
-               rv.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
-
-           }
-
-           @Override
-           public void onFailure(Call<ArrayList<CommentA>> call, Throwable t) {
-               Log.d("Error", t.toString());
-           }
-       });*/
-
+        adapter.notifyDataSetChanged();
 
     }
     public void SendCmnt(View view) {
