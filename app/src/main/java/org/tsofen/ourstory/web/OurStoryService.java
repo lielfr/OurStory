@@ -16,6 +16,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -39,6 +40,8 @@ public interface OurStoryService {
     @GET("comments/findById/{id}")
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
+    @DELETE("memories/delete/{id}")
+    Call<Memory> DeleteMemory(@Path("id") long id);
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
     @GET("users/findById/{id}")
