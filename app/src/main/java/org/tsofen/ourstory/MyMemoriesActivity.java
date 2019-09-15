@@ -45,12 +45,12 @@ public class MyMemoriesActivity extends AppCompatActivity {
        //TODO int user_id = intent.getStringExtra(AppHomePage.EXTRA_MESSAGE);
         rv = findViewById(R.id.recycler);
         MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(12).enqueue(new Callback<ArrayList<MemoryA>>() {
+        MemoryAService.GetMemoriesByUser(4).enqueue(new Callback<ArrayList<MemoryA>>() {
             @Override
             public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                 memories = response.body();
-                Toast.makeText(getApplicationContext(), memories.size() + " activity", Toast.LENGTH_LONG).show();
-                adapter = new MyMemoriesAdapter(MyMemoriesActivity.this,memories);
+                Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
+                adapter = new MyMemoriesAdapter(MyMemoriesActivity.this, memories);
 
                 rv.setAdapter(adapter);
                 rv.setLayoutManager(new LinearLayoutManager(MyMemoriesActivity.this));
@@ -62,7 +62,7 @@ public class MyMemoriesActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btn = (ImageButton) findViewById(R.id.searchview);
+        ImageButton btn = findViewById(R.id.searchview);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

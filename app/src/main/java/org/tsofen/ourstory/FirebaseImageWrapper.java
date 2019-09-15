@@ -16,17 +16,21 @@ public class FirebaseImageWrapper {
         super();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        ref = storageReference.child(folder + "/" + UUID.randomUUID().toString());
+        ref = storageReference.child(folder + "/");
     }
 
     public FirebaseImageWrapper() {
         super();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        ref = storageReference.child("images/" + UUID.randomUUID().toString());
+        ref = storageReference.child("images/");
     }
 
     public UploadTask uploadImg(Uri path) {
-        return ref.putFile(path);
+        return ref.child(UUID.randomUUID().toString()).putFile(path);
+    }
+
+    public void removeImg(String path) {
+        // TODO: Right now we don't do that.
     }
 }
