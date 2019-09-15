@@ -87,6 +87,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private User user;
     private Story story;
     TextView AddPicTxV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -452,14 +453,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             int finalI = i;
             int offset = imageAdapter.data.size();
             tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
-                Uploadable uploadable = new Uploadable(taskSnapshot.getDownloadUrl().toString());
+
+                Uploadable uploadable = videoAdapter.data.get(finalI - imageAdapter.data.size());
+                uploadable.setUrl(taskSnapshot.getDownloadUrl().toString());
                 uploadable.setUploaded(true);
-                videoAdapter.data.set(finalI, uploadable);
-                progress[finalI + offset] = 100;
+                progress[finalI] = 100;
             }).addOnProgressListener(taskSnapshot -> {
                 double currentFileProgress = taskSnapshot.getBytesTransferred() /
                         taskSnapshot.getTotalByteCount();
-                progress[finalI + offset] = currentFileProgress * 100;
+                progress[finalI] = currentFileProgress * 100;
                 double progressAvg = 0;
                 for (double p : progress)
                     progressAvg += p;
@@ -485,6 +487,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 tags.add(t.getLabel());
             }
             if (create) {
+//                service.CreateMemory(memory)
+//                        .flatMap(CreateEditMemoryActivity::apply);
                 service.CreateMemory(memory).enqueue(new Callback<Memory>() {
                     @Override
                     public void onResponse(Call<Memory> call, Response<Memory> response) {
