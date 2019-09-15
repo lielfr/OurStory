@@ -87,8 +87,8 @@
             app:layout_constraintVertical_bias="0.065"
             app:srcCompat="@drawable/alex" />
 
-        <ImageView
-            android:id="@+id/memory_pic"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_memoriesRv"
             android:layout_width="0dp"
             android:layout_height="201dp"
             android:layout_marginStart="8dp"
@@ -101,7 +101,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descr"
             app:layout_constraintVertical_bias="0.035"
-            app:srcCompat="@drawable/pic" />
+           />
 
         <TextView
             android:id="@+id/memory_date"
@@ -212,7 +212,6 @@
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
 
-            android:onClick="editMemory"
             app:layout_constraintBottom_toBottomOf="@+id/deletebtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
