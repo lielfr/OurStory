@@ -1,6 +1,5 @@
 package org.tsofen.ourstory;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,12 +28,11 @@ import retrofit2.Response;
 public class MemoriesOfStoryActivity extends AppCompatActivity {
 
     OurStoryService MemoryAService;
-    ArrayList<MemoryA> memories;
-    Context ctx;
     RecyclerView rv;
-    ArrayList<MemoryA> data;
+    ArrayList<Memory> data;
     MemoryAdapter adapter;
     TextView storyName;
+    private ArrayList<MemoryA> memories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +63,12 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         //               flag 0 == by Year |||| flag 1 == by Tag
         if(stringExtra[0].equals("0")) {
 
-            MemoryAService.GetMemoriesByYear(258, 2019).enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByYear(10, 2000).enqueue(new Callback<ArrayList<MemoryA>>() {
                 @Override
                 public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                     memories = response.body();
                     Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
-                    adapter = new MemoryAdapter(memories);
-                    rv.setAdapter(adapter);
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                 }
 
                 @Override
@@ -82,13 +79,12 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         }
 
         else {
-            MemoryAService.GetMemoriesByTag(16, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByTag(10, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
                 @Override
                 public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
                     memories = response.body();
                     Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
-                    adapter = new MemoryAdapter(memories);
-
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                 }
 
                 @Override
@@ -109,18 +105,6 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void filter(int text) {
-        ArrayList<MemoryA> filteredList = new ArrayList<>();
-        for (MemoryA memory : data) {
-
-            int year2 = memory.getMemoryDate().get(Calendar.YEAR);
-            if (year2 == text)
-                filteredList.add(memory);
-        }
-
-        adapter.filterList(filteredList);
     }
 
     public void shareMemory(View view)

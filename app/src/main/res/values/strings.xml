@@ -15,6 +15,10 @@
     <string name="alert_message">Please Fill in</string>
     <string name="alert_title">Alert</string>
 
+    <string name="dayTxt">day</string>
+    <string name="monthTxt">month</string>
+    <string name="yearTxt">year</string>
+
     <string name="showMore">" show more"</string>
     <string name="showLess">" show less"</string>
 

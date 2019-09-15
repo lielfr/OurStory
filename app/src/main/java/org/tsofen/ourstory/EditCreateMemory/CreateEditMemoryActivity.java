@@ -1,28 +1,41 @@
 package org.tsofen.ourstory.EditCreateMemory;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import androidx.annotation.Nullable;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.UploadTask;
+
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,12 +44,10 @@ import java.util.LinkedList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    int flag = -1;
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
     AddMemoryVideoAdapter videoAdapter;
@@ -61,7 +72,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
     private Memory memory;
-
+    private boolean create = true;
+    private TextView MemError;
+    private LinearLayout imageLiner;
+    private ScrollView ourScroller;
+    TextView AddPicTxV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +85,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         Intent intent = getIntent();
         memory = (Memory) intent.getSerializableExtra(KEY_EDIT);
         TextView pageTitle = findViewById(R.id.text_cememory);
-        if (memory == null)
-            pageTitle.setText("Add Memory");
-        else
-            pageTitle.setText("Edit Memory");
-
         editTextDescription = findViewById(R.id.memDescription_cememory);
         editTextLocation = findViewById(R.id.memLocation_cememory);
         smileb = findViewById(R.id.smilebtn_cememory);
@@ -82,6 +92,38 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         loveb = findViewById(R.id.lovebtn_cememory);
         svbtn = findViewById(R.id.Savebtn_cememory);
         cnslbtn = findViewById(R.id.Cancelbtn_cememory);
+        TextView dayDate = findViewById(R.id.day_text_cememory);
+        TextView monthDate = findViewById(R.id.month_text_cememory);
+        TextView yearDate = findViewById(R.id.year_text_cememory);
+        MemError = findViewById(R.id.error_cememory);
+        imageLiner = findViewById(R.id.LinerForImage);
+        ourScroller = findViewById(R.id.scrollView_cememory);
+        AddPicTxV = findViewById(R.id.AddPicTV_cememory);
+        if (memory == null) {
+            pageTitle.setText("Add Memory");
+            memory = new Memory();
+        } else {
+            create = false;
+            pageTitle.setText("Edit Memory");
+            editTextDescription.setText(memory.getDescription());
+            editTextLocation.setText(memory.getLocation());
+            dayDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+            monthDate.setText(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+            yearDate.setText(memory.getMemoryDate().get(Calendar.YEAR));
+            selectEmoji(memory.getFeeling());
+
+            imageAdapter.data.addAll(memory.getPictures());
+            imageAdapter.notifyDataSetChanged();
+            videoAdapter.data.addAll(memory.getVideos());
+            videoAdapter.notifyDataSetChanged();
+            tagAdapter.tags.addAll(memory.getTags());
+            tagAdapter.notifyDataSetChanged();
+        }
+
+        Story story = (Story) intent.getSerializableExtra(KEY_CREATE);
+        if (story != null) {
+            memory.setStory(story);
+        }
 
         smileb.setOnClickListener(this);
         sadb.setOnClickListener(this);
@@ -117,51 +159,64 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         switch (v.getId()) {
             case R.id.smilebtn_cememory:
                 SelectedEmoji = Feeling.HAPPY;
-                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back1).setVisibility(View.VISIBLE);
+                selectEmoji(SelectedEmoji);
 
                 break;
             case R.id.sadbtn_cememory:
                 SelectedEmoji = Feeling.SAD;
-                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back2).setVisibility(View.VISIBLE);
+                selectEmoji(SelectedEmoji);
                 break;
 
             case R.id.lovebtn_cememory:
                 SelectedEmoji = Feeling.LOVE;
-                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
-                findViewById(R.id.smiley_back3).setVisibility(View.VISIBLE);
+                selectEmoji(SelectedEmoji);
                 break;
 
             case R.id.Savebtn_cememory:
                 if (CheckValidation(v)) {
+                    // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+                    //  imageLiner.removeAllViews();
                     this.svbtn.setEnabled(true);
                     saveMemory(v);
                 } else {
+
                     displayToast("Error , Please try filling out the fields again");
                 }
                 break;
             case R.id.Cancelbtn_cememory:
                 finish();
                 break;
+            case R.id.back_button_cememory:
+                finish();
+                break;
+
         }
     }
 
     public boolean CheckValidation(View v) {        //(Memory m) {
         if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
-            {
-                displayToast("You should either enter an image or a viedeo or description for your memory!");
+            MemError.setText("Enter at Least one of The above!");
+            MemError.setVisibility(View.VISIBLE);
+            ourScroller.fullScroll(ScrollView.FOCUS_UP);// .fullScroll(ScrollView.FOCUS_UP);
+            //return false;
+            // GradientDrawable gradientDrawable=new GradientDrawable();
+            //gradientDrawable.setStroke(4,getResources().getColor(R.color.colorError));
+            //Drawable d = getResources().getDrawable(R.drawable.error_image_background);
+            //imageLiner.setBackground(gradientDrawable);
+            // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+            return false;
+        }
+        /**displayToast("You should either enter an image or a video or description for your memory!");
                 return false;
             }
         }
-        if (today.before(MemDate)) {
+         /* if (today.before(MemDate)) {
             displayToast("You have selected invalid date , please choose valid date again ");
             return false;
-        }
-        if (MemDate.before(BirthDate)) {
+         }           RecycleImage.setBackground(d);*/
+        //  editTextDescription.setHintTextColor(@);
+
+        /**   if (MemDate.before(BirthDate)) {
             displayToast("You have selected invalid date ,Memory can't occur before birth date, please choose valid date again ");
             return false;
         }
@@ -169,7 +224,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             displayToast("You have selected invalid date ,Memory can't occur after Death date, please choose valid date again ");
             return false;
         } else
-            dateFlag = true;
+         dateFlag = true;*/
         return true;
     }
 
@@ -189,9 +244,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 for (int i = 0; i < count; i++) {
                     Uri currentUri = data.getClipData().getItemAt(i).getUri();
                     imageAdapter.data.add(currentUri.toString());
+                    // imageLiner.removeView(getResources().getDrawable(R.drawable.error_image_background));
+
+                    /****/
+
                 }
             } else if (data.getData() != null) {
                 imageAdapter.data.add(data.getData().toString());
+
+
             }
             imageAdapter.notifyDataSetChanged();
         } else if (requestCode == AddMemoryVideoAdapter.ADDMEMORY_VIDEO) {
@@ -223,7 +284,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         currentDate = day_string + "/" + month_string + "/" + year_string;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
-        c.set(year, month + 1, day);
+        c.set(year, month, day);
         MemDate = c.getTime();
 
         TextView dayDate = findViewById(R.id.day_text_cememory);
@@ -241,9 +302,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
 
     public void saveMemory(View view) {
-        boolean create = (memory == null);
-        if (memory == null)
-            memory = new Memory();
         locationText = findViewById(R.id.memLocation_cememory);
         memory.setLocation(locationText.getText().toString());
 
@@ -253,6 +311,17 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         displayToast("Data saved.");
         OurStoryService service = WebFactory.getService();
         Intent intent = new Intent();
+
+        FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
+        for (String s : imageAdapter.data) {
+            wrapper.uploadImg(Uri.parse(s))
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    });
+        }
 
         if (create) {
             service.CreateMemory(memory).enqueue(new Callback<Memory>() {
@@ -287,11 +356,29 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 }
             });
         }
-
-
     }
 
+    public void selectEmoji(Feeling selected) {
+        switch (selected) {
+            case HAPPY:
+                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back1).setVisibility(View.VISIBLE);
+                break;
 
+            case SAD:
+                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back3).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back2).setVisibility(View.VISIBLE);
+                break;
+
+            case LOVE:
+                findViewById(R.id.smiley_back1).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back2).setVisibility(View.INVISIBLE);
+                findViewById(R.id.smiley_back3).setVisibility(View.VISIBLE);
+                break;
+        }
+    }
 }
 
 

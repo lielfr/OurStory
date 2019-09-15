@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +26,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.StoryTeam.MainActivity;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -56,12 +57,13 @@ public class RegistrationPage2 extends AppCompatActivity {
     public EditText EditText6;
     public EditText EditText7;
     public EditText EditText8;
-    public EditText DateOfB;
+//    public EditText DateOfB;
 
     private final int PICK_IMAGE_REQUEST = 71;
     //Firebase
-    FirebaseStorage storage;
-    StorageReference storageReference;
+//    FirebaseStorage storage;
+//    StorageReference storageReference;
+    FirebaseImageWrapper wrapper;
     //profile picture part
     private Button chooseButton;
     private ImageView profileImageView;
@@ -72,7 +74,8 @@ public class RegistrationPage2 extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page2);
         Intent currIntent = getIntent();
@@ -80,12 +83,12 @@ public class RegistrationPage2 extends AppCompatActivity {
         firstNameString = currIntent.getStringExtra("first_name");
         lastNameString = currIntent.getStringExtra("last_name");
         passwordString = currIntent.getStringExtra("password");
-        DateOfB = findViewById(R.id.showDate);
+//        DateOfB = findViewById(R.id.showDate);
         Log.d("log4", "values received from registrationPage1:"
                 + emailString + " " + firstNameString + " "
                 + lastNameString + " " + passwordString);
 
-        //Initialize proifle picture Views
+        //Initialize profile picture Views
         chooseButton = findViewById(R.id.choose_button);
         profileImageView = findViewById(R.id.profileImageView);
         chooseButton.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +98,9 @@ public class RegistrationPage2 extends AppCompatActivity {
             }
         });
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
+//        storage = FirebaseStorage.getInstance();
+//        storageReference = storage.getReference();
+        wrapper = new FirebaseImageWrapper();
     }
 
 
@@ -110,10 +113,18 @@ public class RegistrationPage2 extends AppCompatActivity {
         String month_string = Integer.toString(month + 1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-        String dateString = (month_string +
-                "/" + day_string + "/" + year_string);
-        dateOfBirth = dateString;
-        DateOfB.setText(dateOfBirth);
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+
+
+        TextView year1 = findViewById(R.id.year);
+        year1.setText(year_string);
+        TextView day1 = findViewById(R.id.day);
+        day1.setText(day_string);
+        TextView month1 = findViewById(R.id.month);
+        month1.setText(month_string);
+
+
+
     }
 
 
@@ -139,22 +150,6 @@ public class RegistrationPage2 extends AppCompatActivity {
 
     }
 
-    public void Go2RegistrationPage3andDontSave(View view) {
-        Intent regIntent3 = new Intent(this, LogIn.class);
-        regIntent3.putExtra("email", emailString);
-        regIntent3.putExtra("first_name", firstNameString);
-        regIntent3.putExtra("last_name", lastNameString);
-        regIntent3.putExtra("password", passwordString);
-
-        Log.d("log-not saved", "values sent to registrationPage3:"
-                + emailString + " " + firstNameString + " "
-                + lastNameString + " " + passwordString + " ");
-        startActivity(regIntent3);
-    }
-
-    public void UploadPicture(View view) {
-        //still null
-    }
 
     public void closeActivity(View view) {
         Intent back = new Intent(this, LogIn.class);
@@ -212,8 +207,9 @@ public class RegistrationPage2 extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
-            ref.putFile(filePath)
+//            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
+//            ref.putFile(filePath)
+            wrapper.uploadImg(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

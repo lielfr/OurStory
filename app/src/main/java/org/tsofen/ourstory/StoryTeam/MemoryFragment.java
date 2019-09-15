@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.MemoryAdapter;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.MemoryA;
+
 import java.util.ArrayList;
 
 
 public class MemoryFragment extends Fragment {
-    public ArrayList<Memory> arrayList;
+    public ArrayList<MemoryA> arrayList;
     private RecyclerView mRecyclerView;
     private MemoryAdapter mAdapter;
 
@@ -37,7 +39,7 @@ public class MemoryFragment extends Fragment {
 
         mRecyclerView = getView().findViewById(R.id.recyclerview);
         arrayList = new ArrayList<>();
-        mAdapter = new MemoryAdapter(arrayList);
+        mAdapter = new MemoryAdapter(getContext(),arrayList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

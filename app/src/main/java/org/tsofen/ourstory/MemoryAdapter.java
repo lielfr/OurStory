@@ -1,9 +1,12 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,62 +14,82 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.StoryTeam.Story;
+import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
-    public ArrayList<MemoryA> mMemories;
-
-    public MemoryAdapter(ArrayList<MemoryA> memories) {this.mMemories = memories}
-
+    public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
+    public final ArrayList<MemoryA> mMemories;
+    MemoryA memoryA;
     Context ctx;
- 
+    LayoutInflater mInflater;
+    MemoryA mem;
 
-    public MemoryAdapter(ArrayList<org.tsofen.ourstory.model.Memory> memories) {
+    public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
+    {
         this.mMemories = memories;
-        this.ctx=ctx;
+        mInflater = LayoutInflater.from(context);
     }
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext(); // getting the main activity
         LayoutInflater inflater = LayoutInflater.from(context); // put layout of main activity in layout inflater
-
-        // inflate the custom layout
         View contactView = inflater.inflate(R.layout.memory_item, parent, false);
-
-
-        // return a new holder instance
         ctx=parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MemoryA memory = mMemories.get(position);
-        holder.descr.setText(memory.getDescription());
-        holder.name.setText(memory.getContributer().getFullName());
+        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        String createDate = memory.getCreateDate().get(Calendar.DAY_OF_MONTH) + "/" + (memory.getCreateDate().get(Calendar.MONTH)) +
-                "/" + (memory.getCreateDate().get(Calendar.YEAR));
+                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+               intent.putExtra("memory", memory);
+                ctx.startActivity(intent);
+
+            }
+        });
+     if(memory.getDescription()!=null) {
+         holder.descr.setText(memory.getDescription());
+     }
+     if(memory.getLocation()!=null)
+     {
+         holder.location.setText(memory.getLocation());
+     }
+     if(memory.getFeeling()!=null)
+     {
+         holder.feeling.setText(memory.getFeeling());
+     }
+     if(memory.getContributer()!=null && memory.getContributer().getFullName()!=null ){
+        holder.name.setText(memory.getContributer().getFullName());}
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-       /* holder.num_of_shares.setText(memory.getLikes().size());
-        holder.num_of_shares.setText(memory.getShares().size());
-        holder.num_of_comments.setText(memory.getComments().size());*/
-//        holder.create_date.setText(createDate);
-        holder.mem_date.setText(memDate);
-        ///////////////////////////////
+        if(memory.getMemoryDate()!=null) {
+            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay()+ " , " + (memory.getMemoryDate().getYear());
+            holder.mem_date.setText(memDate);
+        }
+        else
+            holder.mem_date.setVisibility(View.GONE);
+        if(memory.getLikes()!=null) {
+           holder.num_of_likes.setText(memory.getLikes().size());
+       }
+       if(memory.getComments()!=null) {
+           holder.num_of_comments.setText(memory.getComments().size());
+       }
 
+
+        ///////////////////////////////
 
         //ArrayList<ImgItem> images=Memory.getPictures();
         ArrayList<ImgItem> images=new ArrayList<>();
@@ -92,39 +115,38 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
 
 
-
     }
 
     @Override
     public int getItemCount() {
         return mMemories.size();
     }
-
-    public void filterList(ArrayList<MemoryA> filteredList) {
-        mMemories = filteredList;
-        notifyDataSetChanged();
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvMemory;
-        public TextView name, mem_date, create_date, descr, num_of_likes, num_of_comments, num_of_shares;
+        public TextView feeling,location,name, mem_date, descr, num_of_likes, num_of_comments, num_of_shares;
         public ImageView pic;
+        public ImageButton commentbtn;
         public MemoryAdapter adapter;
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
+
+            commentbtn = itemView.findViewById(R.id.commentbtn2);
+            feeling = itemView.findViewById(R.id.feelingtxt);
+            location = itemView.findViewById(R.id.locationtxt);
             name = itemView.findViewById(R.id.name_txt_person);
             mem_date = itemView.findViewById(R.id.memory_date);
-//            create_date = itemView.findViewById(R.id.posted_date);
             descr = itemView.findViewById(R.id.descr);
             pic = itemView.findViewById(R.id.picture_person);
-           /* num_of_comments = itemView.findViewById(R.id.commentNum);
+            num_of_comments = itemView.findViewById(R.id.commentNum);
             num_of_likes = itemView.findViewById(R.id.likesNum);
-            num_of_shares = itemView.findViewById(R.id.shareNum);*/
-            adapter = memoryAdapter;
-
-
-            rvMemory=(RecyclerView)itemView.findViewById(R.id.memory_pic);
+            this.adapter = memoryAdapter;
         }
+    }
+
+    public void editMemory(View view){
+        Intent i = new Intent();
+        i.putExtra("CEMemoryEdit", mem);
+
     }
 }
