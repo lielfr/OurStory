@@ -28,6 +28,7 @@ import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 
 import java.io.IOException;
+import java.util.Date;
 
 
 public class RegistrationPage2 extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class RegistrationPage2 extends AppCompatActivity {
     public String stateString;
     public String cityString;
 
-    public String dateOfBirth;
+    //public String dateOfBirth;
     public String dateOfSignIn;
     public String dateOfLastSignIn;
     public String profilePicture;
@@ -55,6 +56,10 @@ public class RegistrationPage2 extends AppCompatActivity {
     public EditText EditText7;
     public EditText EditText8;
 //    public EditText DateOfB;
+Date date;
+    int month_string ;
+    int day_string ;
+    int year_string;
 
     private final int PICK_IMAGE_REQUEST = 71;
     //Firebase
@@ -107,18 +112,18 @@ public class RegistrationPage2 extends AppCompatActivity {
     }
 
     public void processDatePickerResult(int year, int month, int day) {
-        String month_string = Integer.toString(month + 1);
-        String day_string = Integer.toString(day);
-        String year_string = Integer.toString(year);
+         month_string = month + 1;
+         day_string = day;
+         year_string = year;
         String dateMessage = (month_string + "/" + day_string + "/" + year_string);
-
+date=new Date(year,month,day);
 
         TextView year1 = findViewById(R.id.year);
-        year1.setText(year_string);
+        year1.setText(year_string+"");
         TextView day1 = findViewById(R.id.day);
-        day1.setText(day_string);
+        day1.setText(day_string+"");
         TextView month1 = findViewById(R.id.month);
-        month1.setText(month_string);
+        month1.setText(month_string+"");
 
 
 
@@ -138,11 +143,15 @@ public class RegistrationPage2 extends AppCompatActivity {
         regIntent3.putExtra("password", passwordString);
         regIntent3.putExtra("state", stateString);
         regIntent3.putExtra("city", cityString);
-        regIntent3.putExtra("dateOfBirth", dateOfBirth);
+        //regIntent3.putExtra("dateOfBirth", date);
+        regIntent3.putExtra("day",day_string);
+        regIntent3.putExtra("year",year_string);
+        regIntent3.putExtra("month",month_string);
         regIntent3.putExtra("gender", gender);
 
         //Uploading the image to Firebase + passing Uri to next activity
         uploadImage(); ///goes to upload image. Next activity is started from there.
+
 
 
     }
@@ -227,7 +236,7 @@ public class RegistrationPage2 extends AppCompatActivity {
                             Log.d("log-saved", "values sent to registrationPage3:"
                                     + emailString + " " + firstNameString + " "
                                     + lastNameString + " " + passwordString + " "
-                                    + stateString + " " + cityString + " " + dateOfBirth + " " + gender + " " + profilePicture);
+                                    + stateString + " " + cityString + " " + date + " " + gender + " " + profilePicture);
                             startActivity(regIntent3);
                         }
                     })
