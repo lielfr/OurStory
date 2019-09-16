@@ -49,7 +49,6 @@ public class MyMemories extends Fragment {
     TextView storyName;
     public MyMemories() {
         super();
-
     }
 
     @Nullable
@@ -90,7 +89,7 @@ public class MyMemories extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent Create = new Intent(getActivity(), CreateStory.class);
-                Create.putExtra("userId", userObj.getUserId().toString());
+                Create.putExtra("userId", (userObj.getUserId()).toString());
                 startActivity(Create);
             }
         });

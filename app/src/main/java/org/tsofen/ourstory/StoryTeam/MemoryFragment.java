@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 
 public class MemoryFragment extends Fragment {
-    public ArrayList<MemoryA> arrayList;
+    public ArrayList<Memory> arrayList;
     private RecyclerView mRecyclerView;
     private MemoryAdapter mAdapter;
 
