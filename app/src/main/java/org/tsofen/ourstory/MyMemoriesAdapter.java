@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ShareCompat;
@@ -93,11 +94,11 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
                 OurStoryService deleteMemory;
                 deleteMemory = WebFactory.getService();
-                deleteMemory.DeleteMemory(((memory).getMemoryId())).enqueue(new Callback<Object>() {
+                deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Object>() {
 
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
-                        Toast.makeText(ctx.getApplicationContext(),"Succeded",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ctx.getApplicationContext(), "Succeded", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
