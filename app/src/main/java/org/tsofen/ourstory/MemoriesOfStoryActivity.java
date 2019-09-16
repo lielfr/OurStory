@@ -35,7 +35,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     TextView storyName;
     Long storyId;
     Memory memory;
-    private ArrayList<MemoryA> memories;
+    private ArrayList<Memory> memories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +54,11 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         //               flag 0 == by Year |||| flag 1 == by Tag
         if(flag==0) {
 
-            MemoryAService.GetMemoriesByYear(storyId, Integer.parseInt(m[2])).enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByYear(storyId, Integer.parseInt(m[2])).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), memories.size() + " ", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -66,16 +66,16 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
         }
 
         else if(flag==1){
-            MemoryAService.GetMemoriesByTag(storyId, m[2]).enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByTag(storyId, m[2]).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                     rv.setAdapter(adapter);
@@ -84,7 +84,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
