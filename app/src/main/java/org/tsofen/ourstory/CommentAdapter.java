@@ -1,8 +1,6 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.tsofen.ourstory.UserModel.User;
 import org.tsofen.ourstory.model.Comment;
-import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.web.OurStoryService;
-import org.tsofen.ourstory.web.WebFactory;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
@@ -33,6 +23,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     Context ctx;
     LayoutInflater mInflater;
     Owner user;
+
+    public CommentAdapter(Context context, List<Comment> comments) {
+        this.comments = comments;
+        mInflater = LayoutInflater.from(context);
+    }
+
     @NonNull
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,14 +41,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         // return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-        ctx=parent.getContext();
+        ctx = parent.getContext();
 
         return viewHolder;
-    }
-
-    public CommentAdapter(Context context , List<Comment> comments) {
-        this.comments = comments;
-        mInflater = LayoutInflater.from(context);
     }
 
     @Override

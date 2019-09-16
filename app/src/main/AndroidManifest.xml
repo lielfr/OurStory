@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,14 +32,13 @@
         <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
-        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg"/>
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg" />
         <activity android:name="org.tsofen.ourstory.CommentActivity" />
 
 
         <activity
             android:name=".MemoriesOfStoryActivity"
-            android:label="Memories"
-            />
+            android:label="Memories" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

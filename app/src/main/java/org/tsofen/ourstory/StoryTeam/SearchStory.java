@@ -16,25 +16,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class SearchStory extends AppCompatActivity {
@@ -49,7 +41,7 @@ public class SearchStory extends AppCompatActivity {
     int D;
     int M ;
     int Y ;
-    int Taplayout ;
+    int Taplayout;
 
 
 
@@ -103,7 +95,7 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                Taplayout = tab.getPosition() ;
+                Taplayout = tab.getPosition();
 //                if (adapter.getItem(0)!=null){
 //                    CurrentFragment =adapter.getItem(0);
 //                    Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -140,7 +132,7 @@ public class SearchStory extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-               // if (tabLayout)
+                // if (tabLayout)
                 SendSearchResToFragment(searchresult.getText().toString(),0,CurrentFragment);
 
             }
@@ -237,7 +229,7 @@ public class SearchStory extends AppCompatActivity {
 
         Log.i("fragment","trying to catch fragment");
 
-        if(fragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+        if (fragment != null) { //TODO MEMORYTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
             //this section for STORYTEAM Use
             fragment.CommitSearch(getApplicationContext(), searchresult, flag, op, D, M, Y, SearchBy);
         }else{

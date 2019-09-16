@@ -50,6 +50,23 @@ public class TeamsHomePg extends AppCompatActivity {
 
             }
         });
+
+//        service.GetStoryById(36).enqueue(new Callback<Story>() {
+//            @Override
+//            public void onResponse(Call<Story> call, Response<Story> response) {
+//                if (response.code() != 200) return;
+//                Story story = response.body();
+//                if (story == null) return;
+//
+//                intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Story> call, Throwable t) {
+//
+//            }
+//        });
     }
 
 /*    public void showMem2Part(View view) {

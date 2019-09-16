@@ -9,32 +9,41 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
-import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-    public ArrayList<MemoryA> mMemories;
+    public ArrayList<Memory> mMemories;
     Context ctx;
     User user;
     LayoutInflater mInflater;
-    MemoryA mem;
+    Memory mem;
 
 
-
-    public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories, User userObj) {
+    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
         this.user = userObj;
@@ -56,7 +65,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        MemoryA memory = mMemories.get(position);
+        Memory memory = mMemories.get(position);
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,67 +81,88 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent();
+                Intent i = new Intent(ctx.getApplicationContext(), CreateEditMemoryActivity.class);
                 mem = memory;
                 i.putExtra("CEMemoryEdit", mem);
+                ctx.startActivity(i);
 
             }
         });
-
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 OurStoryService deleteMemory;
                 deleteMemory = WebFactory.getService();
-                deleteMemory.DeleteMemory(memory.getMemoryId());
+                deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Object>() {
+
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        Toast.makeText(ctx.getApplicationContext(), "Succeded", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+                        Toast.makeText(ctx.getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                deleteMemory.DeleteMemory((memory.getId()));
+
 
             }
         });
-
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     } else
-        holder.descr.setVisibility(View.GONE);
+        holder.descr.setVisibility(View.INVISIBLE);
         if (memory.getTags() != null) {
-            String s = "#";
+            String s = "";
             for (Tag tag : memory.getTags()) {
-                s += "#" +tag.getLabel();
+                s += "#" + tag.getLabel();
             }
             holder.tags.setText(s);
         } else
-            holder.tags.setVisibility(View.GONE);
+            holder.tags.setVisibility(View.INVISIBLE);
         Story story = memory.getStory();
         holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
         }
         else
-            holder.mem_date.setVisibility(View.GONE);
+            holder.mem_date.setVisibility(View.INVISIBLE);
 
         if (memory.getStory().getPicture() != null) {
-                holder.profile.setImageURI(Uri.parse(memory.getStory().getPicture().toString()));
+
+            Uri uri = Uri.parse(memory.getStory().getPicture().toString());
+            RequestOptions options = new RequestOptions()
+                    .override(300, 300)
+                    .centerCrop()
+                    .placeholder(R.drawable.nopicyet)
+                    .error(R.drawable.nopicyet);
+            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.profile);
         }
         else {
-            holder.profile.setImageLevel(R.drawable.defaultprofilepicture);
+            holder.profile.setImageResource(R.drawable.defaultprofilepicture);
         }
         if(memory.getLikes().isEmpty())
-            holder.num_of_likes.setVisibility(View.GONE);
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
             holder.num_of_likes.setText(memory.getLikes().size() + "");
         if(memory.getComments().isEmpty())
-            holder.num_of_comments.setVisibility(View.GONE);
+            holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
             holder.num_of_comments.setText(memory.getComments().size()+"");
        if(memory.getLocation()!=null)
            holder.location.setText(memory.getLocation());
        else
-           holder.location.setVisibility(View.GONE);
+           holder.location.setVisibility(View.INVISIBLE);
         if(memory.getFeeling()!=null)
             holder.feeling.setText("#"+memory.getFeeling());
         else
-            holder.feeling.setVisibility(View.GONE);
+            holder.feeling.setVisibility(View.INVISIBLE);
        /* ArrayList<ImgItem> images=new ArrayList<>();
         if(memory.getPictures()!=null) {
             images.add((ImgItem) memory.getPictures());
@@ -143,7 +173,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         }
         else
         {
-            holder.imagesrv.setVisibility(View.GONE);
+            holder.imagesrv.setVisibility(View.INVISIBLE);
         }*/
     }
     @Override
