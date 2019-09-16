@@ -204,6 +204,7 @@
             android:textSize="26sp"
             android:textStyle="bold"
             app:colorClickableText="@color/colorGrayHint"
+            app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.258"
             app:layout_constraintStart_toStartOf="parent"
