@@ -58,27 +58,28 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
         Comment comment = comments.get(position);
-        user_comment = WebFactory.getService();
-        user_comment.GetUserById(comment.getUser().getUserId()).enqueue(new Callback<Owner>() {
-            @Override
-            public void onResponse(Call<Owner> call, Response<Owner> response) {
-                user = response.body();
-                if(user.getLastName()!=null && user.getFirstName()!=null){
-                holder.name.setText(user.getFirstName() + " " + user.getLastName());}
-                if(user.getProfilePicture()!=null)
-                {holder.profile.setImageURI((Uri) user.getProfilePicture());}
-
-            }
-
-            @Override
-            public void onFailure(Call<Owner> call, Throwable t) {
-                Log.d("Error", t.toString());
-            }
-        });
+//        user_comment = WebFactory.getService();
+//        user_comment.GetUserById(comment.getUser().getUserId()).enqueue(new Callback<Owner>() {
+//            @Override
+//            public void onResponse(Call<Owner> call, Response<Owner> response) {
+//                user = response.body();
+//                if(user.getLastName()!=null && user.getFirstName()!=null){
+//                holder.name.setText(user.getFirstName() + " " + user.getLastName());}
+//                if(user.getProfilePicture()!=null)
+//                {holder.profile.setImageURI((Uri) user.getProfilePicture());}
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Owner> call, Throwable t) {
+//                Log.d("Error", t.toString());
+//            }
+//        });
 
 
         if(comment.getText()!=null){
-        holder.comment.setText(comment.getText());}
+        holder.comment.setText("rrr");//comment.getText());
+             }
 
     }
 

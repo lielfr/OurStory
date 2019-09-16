@@ -48,6 +48,7 @@ public class CommentActivity extends Activity {
         user = (User) i.getSerializableExtra("user");
         rv = findViewById(R.id.recycler_comment);
         adapter = new CommentAdapter(this , memoryA.getComments());
+        Log.d("sss",memoryA.getComments().size()+" ");
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
         adapter.notifyDataSetChanged();
