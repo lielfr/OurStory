@@ -59,22 +59,20 @@ public class AppHomePage extends AppCompatActivity {
                         if (UserStatusCheck.getUserStatus().equals("visitor")) {
                             targetFragment = new HomeFragment();
                             upText.setText("Home");
-                        }
-                        else
-                        {
+                        } else {
                             targetFragment = new MyMemories();
                             upText.setText("My Memories");
                         }
                         break;
                     case R.id.nav_profile:
-                       /* if(UserStatusCheck.getUserStatus()=="not a visitor")
-                        {targetFragment = new UserProfile();
-                        upText.setText("My Profile");
-                        break;}*/
-
-                        targetFragment = new UserProfile();
+                        if (UserStatusCheck.getUserStatus() == "visitor") {
+                            Intent login = new Intent(getApplicationContext(), LogIn.class);
+                            startActivity(login);
+                        } else {
+                            targetFragment = new UserProfile();
                             upText.setText("My Profile");
                             break;
+                        }
                     default:
                         return true;
                 }

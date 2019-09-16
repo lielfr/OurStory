@@ -1,7 +1,5 @@
 package org.tsofen.ourstory.UserModel;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.User;
@@ -67,9 +66,10 @@ public class UserProfile extends Fragment {
         pic = getView().findViewById(R.id.profilePictureImageView);
         email = getView().findViewById(R.id.showEmail);
 
-        Activity a = getActivity();
-        Intent i = a.getIntent();
-        profileUser = (User) i.getSerializableExtra("user");
+        Gson gson = new Gson();
+        String userJsonString = LogIn.mPrefs.getString("myUser","");
+        User profileUser = gson.fromJson(userJsonString,User.class);
+
 
         if (profileUser.getFirstName() != null)
             fName.setText(profileUser.getFirstName());
@@ -87,14 +87,15 @@ public class UserProfile extends Fragment {
             city.setText(profileUser.getCity());
         if (profileUser.getEmail() != null)
             email.setText(profileUser.getEmail());
-        pictureUri = Uri.parse(profileUser.getProfilePicture());
+        if(profileUser.getProfilePicture() != null)
+        {pictureUri = Uri.parse(profileUser.getProfilePicture());
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.drawable.defaultprofilepicture)
                 .error(R.drawable.defaultprofilepicture);
 
 
-        Glide.with(this).load(pictureUri).apply(options).into(pic);
+        Glide.with(this).load(pictureUri).apply(options).into(pic);}
     }
 }
 
