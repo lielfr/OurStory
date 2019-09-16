@@ -17,7 +17,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@color/colorRegister"
+        android:background="@drawable/register_button"
         android:fontFamily="@font/quicksand_bold"
         android:onClick="@string/LogIN"
         android:text="@string/Login"
