@@ -66,6 +66,7 @@
     <string name="forgetPassword">Forgot Password</string>
     <string name="Enter">Enter new password:</string>
     <string name="confirm">Confirm Password:</string>
+
     <string name="sendPass">Send password</string>
     <string name="getPass">getPass</string>
     <string name="saveAndLogin">saveAndLogin</string>
