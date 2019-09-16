@@ -89,6 +89,10 @@ public class User implements Serializable
         this.profilePicture = profilePicture;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public Long getUserId() {
         return userId;
     }
