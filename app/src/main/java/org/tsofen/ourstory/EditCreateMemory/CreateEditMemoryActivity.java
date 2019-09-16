@@ -164,7 +164,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             tagAdapter.notifyDataSetChanged();
         }
 
-        /*Story*/ story = (Story) intent.getSerializableExtra(KEY_CREATE);
+        Story story = (Story) intent.getSerializableExtra(KEY_CREATE);
+        this.story = story ;
         if (story != null) {
             memory.setStory(story);
         }
