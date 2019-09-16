@@ -27,7 +27,7 @@
         android:layout_width="101dp"
         android:layout_height="47dp"
         android:layout_gravity="center"
-        android:background="@color/colorRegister"
+        android:background="@drawable/register_button"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:onClick="Go2RegistrationPage2"
