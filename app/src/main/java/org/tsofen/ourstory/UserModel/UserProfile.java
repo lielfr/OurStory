@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.User;
 
@@ -73,8 +76,8 @@ public class UserProfile extends Fragment {
         if (profileUser.getLastName() != null)
             lName.setText(profileUser.getLastName());
         if (profileUser.getDateOfBirth() != null) {
-            Date date = profileUser.getDateOfBirth();
-            dOfBirth.setText(date.getDay() + "/" + date.getMonth() + "/" + date.getYear());
+           Date date = profileUser.getDateOfBirth();
+            dOfBirth.setText(profileUser.getDateOfBirth().toString());
         }
         if (profileUser.getGender() != null)
             gender.setText(profileUser.getGender());
@@ -84,6 +87,14 @@ public class UserProfile extends Fragment {
             city.setText(profileUser.getCity());
         if (profileUser.getEmail() != null)
             email.setText(profileUser.getEmail());
+        pictureUri = Uri.parse(profileUser.getProfilePicture());
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.defaultprofilepicture)
+                .error(R.drawable.defaultprofilepicture);
+
+
+        Glide.with(this).load(pictureUri).apply(options).into(pic);
     }
 }
 

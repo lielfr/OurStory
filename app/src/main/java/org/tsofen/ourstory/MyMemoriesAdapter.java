@@ -1,9 +1,5 @@
 package org.tsofen.ourstory;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -12,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ShareCompat;
@@ -21,16 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
+import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
-import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,15 +35,14 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-    public ArrayList<MemoryA> mMemories;
+    public ArrayList<Memory> mMemories;
     Context ctx;
     User user;
     LayoutInflater mInflater;
-    MemoryA mem;
+    Memory mem;
 
 
-
-    public MyMemoriesAdapter(Context context, ArrayList<MemoryA> memories, User userObj) {
+    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
         this.user = userObj;
@@ -70,7 +64,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        MemoryA memory = mMemories.get(position);
+        Memory memory = mMemories.get(position);
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,9 +80,10 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent();
+                Intent i = new Intent(ctx.getApplicationContext(), CreateEditMemoryActivity.class);
                 mem = memory;
                 i.putExtra("CEMemoryEdit", mem);
+                ctx.startActivity(i);
 
             }
         });
@@ -111,6 +106,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                     }
                 });
 
+                deleteMemory.DeleteMemory((memory.getId()));
+
 
             }
         });
@@ -130,7 +127,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if(memory.getMemoryDate()!=null) {
-            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
         }
         else
