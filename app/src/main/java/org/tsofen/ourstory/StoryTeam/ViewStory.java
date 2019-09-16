@@ -131,16 +131,22 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     textView2.setText(date);
 
                     ImageView pic = findViewById(R.id.imageView3);
-                    imageView_profile = story_full.getStory().getPicture();//TODO check if there is no profile pic MARYAM
-                    String st = imageView_profile.toString();
-                    Uri uri = Uri.parse(st);
-                    RequestOptions options = new RequestOptions()
-                            .override(375, 192)
-                            .centerCrop()
-                            .placeholder(R.drawable.nopicyet)
-                            .error(R.drawable.nopicyet);
 
-                    Glide.with(aa).load(uri).apply(options).into(pic);
+                        imageView_profile = story_full.getStory().getPicture();//TODO check if there is no profile pic MARYAM
+                        if (imageView_profile!=null) {
+                         String st = imageView_profile.toString();
+                        Uri uri = Uri.parse(st);
+                        RequestOptions options = new RequestOptions()
+                                .override(375, 192)
+                                .centerCrop()
+                                .placeholder(R.drawable.nopicyet)
+                                .error(R.drawable.nopicyet);
+
+                        Glide.with(aa).load(uri).apply(options).into(pic);
+                    }else{
+//                            ImageView profile_Pic = (ImageView) findViewById(R.id.imageButton3); //if ther eis no profile pic we need to set the defult one
+//                            profile_Pic.setImageResource(R.drawable.nopicyet);
+                        }
                 }
 
                 if (story_full.getMemories().size()==0) {
