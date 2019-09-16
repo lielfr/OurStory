@@ -29,6 +29,6 @@ public class DatePickerFragmentCEMemory extends DialogFragment
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         CreateEditMemoryActivity activity = (CreateEditMemoryActivity) getActivity();
-        activity.processDatePickerResult(year, month, day);
+        //activity.processDatePickerResult(year, month, day);
     }
 }

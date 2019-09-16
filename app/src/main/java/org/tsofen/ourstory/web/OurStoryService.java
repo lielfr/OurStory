@@ -6,7 +6,6 @@ import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.ListOfStory;
-import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
@@ -35,9 +34,9 @@ public interface OurStoryService {
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
-    Call<ArrayList<MemoryA>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
+    Call<ArrayList<Memory>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
     @GET("memories/story/{story}/findMemoriesByYear/{year}")
-    Call<ArrayList<MemoryA>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
+    Call<ArrayList<Memory>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
     @GET("comments/findById/{id}")
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})

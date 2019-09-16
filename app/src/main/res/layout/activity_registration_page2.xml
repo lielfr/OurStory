@@ -224,7 +224,6 @@
         app:layout_constraintTop_toBottomOf="@+id/genderHolder">
 
         <EditText
-            android:theme="@style/EditText"
             android:id="@+id/showCity"
             android:layout_width="180dp"
             android:layout_height="39dp"
@@ -239,6 +238,7 @@
             android:textColorHint="@color/transparent"
             android:textColorLink="@color/colorError"
             android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

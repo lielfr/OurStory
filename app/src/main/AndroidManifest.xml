@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ourstory_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_ourstory_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -31,8 +31,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
-        <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
-        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg" />
+        <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg"/>
         <activity android:name="org.tsofen.ourstory.CommentActivity" />
 
 
