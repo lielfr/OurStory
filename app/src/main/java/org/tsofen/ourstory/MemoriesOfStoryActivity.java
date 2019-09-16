@@ -59,7 +59,6 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -96,9 +95,9 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Memory> call, Response<Memory> response) {
                     memory = response.body();
-                    ArrayList<Memory> memoryOne;
-                 /*   memoryOne.add(memory);
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memoryOne );*/
+                    ArrayList<Memory> memoryOne = new ArrayList<>();
+                    memoryOne.add(memory);
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memoryOne );
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     adapter.notifyDataSetChanged();
