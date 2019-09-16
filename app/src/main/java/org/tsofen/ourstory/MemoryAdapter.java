@@ -21,6 +21,7 @@ import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,9 +54,9 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
-        Contributer contributer = memory.getContributer();
-        if (memory.getContributer().getProfilePicture() != null) {
-            Uri uri = Uri.parse(memory.getContributer().getProfilePicture().toString());
+        User user = memory.getUser();
+        if (memory.getUser().getProfilePicture() != null) {
+            Uri uri = Uri.parse(memory.getUser().getProfilePicture());
             RequestOptions options = new RequestOptions()
                     .override(300, 300)
                     .centerCrop()
@@ -65,7 +66,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         } else {
             holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
-        holder.name.setText(memory.getContributer().getFullName());
+        holder.name.setText(memory.getUser().getFullName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
