@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.StoryTeam.SearchStory;
+import org.tsofen.ourstory.StoryTeam.ViewStory;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -31,69 +32,84 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     RecyclerView rv;
     ArrayList<Memory> data;
     MemoryAdapter adapter;
-    TextView storyName;
-    private ArrayList<MemoryA> memories;
+    TextView story_name;
+    Long storyId,memoryId;
+    Memory memory;
+    int year,flag;
+    String storyName,tag;
+    private ArrayList<Memory> memories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memories);
-       /* Intent intent = getIntent();
-        String message = intent.getStringExtra(YearActivity.EXTRA_MESSAGE);
-        String[] m = message.split(" ");
-        String name = m[1] + " " + m[2];
-        int year = Integer.parseInt(m[0]);*/
+        Intent intent = getIntent();
+        tag = intent.getStringExtra("tag");
+        storyId= intent.getLongExtra("storyId",storyId);
+        memoryId= intent.getLongExtra("memoryId",memoryId);
+        storyName= intent.getStringExtra("storyName");
+        year= intent.getIntExtra("year",year);
+        flag = intent.getIntExtra("flag",flag);
         rv = findViewById(R.id.recycler);
-       /* storyName = findViewById(R.id.storyname);
-        data = Memory.createContactsList();
-        adapter = new MemoryAdapter(data);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        filter(year);
-        storyName.setText(name);*/
-
-
+        story_name = findViewById(R.id.storyname);
+        story_name.setText(storyName);
         MemoryAService = WebFactory.getService();
-
-        Intent call = getIntent();
-        String userCall = call.getStringExtra("UserCall");
-        String[] stringExtra = userCall.split(" ");
-
-        // String form [ flag, storyId, Tag/Year, userId ]
-        //               flag 0 == by Year |||| flag 1 == by Tag
-        if(stringExtra[0].equals("0")) {
-
-            MemoryAService.GetMemoriesByYear(10, 2000).enqueue(new Callback<ArrayList<MemoryA>>() {
+        if(flag==0) {
+            MemoryAService.GetMemoriesByYear(storyId, year).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter.notifyDataSetChanged();
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
         }
 
-        else {
-            MemoryAService.GetMemoriesByTag(10, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
+        else if(flag==1){
+            MemoryAService.GetMemoriesByTag(storyId, tag).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter.notifyDataSetChanged();
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
         }
+        else
+        {
+            MemoryAService.GetMemoryById(memoryId).enqueue(new Callback<Memory>() {
+                @Override
+                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                    memory = response.body();
+                    ArrayList<Memory> memoryOne = new ArrayList<>();
+                    memoryOne.add(memory);
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memoryOne );
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter.notifyDataSetChanged();
+                }
 
+                @Override
+                public void onFailure(Call<Memory> call, Throwable t) {
+
+                }
+            });
+
+        }
 
         // search button
         ImageButton btn = (ImageButton) findViewById(R.id.searchview);
@@ -104,19 +120,6 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 MemoriesOfStoryActivity.this.startActivity(myIntent);
             }
         });
-
-    }
-
-    public void shareMemory(View view)
-    {
-        String mimeType = "text/plain"; // For the share func to know which type is the sharing
-        // content so it can offer the right apps
-        ShareCompat.IntentBuilder
-                .from(this)
-                .setType(mimeType)
-                .setChooserTitle("Share this memory with: ")
-                .setText("This is a filler until we can integrate a memory object")
-                .startChooser();
 
     }
 }

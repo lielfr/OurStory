@@ -3,6 +3,8 @@ package org.tsofen.ourstory.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 
@@ -55,6 +57,7 @@ public class Memory implements Serializable {
     @SerializedName("is_private")
     @Expose
     boolean isPrivate;
+
 
     public Long getId() {
         return id;
@@ -200,4 +203,8 @@ public class Memory implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    /*public Contributer getContributer() {
+        return contributer;
+    }*/
 }
