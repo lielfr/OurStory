@@ -30,6 +30,7 @@ import com.google.gson.Gson;
 
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.StoryTeam.ViewStory;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Picture;
@@ -163,7 +164,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             tagAdapter.notifyDataSetChanged();
         }
 
-        Story story = (Story) intent.getSerializableExtra(KEY_CREATE);
+        /*Story*/ story = (Story) intent.getSerializableExtra(KEY_CREATE);
         if (story != null) {
             memory.setStory(story);
         }
@@ -501,7 +502,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                         .subscribe(finalResult -> {
                             intent.putExtra(KEY_MEMID, finalResult.getId());
                             setResult(RESULT_OK, intent);
-                            finish();
+                            //finish();
+                            Intent intent1 = new Intent(CreateEditMemoryActivity.this , ViewStory.class);//TODO Dont Touch!!!!
+                            intent1.putExtra("id",Long.toString(story.getStoryId()));
+                            startActivity(intent1);
                         });
 
             } else {
