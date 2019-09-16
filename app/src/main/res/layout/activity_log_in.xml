@@ -335,7 +335,6 @@
         app:layout_constraintTop_toBottomOf="@+id/holder1">
 
         <EditText
-            android:theme="@style/EditText"
             android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -347,11 +346,13 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingLeft="5dp"
+            android:text="Avi1234"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@color/transparent"
             android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -383,7 +384,6 @@
         app:layout_constraintTop_toTopOf="@+id/main_container2">
 
         <EditText
-            android:theme="@style/EditText"
             android:id="@+id/showEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -394,11 +394,13 @@
             android:fontFamily="@font/quicksand"
             android:hint="@string/Email1"
             android:paddingLeft="5dp"
+            android:text="avi.cohen@gmail.com"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@color/transparent"
             android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

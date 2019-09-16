@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.UserModel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
 
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -24,6 +27,7 @@ import static org.tsofen.ourstory.UserModel.UsersList.usersList;
 
 
 public class LogIn extends AppCompatActivity {
+    public static SharedPreferences mPrefs;
     public String emailString;
     public String firstNameString;
     public String lastNameString;
@@ -46,6 +50,7 @@ public class LogIn extends AppCompatActivity {
 org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         email = findViewById(R.id.showEmail);
@@ -80,7 +85,6 @@ org.tsofen.ourstory.model.api.User myUser;
 
 
     public void goLogin(View view) {
-
         //int index = 0;
         // String userIn;
 
@@ -102,13 +106,19 @@ org.tsofen.ourstory.model.api.User myUser;
 
                     userPass = myUser.getPassword();
                     if (userPass.equals(inputPassword)) {
-                        UserStatusCheck.setUserStatus("not a visitor");
+                        UserStatusCheck.setUserStatus("not a visitor"); //TODO move the user id to the home page and then move it to create story intent (move it under name=("userId"))
+                        //
                         Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
                         signInDone.putExtra("email", inputEmail);
                         signInDone.putExtra("userId", userId);
                         signInDone.putExtra("user", myUser);
                         //signInDone.putExtra("index", index);
-
+                        mPrefs= getPreferences(MODE_PRIVATE);
+                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(myUser);
+                        prefsEditor.putString("myUser", json);
+                        prefsEditor.commit();
                         startActivity(signInDone);
                     } else {
                         passErr.setText("Incorrect password!!");

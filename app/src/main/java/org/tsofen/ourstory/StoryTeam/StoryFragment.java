@@ -173,6 +173,7 @@ public class StoryFragment extends Fragment {
                 wb.GetStoriesByDateOfBirth(D, M, Y, searchinput).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ListOfStory>> call, Response<ArrayList<ListOfStory>> response) {
+
                         arr = response.body();
                         if (arr == null) {
                             Log.d("rrr", "arr is null");

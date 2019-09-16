@@ -28,9 +28,9 @@ import static org.tsofen.ourstory.StoryTeam.StoryFragment.inflatedView;
 
 
 public class MemoryFragment extends Fragment {
-    public ArrayList<MemoryA> memories = new ArrayList<>();
-    private RecyclerView mRecyclerView;
-    private MemoryAdapter mAdapter;
+    public static ArrayList<MemoryA> memories = new ArrayList<>();
+    public static RecyclerView mRecyclerView;
+    public static MemoryAdapter mAdapter;
     OurStoryService MemoryAService;
     Context ctx;
 
@@ -46,36 +46,64 @@ public class MemoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_memory, container, false);
 
     }
+
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
-        mRecyclerView = getView().findViewById(R.id.recyclerview);
+        // View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
+        mRecyclerView =getView().findViewById(R.id.recyclerview1);
+        //getView().findViewById(R.id.recyclerview);
+        if(mRecyclerView==null) {
+            Log.d("sss", " on view created nulll");
+        }
+        else
+        {
+            Log.d("sss", " on view created notnull");
+            mAdapter = new MemoryAdapter(getActivity(), memories);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
-    public void CommitSearch(Context context, String searchinput){
+    public void CommitSearch( String searchinput){
         OurStoryService wepengine = WebFactory.getService();
-        wepengine.GetMemoriesByKeyword("description").enqueue(new Callback<ArrayList<MemoryA>>() {
+        wepengine.GetMemoriesByKeyword(searchinput).enqueue(new Callback<ArrayList<MemoryA>>()
+        {
             @Override
-            public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+            public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response)
+            {
                 memories = response.body();
+
+                //
                 if(memories==null) {
-                    Log.d("err", "No Memories");
-                }else {
-                    mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(MemoryFragment.this.getContext()));
+                    Log.d("error", "No Memories");
+                }
+
+                else
+                    {
+
+                    Log.d(" no error", memories.size()+" ");
+
+
+
+
                     mAdapter.notifyDataSetChanged();
+
+
+
+
                 }
             }
-
             @Override
             public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
                 Log.d("Error", t.toString());
             }
         });
-        int MemoryListSize = memories.size();
-        mRecyclerView.getAdapter().notifyItemInserted(MemoryListSize);
-        mRecyclerView.smoothScrollToPosition(MemoryListSize);
+//        int MemoryListSize = memories.size();
+//        mRecyclerView.getAdapter().notifyItemInserted(MemoryListSize);
+//        mRecyclerView.smoothScrollToPosition(MemoryListSize);
     }
 
 }

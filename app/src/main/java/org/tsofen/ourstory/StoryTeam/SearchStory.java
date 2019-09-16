@@ -45,12 +45,12 @@ public class SearchStory extends AppCompatActivity {
     TextView searchresult ;
     StoryFragment CurrentFragment = null;
     MemoryFragment memoryFragment = null;
-    int currTab;
     int flag = 0;
     int op = 0;
     int D;
     int M ;
     int Y ;
+    int Taplayout ;
 
 
 
@@ -104,7 +104,8 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                currTab=tab.getPosition();
+                Taplayout = tab.getPosition() ;
+
 //                if (adapter.getItem(0)!=null){
 //                    CurrentFragment =adapter.getItem(0);
 //                    Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -127,11 +128,13 @@ public class SearchStory extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+
         if(CurrentFragment == null) {
             //CurrentFragment = adapter.getItem(0);
-        }else{
-            Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
-        }
+    }else{
+        Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
+    }
         searchresult = findViewById(R.id.searchresult);
         searchresult.addTextChangedListener(new TextWatcher() {
             @Override
@@ -142,10 +145,10 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if(currTab==0) {//check which fragment we in
+                if(Taplayout==0) {//check which fragment we in
                     SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
                 }else{
-                    SendSearchResToMemoryFragment(searchresult.getText().toString(),0,memoryFragment) ;               }
+                    SendSearchResToMemoryFragment(searchresult.getText().toString()) ;               }
             }
 
             @Override
@@ -249,13 +252,14 @@ public class SearchStory extends AppCompatActivity {
 
     }
 
-    public void SendSearchResToMemoryFragment(String searchresult,int SearchBy,MemoryFragment fragment) {
+    public void SendSearchResToMemoryFragment(String searchresult){//},MemoryFragment fragment) {
 
         Log.i("fragment","trying to catch fragment");
 
-        if(fragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+        if(memoryFragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
             //this section for STORYTEAM Use
-            fragment.CommitSearch(getApplicationContext(), searchresult);
+
+            memoryFragment.CommitSearch(searchresult);
         }else{
             Log.i("fragment","fragment is null");
         }
