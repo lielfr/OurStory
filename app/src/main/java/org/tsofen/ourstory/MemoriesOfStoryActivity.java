@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.StoryTeam.SearchStory;
+import org.tsofen.ourstory.StoryTeam.ViewStory;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -32,66 +33,82 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     ArrayList<Memory> data;
     MemoryAdapter adapter;
     TextView storyName;
-    private ArrayList<MemoryA> memories;
+    Long storyId;
+    Memory memory;
+    private ArrayList<Memory> memories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memories);
-       /* Intent intent = getIntent();
-        String message = intent.getStringExtra(YearActivity.EXTRA_MESSAGE);
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("UserCall");
         String[] m = message.split(" ");
-        String name = m[1] + " " + m[2];
-        int year = Integer.parseInt(m[0]);*/
+        int flag = Integer.parseInt(m[0]);
+        storyId = Long.valueOf((m[1]));
         rv = findViewById(R.id.recycler);
-       /* storyName = findViewById(R.id.storyname);
-        data = Memory.createContactsList();
-        adapter = new MemoryAdapter(data);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        filter(year);
-        storyName.setText(name);*/
-
-
+        storyName = findViewById(R.id.storyname);
+       /* storyName.setText(name);*/
         MemoryAService = WebFactory.getService();
-
-        Intent call = getIntent();
-        String userCall = call.getStringExtra("UserCall");
-        String[] stringExtra = userCall.split(" ");
-
-        // String form [ flag, storyId, Tag/Year, userId ]
+        // String form [ flag, storyId, Tag/Year, story name ]
         //               flag 0 == by Year |||| flag 1 == by Tag
-        if(stringExtra[0].equals("0")) {
+        if(flag==0) {
 
-            MemoryAService.GetMemoriesByYear(10, 2000).enqueue(new Callback<ArrayList<MemoryA>>() {
+            MemoryAService.GetMemoriesByYear(storyId, Integer.parseInt(m[2])).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), memories.size() + " ", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter.notifyDataSetChanged();
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
         }
 
-        else {
-            MemoryAService.GetMemoriesByTag(10, "happy").enqueue(new Callback<ArrayList<MemoryA>>() {
+        else if(flag==1){
+            MemoryAService.GetMemoriesByTag(storyId, m[2]).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
-                public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response) {
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    Toast.makeText(getApplicationContext(), memories.size() + "", Toast.LENGTH_LONG).show();
                     adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter.notifyDataSetChanged();
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
 
                 }
             });
+        }
+        else
+        {
+            MemoryAService.GetMemoryById(Long.parseLong(m[2])).enqueue(new Callback<Memory>() {
+                @Override
+                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                    memory = response.body();
+                    ArrayList<Memory> memoryOne;
+                 /*   memoryOne.add(memory);
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memoryOne );*/
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<Memory> call, Throwable t) {
+
+                }
+            });
+
         }
 
 

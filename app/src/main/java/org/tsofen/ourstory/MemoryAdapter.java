@@ -20,19 +20,22 @@ import com.bumptech.glide.request.RequestOptions;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
-    public final ArrayList<MemoryA> mMemories;
-    MemoryA memoryA;
+    public final ArrayList<Memory> mMemories;
+    Memory memoryA;
     Context ctx;
     LayoutInflater mInflater;
-    MemoryA mem;
+    Memory mem;
 
-    public MemoryAdapter(Context context,ArrayList<MemoryA> memories)
+    public MemoryAdapter(Context context,ArrayList<Memory> memories)
     {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
@@ -50,10 +53,10 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MemoryA memory = mMemories.get(position);
-        Contributer contributer = memory.getContributer();
-        if (memory.getContributer().getProfilePicture() != null) {
-            Uri uri = Uri.parse(memory.getContributer().getProfilePicture().toString());
+        Memory memory = mMemories.get(position);
+        User user = memory.getUser();
+        if (memory.getUser().getProfilePicture() != null) {
+            Uri uri = Uri.parse(memory.getUser().getProfilePicture());
             RequestOptions options = new RequestOptions()
                     .override(300, 300)
                     .centerCrop()
@@ -63,7 +66,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         } else {
             holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
-        holder.name.setText(memory.getContributer().getFullName());
+        holder.name.setText(memory.getUser().getFullName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +90,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
      }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
-            String memDate = monthNames[memory.getMemoryDate().getMonth()] + " " + memory.getMemoryDate().getDay() + " , " + (memory.getMemoryDate().getYear());
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)+1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
         } else
             holder.mem_date.setVisibility(View.INVISIBLE);

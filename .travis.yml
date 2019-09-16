@@ -1,0 +1,20 @@
+language: android
+jdk:
+  - oraclejdk8
+android:
+  components:
+    - tools
+    - build-tools-25.0.0
+    - android-25
+    - Extra-android-support
+    - extra-google-google_play_services
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - addon-google_apis-google-25
+BEFORE_INSTALL:
+  - chmod +x gradlew
+  - export JAVA8_HOME = /usr/lib/jvm/java-8-oracle
+  - export JAVA_HOME = $JAVA8_HOME
+
+script:
+  ./gradlew build
