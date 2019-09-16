@@ -22,7 +22,7 @@ import java.util.List;
 public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAdapter.ViewHolder> {
     Context ctx;
     Activity parent;
-    public List<String> data;
+    public List<Uploadable> data;
     int upload_start = 0;
 
     public static final int ADDMEMORY_VIDEO = 959;
@@ -67,7 +67,7 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
                     setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String item = data.get(position - 1);
+                            String item = data.get(position - 1).getUrl();
                             data.remove(position - 1);
                             notifyItemRemoved(position);
                             notifyDataSetChanged();
@@ -78,7 +78,7 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
                             }
                         }
                     });
-            String uri = data.get(position - 1);
+            String uri = data.get(position - 1).getUrl();
             Glide.with(holder.itemView)
                     .load(uri)
                     .into(imageView);

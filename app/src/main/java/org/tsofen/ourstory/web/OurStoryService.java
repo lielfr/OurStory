@@ -4,6 +4,7 @@ package org.tsofen.ourstory.web;
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
+import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.Owner;
@@ -14,13 +15,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -41,7 +42,7 @@ public interface OurStoryService {
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
     @DELETE("memories/delete/{id}")
-    Call<Memory> DeleteMemory(@Path("id") long id);
+    Call<Object> DeleteMemory(@Path("id") long id);
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
     @GET("users/findById/{id}")
@@ -50,17 +51,17 @@ public interface OurStoryService {
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
 
     @POST("memories/setMediaToMemory/{id}")
-    Call<Memory> SetMediaToMemory(@Path("id") long id, @Body HashMap<String, List<String>> hm);
+    Observable<Memory> SetMediaToMemory(@Path("id") long id, @Body HashMap<String, List<String>> hm);
 
     @Headers({"Content-Type: application/json"})
     @POST("memories/create")
-    Call<Memory> CreateMemory(@Body Memory memory);
+    Observable<Memory> CreateMemory(@Body Memory memory);
 
     @GET("memories/findById/{id}")
     Call<Memory> GetMemoryById(@Path("id") long id);
 
     @PUT("memories/update/{id}")
-    Call<Memory> EditMemory(@Path("id") long id, @Body Memory memory);
+    Observable<Memory> EditMemory(@Path("id") long id, @Body Memory memory);
     @GET("users/findByEmail/{email}")
     Call<User> GetUserByEmail( @Path("email") String email);
 
@@ -71,6 +72,11 @@ public interface OurStoryService {
     @GET("stories/findStoriesByDodFull")
     Call<ArrayList<ListOfStory>> GetStoriesByDodFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
 
+    @GET("stories/findById/{id}")
+    Call<Story> GetStoryById(@Path("id") long id);
+
+    @GET("stories/ViewStoryFull/{id}")
+    Call<FullViewStory> GetFullViewStoryById(@Path("id") long id);
 
     @GET("stories/findStoriesByDobYearMonth")
     Call<ArrayList<ListOfStory>> GetStoriesByDobYearMonth (@Query("m") int month, @Query("y") int year );
@@ -80,5 +86,8 @@ public interface OurStoryService {
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfBirth (@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
     @GET("stories/findStoriesByDateOfDeath")
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfDeath(@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
+    @POST("users/create")
+    Call<User> CreateUser(@Body User newUser);
+
 
 }

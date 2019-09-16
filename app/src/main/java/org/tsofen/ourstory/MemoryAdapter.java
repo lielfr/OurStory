@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
@@ -26,7 +29,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public final ArrayList<Memory> mMemories;
-    Memory memory;
+    Memory memoryA;
     Context ctx;
     LayoutInflater mInflater;
     Memory mem;
@@ -52,9 +55,15 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         Memory memory = mMemories.get(position);
         Contributer contributer = memory.getContributer();
         if (memory.getContributer().getProfilePicture() != null) {
-            holder.pic.setImageURI((Uri) memory.getContributer().getProfilePicture());
+            Uri uri = Uri.parse(memory.getContributer().getProfilePicture().toString());
+            RequestOptions options = new RequestOptions()
+                    .override(300, 300)
+                    .centerCrop()
+                    .placeholder(R.drawable.nopicyet)
+                    .error(R.drawable.nopicyet);
+            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
         } else {
-            holder.pic.setImageLevel(R.drawable.defaultprofilepicture);
+            holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
         holder.name.setText(memory.getContributer().getFullName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
@@ -76,59 +85,45 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
      }
      if(memory.getFeeling()!=null)
      {
-         holder.feeling.setText(memory.getFeeling().toString());
+         holder.feeling.setText("#"+memory.getFeeling());
      }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
-            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH+1)] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)+1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
         } else
-            holder.mem_date.setVisibility(View.GONE);
+            holder.mem_date.setVisibility(View.INVISIBLE);
         if (memory.getLikes() != null) {
-           holder.num_of_likes.setText(memory.getLikes().size());
+           holder.num_of_likes.setText(memory.getLikes().size()+"");
         } else {
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         }
        if(memory.getComments()!=null) {
-           holder.num_of_comments.setText(memory.getComments().size());
+           holder.num_of_comments.setText(memory.getComments().size()+"");
        } else {
            holder.num_of_comments.setVisibility(View.INVISIBLE);
        }
         if (memory.getTags() != null) {
-            String s = "#";
+            String s = "";
             for (Tag tag : memory.getTags()) {
-                s += tag.getLabel();
+                s += "#" +tag.getLabel();
             }
             holder.tags.setText(s);
         } else
             holder.tags.setVisibility(View.INVISIBLE);
 
-
-        ///////////////////////////////
-
-        //ArrayList<ImgItem> images=Memory.getPictures();
-        ArrayList<ImgItem> images=new ArrayList<>();
-
-
-        //////////////////////////////////// fill images
-        ImgItem i1=new ImgItem("alex",R.drawable.alex);
-        ImgItem i2=new ImgItem("alex",R.drawable.pic);
-        ImgItem i3=new ImgItem("alex",R.drawable.alex);
-
-        images.add(i1);
-        images.add(i2);
-
-
-
-
-
-        ///////////////////////////////////
-        ImageAdapter imgAdapter=new ImageAdapter(ctx,images);
-        holder.rvMemory.setHasFixedSize(true);
-        holder.rvMemory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL,false));
-        holder.rvMemory.setAdapter(imgAdapter);
-
-
+       /* ArrayList<ImgItem> images=new ArrayList<>();
+        if(memory.getPictures()!=null) {
+            images.add((ImgItem) memory.getPictures());
+            ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
+            holder.rvMemory.setHasFixedSize(true);
+            holder.rvMemory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
+            holder.rvMemory.setAdapter(imgAdapter);
+        }
+        else
+        {
+            holder.rvMemory.setVisibility(View.INVISIBLE);
+        }*/
 
     }
 
@@ -145,7 +140,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
-
+            rvMemory = itemView.findViewById(R.id.memory_pic);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
             feeling = itemView.findViewById(R.id.feelingtxt);
             location = itemView.findViewById(R.id.locationtxt);

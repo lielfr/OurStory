@@ -27,6 +27,7 @@ import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.UserModel.LogIn;
+import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -50,6 +51,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
     Bitmap bitmap;
     Uri filePath;
+    String fileURI;
 
     Owner owner;
     Story result;
@@ -68,13 +70,15 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     DatePicker birthDatePicker, deathDatePicker;
     int birthDateFields = 3, deathDateFields = 3;
     Date today = new Date();
-
+    OurStoryService Wepengine ;
+    Long userid ;
+    Long Storyid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createstory);
-
+        Wepengine = WebFactory.getService();
         firstName = findViewById(R.id.firstNameEditText);
         lastName = findViewById(R.id.lastNameEditText);
 
@@ -222,24 +226,32 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             }
         });
 
+        Intent intent = getIntent();  //getting the user from the server
+        if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
+            if(intent.getStringExtra("userId")!= null) {
+                userid = Long.parseLong(intent.getStringExtra("userId"));
+                Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
+                    @Override
+                    public void onResponse(Call<Owner> call, Response<Owner> response) {
+                        if (response.body()!=null){
+                            owner = response.body() ;
+                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName() , Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
+                        }
 
-        Intent intent = getIntent();
-        if (intent.getStringExtra("tybe").equals("visitor")) {
-//            AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
-//            alertDialog.setTitle("log in isnt detected") ;
-//            alertDialog.setMessage("you need to log in before creating a new story ");
-//            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "SIGN IN",
-//                    new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
-//                            startActivity(movetocreateaccount);
-//                        }
-//                    });
-//            alertDialog.show();
-            Toast.makeText(this, "you need to log in before creating an new Story ", Toast.LENGTH_SHORT).show();
-            Intent movetocreateaccount = new Intent(CreateStory.this, LogIn.class);
-            startActivity(movetocreateaccount);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Owner> call, Throwable t) {
+                        Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }else{
+                Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
+            }
         }
+
 
 
     }
@@ -388,9 +400,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                 imageup.uploadImg(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(CreateStory.this, "upload image has been completed", Toast.LENGTH_SHORT).show();
+                        fileURI = taskSnapshot.getDownloadUrl().toString();
+                        Toast.makeText(CreateStory.this, "upload image and save the download URI Succeeded", Toast.LENGTH_SHORT).show();
+
                     }
+
                 });
+
 
 
             } catch (FileNotFoundException e) {
@@ -409,7 +425,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             @Override
             public void onResponse(Call<Owner> call, Response<Owner> response) {
 
-                owner=response.body() ;
+               owner=response.body() ;
                 if (owner!=null) {
                     //   Toast.makeText(CreateStory.this, "the story name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
                 }else{
@@ -428,6 +444,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
 
         Intent i = new Intent(this, ViewStory.class);
+
         Intent cm = new Intent(this, CreateEditMemoryActivity.class);
 
         // Names Validation
@@ -491,7 +508,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             f4 = false;
         }
 
-        if (f1 && f2 && f3 && f4) {
+        if ((f1 && f2 && f3 && f4)) {
             // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + " " + lns; // name is done
 
@@ -515,41 +532,45 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 //                DeathDate = y2s + "T14:17:53.763+0000" ;
 //            }
 
-
-            OurStoryService Wepengine = WebFactory.getService();
-            Story story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
+Story story;
+if(fileURI==null){
+     story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
+}else{
+     story = new Story(owner, nameofperson, BirthDate, DeathDate, fileURI);
+}
             Wepengine.CreateStory(story).enqueue(new Callback<Story>() {
                 @Override
                 public void onResponse(Call<Story> call, Response<Story> response) {
                     result = response.body();
                     if (result != null) {
                         Toast.makeText(CreateStory.this, "the story " + result.getNameOfPerson() + " was created succefully", Toast.LENGTH_SHORT).show();
-
-                        // pass birth date to the next activity
-                        if (birthDateFields == 3) {
-                            i.putExtra("date1", df3.format(d1));
-                        } else if (birthDateFields == 2) {
-                            i.putExtra("date1", df2.format(d1));
-                        } else if (birthDateFields == 1) {
-                            i.putExtra("date1", df1.format(d1));
-                        }
-
-                        // pass death date to thr next activity
-                        if (deathDateFields == 3) {
-                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
-                        } else if (deathDateFields == 2) {
-                            i.putExtra("date2", df2.format(d2));
-                        } else if (deathDateFields == 1) {
-                            i.putExtra("date2", df1.format(d2));
-                        }
-
-                        i.putExtra("name", nameofperson);
-                        if (view.getId() == R.id.create) {
-                            i.putExtra("Button", "just_create");
-                        } else {
-                            i.putExtra("Button", "createandadd");
-                            i.putExtra("id", result);
-                        }
+//
+//                        // pass birth date to the next activity
+//                        if (birthDateFields == 3) {
+//                            i.putExtra("date1", df3.format(d1));
+//                        } else if (birthDateFields == 2) {
+//                            i.putExtra("date1", df2.format(d1));
+//                        } else if (birthDateFields == 1) {
+//                            i.putExtra("date1", df1.format(d1));
+//                        }
+//
+//                        // pass death date to thr next activity
+//                        if (deathDateFields == 3) {
+//                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
+//                        } else if (deathDateFields == 2) {
+//                            i.putExtra("date2", df2.format(d2));
+//                        } else if (deathDateFields == 1) {
+//                            i.putExtra("date2", df1.format(d2));
+//                        }
+//
+//                        i.putExtra("name", nameofperson);
+//                        if (view.getId() == R.id.create) {
+//                            i.putExtra("Button", "just_create");
+//                        } else {
+//                            i.putExtra("Button", "createandadd");
+//                            i.putExtra("id", result);
+//                        }
+                        i.putExtra("id", String.valueOf(result.getStoryId()));
                         startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();
