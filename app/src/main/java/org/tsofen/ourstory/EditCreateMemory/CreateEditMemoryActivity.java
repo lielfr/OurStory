@@ -6,10 +6,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,6 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -30,6 +34,7 @@ import com.google.gson.Gson;
 
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Picture;
@@ -40,6 +45,7 @@ import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +53,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TimeZone;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
@@ -88,6 +95,15 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     private User user;
     private Story story;
     TextView AddPicTxV;
+
+    TextView error3;
+    TextView showMemDate;
+    private int year1 = 1, month1 = 1, day1 = 1;
+    CheckBox dayChckBx1,monthChckBx1,yearChckBx1;
+    boolean checked1 = false, checked2 = false, checked3 = false;
+    DatePicker memoryDatePicker;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,13 +124,101 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         loveb = findViewById(R.id.lovebtn_cememory);
         svbtn = findViewById(R.id.Savebtn_cememory);
         cnslbtn = findViewById(R.id.Cancelbtn_cememory);
-        TextView dayDate = findViewById(R.id.day_text_cememory);
-        TextView monthDate = findViewById(R.id.month_text_cememory);
-        TextView yearDate = findViewById(R.id.year_text_cememory);
         MemError = findViewById(R.id.error_cememory);
         imageLiner = findViewById(R.id.LinerForImage);
         ourScroller = findViewById(R.id.scrollView_cememory);
         AddPicTxV = findViewById(R.id.AddPicTV_cememory);
+        error3 = findViewById(R.id.error3);
+
+        yearChckBx1=findViewById(R.id.yearChckBx1);
+        yearChckBx1.setOnClickListener(new View.OnClickListener(){
+            @Override
+             public void onClick(View v){
+                checked1 =((CheckBox) v).isChecked();
+                int yearSpinnerI1 = Resources.getSystem().getIdentifier("year", "id", "android");
+                View yearSpinnerV1 = memoryDatePicker.findViewById(yearSpinnerI1);
+
+                if(checked1) {
+                        if (yearSpinnerV1 != null){
+                            yearSpinnerV1.setVisibility(View.GONE);
+                        }
+
+                    else{
+                            if (yearSpinnerV1 != null){
+                                yearSpinnerV1.setVisibility(View.VISIBLE);
+                            }
+                    }
+                }
+            }
+        });
+
+        monthChckBx1 = findViewById(R.id.monthChckBx1);
+        monthChckBx1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checked2 = ((CheckBox) v).isChecked();
+                int monthSpinnerI1 = Resources.getSystem().getIdentifier("month", "id", "android");
+                View monthSpinnerV1 = memoryDatePicker.findViewById(monthSpinnerI1);
+
+                if (checked2) {
+                    if (monthSpinnerI1 != 0) {
+                        if (monthSpinnerV1 != null) {
+                            monthSpinnerV1.setVisibility(View.GONE);
+                        }
+                    }
+                } else {
+                    if (monthSpinnerI1 != 0) {
+                        if (monthSpinnerV1 != null) {
+                            monthSpinnerV1.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+        });
+
+        dayChckBx1 = findViewById(R.id.dayChckBx1);
+        dayChckBx1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checked3 = ((CheckBox) v).isChecked();
+                int daySpinnerI1 = Resources.getSystem().getIdentifier("day", "id", "android");
+                View daySpinnerV1 = memoryDatePicker.findViewById(daySpinnerI1);
+
+                if (checked3) {
+                    if (daySpinnerI1 != 0) {
+                        if (daySpinnerV1 != null) {
+                            daySpinnerV1.setVisibility(View.GONE);
+                        }
+                    }
+                } else {
+                    if (daySpinnerI1 != 0) {
+                        if (daySpinnerV1 != null) {
+                            daySpinnerV1.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+        });
+
+        showMemDate = findViewById(R.id.showMemDate);
+        Calendar MemCal = Calendar.getInstance();
+        MemCal.setTimeZone(TimeZone.getTimeZone("Asia/Jerusalem"));
+        year1 = MemCal.get(Calendar.YEAR);
+        month1 = MemCal.get(Calendar.MONTH);
+        day1 = MemCal.get(Calendar.DAY_OF_MONTH);
+
+        memoryDatePicker = findViewById(R.id.memoryDatePicker);
+        memoryDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
+        memoryDatePicker.init(year1, month1, day1, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker memoryDatePicker, int year, int month, int day) {
+
+                DateOfMem();
+
+            }
+        });
+
+
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
@@ -131,10 +235,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
             if (memory.getMemoryDate() != null) {
-                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
-                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
-                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
-                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
+//                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
+//                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
+//                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
+//                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
             }
 
             if (memory.getFeeling() != null)
@@ -195,6 +299,31 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         tagsRV.setAdapter(tagAdapter);
         tagsRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                 false));
+    }
+
+    private void DateOfMem(){
+        if ((!checked1 && checked2 && !checked3) || (checked1 && checked2 && !checked3) ) {
+            //only day is shown or only day and year are shown
+            error3.setText("invalid date");
+            error3.setVisibility(View.VISIBLE);
+            return;
+        }
+        if (!checked1){
+            //year is changeable
+            cal.set(Calendar.YEAR,memoryDatePicker.getYear());
+        }
+        if (!checked2){
+            //month is changeable
+            cal.set(Calendar.MONTH,memoryDatePicker.getMonth());
+
+        }
+        if (!checked3){
+            //day is changeable
+            cal.set(Calendar.DAY_OF_MONTH,memoryDatePicker.getDayOfMonth());
+        }
+        MemDate=cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        showMemDate.setText(dateFormat.format(MemDate));
     }
 
     @Override
@@ -348,32 +477,32 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 
-    public void showDatePicker(View view) {
-        DialogFragment newFragment = new DatePickerFragmentCEMemory();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
-
-    public void processDatePickerResult(int year, int month, int day) {
-
-        String month_string = Integer.toString(month + 1);
-        String day_string = Integer.toString(day);
-        String year_string = Integer.toString(year);
+//    public void showDatePicker(View view) {
+//        DialogFragment newFragment = new DatePickerFragmentCEMemory();
+//        newFragment.show(getSupportFragmentManager(), "datePicker");
+//    }
 //
-
-        currentDate = day_string + "/" + month_string + "/" + year_string;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar c = Calendar.getInstance();
-        c.set(year, month, day);
-        MemDate = c.getTime();
-
-        TextView dayDate = findViewById(R.id.day_text_cememory);
-        TextView monthDate = findViewById(R.id.month_text_cememory);
-        TextView yearDate = findViewById(R.id.year_text_cememory);
-
-        dayDate.setText(day_string);
-        monthDate.setText(month_string);
-        yearDate.setText(year_string);
-    }
+//    public void processDatePickerResult(int year, int month, int day) {
+//
+//        String month_string = Integer.toString(month + 1);
+//        String day_string = Integer.toString(day);
+//        String year_string = Integer.toString(year);
+////
+//
+//        currentDate = day_string + "/" + month_string + "/" + year_string;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        Calendar c = Calendar.getInstance();
+//        c.set(year, month, day);
+//        MemDate = c.getTime();
+//
+//        TextView dayDate = findViewById(R.id.day_text_cememory);
+//        TextView monthDate = findViewById(R.id.month_text_cememory);
+//        TextView yearDate = findViewById(R.id.year_text_cememory);
+//
+//        dayDate.setText(day_string);
+//        monthDate.setText(month_string);
+//        yearDate.setText(year_string);
+//    }
 
     /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
