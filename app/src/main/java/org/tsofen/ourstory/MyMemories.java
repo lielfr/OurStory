@@ -27,7 +27,6 @@ import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
-import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -50,7 +49,6 @@ public class MyMemories extends Fragment {
     TextView storyName;
     public MyMemories() {
         super();
-
     }
 
     @Nullable
@@ -91,7 +89,7 @@ public class MyMemories extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent Create = new Intent(getActivity(), CreateStory.class);
-                Create.putExtra("userId", userObj.getUserId().toString());
+                Create.putExtra("userId", (userObj.getUserId()).toString());
                 startActivity(Create);
             }
         });
