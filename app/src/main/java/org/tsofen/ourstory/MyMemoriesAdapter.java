@@ -43,11 +43,13 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     Memory mem;
 
 
+
     public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
         this.user = userObj;
     }
+
 
     @NonNull
     @Override
@@ -57,6 +59,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         View contactView = inflater.inflate(R.layout.memory_item_my_memories, parent, false);
         ctx = parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
+
+
         return viewHolder;
 
 
@@ -112,6 +116,21 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
             }
         });
+
+        holder.sharebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent,null);
+
+                ctx.startActivity(shareIntent);
+            }
+        });
+
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     } else

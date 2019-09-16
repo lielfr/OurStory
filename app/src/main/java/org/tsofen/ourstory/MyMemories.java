@@ -27,7 +27,6 @@ import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
-import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
