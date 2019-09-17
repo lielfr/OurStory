@@ -226,8 +226,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             }
         });
 
-
-
         Intent intent = getIntent();  //getting the user from the server
         if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
             if(intent.getStringExtra("userId")!= null) {
