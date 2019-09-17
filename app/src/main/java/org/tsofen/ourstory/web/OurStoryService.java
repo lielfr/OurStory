@@ -61,10 +61,11 @@ public interface OurStoryService {
 
     @PUT("memories/update/{id}")
     Observable<Memory> EditMemory(@Path("id") long id, @Body Memory memory);
+    @GET("users/login")
+    Call<User> login(@Query("mail")String email,@Query("password") String password);
+
     @GET("users/findByEmail/{email}")
-    Call<User> GetUserByEmail( @Path("email") String email);
-
-
+    Call<User> GetUserByEmail(@Path("email") String email);
     @GET("stories/findStoriesByDobFull")
     Call<ArrayList<ListOfStory>> GetStoriesByDobFull (@Query("d") int day ,@Query("m") int month , @Query("y") int year);
 
@@ -88,6 +89,8 @@ public interface OurStoryService {
 
     @POST("users/create")
     Call<User> CreateUser(@Body User newUser);
+    @POST("users/forgotPassword")
+    Call<Object> resetPassword(@Query("mail") String mail);
 
 
 }

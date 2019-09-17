@@ -77,66 +77,70 @@ org.tsofen.ourstory.model.api.User myUser;
 
 
     public void goLogin(View view) {
-        //int index = 0;
-        // String userIn;
 
         String inputEmail = String.valueOf(email.getText());
         String inputPassword = String.valueOf(password.getText());
+        if (inputEmail.equals("")||(inputPassword.equals(""))) {
+            emailErr.setText("Please enter your email to login");
+            passErr.setText("Please enter your password to login");
 
-        OurStoryService ss = WebFactory.getService();
-        ss.GetUserByEmail(inputEmail).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
-            @Override
-            public void onResponse(Call<org.tsofen.ourstory.model.api.User> call, Response<org.tsofen.ourstory.model.api.User> response) {
-                myUser = response.body();
-                Toast.makeText(getApplicationContext(), myUser.getUserId() + "",
-                        Toast.LENGTH_SHORT).show();
-                userId = myUser.getUserId();
-                if (myUser.getEmail() == null) {
-                    emailErr.setText("This email address is invalid. Please tru a different one.");
+        }
+        else {
 
-                } else {
+            OurStoryService ss = WebFactory.getService();
+            ss.login(inputEmail,inputPassword).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+                @Override
+                public void onResponse(Call<org.tsofen.ourstory.model.api.User> call,
+                                       Response<org.tsofen.ourstory.model.api.User> response) {
+                    myUser = response.body();
+                    if(myUser==null)
 
-                    userPass = myUser.getPassword();
-                    if (userPass.equals(inputPassword)) {
-                        UserStatusCheck.setUserStatus("not a visitor"); //TODO move the user id to the home page and then move it to create story intent (move it under name=("userId"))
-                        //
-                        Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
-                        signInDone.putExtra("email", inputEmail);
-                        signInDone.putExtra("userId", userId);
-                        signInDone.putExtra("user", myUser);
-                        //signInDone.putExtra("index", index);
-                        mPrefs= getPreferences(MODE_PRIVATE);
-                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                        Gson gson = new Gson();
-                        String json = gson.toJson(myUser);
-                        prefsEditor.putString("myUser", json);
-                        prefsEditor.commit();
-                        startActivity(signInDone);
-                    } else {
-                        passErr.setText("Incorrect password!!");
+                    Toast.makeText(getApplicationContext(),   "The email or password you entered is incorrect!",
+                            Toast.LENGTH_SHORT).show();
+                    else {
+                        userId = myUser.getUserId();
+
+                        userPass = myUser.getPassword();
+                        if (userPass.equals(inputPassword)) {
+                            UserStatusCheck.setUserStatus("not a visitor");
+                            //TODO move the user id to the home page and then move it to create story intent (move it under name=("userId"))
+                            //
+                            Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
+                            signInDone.putExtra("email", inputEmail);
+                            signInDone.putExtra("userId", userId);
+                            signInDone.putExtra("user", myUser);
+                            //signInDone.putExtra("index", index);
+                            mPrefs = getPreferences(MODE_PRIVATE);
+                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                            Gson gson = new Gson();
+                            String json = gson.toJson(myUser);
+                            prefsEditor.putString("myUser", json);
+                            prefsEditor.commit();
+                            startActivity(signInDone);
+
+                        }
                     }
+                }//end of onResponse method
+                @Override
+                public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
+                    passErr.setText("The email or password you entered is incorrect!");
+                }// end of onFailure method
+            }   );// end of enque
+        }//end of first else
+
+    }//end of goLogin method
 
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
-                emailErr.setText("Failed");
-            }
 
 
-        });
-
-
-    }
     public void goRegist(View view) {
         Intent registNow = new Intent(this, RegistrationPage1.class);
         startActivity(registNow);
     }
 
     public void goChangePassword(View view) {
-
+Intent forgotPass=new Intent(LogIn.this,ForgotPassword.class);
+startActivity(forgotPass);
 
     }
 

@@ -109,6 +109,10 @@ public class User implements Serializable
         this.email = email;
     }
 
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }

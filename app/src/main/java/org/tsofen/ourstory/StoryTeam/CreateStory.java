@@ -222,6 +222,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             }
         });
 
+
+
         Intent intent = getIntent();  //getting the user from the server
         if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
             if (intent.getStringExtra("userId") != null) {
@@ -560,13 +562,15 @@ if(fileURI==null){
 //                        }
 //
 //                        i.putExtra("name", nameofperson);
-//                        if (view.getId() == R.id.create) {
-//                            i.putExtra("Button", "just_create");
-//                        } else {
-//                            i.putExtra("Button", "createandadd");
-//                            i.putExtra("id", result);
-//                        }
-                        i.putExtra("id", String.valueOf(result.getStoryId()));
+                        if (view.getId() == R.id.create) {
+                            i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("Button", "justcreate");
+                            //startActivity(i);
+                        } else {
+                           // i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("result",result);
+                            i.putExtra("Button", "createandadd");
+                        }
                         startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();

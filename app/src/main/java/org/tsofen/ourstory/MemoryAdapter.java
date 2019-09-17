@@ -2,7 +2,9 @@ package org.tsofen.ourstory;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.User;
 
@@ -28,12 +32,12 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public final ArrayList<Memory> mMemories;
-    MemoryA memoryA;
+    Memory memoryA;
     Context ctx;
     LayoutInflater mInflater;
-    MemoryA mem;
+    Memory mem;
 
-    public MemoryAdapter(Context context, ArrayList<Memory> memories)
+    public MemoryAdapter(Context context,ArrayList<Memory> memories)
     {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
@@ -48,13 +52,19 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         ViewHolder viewHolder = new ViewHolder(contactView, this);
         return viewHolder;
     }
-
+    public int calculateWidth(String text) {
+        Rect bounds = new Rect();
+        TextView textView = new TextView(ctx);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
+        return bounds.width();
+    }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
-        User contributer = memory.getUser();
+        User user = memory.getUser();
         if (memory.getUser().getProfilePicture() != null) {
-            Uri uri = Uri.parse(memory.getUser().getProfilePicture());
+            Uri uri = Uri.parse(memory.getUser().getProfilePicture().toString());
             RequestOptions options = new RequestOptions()
                     .override(300, 300)
                     .centerCrop()
@@ -64,7 +74,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         } else {
             holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
-        holder.name.setText(memory.getUser().getFullName());
+        holder.name.setText(memory.getUser().getFirstName()+" "+memory.getUser().getLastName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,20 +85,36 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
             }
         });
+        holder.sharebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent,null);
+
+                ctx.startActivity(shareIntent);
+            }
+        });
      if(memory.getDescription()!=null) {
          holder.descr.setText(memory.getDescription());
      }
      if(memory.getLocation()!=null)
      {
+         holder.location.setWidth(calculateWidth(memory.getLocation()));
          holder.location.setText(memory.getLocation());
      }
      if(memory.getFeeling()!=null)
      {
+         holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
          holder.feeling.setText("#"+memory.getFeeling());
      }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
-            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)+1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
+           holder.mem_date.setWidth(calculateWidth(memDate));
             holder.mem_date.setText(memDate);
         } else
             holder.mem_date.setVisibility(View.INVISIBLE);
@@ -121,6 +147,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         }
         else
         {
+
             holder.rvMemory.setVisibility(View.INVISIBLE);
         }*/
 
@@ -134,13 +161,14 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         RecyclerView rvMemory;
         public TextView tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
         public ImageView pic;
-        public ImageButton commentbtn;
+        public ImageButton commentbtn,sharebtn;
         public MemoryAdapter adapter;
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
             rvMemory = itemView.findViewById(R.id.memory_pic);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
+            sharebtn=itemView.findViewById(R.id.sharebtn2);
             feeling = itemView.findViewById(R.id.feelingtxt);
             location = itemView.findViewById(R.id.locationtxt);
             name = itemView.findViewById(R.id.name_txt_person);
@@ -153,11 +181,5 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             this.adapter = memoryAdapter;
 
         }
-    }
-
-    public void editMemory(View view){
-        Intent i = new Intent();
-        i.putExtra("CEMemoryEdit", mem);
-
     }
 }

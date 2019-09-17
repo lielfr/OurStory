@@ -50,7 +50,7 @@ public class SearchStory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
-        spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.sp);
         final Button S = findViewById(R.id.show);
 
         List<String> categories = new ArrayList<String>();
@@ -78,15 +78,20 @@ public class SearchStory extends AppCompatActivity {
         if (fragmentManager==null) {
             Log.i("fragment", "you have found it the fragment manager is null........................... ");
         }
+
+
         final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
-        CurrentFragment = (StoryFragment) adapter.getItem(0);
+       CurrentFragment = (StoryFragment) adapter.getItem(0);
         if (CurrentFragment!=null){
             Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
         }else{
             Log.i("fragment", "fragment is not attached FROM SEARCH ACTIVITY!!! ");
+
         }
+
+
 
         // Setting a listener for clicks.
 
@@ -96,6 +101,24 @@ public class SearchStory extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 Taplayout = tab.getPosition();
+                Button B = findViewById(R.id.button3);
+                TextView ShowDate = findViewById(R.id.ShowDate);
+                TextView cat = findViewById(R.id.catg);
+
+                if(Taplayout==1) {
+                    B.setVisibility(View.INVISIBLE);
+                    spinner.setVisibility(View.GONE);
+                     ShowDate.setVisibility(View.INVISIBLE);
+                      cat.setVisibility(View.INVISIBLE);
+                }
+                else {
+
+                    B.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.VISIBLE);
+                    ShowDate.setVisibility(View.VISIBLE);
+                    cat.setVisibility(View.VISIBLE);
+
+                }
 //                if (adapter.getItem(0)!=null){
 //                    CurrentFragment =adapter.getItem(0);
 //                    Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");

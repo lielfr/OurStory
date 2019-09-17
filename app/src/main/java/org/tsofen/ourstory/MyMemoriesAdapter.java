@@ -1,8 +1,13 @@
 package org.tsofen.ourstory;
-
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ShareCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.StoryTeam.MainActivity;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Story;
@@ -43,11 +50,13 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     Memory mem;
 
 
+
     public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
         this.user = userObj;
     }
+
 
     @NonNull
     @Override
@@ -57,9 +66,18 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         View contactView = inflater.inflate(R.layout.memory_item_my_memories, parent, false);
         ctx = parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
+
+
         return viewHolder;
 
 
+    }
+    public int calculateWidth(String text) {
+        Rect bounds = new Rect();
+        TextView textView = new TextView(ctx);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
+        return bounds.width();
     }
 
     @Override
@@ -73,7 +91,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                 Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
                 intent.putExtra("memory",memory);
                 intent.putExtra("user",user);
-                ctx.getApplicationContext().startActivity(intent);
+                ctx.startActivity(intent);
 
             }
         });
@@ -88,30 +106,60 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
             }
         });
+
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder myAlertBuilder = new
+                        AlertDialog.Builder(ctx);
+                myAlertBuilder.setTitle("Delete Memory");
+                myAlertBuilder.setMessage("Are you sure you want to delete this memory?");
+                // Set the dialog title and message.
+                myAlertBuilder.setPositiveButton("Yes", new
+                        DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                OurStoryService deleteMemory;
+                        deleteMemory = WebFactory.getService();
+                        deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Object>() {
 
-                OurStoryService deleteMemory;
-                deleteMemory = WebFactory.getService();
-                deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Object>() {
+                            @Override
+                            public void onResponse(Call<Object> call, Response<Object> response) {
 
-                    @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
-                        Toast.makeText(ctx.getApplicationContext(), "Succeded", Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Object> call, Throwable t) {
+
+                            }
+                        });
+                            }
+                        });
+                myAlertBuilder.setNegativeButton("No", new
+                        DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // User cancelled the dialog.
+
+                            }
+                        });
+                myAlertBuilder.show();
+
                     }
+        });
 
-                    @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
-                        Toast.makeText(ctx.getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
-                    }
-                });
+        holder.sharebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                sendIntent.setType("text/plain");
 
-                deleteMemory.DeleteMemory((memory.getId()));
+                Intent shareIntent = Intent.createChooser(sendIntent,null);
 
-
+                ctx.startActivity(shareIntent);
             }
         });
+
     if(memory.getDescription()!=null) {
         holder.descr.setText(memory.getDescription());
     } else
@@ -119,7 +167,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         if (memory.getTags() != null) {
             String s = "";
             for (Tag tag : memory.getTags()) {
-                s += "#" + tag.getLabel();
+                s += "#"+tag.getLabel();
             }
             holder.tags.setText(s);
         } else
@@ -130,6 +178,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         if(memory.getMemoryDate()!=null) {
             String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
             holder.mem_date.setText(memDate);
+            holder.mem_date.setWidth(calculateWidth(memDate));
         }
         else
             holder.mem_date.setVisibility(View.INVISIBLE);
@@ -155,12 +204,16 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
             holder.num_of_comments.setText(memory.getComments().size()+"");
-       if(memory.getLocation()!=null)
+       if(memory.getLocation()!=null) {
            holder.location.setText(memory.getLocation());
+           holder.location.setWidth(calculateWidth(memory.getLocation()));
+       }
        else
            holder.location.setVisibility(View.INVISIBLE);
-        if(memory.getFeeling()!=null)
-            holder.feeling.setText("#"+memory.getFeeling());
+        if(memory.getFeeling()!=null) {
+            holder.feeling.setText("#" + memory.getFeeling());
+            holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
+        }
         else
             holder.feeling.setVisibility(View.INVISIBLE);
        /* ArrayList<ImgItem> images=new ArrayList<>();

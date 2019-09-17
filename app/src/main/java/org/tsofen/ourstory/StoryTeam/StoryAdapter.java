@@ -41,6 +41,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
         return new StoryViewHolder(mItemView, this);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull StoryViewHolder holder, int position) {
         ListOfStory mCurrent = mStoryList.get(position);

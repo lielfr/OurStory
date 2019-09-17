@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.tsofen.ourstory">
+    package="org.tsofen.ourstory"
+    android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -8,14 +9,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ourstory_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_ourstory_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage">
-            <intent-filter>
+                    <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,11 +25,14 @@
         <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
+        <activity android:name="org.tsofen.ourstory.UserModel.ForgotPassword" />
         <activity
             android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
             android:label="CreateStory"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+
+
         <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
@@ -37,10 +41,10 @@
             android:name="org.tsofen.ourstory.CommentActivity"
             android:windowSoftInputMode="adjustPan" />
 
-
         <activity
             android:name=".MemoriesOfStoryActivity"
             android:label="Memories" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
