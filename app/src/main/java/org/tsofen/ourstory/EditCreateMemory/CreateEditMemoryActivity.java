@@ -140,14 +140,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 View yearSpinnerV1 = memoryDatePicker.findViewById(yearSpinnerI1);
 
                 if(checked1) {
-                    if (yearSpinnerV1 != null){
+                    if (yearSpinnerV1 != null) {
                         yearSpinnerV1.setVisibility(View.GONE);
                     }
-
-                    else{
-                        if (yearSpinnerV1 != null){
-                            yearSpinnerV1.setVisibility(View.VISIBLE);
-                        }
+                } else {
+                    if (yearSpinnerV1 != null) {
+                        yearSpinnerV1.setVisibility(View.VISIBLE);
                     }
                 }
             }
