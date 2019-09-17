@@ -222,6 +222,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 user = gson.fromJson(userStr, User.class);
         } else {
             create = false;
+            tagAdapter.tags.clear();
+            tagAdapter.notifyDataSetChanged();
             pageTitle.setText("Edit Memory");
             user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
