@@ -87,7 +87,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_EDIT = "CEMemoryEdit";
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
-    public static final String KEY_USER = "CEMemoryUser";
+    //    public static final String KEY_USER = "CEMemoryUser";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
@@ -210,14 +210,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         memoryDatePicker = findViewById(R.id.memoryDatePicker);
         memoryDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
-        memoryDatePicker.init(year1, month1, day1, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker memoryDatePicker, int year, int month, int day) {
-
-                DateOfMem();
-
-            }
-        });
+        memoryDatePicker.init(year1, month1, day1, (memoryDatePicker, year, month, day) -> DateOfMem());
 
 
         if (memory == null) {
@@ -238,9 +231,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (memory.getMemoryDate() != null) {
                 MemDate = memory.getMemoryDate().getTime();
                 memoryDatePicker.updateDate(memory.getMemoryDate().get(Calendar.YEAR),
-                        memory.getMemoryDate().get(Calendar.MONTH) + 1,
+                        memory.getMemoryDate().get(Calendar.MONTH),
                         memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-                Log.d("MOO", "Got it!");
             }
 
             if (memory.getFeeling() != null)
