@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -133,20 +134,20 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         yearChckBx1=findViewById(R.id.yearChckBx1);
         yearChckBx1.setOnClickListener(new View.OnClickListener(){
             @Override
-             public void onClick(View v){
+            public void onClick(View v){
                 checked1 =((CheckBox) v).isChecked();
                 int yearSpinnerI1 = Resources.getSystem().getIdentifier("year", "id", "android");
                 View yearSpinnerV1 = memoryDatePicker.findViewById(yearSpinnerI1);
 
                 if(checked1) {
-                        if (yearSpinnerV1 != null){
-                            yearSpinnerV1.setVisibility(View.GONE);
-                        }
+                    if (yearSpinnerV1 != null){
+                        yearSpinnerV1.setVisibility(View.GONE);
+                    }
 
                     else{
-                            if (yearSpinnerV1 != null){
-                                yearSpinnerV1.setVisibility(View.VISIBLE);
-                            }
+                        if (yearSpinnerV1 != null){
+                            yearSpinnerV1.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -235,10 +236,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
             if (memory.getMemoryDate() != null) {
-//                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
-//                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
-//                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
-//                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
+                MemDate = memory.getMemoryDate().getTime();
+                memoryDatePicker.updateDate(memory.getMemoryDate().get(Calendar.YEAR),
+                        memory.getMemoryDate().get(Calendar.MONTH) + 1,
+                        memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+                Log.d("MOO", "Got it!");
             }
 
             if (memory.getFeeling() != null)
@@ -505,21 +507,21 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 //    }
 
     /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.finish();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+     AlertDialog.Builder builder = new AlertDialog.Builder(this);
+     builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+    dialogInterface.cancel();
     }
+    }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+    activity.finish();
+    }
+    });
+     AlertDialog alert = builder.create();
+     alert.show();
+     }
      **/
     public void closeActivity(View view) {
         finish();
@@ -710,5 +712,4 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 }
-
 

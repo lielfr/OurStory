@@ -67,6 +67,8 @@
     <string name="Enter">Enter new password:</string>
     <string name="confirm">Confirm Password:</string>
 
+    <string name="sendPass">Send password</string>
+    <string name="getPass">getPass</string>
     <string name="saveAndLogin">saveAndLogin</string>
     <string name="changePassword">goChangePassword</string>
     <string name="MyProfile">My Profile</string>
