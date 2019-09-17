@@ -12,5 +12,5 @@ script:
   ./gradlew build
 
 after_success:
-  - echo $TRAVIS_COMMIT
-  - echo $TRAVIS_BRANCH
+  - chmod +x post-success.sh
+  - ./post-success.sh
