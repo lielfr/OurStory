@@ -89,11 +89,21 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             mStoryList.addLast(new Story("pini Cohen" + i, "12/8/1930" + i, "5/4/2002", "m"));
 
         }
-        Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
+        Activity aa = this;
         Intent intent = getIntent();
+        if(intent.getStringExtra("id")!=null)
         id = Long.parseLong(intent.getStringExtra("id"));
 
-        Activity aa = this;
+        if(intent.getStringExtra("Button")!=null && intent.getStringExtra("Button").equals("createandadd")){
+            AddMemoryLive((Story) intent.getSerializableExtra("result"));
+            Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
+        }
+       // Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
+//
+//        if(intent.getStringExtra("id")!=null)
+//        id = Long.parseLong(intent.getStringExtra("id"));
+
+
 
 
         story_api = WebFactory.getService();
@@ -102,8 +112,9 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             public void onResponse(Call<FullViewStory> call, Response<FullViewStory> response) {
                 story_full = response.body();
                 if (story_full == null) {
-                    Toast.makeText(getApplicationContext(), "Null", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "there is no story like this null ", Toast.LENGTH_LONG).show();
                 } else {
+
                     String personName = story_full.getStory().getNameOfPerson();
                     TextView textView1 = (findViewById(R.id.textView));
                     textView1.setText(personName);
@@ -131,65 +142,72 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     textView2.setText(date);
 
                     ImageView pic = findViewById(R.id.imageView3);
+
                     imageView_profile = story_full.getStory().getPicture();//TODO check if there is no profile pic MARYAM
-                    String st = imageView_profile.toString();
-                    Uri uri = Uri.parse(st);
-                    RequestOptions options = new RequestOptions()
-                            .override(375, 192)
-                            .centerCrop()
-                            .placeholder(R.drawable.nopicyet)
-                            .error(R.drawable.nopicyet);
+                    if (imageView_profile != null) {
+                        String st = imageView_profile.toString();
+                        Uri uri = Uri.parse(st);
+                        RequestOptions options = new RequestOptions()
+                                .override(375, 192)
+                                .centerCrop()
+                                .placeholder(R.drawable.nopicyet)
+                                .error(R.drawable.nopicyet);
 
-                    Glide.with(aa).load(uri).apply(options).into(pic);
-                }
+                        Glide.with(aa).load(uri).apply(options).into(pic);
+                    } else {
+//                            ImageView profile_Pic = (ImageView) findViewById(R.id.imageButton3); //if ther eis no profile pic we need to set the defult one
+//                            profile_Pic.setImageResource(R.drawable.nopicyet);
+                    }
 
-                if (story_full.getMemories().size()==0) {
-                    LinearLayout linearLayout = findViewById(R.id.linearLayout3);
-                    linearLayout.setVisibility(View.INVISIBLE);
 
-                    ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
-                    constraintLayout.setVisibility(View.VISIBLE);
-                    Toast.makeText(aa, "dsflkhjvfkd", Toast.LENGTH_SHORT).show();
+                    if (story_full != null && story_full.getMemories().size() == 0) {
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout3);
+                        linearLayout.setVisibility(View.INVISIBLE);
+
+                        ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
+                        constraintLayout.setVisibility(View.VISIBLE);
+                        Toast.makeText(aa, "dsflkhjvfkd", Toast.LENGTH_SHORT).show();
 //            ImageView image4 = findViewById(R.id.imageView3);
 //            image4.setImageResource(R.drawable.nopicyet);
 //
 
-                } else {
-                    LinearLayout linearLayout = findViewById(R.id.linearLayout3);
-                    linearLayout.setVisibility(View.VISIBLE);
-
-                    ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
-                    constraintLayout.setVisibility(View.INVISIBLE);
-
-
-                    TextView textView = findViewById(R.id.textView4);
-                    if(story_full.getTop3tags().size()>0) {
-                        textView.setText(story_full.getTop3tags().get(0));
-                        Log.d("sss", story_full.getTop3tags().get(0));
-
-                        textView = findViewById(R.id.textView5);
-                        textView.setText(story_full.getTop3tags().get(1));
-                        textView = findViewById(R.id.textView6);
-                        textView.setText(story_full.getTop3tags().get(2));
-                    }
-
-                    // Get a handle to the RecyclerView.
-                    mRecyclerView = findViewById(R.id.recyclerview);
-                    // Create an adapter and supply the data to be displayed.
-                    mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories());
-                    //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
-
-
-                    // Connect the adapter with the RecyclerView.
-                    if (mRecyclerView != null) {
-                        mRecyclerView.setAdapter(mAdapter);
-                        // Give the RecyclerView a default layout manager.
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(aa));
                     } else {
-                        Toast.makeText(getApplicationContext(), " the recycle View is null ", Toast.LENGTH_LONG).show();
+                        LinearLayout linearLayout = findViewById(R.id.linearLayout3);
+                        linearLayout.setVisibility(View.VISIBLE);
+
+                        ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
+                        constraintLayout.setVisibility(View.INVISIBLE);
+
+
+                        TextView textView = findViewById(R.id.textView4);
+                        if (story_full != null && story_full.getTop3tags().size() > 0) {
+                            textView.setText(story_full.getTop3tags().get(0));
+                            Log.d("sss", story_full.getTop3tags().get(0));
+
+                            textView = findViewById(R.id.textView5);
+                            textView.setText(story_full.getTop3tags().get(1));
+                            textView = findViewById(R.id.textView6);
+                            textView.setText(story_full.getTop3tags().get(2));
+                        }
+
+                        // Get a handle to the RecyclerView.
+                        mRecyclerView = findViewById(R.id.recyclerview);
+                        // Create an adapter and supply the data to be displayed.
+                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories());
+                        //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
+
+
+                        // Connect the adapter with the RecyclerView.
+                        if (mRecyclerView != null) {
+                            mRecyclerView.setAdapter(mAdapter);
+                            // Give the RecyclerView a default layout manager.
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(aa));
+                        } else {
+                            Toast.makeText(getApplicationContext(), " the recycle View is null ", Toast.LENGTH_LONG).show();
+                        }
+
+
                     }
-
-
                 }
             }
                 @Override
@@ -354,6 +372,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     public void AddMemory(View view) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story_full.getStory());
+        startActivity(intent);
+    }
+    public void AddMemoryLive(Story story) {
+        Intent intent = new Intent(this, CreateEditMemoryActivity.class);
+        intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
         startActivity(intent);
     }
 }
