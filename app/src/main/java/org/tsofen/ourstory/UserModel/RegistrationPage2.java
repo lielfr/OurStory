@@ -165,7 +165,12 @@ date=new Date(year,month,day);
 
 
     public void closeActivity(View view) {
-        Intent back = new Intent(this, LogIn.class);
+        Intent back = new Intent(this, RegistrationPage1.class);
+        back.putExtra("email", emailString);
+        back.putExtra("first_name", firstNameString);
+        back.putExtra("last_name", lastNameString);
+        back.putExtra("password", passwordString);
+
         startActivity(back);
     }
 
