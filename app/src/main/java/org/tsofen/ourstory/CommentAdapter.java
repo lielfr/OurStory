@@ -69,14 +69,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
 
         if(comment.getText()!=null){
-        holder.comment.setText("rrr");//comment.getText());
-             }
-
+            holder.comment.setText(comment.getText());
+        }
+        if (comment.getUser().getFullName() != null) {
+            holder.name.setText((comment.getUser().getFullName()));
+        }
+        if (comment.getUser().getProfilePicture() != null) {
+            holder.profile.setImageResource(R.drawable.profilepic);
+        }
+////            holder.profile.setImageResource(R.drawable.defaultprofilepicture);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return comments.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

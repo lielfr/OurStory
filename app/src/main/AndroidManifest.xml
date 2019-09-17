@@ -33,7 +33,9 @@
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity" />
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg" />
-        <activity android:name="org.tsofen.ourstory.CommentActivity" />
+        <activity
+            android:name="org.tsofen.ourstory.CommentActivity"
+            android:windowSoftInputMode="adjustPan" />
 
 
         <activity

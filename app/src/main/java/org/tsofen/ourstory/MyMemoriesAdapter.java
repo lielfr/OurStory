@@ -73,7 +73,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                 Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
                 intent.putExtra("memory",memory);
                 intent.putExtra("user",user);
-                ctx.startActivity(intent);
+                ctx.getApplicationContext().startActivity(intent);
 
             }
         });
