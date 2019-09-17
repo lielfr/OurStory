@@ -61,17 +61,32 @@ public class RegistrationPage1 extends AppCompatActivity {
         TextViewInvs4 = findViewById(R.id.emptyView4);
         TextViewInvs5 = findViewById(R.id.emptyView5);
 
+        EditText1 = findViewById(R.id.showEmail);
+        EditText2 = findViewById(R.id.showFirst);
+        EditText3 = findViewById(R.id.showLast);
+        EditText4 = findViewById(R.id.password_editText);
+        EditText5 = findViewById(R.id.repeatpassword_editText);
+
+        Intent currIntent = getIntent();
+        emailString = currIntent.getStringExtra("email");
+        firstNameString = currIntent.getStringExtra("first_name");
+        lastNameString = currIntent.getStringExtra("last_name");
+        passwordString = currIntent.getStringExtra("password");
+
+        EditText1.setText(emailString);
+        EditText2.setText(firstNameString);
+        EditText3.setText(lastNameString);
+        EditText4.setText(passwordString);
+        EditText5.setText(passwordString);
+
+
     }
 
     public void Go2RegistrationPage2(View view)
     {
         Intent regIntent2 = new Intent(this, RegistrationPage2.class);
 
-        EditText1 = findViewById(R.id.showEmail);
-        EditText2 = findViewById(R.id.showFirst);
-        EditText3 = findViewById(R.id.showLast);
-        EditText4 = findViewById(R.id.password_editText);
-        EditText5 = findViewById(R.id.repeatpassword_editText);
+
 
         emailString = EditText1.getText().toString();
         firstNameString = EditText2.getText().toString();
@@ -95,13 +110,12 @@ public class RegistrationPage1 extends AppCompatActivity {
         ss.GetUserByEmail(emailString).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-               Log.d("checktag","the emsil is taken");
-                TextViewInvs3.setVisibility(View.VISIBLE);
-                TextViewInvs3.setText("The email is taken.Try another.");
-
+                User currUser = response.body();
+                    Log.d("checktag", "the email is taken");
+                    TextViewInvs3.setVisibility(View.VISIBLE);
+                    TextViewInvs3.setText("The email is taken.Try another.");
 
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 if ((f1 == 1) && (f2 == 1) && (f3 == 1) && (f4 == 1) && (f5 == 1)) {
@@ -114,7 +128,8 @@ public class RegistrationPage1 extends AppCompatActivity {
                             + lastNameString + " " + passwordString);
                     startActivity(regIntent2);
                 }
-            }
+                }
+
         });
 
 
