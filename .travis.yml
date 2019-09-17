@@ -10,3 +10,7 @@ before_install:
 
 script:
   ./gradlew build
+
+after_success:
+  - echo $TRAVIS_COMMIT
+  - echo $TRAVIS_BRANCH
