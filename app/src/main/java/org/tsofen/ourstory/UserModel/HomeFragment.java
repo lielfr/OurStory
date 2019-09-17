@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent Create = new Intent(getActivity(), CreateStory.class);
 
-                    startActivity(Create);
+                startActivity(Create);
                 }
 
         });
