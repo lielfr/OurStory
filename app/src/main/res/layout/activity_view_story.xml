@@ -129,7 +129,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/profilepic" />
+                    app:srcCompat="@drawable/nopicyet" />
 
                 <TextView
                     android:id="@+id/textView"

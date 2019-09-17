@@ -134,20 +134,20 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         yearChckBx1=findViewById(R.id.yearChckBx1);
         yearChckBx1.setOnClickListener(new View.OnClickListener(){
             @Override
-             public void onClick(View v){
+            public void onClick(View v){
                 checked1 =((CheckBox) v).isChecked();
                 int yearSpinnerI1 = Resources.getSystem().getIdentifier("year", "id", "android");
                 View yearSpinnerV1 = memoryDatePicker.findViewById(yearSpinnerI1);
 
                 if(checked1) {
-                        if (yearSpinnerV1 != null){
-                            yearSpinnerV1.setVisibility(View.GONE);
-                        }
+                    if (yearSpinnerV1 != null){
+                        yearSpinnerV1.setVisibility(View.GONE);
+                    }
 
                     else{
-                            if (yearSpinnerV1 != null){
-                                yearSpinnerV1.setVisibility(View.VISIBLE);
-                            }
+                        if (yearSpinnerV1 != null){
+                            yearSpinnerV1.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -507,21 +507,21 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 //    }
 
     /** public void ShowAlertDialog(Activity activity, String title, CharSequence message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                activity.finish();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+     AlertDialog.Builder builder = new AlertDialog.Builder(this);
+     builder.setMessage(message).setCancelable(false).setNegativeButton("No", new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+    dialogInterface.cancel();
     }
+    }).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+    activity.finish();
+    }
+    });
+     AlertDialog alert = builder.create();
+     alert.show();
+     }
      **/
     public void closeActivity(View view) {
         finish();
@@ -712,5 +712,4 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 }
-
 
