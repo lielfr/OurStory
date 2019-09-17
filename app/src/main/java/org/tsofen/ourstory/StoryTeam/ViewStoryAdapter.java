@@ -60,7 +60,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
 
         @Override
         public void onClick(View view) {
-
+            
         }
     }
 
