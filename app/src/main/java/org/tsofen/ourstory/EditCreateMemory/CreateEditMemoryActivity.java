@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -235,10 +236,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             editTextDescription.setText(memory.getDescription());
             editTextLocation.setText(memory.getLocation());
             if (memory.getMemoryDate() != null) {
-//                dayDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.DAY_OF_MONTH)));
-//                // DAY_OF_MONTH returns the day starting with 0, which we need to counter here
-//                monthDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.MONTH) + 1));
-//                yearDate.setText(String.valueOf(memory.getMemoryDate().get(Calendar.YEAR)));
+                MemDate = memory.getMemoryDate().getTime();
+                memoryDatePicker.updateDate(memory.getMemoryDate().get(Calendar.YEAR),
+                        memory.getMemoryDate().get(Calendar.MONTH) + 1,
+                        memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+                Log.d("MOO", "Got it!");
             }
 
             if (memory.getFeeling() != null)
