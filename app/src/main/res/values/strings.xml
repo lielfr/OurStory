@@ -112,6 +112,7 @@
     <string name="view_story_title">View Story</string>
     <string name="CreateNewAcount">Create a new account</string>
     <string name="deselect_tag">Deselect Tag</string>
+    <string name="shared_pref_key">OurStorySharedPref</string>
 
     <string-array name="names">
         <item>Mance Raider</item>

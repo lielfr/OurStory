@@ -113,7 +113,7 @@ org.tsofen.ourstory.model.api.User myUser;
                             signInDone.putExtra("userId", userId);
                             signInDone.putExtra("user", myUser);
                             //signInDone.putExtra("index", index);
-                            mPrefs = getPreferences(MODE_PRIVATE);
+                            mPrefs = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
                             Gson gson = new Gson();
                             String json = gson.toJson(myUser);
