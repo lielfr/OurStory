@@ -36,6 +36,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
+import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.UserModel.UsersList;
 import org.tsofen.ourstory.model.api.FullViewStory;
@@ -116,6 +117,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                 } else {
 
                     String personName = story_full.getStory().getNameOfPerson();
+                    Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
+
                     TextView textView1 = (findViewById(R.id.textView));
                     textView1.setText(personName);
                     String date1 = story_full.getStory().getDateOfBirth();
@@ -190,11 +193,18 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                             textView.setText(story_full.getTop3tags().get(2));
                         }
 
+
+                    // Get a handle to the RecyclerView.
+                    mRecyclerView = findViewById(R.id.recyclerview);
+                    // Create an adapter and supply the data to be displayed.
+                    mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(),story_full.getStory().getNameOfPerson(),story_full.getStory().getStoryId());
+                    //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories());
+                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
+
 
 
                         // Connect the adapter with the RecyclerView.
@@ -212,6 +222,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             }
                 @Override
                 public void onFailure (Call < FullViewStory > call, Throwable t){
+                    Log.d("Failure", t.toString());
 
                 }
 
@@ -374,9 +385,47 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story_full.getStory());
         startActivity(intent);
     }
+
+
+    public void ShowMemoryByTag1(View view) {
+        Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
+        intent.putExtra("flag",1);
+        intent.putExtra("storyId",story_full.getStory().getStoryId());
+        intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
+        TextView textView=  findViewById(R.id.textView4);
+        intent.putExtra("tag",textView.getText().toString());
+        startActivity(intent);
+    }
+    public void ShowMemoryByTag2(View view) {
+        Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
+        intent.putExtra("flag",1);
+        if (story_full.getStory()!=null) {
+            intent.putExtra("storyId", story_full.getStory().getStoryId());
+            intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
+        }
+        else
+            Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
+        TextView textView=  findViewById(R.id.textView5);
+        intent.putExtra("tag",textView.getText().toString());
+        startActivity(intent);
+    }
+    public void ShowMemoryByTag3(View view) {
+        Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
+        intent.putExtra("flag",1);
+        intent.putExtra("storyId",story_full.getStory().getStoryId());
+        intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
+        TextView textView=  findViewById(R.id.textView6);
+        intent.putExtra("tag",textView.getText().toString());
+        startActivity(intent);
+    }
+
+
+
+
     public void AddMemoryLive(Story story) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
         startActivity(intent);
     }
+
 }
