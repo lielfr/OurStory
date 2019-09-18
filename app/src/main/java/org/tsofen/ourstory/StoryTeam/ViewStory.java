@@ -228,9 +228,15 @@ public class ViewStory extends AppCompatActivity implements Serializable {
 
         });
 
-
-
     }
+
+   @Override
+   public void onRestart()
+   {
+       super.onRestart();
+       finish();
+       startActivity(getIntent());
+   }
 
 
 //
@@ -433,5 +439,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
         startActivity(intent);
     }
+
+
+
 
 }
