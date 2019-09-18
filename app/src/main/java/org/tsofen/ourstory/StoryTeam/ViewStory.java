@@ -394,7 +394,9 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
         TextView textView=  findViewById(R.id.textView4);
         intent.putExtra("tag",textView.getText().toString());
-        startActivity(intent);
+        Toast.makeText(view.getContext(),"tag1",Toast.LENGTH_LONG).show();
+
+//        startActivity(intent);
     }
     public void ShowMemoryByTag2(View view) {
         Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
@@ -407,7 +409,9 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
         TextView textView=  findViewById(R.id.textView5);
         intent.putExtra("tag",textView.getText().toString());
-        startActivity(intent);
+        Toast.makeText(view.getContext(),"tag2",Toast.LENGTH_LONG).show();
+
+//        startActivity(intent);
     }
     public void ShowMemoryByTag3(View view) {
         Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
@@ -416,7 +420,9 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
         TextView textView=  findViewById(R.id.textView6);
         intent.putExtra("tag",textView.getText().toString());
-        startActivity(intent);
+        Toast.makeText(view.getContext(),"tag3",Toast.LENGTH_LONG).show();
+
+//        startActivity(intent);
     }
 
 
