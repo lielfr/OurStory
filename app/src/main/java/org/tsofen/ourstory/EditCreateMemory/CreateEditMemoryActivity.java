@@ -348,8 +348,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     this.svbtn.setEnabled(true);
                     saveMemory(v);
                 } else {
-
-                    displayToast("Error , Please try filling out the fields again");
+                    TextView addPicTV = findViewById(R.id.AddPicTV_cememory);
+                    addPicTV.setTextColor(getResources().getColor(R.color.colorError));
+                    TextView addVidTV = findViewById(R.id.AddVidTV_cememory);
+                    addVidTV.setTextColor(getResources().getColor(R.color.colorError));
+                    TextView addDesc = findViewById(R.id.AddDescriptionTV_cememory);
+                    addDesc.setTextColor(getResources().getColor(R.color.colorError));
+                   // displayToast("Error , Please try filling out the fields again");
                 }
                 break;
             case R.id.Cancelbtn_cememory:
