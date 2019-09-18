@@ -20,6 +20,7 @@
         app:srcCompat="@drawable/back" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="63dp"
         android:layout_marginTop="68dp"
@@ -29,43 +30,46 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context="org.tsofen.ourstory.AddComment">
 
+        <Button
+            android:id="@+id/sendBtn2"
+            android:layout_width="63dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="SendCmnt"
+            android:text="Send"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/AddComment"
+            app:layout_constraintTop_toTopOf="@+id/AddComment"
+            app:layout_constraintVertical_bias="0.428" />
+
         <EditText
             android:id="@+id/AddComment"
-            android:layout_width="380dp"
-            android:layout_height="58dp"
+            android:layout_width="321dp"
+            android:layout_height="62dp"
             android:background="@drawable/edit_round3"
             android:ems="10"
             android:gravity="center|start"
             android:hint="  Add comment"
             android:inputType="textMultiLine"
-            android:paddingLeft="2dp"
+            android:paddingLeft="20dp"
             android:textColorHint="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/sendcomment_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="12dp"
-            android:background="@color/colorPrimary"
-            android:onClick="SendCmnt"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_send" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_comment"
-        android:layout_width="405dp"
-        android:layout_height="585dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

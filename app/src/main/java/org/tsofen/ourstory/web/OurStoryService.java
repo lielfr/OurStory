@@ -36,7 +36,7 @@ public interface OurStoryService {
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
     Call<ArrayList<Memory>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
     @GET("memories/story/{story}/findMemoriesByYear/{year}")
-    Call<ArrayList<Memory>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
+    Call<ArrayList<Memory>> GetMemoriesByYear(@Path("story") long story, @Path("year") int year);
     @GET("comments/findById/{id}")
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
@@ -86,6 +86,7 @@ public interface OurStoryService {
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfBirth (@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
     @GET("stories/findStoriesByDateOfDeath")
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfDeath(@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
+
     @POST("users/create")
     Call<User> CreateUser(@Body User newUser);
     @POST("users/forgotPassword")

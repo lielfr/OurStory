@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.MemoryAdapter;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.api.MemoryA;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class MemoryFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         if (mAdapter!=null) {
             mRecyclerView = getView().findViewById(R.id.recyclerview);
-            arrayList = new ArrayList<>();
+            arrayList = new ArrayList<Memory>();
             mAdapter = new MemoryAdapter(getContext(), arrayList);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
