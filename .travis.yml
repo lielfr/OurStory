@@ -6,9 +6,6 @@ android:
     - build-tools-29.0.2
     - android-29
 
-python:
-  - "3.7"
-
 before_install:
   - chmod +x gradlew
 
