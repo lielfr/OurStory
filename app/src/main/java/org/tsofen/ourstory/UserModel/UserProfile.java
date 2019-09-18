@@ -76,7 +76,7 @@ public class UserProfile extends Fragment {
         if (profileUser.getLastName() != null)
             lName.setText(profileUser.getLastName());
         if (profileUser.getDateOfBirth() != null) {
-           Date date = profileUser.getDateOfBirth();
+            Date date = profileUser.getDateOfBirth();
             dOfBirth.setText(profileUser.getDateOfBirth().toString());
         }
         if (profileUser.getGender() != null)

@@ -16,7 +16,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,8 +52,6 @@ import retrofit2.Response;
 
 public class CreateStory extends AppCompatActivity implements Serializable {
 
-    ScrollView sv;
-
     Bitmap bitmap;
     Uri filePath;
     String fileURI;
@@ -76,7 +73,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     DatePicker birthDatePicker, deathDatePicker;
     int birthDateFields = 3, deathDateFields = 3;
     Date today = new Date();
-    OurStoryService Wepengine;
+    OurStoryService Wepengine ;
     Long userid;
     Long Storyid;
 
@@ -84,58 +81,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createstory);
-
-        sv = findViewById(R.id.sv);
-
         Wepengine = WebFactory.getService();
-
         firstName = findViewById(R.id.firstNameEditText);
-        firstName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!Character.isUpperCase(editable.charAt(0)))
-                {
-                    char c=Character.toUpperCase(editable.charAt(0));
-                    String str=editable.replace(0,1,c+"").toString();
-
-                    firstName.setText(str);
-                }
-            }
-        });
-
         lastName = findViewById(R.id.lastNameEditText);
-        lastName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!Character.isUpperCase(editable.charAt(0)))
-                {
-                    char c=Character.toUpperCase(editable.charAt(0));
-                    String str=editable.replace(0,1,c+"").toString();
-
-                    lastName.setText(str);
-                }
-            }
-        });
 
         error1 = findViewById(R.id.error1);
         error2 = findViewById(R.id.error2);
@@ -242,7 +190,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         year1 = birthCal.get(Calendar.YEAR);
         month1 = birthCal.get(Calendar.MONTH);
         day1 = birthCal.get(Calendar.DAY_OF_MONTH);
-
+//
         birthDatePicker = findViewById(R.id.birthDatePicker);
         birthDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
         birthDatePicker.init(year1 - 50, month1, day1, new DatePicker.OnDateChangedListener() {
@@ -282,17 +230,18 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         });
 
 
+
         Intent intent = getIntent();  //getting the user from the server
         if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
-            if (intent.getStringExtra("userId") != null) {
+            if(intent.getStringExtra("userId")!= null) {
                 userid = Long.parseLong(intent.getStringExtra("userId"));
                 Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
                     @Override
                     public void onResponse(Call<Owner> call, Response<Owner> response) {
-                        if (response.body() != null) {
-                            owner = response.body();
-                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
-                        } else {
+                        if (response.body()!=null){
+                            owner = response.body() ;
+                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName() , Toast.LENGTH_SHORT).show();
+                        }else{
                             Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
                         }
 
@@ -303,10 +252,11 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                         Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
-            } else {
+            }else{
                 Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
             }
         }
+
 
 
     }
@@ -316,7 +266,6 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         StringBuffer strBuffer = new StringBuffer();
         strBuffer.append("Birth Date: ");
-
         if (!checked1 && !checked2) {
             birthDateFields = 3;
             // three fields are shown
@@ -355,10 +304,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     }
 
     private void Death() {
-
         StringBuffer strBuffer = new StringBuffer();
-        strBuffer.append("Death Date: ");
 
+        strBuffer.append("Death Date: ");
         if (!checked3 && !checked4) {
             deathDateFields = 3;
             // three fields are shown
@@ -465,6 +413,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                 });
 
 
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -510,11 +459,21 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         f2 = validateName(lastName, lns, 2);
 
 
+        // dates validation
+
         if (day1 == 1) d1s = "";
         if (day2 == 1) d2s = "";
         if (month1 == 1) m1s = "";
         if (month2 == 1) m2s = "";
-
+        if (year1 > year2) {
+            error4.setText("Set valid dates!");
+            error3.setVisibility(View.VISIBLE);
+            error3.setText("Set valid dates!");
+            error4.setVisibility(View.VISIBLE);
+        } else { // all good
+            error3.setVisibility(View.GONE);
+            error4.setVisibility(View.GONE);
+        }
         y1s = String.valueOf(year1);
         y2s = String.valueOf(year2);
 
@@ -532,10 +491,12 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
 
-        //Toast.makeText(this, today.toString(), Toast.LENGTH_LONG).show();
+
+        Toast.makeText(this, today.toString(), Toast.LENGTH_LONG).show();
         Date d1 = new Date(year1 - 1900, month1, day1);
         Date d2 = new Date(year2 - 1900, month2, day2);
-        // df is the date format for the server, we MUST send a full date to the server
+        // df is the date format for the server
+        // we MUST send a full date
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         // df[i] is the date for the next activity
         DateFormat df3 = new SimpleDateFormat("yyyy/MM/dd"); // send three fields to the next activity
@@ -546,53 +507,75 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         BirthDate = df.format(d1);
         DeathDate = df.format(d2);
 
-        validateDates(d1, d2, today);
+        if (d2.after(today)) {
+            error4.setText("Please enter a valid date");
+            error4.setVisibility(View.VISIBLE);
+            f4 = false;
+        }
 
         if ((f1 && f2 && f3 && f4)) {
-
             // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + " " + lns; // name is done
 
-            Story story;
-            if (fileURI == null) {
-                story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
-            } else {
-                story = new Story(owner, nameofperson, BirthDate, DeathDate, fileURI);
-            }
+            //adapting months and days
+//            if(m1s!="" && Integer.valueOf(m1s)<10){m1s="0"+m1s;}
+//            if(m2s!="" && Integer.valueOf(m2s)<10){m2s="0"+m2s;}
+//            if(d1s!="" && Integer.valueOf(d1s)<10){d1s="0"+d1s;}
+//            if(d2s!="" && Integer.valueOf(d2s)<10){d2s="0"+d2s;}
+//
+//            if(!m1s.equals("") && !m2s.equals("") && !d1s.equals("") && !d2s.equals("")){
+//                // three fields in date
+//                BirthDate = y1s + "/" + m1s + "/" + d1s + "T14:17:53.763+0000" ;
+//                DeathDate = y2s + "/" + m2s + "/" + d2s + "T14:17:53.763+0000" ; //dates has been updated successfully
+//            }else if(!m1s.equals("") && !m2s.equals("") && d1s.equals("") && d2s.equals("")){
+//                // two fields in date
+//                BirthDate = y1s + "/" + m1s + "T14:17:53.763+0000" ;
+//                DeathDate = y2s + "/" + m2s + "T14:17:53.763+0000" ;
+//            }else if(m1s.equals("") && m2s.equals("") && d1s.equals("") && d2s.equals("")){
+//                // one field in date
+//                BirthDate = y1s + "T14:17:53.763+0000" ;
+//                DeathDate = y2s + "T14:17:53.763+0000" ;
+//            }
 
+Story story;
+if(fileURI==null){
+     story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
+}else{
+     story = new Story(owner, nameofperson, BirthDate, DeathDate, fileURI);
+}
             Wepengine.CreateStory(story).enqueue(new Callback<Story>() {
                 @Override
                 public void onResponse(Call<Story> call, Response<Story> response) {
                     result = response.body();
                     if (result != null) {
                         Toast.makeText(CreateStory.this, "the story " + result.getNameOfPerson() + " was created succefully", Toast.LENGTH_SHORT).show();
-
-                        // pass birth date to the next activity
-                        if (birthDateFields == 3) {
-                            i.putExtra("date1", df3.format(d1));
-                        } else if (birthDateFields == 2) {
-                            i.putExtra("date1", df2.format(d1));
-                        } else if (birthDateFields == 1) {
-                            i.putExtra("date1", df1.format(d1));
-                        }
-
-                        // pass death date to the next activity
-                        if (deathDateFields == 3) {
-                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
-                        } else if (deathDateFields == 2) {
-                            i.putExtra("date2", df2.format(d2));
-                        } else if (deathDateFields == 1) {
-                            i.putExtra("date2", df1.format(d2));
-                        }
-
-                        i.putExtra("name", nameofperson);
+//
+//                        // pass birth date to the next activity
+//                        if (birthDateFields == 3) {
+//                            i.putExtra("date1", df3.format(d1));
+//                        } else if (birthDateFields == 2) {
+//                            i.putExtra("date1", df2.format(d1));
+//                        } else if (birthDateFields == 1) {
+//                            i.putExtra("date1", df1.format(d1));
+//                        }
+//
+//                        // pass death date to thr next activity
+//                        if (deathDateFields == 3) {
+//                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
+//                        } else if (deathDateFields == 2) {
+//                            i.putExtra("date2", df2.format(d2));
+//                        } else if (deathDateFields == 1) {
+//                            i.putExtra("date2", df1.format(d2));
+//                        }
+//
+//                        i.putExtra("name", nameofperson);
                         if (view.getId() == R.id.create) {
                             i.putExtra("id", String.valueOf(result.getStoryId()));
                             i.putExtra("Button", "justcreate");
                             //startActivity(i);
                         } else {
-                            // i.putExtra("id", String.valueOf(result.getStoryId()));
-                            i.putExtra("result", result);
+                           // i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("result",result);
                             i.putExtra("Button", "createandadd");
                         }
                         startActivity(i);
@@ -625,44 +608,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 //                }
 //            });
             // startActivity(intent);
+        }
 
-        } else {
-            // f1==false || f2==false || f3==false || f4==false
-            sv.fullScroll(ScrollView.FOCUS_UP);
-        }
-    }
-
-    private void validateDates(Date d1, Date d2, Date today) {
-        // dates validation
-        if (d2.after(today)) {
-            error4.setText("Please enter a valid date");
-            error4.setVisibility(View.VISIBLE);
-            f4 = false;
-            f3=false;
-        }
-        if(d1.after(d2)){
-            error4.setText("Please enter valid dates!");
-            error3.setVisibility(View.VISIBLE);
-            error3.setText("Please enter valid dates!");
-            error4.setVisibility(View.VISIBLE);
-            f4 = false;
-            f3=false;
-        }else if(d2.before(d1)){ //redundant
-            error4.setText("Please enter valid dates!");
-            error3.setVisibility(View.VISIBLE);
-            error3.setText("Please enter valid dates!");
-            error4.setVisibility(View.VISIBLE);
-            f4 = false;
-            f3=false;
-        }else{ // all good
-            error3.setVisibility(View.GONE);
-            error4.setVisibility(View.GONE);
-            f4=true;
-            f3=true;
-        }
     }
 
     public void closeActivity(View view) {
         finish();
     }
+
+
 }

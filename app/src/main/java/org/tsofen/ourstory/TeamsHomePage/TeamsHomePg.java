@@ -12,7 +12,6 @@ import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.StoryTeam.ViewStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Memory;
-import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
