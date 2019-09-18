@@ -63,7 +63,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
         User user = memory.getUser();
-        if (memory.getUser() == null) return;
+        if (user == null) return;
         if (memory.getUser().getProfilePicture() != null) {
             Uri uri = Uri.parse(memory.getUser().getProfilePicture());
             RequestOptions options = new RequestOptions()
