@@ -49,6 +49,7 @@ import org.tsofen.ourstory.web.WebFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,6 +61,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
+    int AUTOCOMPLETE_REQUEST_CODE = 1;
+
 
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
@@ -404,6 +407,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             //imageLiner.setBackground(gradientDrawable);
             // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
             return false;
+        }
+        if (editTextLocation.toString()!=null)
+        {
+
         }
         /**displayToast("You should either enter an image or a video or description for your memory!");
          return false;
