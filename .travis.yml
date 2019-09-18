@@ -1,20 +1,17 @@
 language: android
-jdk:
-  - oraclejdk8
+dist: trusty
 android:
   components:
     - tools
-    - build-tools-25.0.0
-    - android-25
-    - Extra-android-support
-    - extra-google-google_play_services
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - addon-google_apis-google-25
-BEFORE_INSTALL:
+    - build-tools-29.0.2
+    - android-29
+
+before_install:
   - chmod +x gradlew
-  - export JAVA8_HOME = /usr/lib/jvm/java-8-oracle
-  - export JAVA_HOME = $JAVA8_HOME
 
 script:
   ./gradlew build
+
+after_success:
+  - chmod +x post-success.sh
+  - ./post-success.sh
