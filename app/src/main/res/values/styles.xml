@@ -40,4 +40,5 @@
     <style name="EditText">
         <item name="colorAccent">@color/colorRegister</item>
     </style>
+
 </resources>

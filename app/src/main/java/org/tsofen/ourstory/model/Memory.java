@@ -3,6 +3,8 @@ package org.tsofen.ourstory.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 
@@ -47,7 +49,7 @@ public class Memory implements Serializable {
     private ArrayList<Tag> tags = new ArrayList<>();
     @SerializedName("likes")
     @Expose
-    private ArrayList<Long> likes = new ArrayList<>();
+    private ArrayList<Object> likes = new ArrayList<Object>();
     @SerializedName("comments")
     @Expose
     private ArrayList<Comment> comments;
@@ -55,6 +57,7 @@ public class Memory implements Serializable {
     @SerializedName("is_private")
     @Expose
     boolean isPrivate;
+
 
     public Long getId() {
         return id;
@@ -147,11 +150,11 @@ public class Memory implements Serializable {
         this.tags = tags;
     }
 
-    public ArrayList<Long> getLikes() {
+    public ArrayList<Object> getLikes() {
         return likes;
     }
 
-    public void setLikes(ArrayList<Long> likes) {
+    public void setLikes(ArrayList<Object> likes) {
         this.likes = likes;
     }
 
@@ -200,4 +203,8 @@ public class Memory implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    /*public Contributer getContributer() {
+        return contributer;
+    }*/
 }

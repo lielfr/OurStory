@@ -71,6 +71,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     int birthDateFields = 3, deathDateFields = 3;
     Date today = new Date();
     OurStoryService Wepengine ;
+    Long userid ;
+    Long Storyid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,11 +226,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             }
         });
 
+
+
         Intent intent = getIntent();  //getting the user from the server
-        if (UserStatusCheck.getUserStatus().equals("not a visitor")||true) {
-            if(/*intent.getStringExtra("userId")!= null||*/true) {
-                //int userid = Integer.parseInt(intent.getStringExtra("userId"));
-                Wepengine.GetUserById(3).enqueue(new Callback<Owner>() {
+        if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
+            if(intent.getStringExtra("userId")!= null) {
+                userid = Long.parseLong(intent.getStringExtra("userId"));
+                Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
                     @Override
                     public void onResponse(Call<Owner> call, Response<Owner> response) {
                         if (response.body()!=null){
@@ -442,6 +446,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
 
         Intent i = new Intent(this, ViewStory.class);
+
         Intent cm = new Intent(this, CreateEditMemoryActivity.class);
 
         // Names Validation
@@ -541,31 +546,34 @@ if(fileURI==null){
                     result = response.body();
                     if (result != null) {
                         Toast.makeText(CreateStory.this, "the story " + result.getNameOfPerson() + " was created succefully", Toast.LENGTH_SHORT).show();
-
-                        // pass birth date to the next activity
-                        if (birthDateFields == 3) {
-                            i.putExtra("date1", df3.format(d1));
-                        } else if (birthDateFields == 2) {
-                            i.putExtra("date1", df2.format(d1));
-                        } else if (birthDateFields == 1) {
-                            i.putExtra("date1", df1.format(d1));
-                        }
-
-                        // pass death date to thr next activity
-                        if (deathDateFields == 3) {
-                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
-                        } else if (deathDateFields == 2) {
-                            i.putExtra("date2", df2.format(d2));
-                        } else if (deathDateFields == 1) {
-                            i.putExtra("date2", df1.format(d2));
-                        }
-
-                        i.putExtra("name", nameofperson);
+//
+//                        // pass birth date to the next activity
+//                        if (birthDateFields == 3) {
+//                            i.putExtra("date1", df3.format(d1));
+//                        } else if (birthDateFields == 2) {
+//                            i.putExtra("date1", df2.format(d1));
+//                        } else if (birthDateFields == 1) {
+//                            i.putExtra("date1", df1.format(d1));
+//                        }
+//
+//                        // pass death date to thr next activity
+//                        if (deathDateFields == 3) {
+//                            i.putExtra("date2", df3.format(d2)); // pass it as a Date to thr next activity
+//                        } else if (deathDateFields == 2) {
+//                            i.putExtra("date2", df2.format(d2));
+//                        } else if (deathDateFields == 1) {
+//                            i.putExtra("date2", df1.format(d2));
+//                        }
+//
+//                        i.putExtra("name", nameofperson);
                         if (view.getId() == R.id.create) {
-                            i.putExtra("Button", "just_create");
+                            i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("Button", "justcreate");
+                            //startActivity(i);
                         } else {
+                           // i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("result",result);
                             i.putExtra("Button", "createandadd");
-                            i.putExtra("id", result);
                         }
                         startActivity(i);
                     } else {

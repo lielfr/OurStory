@@ -17,7 +17,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:background="@color/colorRegister"
+        android:background="@drawable/register_button"
         android:fontFamily="@font/quicksand_bold"
         android:onClick="@string/LogIN"
         android:text="@string/Login"
@@ -83,10 +83,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView6"
         app:layout_constraintEnd_toStartOf="@+id/login_button"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="@+id/main_container2"
         app:layout_constraintTop_toBottomOf="@+id/holder2"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.09" />
 
     <FrameLayout
         android:id="@+id/main_container2"
@@ -136,15 +136,15 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="173dp"
-        android:layout_height="105dp"
+        android:layout_width="183dp"
+        android:layout_height="94dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toStartOf="@+id/or"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView2"
         app:srcCompat="@drawable/line1" />
@@ -225,8 +225,6 @@
         android:id="@+id/or"
         android:layout_width="47dp"
         android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -237,10 +235,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.173" />
 
     <TextView
         android:id="@+id/emailErr"
@@ -259,7 +257,7 @@
         android:id="@+id/PassError"
         android:layout_width="326dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="44dp"
         android:gravity="center|left"
         android:textColor="@android:color/holo_red_light"
         android:textSize="15sp"
@@ -267,7 +265,7 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -326,21 +324,19 @@
         android:id="@+id/holder2"
         android:layout_width="328dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="@+id/holder1"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/holder1">
 
         <EditText
             android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/edittext_legend_continuous"
             android:fontFamily="@font/quicksand"
             android:hint="@string/password"
@@ -354,14 +350,16 @@
             android:textCursorDrawable="@null"
             android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="86dp"
+            android:layout_width="79dp"
             android:layout_height="19dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/background_gradient"
             android:fontFamily="@font/quicksand_bold"
             android:text="@string/Password"
@@ -406,10 +404,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="55dp"
-            android:layout_height="21dp"
+            android:layout_width="49dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
@@ -419,7 +417,7 @@
             android:textColor="@color/colorGrayHint"
             app:layout_constraintBottom_toBottomOf="@+id/showEmail"
             app:layout_constraintEnd_toEndOf="@+id/showEmail"
-            app:layout_constraintHorizontal_bias="0.027"
+            app:layout_constraintHorizontal_bias="0.06"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />

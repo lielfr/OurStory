@@ -16,25 +16,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class SearchStory extends AppCompatActivity {
@@ -50,7 +42,7 @@ public class SearchStory extends AppCompatActivity {
     int D;
     int M ;
     int Y ;
-    int Taplayout ;
+    int Taplayout;
 
 
 
@@ -59,7 +51,7 @@ public class SearchStory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_story);
-        spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.sp);
         final Button S = findViewById(R.id.show);
 
         List<String> categories = new ArrayList<String>();
@@ -87,6 +79,8 @@ public class SearchStory extends AppCompatActivity {
         if (fragmentManager==null) {
             Log.i("fragment", "you have found it the fragment manager is null........................... ");
         }
+
+
         final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         memoryFragment = (MemoryFragment) adapter.getItem(1);
@@ -97,6 +91,8 @@ public class SearchStory extends AppCompatActivity {
             Log.i("fragment", "fragment is not attached FROM SEARCH ACTIVITY!!! ");
         }
 
+
+
         // Setting a listener for clicks.
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -104,8 +100,25 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                Taplayout = tab.getPosition() ;
+                Taplayout = tab.getPosition();
+                Button B = findViewById(R.id.button3);
+                TextView ShowDate = findViewById(R.id.ShowDate);
+                TextView cat = findViewById(R.id.catg);
 
+                if(Taplayout==1) {
+                    B.setVisibility(View.INVISIBLE);
+                    spinner.setVisibility(View.GONE);
+                     ShowDate.setVisibility(View.INVISIBLE);
+                      cat.setVisibility(View.INVISIBLE);
+                }
+                else {
+
+                    B.setVisibility(View.VISIBLE);
+                    spinner.setVisibility(View.VISIBLE);
+                    ShowDate.setVisibility(View.VISIBLE);
+                    cat.setVisibility(View.VISIBLE);
+
+                }
 //                if (adapter.getItem(0)!=null){
 //                    CurrentFragment =adapter.getItem(0);
 //                    Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -146,9 +159,12 @@ public class SearchStory extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 if(Taplayout==0) {//check which fragment we in
+                    Log.i("fragment", "story fragment text change");
                     SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
                 }else{
-                    SendSearchResToMemoryFragment(searchresult.getText().toString()) ;               }
+                    Log.i("fragment", "memory fragment text change");
+                    SendSearchResToMemoryFragment(searchresult.getText().toString(),memoryFragment) ;
+                }
             }
 
             @Override
@@ -243,8 +259,10 @@ public class SearchStory extends AppCompatActivity {
 
         Log.i("fragment","trying to catch fragment");
 
-        if(fragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+        if(fragment != null){ //TODO MEMORYTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
             //this section for STORYTEAM Use
+            Log.i("fragment","story search commited");
+
             fragment.CommitSearch(getApplicationContext(), searchresult, flag, op, D, M, Y, SearchBy);
         }else{
             Log.i("fragment","fragment is null");
@@ -252,14 +270,15 @@ public class SearchStory extends AppCompatActivity {
 
     }
 
-    public void SendSearchResToMemoryFragment(String searchresult){//},MemoryFragment fragment) {
+    public void SendSearchResToMemoryFragment(String searchresult,MemoryFragment fragment) {
 
-        Log.i("fragment","trying to catch fragment");
+        Log.i("fragment","trying to catch memory fragment");
 
-        if(memoryFragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+        if(fragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
             //this section for STORYTEAM Use
+            Log.i("fragment","memory search commited");
 
-            memoryFragment.CommitSearch(searchresult);
+            fragment.CommitSearch(searchresult);
         }else{
             Log.i("fragment","fragment is null");
         }

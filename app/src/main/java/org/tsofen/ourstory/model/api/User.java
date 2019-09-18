@@ -49,7 +49,7 @@ public class User implements Serializable
     private Boolean status;
     @SerializedName("profile_picture")
     @Expose
-    private Object profilePicture;
+    private String profilePicture;
 
     /**
      * No args constructor for use in serialization
@@ -72,7 +72,7 @@ public class User implements Serializable
      * @param firstName
      * @param dateOfLastSignIn
      */
-    public User(Long userId, String email, String firstName, String lastName, String password, String gender, Date dateOfBirth, Object dateOfSignUp, Object dateOfLastSignIn, String state, String city, Boolean status, Object profilePicture) {
+    public User(Long userId, String email, String firstName, String lastName, String password, String gender, Date dateOfBirth, Object dateOfSignUp, Object dateOfLastSignIn, String state, String city, Boolean status, String profilePicture) {
         super();
         this.userId = userId;
         this.email = email;
@@ -103,6 +103,10 @@ public class User implements Serializable
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFullName(){
+        return firstName + " " + lastName;
     }
 
     public String getFirstName() {
@@ -185,11 +189,11 @@ public class User implements Serializable
         this.status = status;
     }
 
-    public Object getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Object profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

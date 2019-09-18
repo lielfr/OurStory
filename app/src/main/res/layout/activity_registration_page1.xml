@@ -9,25 +9,25 @@
 
     <TextView
         android:id="@+id/emptyView2"
-        android:layout_width="186dp"
-        android:layout_height="34dp"
+        android:layout_width="188dp"
+        android:layout_height="42dp"
         android:textColor="@android:color/holo_red_light"
         android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/EmailHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FirstNameHolder"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.142" />
 
     <Button
         android:id="@+id/continue_button"
         android:layout_width="101dp"
         android:layout_height="47dp"
         android:layout_gravity="center"
-        android:background="@color/colorRegister"
+        android:background="@drawable/register_button"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:onClick="Go2RegistrationPage2"
@@ -60,17 +60,17 @@
     <TextView
         android:id="@+id/emptyView1"
         android:layout_width="186dp"
-        android:layout_height="34dp"
+        android:layout_height="43dp"
         android:textColor="@android:color/holo_red_light"
         android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/EmailHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FirstNameHolder"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <TextView
         android:id="@+id/emptyView3"
@@ -82,24 +82,25 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/passwordHolder"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailHolder"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/emptyView4"
-        android:layout_width="385dp"
-        android:layout_height="50dp"
+        android:layout_width="376dp"
+        android:layout_height="47dp"
         android:textColor="@android:color/holo_red_light"
         android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/rePasswordHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordHolder"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/emptyView5"
@@ -111,10 +112,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/continue_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintHorizontal_bias="0.703"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rePasswordHolder"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
@@ -279,9 +280,8 @@
         app:layout_constraintTop_toBottomOf="@+id/LastNameHolder">
 
         <EditText
-            android:theme="@style/EditText"
             android:id="@+id/showEmail"
-            android:layout_width="380dp"
+            android:layout_width="378dp"
             android:layout_height="44dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
@@ -295,6 +295,7 @@
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@android:color/transparent"
             android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -325,15 +326,14 @@
         android:id="@+id/passwordHolder"
         android:layout_width="388dp"
         android:layout_height="66dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailHolder">
 
         <EditText
-            android:theme="@style/EditText"
             android:id="@+id/password_editText"
             android:layout_width="378dp"
             android:layout_height="48dp"
@@ -349,6 +349,7 @@
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@color/transparent"
             android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -377,12 +378,11 @@
         android:layout_height="66dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordHolder">
 
         <EditText
-            android:theme="@style/EditText"
             android:id="@+id/repeatpassword_editText"
             android:layout_width="376dp"
             android:layout_height="48dp"
@@ -399,6 +399,7 @@
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@android:color/transparent"
             android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.MemoryAdapter;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -28,10 +28,11 @@ import static org.tsofen.ourstory.StoryTeam.StoryFragment.inflatedView;
 
 
 public class MemoryFragment extends Fragment {
-    public static ArrayList<MemoryA> memories = new ArrayList<>();
+    public static ArrayList<Memory> memories = new ArrayList<>();
     public static RecyclerView mRecyclerView;
     public static MemoryAdapter mAdapter;
-    OurStoryService MemoryAService;
+    OurStoryService wb;
+    static View inflatedView;
     Context ctx;
 
 
@@ -42,62 +43,49 @@ public class MemoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_memory, container, false);
-
     }
-
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        // View inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
+        inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
         mRecyclerView =getView().findViewById(R.id.recyclerview1);
-        //getView().findViewById(R.id.recyclerview);
         if(mRecyclerView==null) {
-            Log.d("sss", " on view created nulll");
+            Log.d("fragment", " on memoryfragment view created nulll");
         }
         else
         {
-            Log.d("sss", " on view created notnull");
-            mAdapter = new MemoryAdapter(getActivity(), memories);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            mAdapter.notifyDataSetChanged();
+            Log.d("fragment", " on memoryfragment view created notnull");
+
         }
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void CommitSearch( String searchinput){
-        OurStoryService wepengine = WebFactory.getService();
-        wepengine.GetMemoriesByKeyword(searchinput).enqueue(new Callback<ArrayList<MemoryA>>()
-        {
+        Log.i("fragment","commited : searching for "+searchinput);
+
+        wb= WebFactory.getService();
+
+        wb.GetMemoriesByKeyword(searchinput).enqueue(new Callback<ArrayList<Memory>>() {
             @Override
-            public void onResponse(Call<ArrayList<MemoryA>> call, Response<ArrayList<MemoryA>> response)
+            public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response)
             {
                 memories = response.body();
-
-                //
                 if(memories==null) {
-                    Log.d("error", "No Memories");
-                }
-
-                else
-                    {
-
-                    Log.d(" no error", memories.size()+" ");
-
-
-
-
+                    Log.d("fragment", "No Memories");
+                } else {
+                    Log.d("fragment", "number of memories "+memories.size()+" ");
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    mRecyclerView.setAdapter(mAdapter);
+                    mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
                     mAdapter.notifyDataSetChanged();
-
-
-
-
-                }
-            }
+                }}
             @Override
-            public void onFailure(Call<ArrayList<MemoryA>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
                 Log.d("Error", t.toString());
             }
         });
