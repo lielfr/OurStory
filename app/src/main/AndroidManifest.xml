@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage">
-            <intent-filter>
+                    <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,11 +25,14 @@
         <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
         <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
+        <activity android:name="org.tsofen.ourstory.UserModel.ForgotPassword" />
         <activity
             android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
             android:label="CreateStory"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+
+
         <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
         <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
         <activity android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity"
@@ -37,10 +40,10 @@
         <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg"/>
         <activity android:name="org.tsofen.ourstory.CommentActivity" />
 
-
         <activity
             android:name=".MemoriesOfStoryActivity"
             android:label="Memories" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
