@@ -1,5 +1,6 @@
 package org.tsofen.ourstory.StoryTeam;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -103,10 +105,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!Character.isUpperCase(editable.charAt(0)))
-                {
-                    char c=Character.toUpperCase(editable.charAt(0));
-                    String str=editable.replace(0,1,c+"").toString();
+                if (!Character.isUpperCase(editable.charAt(0))) {
+                    char c = Character.toUpperCase(editable.charAt(0));
+                    String str = editable.replace(0, 1, c + "").toString();
 
                     firstName.setText(str);
                 }
@@ -127,10 +128,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!Character.isUpperCase(editable.charAt(0)))
-                {
-                    char c=Character.toUpperCase(editable.charAt(0));
-                    String str=editable.replace(0,1,c+"").toString();
+                if (!Character.isUpperCase(editable.charAt(0))) {
+                    char c = Character.toUpperCase(editable.charAt(0));
+                    String str = editable.replace(0, 1, c + "").toString();
 
                     lastName.setText(str);
                 }
@@ -306,9 +306,25 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             } else {
                 Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
             }
+        } else if (UserStatusCheck.getUserStatus().equals("visitor")) {
+            // show a pop up with a log in option
+            AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(CreateStory.this);
+            // Set the dialog title and message
+            myAlertBuilder.setTitle("Alert");
+            myAlertBuilder.setMessage("You need to Log In first in order to create a new story.");
+            // Add the dialog log in button
+            myAlertBuilder.setPositiveButton("Log In", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked Log In button.
+                    Intent i = new Intent(CreateStory.this, LogIn.class);
+                    //startActivity(i);
+                    i.putExtra("logtocreate", "logToCreate");
+                    startActivityForResult(i,1);
+                }
+            });
+            // Create and show the AlertDialog.
+            myAlertBuilder.show();
         }
-
-
     }
 
 
@@ -638,27 +654,27 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             error4.setText("Please enter a valid date");
             error4.setVisibility(View.VISIBLE);
             f4 = false;
-            f3=false;
+            f3 = false;
         }
-        if(d1.after(d2)){
+        if (d1.after(d2)) {
             error4.setText("Please enter valid dates!");
             error3.setVisibility(View.VISIBLE);
             error3.setText("Please enter valid dates!");
             error4.setVisibility(View.VISIBLE);
             f4 = false;
-            f3=false;
-        }else if(d2.before(d1)){ //redundant
+            f3 = false;
+        } else if (d2.before(d1)) { //redundant
             error4.setText("Please enter valid dates!");
             error3.setVisibility(View.VISIBLE);
             error3.setText("Please enter valid dates!");
             error4.setVisibility(View.VISIBLE);
             f4 = false;
-            f3=false;
-        }else{ // all good
+            f3 = false;
+        } else { // all good
             error3.setVisibility(View.GONE);
             error4.setVisibility(View.GONE);
-            f4=true;
-            f3=true;
+            f4 = true;
+            f3 = true;
         }
     }
 
