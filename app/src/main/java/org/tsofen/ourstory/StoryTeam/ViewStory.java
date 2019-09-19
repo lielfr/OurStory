@@ -75,6 +75,14 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     FullViewStory story_full;
 
     @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_story);
@@ -93,13 +101,13 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         Activity aa = this;
         Intent intent = getIntent();
         if(intent.getStringExtra("id")!=null)
-        id = Long.parseLong(intent.getStringExtra("id"));
+            id = Long.parseLong(intent.getStringExtra("id"));
 
         if(intent.getStringExtra("Button")!=null && intent.getStringExtra("Button").equals("createandadd")){
             AddMemoryLive((Story) intent.getSerializableExtra("result"));
             Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
         }
-       // Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
 //
 //        if(intent.getStringExtra("id")!=null)
 //        id = Long.parseLong(intent.getStringExtra("id"));
@@ -117,7 +125,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                 } else {
 
                     String personName = story_full.getStory().getNameOfPerson();
-                    Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
 
                     TextView textView1 = (findViewById(R.id.textView));
                     textView1.setText(personName);
@@ -194,11 +202,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         }
 
 
-                    // Get a handle to the RecyclerView.
-                    mRecyclerView = findViewById(R.id.recyclerview);
-                    // Create an adapter and supply the data to be displayed.
-                    mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(),story_full.getStory().getNameOfPerson(),story_full.getStory().getStoryId());
-                    //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
+                        // Get a handle to the RecyclerView.
+                        mRecyclerView = findViewById(R.id.recyclerview);
+                        // Create an adapter and supply the data to be displayed.
+                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(),story_full.getStory().getNameOfPerson(),story_full.getStory().getStoryId());
+                        //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
@@ -220,11 +228,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     }
                 }
             }
-                @Override
-                public void onFailure (Call < FullViewStory > call, Throwable t){
-                    Log.d("Failure", t.toString());
+            @Override
+            public void onFailure (Call < FullViewStory > call, Throwable t){
+                Log.d("Failure", t.toString());
 
-                }
+            }
 
         });
 
@@ -394,9 +402,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
         TextView textView=  findViewById(R.id.textView4);
         intent.putExtra("tag",textView.getText().toString());
-        Toast.makeText(view.getContext(),"tag1",Toast.LENGTH_LONG).show();
-
-//        startActivity(intent);
+        startActivity(intent);
     }
     public void ShowMemoryByTag2(View view) {
         Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
@@ -409,9 +415,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
         TextView textView=  findViewById(R.id.textView5);
         intent.putExtra("tag",textView.getText().toString());
-        Toast.makeText(view.getContext(),"tag2",Toast.LENGTH_LONG).show();
-
-//        startActivity(intent);
+        startActivity(intent);
     }
     public void ShowMemoryByTag3(View view) {
         Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
@@ -420,9 +424,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
         TextView textView=  findViewById(R.id.textView6);
         intent.putExtra("tag",textView.getText().toString());
-        Toast.makeText(view.getContext(),"tag3",Toast.LENGTH_LONG).show();
-
-//        startActivity(intent);
+        startActivity(intent);
     }
 
 
