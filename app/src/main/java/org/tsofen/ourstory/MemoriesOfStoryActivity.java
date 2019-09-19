@@ -1,7 +1,14 @@
 package org.tsofen.ourstory;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.InputType;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -9,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,8 +59,14 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         year= intent.getIntExtra("year",year);
         flag = intent.getIntExtra("flag",flag);
         rv = findViewById(R.id.recycler_mem);
-        story_name = findViewById(R.id.storyname);
-        story_name.setText(storyName);
+        story_name = findViewById(R.id.memoriestxt);
+        int story_name_color = ResourcesCompat.getColor(getResources(), R.color.colorLogin, getTheme());
+        Spannable spannable = new SpannableString(story_name.getText() + " " + storyName);
+        spannable.setSpan(new ForegroundColorSpan(story_name_color),
+                story_name.getText().length(),
+                story_name.getText().length() + 1 + storyName.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        story_name.setText(spannable, TextView.BufferType.SPANNABLE);
         MemoryAService = WebFactory.getService();
         if(flag==0) {
             MemoryAService.GetMemoriesByYear(storyId, year).enqueue(new Callback<ArrayList<Memory>>() {
