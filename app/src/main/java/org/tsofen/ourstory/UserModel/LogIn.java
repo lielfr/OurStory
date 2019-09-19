@@ -3,7 +3,9 @@ package org.tsofen.ourstory.UserModel;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +26,6 @@ import retrofit2.Response;
 
 
 public class LogIn extends AppCompatActivity {
-    public static SharedPreferences mPrefs;
     public String emailString;
     public String firstNameString;
     public String lastNameString;
@@ -40,20 +41,24 @@ public class LogIn extends AppCompatActivity {
     EditText password;
     TextView passErr;
     TextView emailErr;
-    int flag1 = 1;
-    int flag2 = 1;
     String userPass;
     Long userId;
     int year;
     int month;
     int day;
+    SharedPreferences mPrefs ;
+    SharedPreferences.Editor prefsEditor;
+    CheckBox keeplog ;
+
 org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-
+        mPrefs = getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
+        prefsEditor = mPrefs.edit();
+        keeplog = (CheckBox) findViewById(R.id.checkBoxRememberMe);
         email = findViewById(R.id.showEmail);
         password = findViewById(R.id.Password);
         passErr = findViewById(R.id.PassError);
@@ -80,10 +85,10 @@ org.tsofen.ourstory.model.api.User myUser;
 
         String inputEmail = String.valueOf(email.getText());
         String inputPassword = String.valueOf(password.getText());
+
         if (inputEmail.equals("")||(inputPassword.equals(""))) {
             emailErr.setText("Please enter your email to login");
             passErr.setText("Please enter your password to login");
-
         }
         else {
 
@@ -110,12 +115,18 @@ org.tsofen.ourstory.model.api.User myUser;
                             signInDone.putExtra("userId", userId);
                             signInDone.putExtra("user", myUser);
                             //signInDone.putExtra("index", index);
-                            mPrefs = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
-                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
                             Gson gson = new Gson();
                             String json = gson.toJson(myUser);
-                            prefsEditor.putString("myUser", json);
+                            if(keeplog.isChecked()==true)
+                            {prefsEditor.putString(AppHomePage.USER, json);
                             prefsEditor.commit();
+                            Log.d("what",mPrefs.getString(AppHomePage.USER,""));}
+                            else
+                            {
+
+                                signInDone.putExtra("myUserJson", json);
+                            }
+                            UserStatusCheck.setUserStatus("not a visitor");
                             startActivity(signInDone);
 
                         }

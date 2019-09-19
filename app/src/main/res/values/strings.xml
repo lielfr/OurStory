@@ -73,6 +73,7 @@
     <string name="CreateNewAcount">Create a new account</string>
     <string name="deselect_tag">Deselect Tag</string>
     <string name="shared_pref_key">OurStorySharedPref</string>
+    <string name="keepme">Keep me logged in</string>
 
 
 </resources>
