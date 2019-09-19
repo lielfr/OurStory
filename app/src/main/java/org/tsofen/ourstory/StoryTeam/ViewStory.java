@@ -75,6 +75,14 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     FullViewStory story_full;
 
     @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_story);
@@ -93,13 +101,13 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         Activity aa = this;
         Intent intent = getIntent();
         if(intent.getStringExtra("id")!=null)
-        id = Long.parseLong(intent.getStringExtra("id"));
+            id = Long.parseLong(intent.getStringExtra("id"));
 
         if(intent.getStringExtra("Button")!=null && intent.getStringExtra("Button").equals("createandadd")){
             AddMemoryLive((Story) intent.getSerializableExtra("result"));
             Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
         }
-       // Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
 //
 //        if(intent.getStringExtra("id")!=null)
 //        id = Long.parseLong(intent.getStringExtra("id"));
@@ -194,11 +202,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         }
 
 
-                    // Get a handle to the RecyclerView.
-                    mRecyclerView = findViewById(R.id.recyclerview);
-                    // Create an adapter and supply the data to be displayed.
-                    mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(),story_full.getStory().getNameOfPerson(),story_full.getStory().getStoryId());
-                    //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
+                        // Get a handle to the RecyclerView.
+                        mRecyclerView = findViewById(R.id.recyclerview);
+                        // Create an adapter and supply the data to be displayed.
+                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(),story_full.getStory().getNameOfPerson(),story_full.getStory().getStoryId());
+                        //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
@@ -220,11 +228,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     }
                 }
             }
-                @Override
-                public void onFailure (Call < FullViewStory > call, Throwable t){
-                    Log.d("Failure", t.toString());
+            @Override
+            public void onFailure (Call < FullViewStory > call, Throwable t){
+                Log.d("Failure", t.toString());
 
-                }
+            }
 
         });
 
