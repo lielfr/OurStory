@@ -126,6 +126,11 @@ public class RegistrationPage1 extends AppCompatActivity {
                     Log.d("log2", "values passed from registrationPage1:"
                             + emailString + " " + firstNameString + " "
                             + lastNameString + " " + passwordString);
+                    TextViewInvs1.setVisibility(View.INVISIBLE);
+                    TextViewInvs2.setVisibility(View.INVISIBLE);
+                    TextViewInvs3.setVisibility(View.INVISIBLE);
+                    TextViewInvs4.setVisibility(View.INVISIBLE);
+                    TextViewInvs5.setVisibility(View.INVISIBLE);
                     startActivity(regIntent2);
                 }
                 }
@@ -149,6 +154,7 @@ public class RegistrationPage1 extends AppCompatActivity {
         }
         else
         { //all good
+            edtTxt.setVisibility(View.INVISIBLE);
             return 1;
         }
 
@@ -169,6 +175,7 @@ public class RegistrationPage1 extends AppCompatActivity {
 
         else
         {   //all good
+            edtTxt.setVisibility(View.INVISIBLE);
             return 1;
         }
 
@@ -190,6 +197,7 @@ public class RegistrationPage1 extends AppCompatActivity {
             edtTxt1.setVisibility(View.VISIBLE);
             return 0;
         }
+        edtTxt1.setVisibility(View.INVISIBLE);
         return 1;
 
     }
@@ -204,7 +212,9 @@ public class RegistrationPage1 extends AppCompatActivity {
         }
         else if (str1.equals(str2))
         {
+            edtTxt2.setVisibility(View.INVISIBLE);
             return 1;
+
         }
         else
         {
