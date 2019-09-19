@@ -71,10 +71,10 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
                     .placeholder(R.drawable.nopicyet)
                     .error(R.drawable.nopicyet);
             Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
+            holder.name.setText(memory.getUser().getFullName());
         } else {
             holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
-        holder.name.setText(memory.getUser().getFullName());
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
