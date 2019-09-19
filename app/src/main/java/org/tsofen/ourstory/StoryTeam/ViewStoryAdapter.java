@@ -75,6 +75,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
             year.setOnClickListener(this);
         }
 
+
         @Override
         public void onClick(View view) {
             Log.d("hh", "hh");
@@ -142,7 +143,6 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
     @NonNull
     @Override
     public ViewStoryAdapter.StoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View mItemView = mInflater.inflate(R.layout.item_memory_view, parent  , false);
         return new StoryViewHolder(mItemView, this);
 
