@@ -38,7 +38,6 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
     public Context context;
     public long storyId;
     public String storyName;
-    VSMemories mCurrent;
 
 
 
@@ -58,74 +57,46 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
         public final ImageButton img1;
         public final ImageButton img2;
         public final ImageButton img3;
-        int mposition=0;
 
         final ViewStoryAdapter mAdapter;
         public StoryViewHolder(View itemView, ViewStoryAdapter adapter) {
             super(itemView);
             year = itemView.findViewById(R.id.textView13);
             img1 = itemView.findViewById(R.id.imageButton3);
-//            int mposition = getLayoutPosition();
-//            img1.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(view.getContext(), "img1clicked", Toast.LENGTH_SHORT).show();
-//                    VSMemories mCurrent = mStoryList.get(mposition);
-//                    Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-//                    intent.putExtra("flag", 2);
-//                    intent.putExtra("storyId",storyId);
-//                    intent.putExtra("storyName",storyName);
-//                    intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
-//                    Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-////                    context.startActivity(intent);
-//                }
-//
-//            });
             img2 = itemView.findViewById(R.id.imageButton4);
             img3 = itemView.findViewById(R.id.imageButton5);
             this.mAdapter = adapter;
-            img1.setOnClickListener(this);
-            img2.setOnClickListener(this);
-            img3.setOnClickListener(this);
-            year.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             Log.d("hh", "hh");
-            int YearId=2131362202;
-            int img1Id=2131361986;
-            int img2Id=2131361987;
-            int img3Id=2131361988;
-//             mposition = getLayoutPosition();
+            int mposition = getLayoutPosition();
             Toast.makeText(view.getContext(), Integer.toString(mposition), Toast.LENGTH_SHORT).show();
-//            Toast.makeText(view.getContext(),storyId+"",Toast.LENGTH_LONG).show();
-//            Toast.makeText(view.getContext(),view.getId()+"",Toast.LENGTH_LONG).show();
-            if(view.getId()==YearId){
-                    Toast.makeText(view.getContext(), "yearclicked", Toast.LENGTH_SHORT).show();
-//                    VSMemories mCurrent = mStoryList.get(mposition);
-                    Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-                    intent.putExtra("flag",0);
-                    intent.putExtra("storyId",storyId);
-                    intent.putExtra("storyName",storyName);
-                    intent.putExtra("year",mCurrent.getYear());
-                    Toast.makeText(view.getContext(), mCurrent.getYear().toString(), Toast.LENGTH_SHORT).show();
-//                    context.startActivity(intent);
 
-            }
-            else if (view.getId()==img1Id){
-                Toast.makeText(view.getContext(), "img1clicked", Toast.LENGTH_SHORT).show();
+
+
+            img1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "img1clicked", Toast.LENGTH_SHORT).show();
                     VSMemories mCurrent = mStoryList.get(mposition);
                     Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
                     intent.putExtra("flag", 2);
                     intent.putExtra("storyId",storyId);
                     intent.putExtra("storyName",storyName);
-                   // intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
-                    Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2)+"hhhh", Toast.LENGTH_LONG).show();
-//                    context.startActivity(intent);
+                    intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
+                    Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
+                }
 
-            }
-            else if (view.getId()==img2Id){
+            });
+
+
+            img2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     Toast.makeText(view.getContext(), "img2clicked", Toast.LENGTH_SHORT).show();
                     VSMemories mCurrent = mStoryList.get(mposition);
                     Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
@@ -134,11 +105,16 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                     intent.putExtra("storyName",storyName);
                     intent.putExtra("memoryId",mCurrent.getPics().get(mposition).get(2));
                     Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-//                    context.startActivity(intent);
+                    context.startActivity(intent);
 
-            }
-            else if (view.getId()==img3Id){
 
+
+                }
+
+            });
+            img3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     Toast.makeText(view.getContext(), "img3clicked", Toast.LENGTH_SHORT).show();
                     VSMemories mCurrent = mStoryList.get(mposition);
                     Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
@@ -147,64 +123,27 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                     intent.putExtra("storyName",storyName);
                     intent.putExtra("memoryId",mCurrent.getPics().get(mposition).get(2));
                     Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-//                    context.startActivity(intent);
+                    context.startActivity(intent);
 
-            }
+                }
 
+            });
+            year.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "yearclicked", Toast.LENGTH_SHORT).show();
+                    VSMemories mCurrent = mStoryList.get(mposition);
+                    Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                    intent.putExtra("flag",0);
+                    intent.putExtra("storyId",storyId);
+                    intent.putExtra("storyName",storyName);
+                    intent.putExtra("year",mCurrent.getYear());
+                    Toast.makeText(view.getContext(), mCurrent.getYear().toString(), Toast.LENGTH_SHORT).show();
+                    context.startActivity(intent);
 
+                }
 
-
-
-//            img2.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(view.getContext(), "img2clicked", Toast.LENGTH_SHORT).show();
-//                    VSMemories mCurrent = mStoryList.get(mposition);
-//                    Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-//                    intent.putExtra("flag",2);
-//                    intent.putExtra("storyId",storyId);
-//                    intent.putExtra("storyName",storyName);
-//                    intent.putExtra("memoryId",mCurrent.getPics().get(mposition).get(2));
-//                    Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-////                    context.startActivity(intent);
-//
-//
-//
-//                }
-//
-//            });
-//            img3.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(view.getContext(), "img3clicked", Toast.LENGTH_SHORT).show();
-//                    VSMemories mCurrent = mStoryList.get(mposition);
-//                    Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-//                    intent.putExtra("flag",2);
-//                    intent.putExtra("storyId",storyId);
-//                    intent.putExtra("storyName",storyName);
-//                    intent.putExtra("memoryId",mCurrent.getPics().get(mposition).get(2));
-//                    Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-////                    context.startActivity(intent);
-//
-//                }
-//
-//            });
-//            year.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(view.getContext(), "yearclicked", Toast.LENGTH_SHORT).show();
-//                    VSMemories mCurrent = mStoryList.get(mposition);
-//                    Intent intent =new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-//                    intent.putExtra("flag",0);
-//                    intent.putExtra("storyId",storyId);
-//                    intent.putExtra("storyName",storyName);
-//                    intent.putExtra("year",mCurrent.getYear());
-//                    Toast.makeText(view.getContext(), mCurrent.getYear().toString(), Toast.LENGTH_SHORT).show();
-////                    context.startActivity(intent);
-//
-//                }
-//
-//            });
+            });
 
 
         }
@@ -222,8 +161,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
 
     @Override
     public void onBindViewHolder(@NonNull ViewStoryAdapter.StoryViewHolder holder, int position) {
-
-        mCurrent = mStoryList.get(position);
+        VSMemories mCurrent = mStoryList.get(position);
         Log.d("fadi",mCurrent.getPics().get(0).get(1).toString());
     //   Bitmap bitmap = BitmapFactory.decodeStream(mCurrent.getPics().get(0).get(1).toString());
         holder.year.setText(mCurrent.getYear()+"");
