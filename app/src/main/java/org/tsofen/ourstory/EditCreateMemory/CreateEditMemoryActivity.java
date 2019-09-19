@@ -107,6 +107,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
+        Gson gson = new Gson();
+        String userStr = preferences.getString("myUser", "ERR");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
 
@@ -215,9 +218,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             pageTitle.setText("Add Memory");
             memory = new Memory();
 //            user = (User) intent.getSerializableExtra(KEY_USER);
-            SharedPreferences preferences = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
-            Gson gson = new Gson();
-            String userStr = preferences.getString("myUser", "ERR");
+
             Log.d("MOO", "got User: " + userStr);
             if (userStr != "ERR") {
                 user = gson.fromJson(userStr, User.class);
