@@ -134,17 +134,22 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     textView2.setText(date);
 
                     ImageView pic = findViewById(R.id.imageView3);
-                    imageView_profile = story_full.getStory().getPicture();//TODO check if there is no profile pic MARYAM
-                    String st = imageView_profile.toString();
-                    Uri uri = Uri.parse(st);
-                    RequestOptions options = new RequestOptions()
-                            .override(375, 192)
-                            .centerCrop()
-                            .placeholder(R.drawable.nopicyet)
-                            .error(R.drawable.nopicyet);
+                    if (story_full.getStory().getPicture() != null) {
+                        imageView_profile = story_full.getStory().getPicture();//TODO check if there is no profile pic MARYAM
+                        String st = imageView_profile.toString();
+                        Uri uri = Uri.parse(st);
+                        RequestOptions options = new RequestOptions()
+                                .override(375, 192)
+                                .centerCrop()
+                                .placeholder(R.drawable.nopicyet)
+                                .error(R.drawable.nopicyet);
 
-                    Glide.with(aa).load(uri).apply(options).into(pic);
+                        Glide.with(aa).load(uri).apply(options).into(pic);
+                    }else {
+                        pic.setImageResource(R.drawable.nopicyet);
+                    }
                 }
+
 
                 if (story_full.getMemories().size()==0) {
                     LinearLayout linearLayout = findViewById(R.id.linearLayout3);
@@ -368,7 +373,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
         TextView textView=  findViewById(R.id.textView4);
         intent.putExtra("tag",textView.getText().toString());
-        startActivity(intent);
+        Toast.makeText(view.getContext(), "tag1", Toast.LENGTH_SHORT).show();
+//        startActivity(intent);
     }
     public void ShowMemoryByTag2(View view) {
         Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
@@ -381,16 +387,19 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
         TextView textView=  findViewById(R.id.textView5);
         intent.putExtra("tag",textView.getText().toString());
-        startActivity(intent);
+        Toast.makeText(view.getContext(), "tag2", Toast.LENGTH_SHORT).show();
+//        startActivity(intent);
     }
     public void ShowMemoryByTag3(View view) {
         Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
         intent.putExtra("flag",1);
         intent.putExtra("storyId",story_full.getStory().getStoryId());
+        Toast.makeText(view.getContext(),story_full.getStory().getStoryId()+"",Toast.LENGTH_LONG).show();
         intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
         TextView textView=  findViewById(R.id.textView6);
         intent.putExtra("tag",textView.getText().toString());
-        startActivity(intent);
+        Toast.makeText(view.getContext(), "tag3", Toast.LENGTH_SHORT).show();
+//        startActivity(intent);
     }
 
 
