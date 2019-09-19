@@ -33,7 +33,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     ArrayList<Memory> data;
     MemoryAdapter adapter;
     TextView story_name;
-    Long storyId,memoryId;
+    long storyId, memoryId;
     Memory memory;
     int year,flag;
     String storyName,tag;
@@ -50,7 +50,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         storyName= intent.getStringExtra("storyName");
         year= intent.getIntExtra("year",year);
         flag = intent.getIntExtra("flag",flag);
-        rv = findViewById(R.id.recycler);
+        rv = findViewById(R.id.recycler_mem);
         story_name = findViewById(R.id.storyname);
         story_name.setText(storyName);
         MemoryAService = WebFactory.getService();
@@ -77,7 +77,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
+                    adapter = new MemoryAdapter(getApplicationContext(), memories);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     adapter.notifyDataSetChanged();
@@ -112,7 +112,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         }
 
         // search button
-        ImageButton btn = (ImageButton) findViewById(R.id.searchview);
+        ImageButton btn = findViewById(R.id.searchview);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

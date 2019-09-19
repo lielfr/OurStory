@@ -49,6 +49,7 @@ import org.tsofen.ourstory.web.WebFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -57,12 +58,11 @@ import java.util.List;
 import java.util.TimeZone;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
+    int AUTOCOMPLETE_REQUEST_CODE = 1;
+
 
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
@@ -87,7 +87,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_EDIT = "CEMemoryEdit";
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
-    public static final String KEY_USER = "CEMemoryUser";
+    //    public static final String KEY_USER = "CEMemoryUser";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
@@ -140,14 +140,12 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 View yearSpinnerV1 = memoryDatePicker.findViewById(yearSpinnerI1);
 
                 if(checked1) {
-                    if (yearSpinnerV1 != null){
+                    if (yearSpinnerV1 != null) {
                         yearSpinnerV1.setVisibility(View.GONE);
                     }
-
-                    else{
-                        if (yearSpinnerV1 != null){
-                            yearSpinnerV1.setVisibility(View.VISIBLE);
-                        }
+                } else {
+                    if (yearSpinnerV1 != null) {
+                        yearSpinnerV1.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -210,27 +208,25 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         memoryDatePicker = findViewById(R.id.memoryDatePicker);
         memoryDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
-        memoryDatePicker.init(year1, month1, day1, new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker memoryDatePicker, int year, int month, int day) {
-
-                DateOfMem();
-
-            }
-        });
+        memoryDatePicker.init(year1, month1, day1, (memoryDatePicker, year, month, day) -> DateOfMem());
 
 
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
 //            user = (User) intent.getSerializableExtra(KEY_USER);
-            SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+            SharedPreferences preferences = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
             Gson gson = new Gson();
             String userStr = preferences.getString("myUser", "ERR");
-            if (userStr != "ERR")
+            Log.d("MOO", "got User: " + userStr);
+            if (userStr != "ERR") {
                 user = gson.fromJson(userStr, User.class);
+                memory.setUser(user);
+            }
         } else {
             create = false;
+            tagAdapter.tags.clear();
+            tagAdapter.notifyDataSetChanged();
             pageTitle.setText("Edit Memory");
             user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
@@ -238,9 +234,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (memory.getMemoryDate() != null) {
                 MemDate = memory.getMemoryDate().getTime();
                 memoryDatePicker.updateDate(memory.getMemoryDate().get(Calendar.YEAR),
-                        memory.getMemoryDate().get(Calendar.MONTH) + 1,
+                        memory.getMemoryDate().get(Calendar.MONTH),
                         memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
-                Log.d("MOO", "Got it!");
             }
 
             if (memory.getFeeling() != null)
@@ -326,6 +321,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         MemDate=cal.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         showMemDate.setText(dateFormat.format(MemDate));
+        error3.setVisibility(View.GONE);
     }
 
     @Override
@@ -353,8 +349,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     this.svbtn.setEnabled(true);
                     saveMemory(v);
                 } else {
-
-                    displayToast("Error , Please try filling out the fields again");
+                    TextView addPicTV = findViewById(R.id.AddPicTV_cememory);
+                    addPicTV.setTextColor(getResources().getColor(R.color.colorError));
+                    TextView addVidTV = findViewById(R.id.AddVidTV_cememory);
+                    addVidTV.setTextColor(getResources().getColor(R.color.colorError));
+                    TextView addDesc = findViewById(R.id.AddDescriptionTV_cememory);
+                    addDesc.setTextColor(getResources().getColor(R.color.colorError));
+                   // displayToast("Error , Please try filling out the fields again");
                 }
                 break;
             case R.id.Cancelbtn_cememory:
@@ -404,7 +405,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
      * alert.show();
      **/
     public boolean CheckValidation(View v) {        //(Memory m) {
-        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
+        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) &&
+                (videoAdapter.data.isEmpty())) {
             MemError.setText("Enter at Least one of The above!");
             MemError.setVisibility(View.VISIBLE);
             ourScroller.fullScroll(ScrollView.FOCUS_UP);// .fullScroll(ScrollView.FOCUS_UP);
@@ -415,6 +417,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             //imageLiner.setBackground(gradientDrawable);
             // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
             return false;
+        }
+        if((!checked1 && checked2 && !checked3) || (checked1 && checked2 && !checked3)){
+            return false;
+        }
+        if (editTextLocation.toString()!=null)
+        {
+
         }
         /**displayToast("You should either enter an image or a video or description for your memory!");
          return false;

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,11 +28,13 @@ public class ForgotPassword extends AppCompatActivity {
     public EditText EditText2;
     public TextView TextViewInvs1;
     public TextView TextViewInvs2;
-    public  TextView ErrorText;
+    public TextView ErrorText;
+    public TextView passErrorText;
     public View holderpass;
     public Button save;
     public User currUser;
-    boolean flag=true;
+
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -44,11 +47,14 @@ public class ForgotPassword extends AppCompatActivity {
         TextViewInvs2 = findViewById(R.id.textView2);
         TextViewInvs1 = findViewById(R.id.textView1);
         ErrorText=findViewById(R.id.EmailError);
+        passErrorText=findViewById(R.id.passwordError);
         holderpass=findViewById(R.id.holder3);
         save=findViewById(R.id.savechange);
+        EditText2 = findViewById(R.id.NewPass);
     }
     public void getPass(View view)
     {
+
         emailString = EditText1.getText().toString();
         if(emailString.length()==0)
         {
@@ -60,6 +66,12 @@ public class ForgotPassword extends AppCompatActivity {
             findUser.GetUserByEmail(emailString).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
+
+                    ErrorText.setVisibility(View.INVISIBLE);
+                    TextViewInvs2.setVisibility(View.VISIBLE);
+                    holderpass.setVisibility(View.VISIBLE);
+                    save.setVisibility(View.VISIBLE);
+                    passErrorText.setVisibility(View.INVISIBLE);
                     OurStoryService forgetPass = WebFactory.getService();
                     forgetPass.resetPassword(emailString).enqueue(new Callback<Object>() {
                         @Override
@@ -79,26 +91,46 @@ public class ForgotPassword extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
+                    ErrorText.setVisibility(View.VISIBLE);
+                    TextViewInvs2.setVisibility(View.INVISIBLE);
+                    holderpass.setVisibility(View.INVISIBLE);
+                    save.setVisibility(View.INVISIBLE);
+                    passErrorText.setVisibility(View.INVISIBLE);
                     ErrorText.setText("Enter a valid email!");
-                    flag=false;
 
                 }
             });
 
 
         }
-        if(flag==true){
-        TextViewInvs2.setVisibility(View.VISIBLE);
-        holderpass.setVisibility(View.VISIBLE);
-        save.setVisibility(View.VISIBLE);}
+
 
     }
     public void gotoLogIn(View view)
     {
-        EditText2 = findViewById(R.id.NewPass);
+
         newPass = EditText2.getText().toString();
-        Intent intent=new Intent(this,LogIn.class);
-        startActivity(intent);
+        OurStoryService ss = WebFactory.getService();
+        ss.login(emailString,newPass).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+            @Override
+            public void onResponse(Call<org.tsofen.ourstory.model.api.User> call,
+                                   Response<org.tsofen.ourstory.model.api.User> response) {
+                currUser = response.body();
+
+                    Toast.makeText(ForgotPassword.this,"Your password has changed successfully",Toast.LENGTH_LONG).show();
+                  Intent newIn=new Intent(ForgotPassword.this,LogIn.class);
+                  passErrorText.setVisibility(View.INVISIBLE);
+                  startActivity(newIn);
+
+
+            }//end of onResponse method
+            @Override
+            public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
+                passErrorText.setVisibility(View.VISIBLE);
+                passErrorText.setText("The password you've entered is incorrect");
+            }// end of onFailure method
+        }   );// end of enque
+
     }
 
     public void closeActivity( View view)

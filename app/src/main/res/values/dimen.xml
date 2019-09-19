@@ -5,4 +5,5 @@
     <dimen name="app_bar_height">96dp</dimen>
     <dimen name="errorSize">15dp</dimen>
     <dimen name="textSize">5dp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
 </resources>

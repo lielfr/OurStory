@@ -89,6 +89,10 @@ public class User implements Serializable
         this.profilePicture = profilePicture;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -103,10 +107,6 @@ public class User implements Serializable
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFullName(){
-        return firstName + " " + lastName;
     }
 
     public String getFirstName() {
