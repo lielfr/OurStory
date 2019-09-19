@@ -36,6 +36,8 @@ import com.google.gson.Gson;
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.StoryTeam.CreateStory;
+import org.tsofen.ourstory.UserModel.AppHomePage;
+import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.Feeling;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Picture;
@@ -134,6 +136,25 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         AddPicTxV = findViewById(R.id.AddPicTV_cememory);
         error3 = findViewById(R.id.error3);
 
+        if(userStr.equals("ERR")){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You are not registered.")
+                    .setCancelable(false)
+                    .setPositiveButton("login", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent i = new Intent(getApplicationContext(), LogIn.class);
+                            startActivity(i);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
         yearChckBx1=findViewById(R.id.yearChckBx1);
         yearChckBx1.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -219,7 +240,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             memory = new Memory();
 //            user = (User) intent.getSerializableExtra(KEY_USER);
 
-            Log.d("MOO", "got User: " + userStr);
+            //Log.d("MOO", "got User: " + userStr);
             if (userStr != "ERR") {
                 user = gson.fromJson(userStr, User.class);
                 memory.setUser(user);
