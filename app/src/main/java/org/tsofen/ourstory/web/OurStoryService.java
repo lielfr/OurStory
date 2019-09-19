@@ -29,8 +29,8 @@ import retrofit2.http.Query;
 public interface OurStoryService {
     @FormUrlEncoded
     @Headers("Content-Type: application/json")
-    @POST("api/comments")
-    Call<Comment> newComment(@Body Comment comment);
+    @POST("comments/create/{id}")
+    Call<Comment> newComment(@Path("id") long id,@Body Comment comment);
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
