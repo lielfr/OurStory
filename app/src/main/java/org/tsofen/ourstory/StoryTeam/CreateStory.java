@@ -112,11 +112,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!Character.isUpperCase(editable.charAt(0))) {
-                    char c = Character.toUpperCase(editable.charAt(0));
-                    String str = editable.replace(0, 1, c + "").toString();
+                if(editable.length()>0&&editable!=null){
+                    if (!Character.isUpperCase(editable.charAt(0))) {
+                        char c = Character.toUpperCase(editable.charAt(0));
+                        String str = editable.replace(0, 1, c + "").toString();
 
-                    firstName.setText(str);
+                        firstName.setText(str);
+                    }
                 }
             }
         });
@@ -135,11 +137,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!Character.isUpperCase(editable.charAt(0))) {
-                    char c = Character.toUpperCase(editable.charAt(0));
-                    String str = editable.replace(0, 1, c + "").toString();
+                if(editable.length()>0&&editable!=null){
+                    if (!Character.isUpperCase(editable.charAt(0))) {
+                        char c = Character.toUpperCase(editable.charAt(0));
+                        String str = editable.replace(0, 1, c + "").toString();
 
-                    lastName.setText(str);
+                        lastName.setText(str);
+                    }
                 }
             }
         });
@@ -698,3 +702,4 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         finish();
     }
 }
+
