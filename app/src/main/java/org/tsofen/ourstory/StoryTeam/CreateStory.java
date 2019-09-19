@@ -339,7 +339,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                 }
             });
             // Create and show the AlertDialog.
-            myAlertBuilder.show();
+            myAlertBuilder.show() ;
         }
     }
 
