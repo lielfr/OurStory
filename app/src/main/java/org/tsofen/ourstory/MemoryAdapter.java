@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,17 +64,18 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
         User user = memory.getUser();
-        if (user != null && memory.getUser().getProfilePicture() != null) {
-            Uri uri = Uri.parse(memory.getUser().getProfilePicture());
-            RequestOptions options = new RequestOptions()
-                    .override(300, 300)
-                    .centerCrop()
-                    .placeholder(R.drawable.nopicyet)
-                    .error(R.drawable.nopicyet);
-            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
+        if (user != null) {
+            if (memory.getUser().getProfilePicture() != null) {
+                Uri uri = Uri.parse(memory.getUser().getProfilePicture());
+                RequestOptions options = new RequestOptions()
+                        .override(300, 300)
+                        .centerCrop()
+                        .placeholder(R.drawable.nopicyet)
+                        .error(R.drawable.nopicyet);
+                Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
+            } else
+                holder.pic.setImageResource(R.drawable.defaultprofilepicture);
             holder.name.setText(memory.getUser().getFullName());
-        } else {
-            holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +110,15 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
      }
      if(memory.getFeeling()!=null)
      {
-         holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
+//         holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
          holder.feeling.setText("#"+memory.getFeeling());
      }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
-            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH)+1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-           holder.mem_date.setWidth(calculateWidth(memDate));
+            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + ", " + (memory.getMemoryDate().get(Calendar.YEAR));
+//           holder.mem_date.setWidth(calculateWidth(memDate));
             holder.mem_date.setText(memDate);
+            Log.d("MOO", "MemDate: " + memDate);
         } else
             holder.mem_date.setVisibility(View.INVISIBLE);
         if (memory.getLikes() != null) {
