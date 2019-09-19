@@ -144,7 +144,7 @@ public class SearchStory extends AppCompatActivity {
         if(CurrentFragment == null) {
             //CurrentFragment = adapter.getItem(0);
         }else{
-            Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
         }
         searchresult = findViewById(R.id.searchresult);
         searchresult.addTextChangedListener(new TextWatcher() {
@@ -178,14 +178,14 @@ public class SearchStory extends AppCompatActivity {
                 } else {
                     item = adapterView.getItemAtPosition(i).toString();
                     cat.setText(item);
-                    Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
                     //here you want to add the parameters thar you need to send to the fragment in order to ake search by date
                     EditText editText = findViewById(R.id.searchresult);
 
                     TextView D1 = findViewById(R.id.Day);
                     String D2 = D1.getText().toString();
                     D = Integer.parseInt(D2);
-                    Toast.makeText(getApplicationContext(), "the value is " + D, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "the value is " + D, Toast.LENGTH_SHORT).show();
 
                     TextView M1 = findViewById(R.id.Month);
                     String M2 = M1.getText().toString();

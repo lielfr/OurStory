@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Our Story</string>
     <string name="save">SAVE</string>
-    <string name="todo">TODO</string>
     <string name="tags">Tags</string>
     <string name="write_your_memory">Write Your Memory</string>
     <string name="add_pictures">Add Pictures</string>
@@ -12,12 +11,6 @@
     <string name="month">mm</string>
     <string name="year">yyyy</string>
     <string name="day">dd</string>
-    <string name="alert_message">Please Fill in</string>
-    <string name="alert_title">Alert</string>
-
-    <string name="dayTxt">day</string>
-    <string name="monthTxt">month</string>
-    <string name="yearTxt">year</string>
 
     <string name="showMore">" show more"</string>
 
@@ -40,51 +33,27 @@
 
     <string name="Login">Login</string>
     <string name="infinity">infinity</string>
-    <string name="Email">Email</string>
     <string name="Email1">Email...</string>
     <string name="Email2">Email</string>
     <string name="Password">Password</string>
     <string name="password">Password...</string>
 
-    <string name="continue2">CONTINUE</string>
-    <string name="continue1">CONTINUE</string>
     <string name="RememberMe">Remember me</string>
     <string name="Register_now">Register now</string>
-    <string name="registernow">Register now</string>
     <string name="regist">goRegist</string>
     <string name="LogIN">goLogin</string>
-    <string name="ForgetPass">Forget password?</string>
     <string name="forget">Forgot password?</string>
-    <string name="or2">or</string>
     <string name="facLogin">facLogin</string>
     <string name="googleLogin">googleLogin</string>
     <string name="OR">or</string>
-    <string name="logiN">regesteredGoLogin</string>
-    <string name="Registration">goRegister</string>
-    <string name="ChangePassword">Change Password</string>
-    <string name="ForgetPassword">Forget Password?</string>
-    <string name="forgetPassword">Forgot Password</string>
-    <string name="Enter">Enter new password:</string>
-    <string name="confirm">Confirm Password:</string>
 
     <string name="sendPass">Send password</string>
     <string name="getPass">getPass</string>
-    <string name="saveAndLogin">saveAndLogin</string>
     <string name="changePassword">goChangePassword</string>
-    <string name="MyProfile">My Profile</string>
-    <string name="First">First Name:</string>
-    <string name="Last">Last Name:</string>
-    <string name="gender">Gender</string>
     <string name="DateOfBirth">Date Of Birth</string>
-    <string name="State">State:</string>
-    <string name="City">City:</string>
-    <string name="Gender">Gender:</string>
-    <string name="close">closeActivity</string>
-    <string name="Create">Create a new acount</string>
     <string name="FIRSTNAME">First Name</string>
     <string name="LastName">Last Name</string>
     <string name="Fname">First Name...</string>
-    <string name="repass">Re-Password</string>
     <string name="repas">Re-Password...</string>
     <string name="FNAME">First Name*</string>
     <string name="email">Email*</string>
@@ -95,66 +64,15 @@
     <string name="st">State</string>
     <string name="City1">City</string>
     <string name="ct">City...</string>
-    <string name="ProfilePicture">ProfilePicture</string>
     <string name="proPic">Profile Picture</string>
-    <string name="Date">DateOfBirth</string>
-    <string name="DOB">Date Of Birth...</string>
-    <string name="select">Select Date</string>
-    <string name="upload">Upload</string>
 
     <string name="gender1">Gender</string>
     <string name="Gender2">Gender...</string>
-    <string name="choseGe">Choose Gender...</string>
-    <string name="myprofile">My Profile</string>
 
 
-    <string name="title_activity_view_story">ViewStory</string>
-    <string name="view_story_title">View Story</string>
     <string name="CreateNewAcount">Create a new account</string>
     <string name="deselect_tag">Deselect Tag</string>
     <string name="shared_pref_key">OurStorySharedPref</string>
-
-    <string-array name="names">
-        <item>Mance Raider</item>
-        <item>Robb Stark</item>
-        <item>Jon Snow</item>
-        <item>Robert Baratheon</item>
-        <item>Stannis Baratheon</item>
-        <item>Balon Greyjoy</item>
-        <item>Joffrey Baratheon</item>
-        <item>Tommen Baratheon</item>
-        <item>Night King</item>
-        <item>Aerys II Targaryen</item>
-        <item>Jaime Lannister</item>
-    </string-array>
-
-    <string-array name="titles">
-        <item>King Beyong The Wall</item>
-        <item>The King In The North</item>
-        <item>The King In The North</item>
-        <item>King Of Westeros</item>
-        <item>King Of Westeros</item>
-        <item>King Of Iron Islands</item>
-        <item>King Of Westeros</item>
-        <item>King Of Westeros</item>
-        <item>Night King</item>
-        <item>The Mad King</item>
-        <item>The Kingslayer</item>
-    </string-array>
-
-    <string-array name="dates">
-        <item>season2-season3</item>
-        <item>season1-season3</item>
-        <item>season1-season8</item>
-        <item>season1</item>
-        <item>season2-season6</item>
-        <item>season3-season5</item>
-        <item>season1-season5</item>
-        <item>season1-season7</item>
-        <item>season4-season8</item>
-        <item>season0</item>
-        <item>season1-season8</item>
-    </string-array>
 
 
 </resources>

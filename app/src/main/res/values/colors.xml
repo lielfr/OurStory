@@ -14,7 +14,6 @@
     <color name="white">#FFFFFF</color>
     <color name="colorName">#52A6C2</color>
     <color name="background">#34495E</color>
-    <color name="colorTags">#3c1C2733</color>
     <color name="colorError">#E47169</color>
     <color name="colorPrimaryDarkTagAlpha">#ED2C3E50</color>
     <color name="colorAccentTagSeparator">#A1E47169</color>

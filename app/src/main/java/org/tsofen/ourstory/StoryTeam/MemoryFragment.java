@@ -46,7 +46,7 @@ public class MemoryFragment extends Fragment {
             mRecyclerView.getAdapter().notifyItemInserted(MemoryListSize);
             mRecyclerView.smoothScrollToPosition(MemoryListSize);
         }else {
-            Toast.makeText(getContext(), "the adapter is null", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "the adapter is null", Toast.LENGTH_SHORT).show();
         }
     }
 

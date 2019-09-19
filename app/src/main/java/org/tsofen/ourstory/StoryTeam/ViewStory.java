@@ -125,7 +125,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                 } else {
 
                     String personName = story_full.getStory().getNameOfPerson();
-                    Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
 
                     TextView textView1 = (findViewById(R.id.textView));
                     textView1.setText(personName);
