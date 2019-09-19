@@ -88,7 +88,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
                     R.layout.tags_dropdown_item, suggestions);
             editText.setAdapter(adapter);
-            editText.showDropDown();
+//            editText.showDropDown();
         } else {
             String text = tags.get(position).getLabel();
             editText.setText(text);
