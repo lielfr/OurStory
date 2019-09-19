@@ -120,7 +120,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                     intent.putExtra("storyName", storyName);
                     intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
                     Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-                    context.startActivity(intent);
+                   context.startActivity(intent);
                 }
 
             });
@@ -156,7 +156,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                     intent.putExtra("storyName", storyName);
                     intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
                     Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
-                    context.startActivity(intent);
+                   context.startActivity(intent);
 
                 }
 
@@ -173,7 +173,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                     intent.putExtra("storyName", storyName);
                     intent.putExtra("year", mCurrent.getYear());
                     Toast.makeText(view.getContext(), mCurrent.getYear().toString(), Toast.LENGTH_SHORT).show();
-                    context.startActivity(intent);
+                   context.startActivity(intent);
 
                 }
 

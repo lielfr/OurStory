@@ -46,7 +46,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     public void onBindViewHolder(@NonNull StoryViewHolder holder, int position) {
         ListOfStory mCurrent = mStoryList.get(position);
         holder.firstName.setText(mCurrent.getNameOfPerson());
-        holder.dates.setText("From "+mCurrent.getDateOfBirth().substring(0,9)+" To "+ mCurrent.getDateOfDeath().substring(0,9));
+        holder.dates.setText("From "+mCurrent.getDateOfBirth().substring(0,10)+" To "+ mCurrent.getDateOfDeath().substring(0,10));
         Object p = mCurrent.getPicture();
         if (p == null) return;
         String SP = p.toString();
