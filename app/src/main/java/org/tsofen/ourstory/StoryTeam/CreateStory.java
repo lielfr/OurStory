@@ -33,6 +33,7 @@ import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.UserModel.LogIn;
+import org.tsofen.ourstory.UserModel.RegistrationPage1;
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
@@ -311,7 +312,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
             AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(CreateStory.this);
             // Set the dialog title and message
             myAlertBuilder.setTitle("Alert");
-            myAlertBuilder.setMessage("You need to Log In first in order to create a new story.");
+            myAlertBuilder.setMessage("You need to Log In / Register first in order to create a new story.");
             // Add the dialog log in button
             myAlertBuilder.setPositiveButton("Log In", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
@@ -319,6 +320,15 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     Intent i = new Intent(CreateStory.this, LogIn.class);
                     //startActivity(i);
                     i.putExtra("logtocreate", "logToCreate");
+                    startActivityForResult(i,1);
+                }
+            });
+            myAlertBuilder.setNegativeButton("Register", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked Log In button.
+                    Intent i = new Intent(CreateStory.this, RegistrationPage1.class);
+                    //startActivity(i);
+                    i.putExtra("registertocreate", "registerToCreate");
                     startActivityForResult(i,1);
                 }
             });
