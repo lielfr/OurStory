@@ -58,9 +58,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -324,6 +321,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         MemDate=cal.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         showMemDate.setText(dateFormat.format(MemDate));
+        error3.setVisibility(View.GONE);
     }
 
     @Override
@@ -351,8 +349,13 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     this.svbtn.setEnabled(true);
                     saveMemory(v);
                 } else {
-
-                    displayToast("Error , Please try filling out the fields again");
+                    TextView addPicTV = findViewById(R.id.AddPicTV_cememory);
+                    addPicTV.setTextColor(getResources().getColor(R.color.colorError));
+                    TextView addVidTV = findViewById(R.id.AddVidTV_cememory);
+                    addVidTV.setTextColor(getResources().getColor(R.color.colorError));
+                    TextView addDesc = findViewById(R.id.AddDescriptionTV_cememory);
+                    addDesc.setTextColor(getResources().getColor(R.color.colorError));
+                   // displayToast("Error , Please try filling out the fields again");
                 }
                 break;
             case R.id.Cancelbtn_cememory:
@@ -402,7 +405,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
      * alert.show();
      **/
     public boolean CheckValidation(View v) {        //(Memory m) {
-        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
+        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) &&
+                (videoAdapter.data.isEmpty())) {
             MemError.setText("Enter at Least one of The above!");
             MemError.setVisibility(View.VISIBLE);
             ourScroller.fullScroll(ScrollView.FOCUS_UP);// .fullScroll(ScrollView.FOCUS_UP);
@@ -412,6 +416,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             //Drawable d = getResources().getDrawable(R.drawable.error_image_background);
             //imageLiner.setBackground(gradientDrawable);
             // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+            return false;
+        }
+        if((!checked1 && checked2 && !checked3) || (checked1 && checked2 && !checked3)){
             return false;
         }
         if (editTextLocation.toString()!=null)

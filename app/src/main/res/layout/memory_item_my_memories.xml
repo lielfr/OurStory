@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -87,20 +86,21 @@
             app:layout_constraintVertical_bias="0.065"
             app:srcCompat="@drawable/alex" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_memoriesRv"
-            android:layout_width="0dp"
-            android:layout_height="201dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+        <TextView
+            android:id="@+id/likesNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="15"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/commentbtn2"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descr"
-            app:layout_constraintVertical_bias="0.035" />
+            app:layout_constraintStart_toStartOf="@+id/likebtn" />
 
         <TextView
             android:id="@+id/memory_date"
@@ -174,22 +174,6 @@
             app:srcCompat="@drawable/comment" />
 
         <TextView
-            android:id="@+id/likesNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="15"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/commentbtn2"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/likebtn" />
-
-        <TextView
             android:id="@+id/commentNum"
             android:layout_width="22dp"
             android:layout_height="17dp"
@@ -203,6 +187,21 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/likesNum" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_memoriesRv"
+            android:layout_width="0dp"
+            android:layout_height="201dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descr"
+            app:layout_constraintVertical_bias="0.035" />
 
         <ImageButton
             android:id="@+id/editbtn"
