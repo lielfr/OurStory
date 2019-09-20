@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.MemoryAdapter;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.SearchMemoryAdapter;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
@@ -30,7 +31,7 @@ import static org.tsofen.ourstory.StoryTeam.StoryFragment.inflatedView;
 public class MemoryFragment extends Fragment {
     public static ArrayList<Memory> memories = new ArrayList<>();
     public static RecyclerView mRecyclerView;
-    public static MemoryAdapter mAdapter;
+    public static SearchMemoryAdapter mAdapter;
     OurStoryService wb;
     static View inflatedView;
     Context ctx;
@@ -61,7 +62,7 @@ public class MemoryFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
+        mAdapter = new SearchMemoryAdapter(inflatedView.getContext(), memories);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -81,7 +82,7 @@ public class MemoryFragment extends Fragment {
                     Log.d("fragment", "number of memories "+memories.size()+" ");
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mRecyclerView.setAdapter(mAdapter);
-                    mAdapter = new MemoryAdapter(inflatedView.getContext(), memories);
+                    mAdapter = new SearchMemoryAdapter(inflatedView.getContext(), memories);
                     mAdapter.notifyDataSetChanged();
                 }}
             @Override

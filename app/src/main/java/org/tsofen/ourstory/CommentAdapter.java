@@ -65,7 +65,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             public void onResponse(Call<Owner> call, Response<Owner> response) {
                 user = response.body();
                 if(user.getLastName()!=null && user.getFirstName()!=null){
-                holder.name.setText(user.getFirstName() + " " + user.getLastName());}
+                    holder.name.setText(user.getFirstName() + " " + user.getLastName());}
                 if(user.getProfilePicture()!=null)
                 {holder.profile.setImageURI((Uri) user.getProfilePicture());}
 
@@ -79,7 +79,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
 
         if(comment.getText()!=null){
-        holder.comment.setText(comment.getText());}
+            holder.comment.setText(comment.getText());}
 
     }
 

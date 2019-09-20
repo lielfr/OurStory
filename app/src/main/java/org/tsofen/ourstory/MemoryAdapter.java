@@ -36,7 +36,6 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public final ArrayList<Memory> mMemories;
-    Memory memoryA;
     Context ctx;
     LayoutInflater mInflater;
     User user;
