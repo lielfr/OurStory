@@ -63,8 +63,8 @@ public class MyMemories extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Gson gson = new Gson();
         pr = getContext().getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
-        String userJsonString = pr.getString(AppHomePage.USER, "");
-        if (userJsonString != "") {
+        String userJsonString = pr.getString(AppHomePage.USER, "ERROR");
+        if (!userJsonString.equals("ERROR")) {
             User userObj = gson.fromJson(userJsonString, User.class);
             user_id = userObj.getUserId();
             rv = view.findViewById(R.id.recycler);
