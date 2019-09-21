@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.api.ListOfStory;
 
 import java.util.List;
@@ -26,15 +25,13 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     private final List<ListOfStory> mStoryList;
     private LayoutInflater mInflater;
     public Context context ;
-    Uri uri ;
-    StoryFragment fragment;
+    Uri uri;
 
-    public StoryAdapter(Context context, List<ListOfStory> storyList, StoryFragment fragment) {
+    public StoryAdapter(Context context, List<ListOfStory> storyList) {
         mInflater = LayoutInflater.from(context);
         //Log.i("story ",storyList.get(0).getNameOfPerson());
         this.mStoryList = storyList;
         this.context = context ;
-        this.fragment = fragment;
     }
 
     @NonNull
@@ -49,7 +46,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     public void onBindViewHolder(@NonNull StoryViewHolder holder, int position) {
         ListOfStory mCurrent = mStoryList.get(position);
         holder.firstName.setText(mCurrent.getNameOfPerson());
-        holder.dates.setText("From "+mCurrent.getDateOfBirth().substring(0,9)+" To "+ mCurrent.getDateOfDeath().substring(0,9));
+        holder.dates.setText("From " + mCurrent.getDateOfBirth().substring(0, 10) + " To " + mCurrent.getDateOfDeath().substring(0, 10));
         Object p = mCurrent.getPicture();
         if (p == null) return;
         String SP = p.toString();
@@ -94,10 +91,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
             mAdapter.notifyDataSetChanged();
             Intent showStory = new Intent(view.getContext(), ViewStory.class);
             if (showStory!=null) {
-                showStory.putExtra("id",element.getStoryId().toString());
+                showStory.putExtra("id", element.getStoryId().toString());
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
-                if (fragment.parent != null)
-                    showStory.putExtra("user", fragment.parent.user);
                 context.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
             }else{
                 Toast.makeText(context, "Warning intent is null ", Toast.LENGTH_SHORT).show();

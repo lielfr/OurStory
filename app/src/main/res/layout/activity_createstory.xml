@@ -68,6 +68,7 @@
 
 
     <ScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +104,9 @@
                     android:background="@drawable/edittext_legend_continuous"
                     android:fontFamily="@font/quicksand"
                     android:hint="@string/first_name"
-                    android:inputType="text|textCapSentences|textPersonName"
+
+                    android:capitalize="words"
+                    android:inputType="text|textPersonName|textCapWords|textCapSentences"
                     android:maxLines="1"
                     android:paddingLeft="5dp"
                     android:textColorHint="@color/colorGrayHint"
@@ -154,7 +157,8 @@
                     android:background="@drawable/edittext_legend_continuous"
                     android:fontFamily="@font/quicksand"
                     android:hint="@string/last_name"
-                    android:inputType="text|textCapSentences|textPersonName"
+                    android:capitalize="words"
+                    android:inputType="text|textPersonName|textCapWords"
                     android:maxLines="1"
                     android:paddingLeft="5dp"
                     android:textColorHint="@color/colorGrayHint"

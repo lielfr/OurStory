@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     tools:context=".CommentActivity">
-    ​
+
     <ImageButton
         android:id="@+id/back_from_comments"
         android:layout_width="60dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back" />
-    ​
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context="org.tsofen.ourstory.AddComment">
-        ​
+
         <Button
             android:id="@+id/sendBtn2"
             android:layout_width="63dp"
@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="@+id/AddComment"
             app:layout_constraintTop_toTopOf="@+id/AddComment"
             app:layout_constraintVertical_bias="0.428" />
-        ​
+
         <EditText
             android:id="@+id/AddComment"
             android:layout_width="321dp"
@@ -59,9 +59,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        ​
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-    ​
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_comment"
         android:layout_width="0dp"
@@ -71,5 +71,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-    ​
+
 </androidx.constraintlayout.widget.ConstraintLayout>

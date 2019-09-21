@@ -22,7 +22,7 @@
         android:onClick="@string/LogIN"
         android:text="@string/Login"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.885"
@@ -381,6 +381,7 @@
         app:layout_constraintTop_toTopOf="@+id/main_container2">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -396,7 +397,6 @@
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@color/transparent"
             android:textCursorDrawable="@null"
-            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

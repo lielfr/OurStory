@@ -41,7 +41,7 @@ public class AddComment extends Fragment {
         comment.setText(txtview.getText().toString());
         comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        service.newComment(comment);
+        /* service.newComment(comment);*/
 
     }
 }

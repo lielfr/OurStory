@@ -69,16 +69,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="205dp"
-            android:layout_height="72dp"
-            android:background="#34495E"
-            app:layout_constraintBottom_toTopOf="@+id/sp"
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="27dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/calendar_icon"
+            android:onClick="ShowDatePicker"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/storyback" />
+            app:layout_constraintHorizontal_bias="0.851"
+            app:layout_constraintStart_toEndOf="@+id/show"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView12"
@@ -106,17 +109,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@color/transparent" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="27dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="108dp"
-            android:background="@drawable/calendar_icon"
-            android:onClick="ShowDatePicker"
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="205dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="16dp"
+            android:background="#34495E"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.851"
-            app:layout_constraintStart_toEndOf="@+id/show"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/storyback" />
 
         <TextView
             android:id="@+id/Day"
@@ -182,11 +185,11 @@
 
         <TextView
             android:id="@+id/ShowDate"
-            android:layout_width="55dp"
+            android:layout_width="57dp"
             android:layout_height="23dp"
             android:layout_marginTop="108dp"
-            android:layout_marginEnd="52dp"
-            android:layout_marginRight="52dp"
+            android:layout_marginEnd="58dp"
+            android:layout_marginRight="58dp"
             android:text="--/--/--"
             android:textColor="#FFFFFF"
             android:textColorLink="#3F51B5"
