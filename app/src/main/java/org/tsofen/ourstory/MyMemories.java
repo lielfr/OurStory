@@ -1,5 +1,6 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +24,9 @@ import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.UserModel.LogIn;
+import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;

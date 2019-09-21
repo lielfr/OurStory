@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.api.ListOfStory;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     private final List<ListOfStory> mStoryList;
     private LayoutInflater mInflater;
     public Context context ;
-    Uri uri;
+    Uri uri ;
 
     public StoryAdapter(Context context, List<ListOfStory> storyList) {
         mInflater = LayoutInflater.from(context);
@@ -91,7 +92,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
             mAdapter.notifyDataSetChanged();
             Intent showStory = new Intent(view.getContext(), ViewStory.class);
             if (showStory!=null) {
-                showStory.putExtra("id", element.getStoryId().toString());
+                showStory.putExtra("id",element.getStoryId().toString());
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
                 context.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
             }else{

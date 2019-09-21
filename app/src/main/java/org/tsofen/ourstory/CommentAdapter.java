@@ -1,6 +1,8 @@
 package org.tsofen.ourstory;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.UserModel.User;
 import org.tsofen.ourstory.model.Comment;
+import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
 
@@ -49,40 +59,33 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
         Comment comment = comments.get(position);
-//        user_comment = WebFactory.getService();
-//        user_comment.GetUserById(comment.getUser().getUserId()).enqueue(new Callback<Owner>() {
-//            @Override
-//            public void onResponse(Call<Owner> call, Response<Owner> response) {
-//                user = response.body();
-//                if(user.getLastName()!=null && user.getFirstName()!=null){
-//                holder.name.setText(user.getFirstName() + " " + user.getLastName());}
-//                if(user.getProfilePicture()!=null)
-//                {holder.profile.setImageURI((Uri) user.getProfilePicture());}
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Owner> call, Throwable t) {
-//                Log.d("Error", t.toString());
-//            }
-//        });
+        user_comment = WebFactory.getService();
+        user_comment.GetUserById(comment.getUser().getUserId()).enqueue(new Callback<Owner>() {
+            @Override
+            public void onResponse(Call<Owner> call, Response<Owner> response) {
+                user = response.body();
+                if(user.getLastName()!=null && user.getFirstName()!=null){
+                    holder.name.setText(user.getFirstName() + " " + user.getLastName());}
+                if(user.getProfilePicture()!=null)
+                {holder.profile.setImageURI((Uri) user.getProfilePicture());}
+
+            }
+
+            @Override
+            public void onFailure(Call<Owner> call, Throwable t) {
+                Log.d("Error", t.toString());
+            }
+        });
 
 
         if(comment.getText()!=null){
-            holder.comment.setText(comment.getText());
-        }
-        if (comment.getUser().getFullName() != null) {
-            holder.name.setText((comment.getUser().getFullName()));
-        }
-        if (comment.getUser().getProfilePicture() != null) {
-            holder.profile.setImageResource(R.drawable.profilepic);
-        }
-////            holder.profile.setImageResource(R.drawable.defaultprofilepicture);
+            holder.comment.setText(comment.getText());}
+
     }
 
     @Override
     public int getItemCount() {
-        return comments.size();
+        return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

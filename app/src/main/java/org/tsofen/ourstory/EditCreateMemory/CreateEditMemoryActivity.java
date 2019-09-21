@@ -49,7 +49,6 @@ import org.tsofen.ourstory.web.WebFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -57,12 +56,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
 
-import io.reactivex.rxjava3.schedulers.Schedulers;
+//import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CreateEditMemoryActivity extends AppCompatActivity implements View.OnClickListener {
-    int AUTOCOMPLETE_REQUEST_CODE = 1;
-
 
     boolean dateFlag = false;
     AddMemoryImageAdapter imageAdapter;
@@ -87,7 +87,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     public static final String KEY_EDIT = "CEMemoryEdit";
     public static final String KEY_CREATE = "CEMemoryCreate";
     public static final String KEY_MEMID = "CEMemoryMemoryID";
-    //    public static final String KEY_USER = "CEMemoryUser";
+    public static final String KEY_USER = "CEMemoryUser";
     private Memory memory;
     private boolean create = true;
     private TextView MemError;
@@ -140,12 +140,14 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 View yearSpinnerV1 = memoryDatePicker.findViewById(yearSpinnerI1);
 
                 if(checked1) {
-                    if (yearSpinnerV1 != null) {
+                    if (yearSpinnerV1 != null){
                         yearSpinnerV1.setVisibility(View.GONE);
                     }
-                } else {
-                    if (yearSpinnerV1 != null) {
-                        yearSpinnerV1.setVisibility(View.VISIBLE);
+
+                    else{
+                        if (yearSpinnerV1 != null){
+                            yearSpinnerV1.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -208,25 +210,27 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
         memoryDatePicker = findViewById(R.id.memoryDatePicker);
         memoryDatePicker.setMaxDate(new Date().getTime()); // set today to be the maximum date
-        memoryDatePicker.init(year1, month1, day1, (memoryDatePicker, year, month, day) -> DateOfMem());
+        memoryDatePicker.init(year1, month1, day1, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker memoryDatePicker, int year, int month, int day) {
+
+                DateOfMem();
+
+            }
+        });
 
 
         if (memory == null) {
             pageTitle.setText("Add Memory");
             memory = new Memory();
 //            user = (User) intent.getSerializableExtra(KEY_USER);
-            SharedPreferences preferences = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
+            SharedPreferences preferences = getPreferences(MODE_PRIVATE);
             Gson gson = new Gson();
             String userStr = preferences.getString("myUser", "ERR");
-            Log.d("MOO", "got User: " + userStr);
-            if (userStr != "ERR") {
+            if (userStr != "ERR")
                 user = gson.fromJson(userStr, User.class);
-                memory.setUser(user);
-            }
         } else {
             create = false;
-            tagAdapter.tags.clear();
-            tagAdapter.notifyDataSetChanged();
             pageTitle.setText("Edit Memory");
             user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
@@ -234,8 +238,9 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (memory.getMemoryDate() != null) {
                 MemDate = memory.getMemoryDate().getTime();
                 memoryDatePicker.updateDate(memory.getMemoryDate().get(Calendar.YEAR),
-                        memory.getMemoryDate().get(Calendar.MONTH),
+                        memory.getMemoryDate().get(Calendar.MONTH) + 1,
                         memory.getMemoryDate().get(Calendar.DAY_OF_MONTH));
+                Log.d("MOO", "Got it!");
             }
 
             if (memory.getFeeling() != null)
@@ -321,7 +326,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         MemDate=cal.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         showMemDate.setText(dateFormat.format(MemDate));
-        error3.setVisibility(View.GONE);
     }
 
     @Override
@@ -342,22 +346,17 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                 selectEmoji(SelectedEmoji);
                 break;
 
-            case R.id.Savebtn_cememory:
-                if (CheckValidation(v)) {
-                    // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
-                    //  imageLiner.removeAllViews();
-                    this.svbtn.setEnabled(true);
-                    saveMemory(v);
-                } else {
-                    TextView addPicTV = findViewById(R.id.AddPicTV_cememory);
-                    addPicTV.setTextColor(getResources().getColor(R.color.colorError));
-                    TextView addVidTV = findViewById(R.id.AddVidTV_cememory);
-                    addVidTV.setTextColor(getResources().getColor(R.color.colorError));
-                    TextView addDesc = findViewById(R.id.AddDescriptionTV_cememory);
-                    addDesc.setTextColor(getResources().getColor(R.color.colorError));
-                   // displayToast("Error , Please try filling out the fields again");
-                }
-                break;
+//            case R.id.Savebtn_cememory:
+//                if (CheckValidation(v)) {
+//                    // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
+//                    //  imageLiner.removeAllViews();
+//                    this.svbtn.setEnabled(true);
+//                    saveMemory(v);
+//                } else {
+//
+//                    displayToast("Error , Please try filling out the fields again");
+//                }
+//                break;
             case R.id.Cancelbtn_cememory:
                 ShowAlertDialog(this, "", "Are you sure you want to cancel ?");
                 // finish();
@@ -405,8 +404,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
      * alert.show();
      **/
     public boolean CheckValidation(View v) {        //(Memory m) {
-        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) &&
-                (videoAdapter.data.isEmpty())) {
+        if ((editTextDescription.getText().toString().equals("")) && (imageAdapter.data.isEmpty()) && (videoAdapter.data.isEmpty())) {
             MemError.setText("Enter at Least one of The above!");
             MemError.setVisibility(View.VISIBLE);
             ourScroller.fullScroll(ScrollView.FOCUS_UP);// .fullScroll(ScrollView.FOCUS_UP);
@@ -417,13 +415,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             //imageLiner.setBackground(gradientDrawable);
             // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
             return false;
-        }
-        if((!checked1 && checked2 && !checked3) || (checked1 && checked2 && !checked3)){
-            return false;
-        }
-        if (editTextLocation.toString()!=null)
-        {
-
         }
         /**displayToast("You should either enter an image or a video or description for your memory!");
          return false;
@@ -537,134 +528,134 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     }
 
 
-    public void saveMemory(View view) {
-        locationText = findViewById(R.id.memLocation_cememory);
-        memory.setLocation(locationText.getText().toString());
-
-        memory.setDescription(editTextDescription.getText().toString());
-        memory.setFeeling(SelectedEmoji);
-        memory.setMemoryDate(MemDate);
-        displayToast("Data saved.");
-        OurStoryService service = WebFactory.getService();
-        Intent intent = new Intent();
-
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Uploading media...");
-        progressDialog.show();
-
-        double[] progress = new double
-                [imageAdapter.data.size() + videoAdapter.data.size()];
-
-        for (int i = 0; i < progress.length; i++) {
-            progress[i] = 0;
-        }
-
-        FirebaseImageWrapper wrapper = new FirebaseImageWrapper("memory_media");
-        List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
-
-        for (int i = 0; i < imageAdapter.data.size(); i++) {
-            Uploadable u = imageAdapter.data.get(i);
-            if (u.isUploaded()) continue;
-            String uri = u.getUrl();
-            int finalI = i;
-            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
-                Uploadable uploadable = imageAdapter.data.get(finalI);
-                uploadable.setUploaded(true);
-                uploadable.setUrl(taskSnapshot.getDownloadUrl().toString());
-                progress[finalI] = 100;
-            }).addOnProgressListener(taskSnapshot -> {
-                // We need to set the progress relative to both the current file and the other files
-                double currentFileProgress = taskSnapshot.getBytesTransferred() /
-                        taskSnapshot.getTotalByteCount();
-                progress[finalI] = currentFileProgress * 100;
-                double progressAvg = 0;
-                for (double p : progress)
-                    progressAvg += p;
-                progressAvg /= progress.length;
-                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
-            }));
-        }
-
-        // TODO: Maybe we can avoid this code duplication
-        for (int i = imageAdapter.data.size(); i < progress.length; i++) {
-            Uploadable u = videoAdapter.data.get(i - imageAdapter.data.size());
-            if (u.isUploaded()) continue;
-            String uri = u.getUrl();
-            int finalI = i;
-            int offset = imageAdapter.data.size();
-            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
-                u.setUrl(taskSnapshot.getDownloadUrl().toString());
-                u.setUploaded(true);
-//                videoAdapter.data.set(finalI, uploadable);
-                progress[finalI] = 100;
-            }).addOnProgressListener(taskSnapshot -> {
-                double currentFileProgress = taskSnapshot.getBytesTransferred() /
-                        taskSnapshot.getTotalByteCount();
-                progress[finalI] = currentFileProgress * 100;
-                double progressAvg = 0;
-                for (double p : progress)
-                    progressAvg += p;
-                progressAvg /= progress.length;
-                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
-            }));
-        }
-
-
-        Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
-            progressDialog.dismiss();
-            ArrayList<String> pictures = new ArrayList<>();
-            ArrayList<String> videos = new ArrayList<>();
-            for (Uploadable u : imageAdapter.data) {
-                pictures.add(u.getUrl());
-            }
-            for (Uploadable u : videoAdapter.data) {
-                videos.add(u.getUrl());
-            }
-
-            ArrayList<String> tags = new ArrayList<>();
-            for (Tag t : tagAdapter.tags) {
-                tags.add(t.getLabel());
-            }
-            if (create) {
-                service.CreateMemory(memory)
-                        .subscribeOn(Schedulers.newThread())
-                        .flatMap(mem -> {
-                            if (mem == null) return null;
-                            long memId = mem.getId();
-                            HashMap<String, List<String>> hm = new HashMap<>();
-                            hm.put("pictures", pictures);
-                            hm.put("videos", videos);
-                            hm.put("tags", tags);
-
-                            return service.SetMediaToMemory(memId, hm);
-                        })
-                        .subscribe(finalResult -> {
-                            intent.putExtra(KEY_MEMID, finalResult.getId());
-                            setResult(RESULT_OK, intent);
-                            finish();
-                        });
-
-            } else {
-                memory.getPictures().clear();
-                memory.getVideos().clear();
-                memory.getTags().clear();
-                service.EditMemory(memory.getId(), memory)
-                        .subscribeOn(Schedulers.newThread())
-                        .flatMap(mem -> {
-                            if (mem == null) return null;
-                            long memId = mem.getId();
-                            HashMap<String, List<String>> hm = new HashMap<>();
-                            hm.put("pictures", pictures);
-                            hm.put("videos", videos);
-                            hm.put("tags", tags);
-
-                            return service.SetMediaToMemory(memId, hm);
-                        })
-                        .subscribe(finalResult -> {
-                            intent.putExtra(KEY_MEMID, finalResult.getId());
-                            setResult(RESULT_OK, intent);
-                            finish();
-                        });
+//    public void saveMemory(View view) {
+//        locationText = findViewById(R.id.memLocation_cememory);
+//        memory.setLocation(locationText.getText().toString());
+//
+//        memory.setDescription(editTextDescription.getText().toString());
+//        memory.setFeeling(SelectedEmoji);
+//        memory.setMemoryDate(MemDate);
+//        displayToast("Data saved.");
+//        OurStoryService service = WebFactory.getService();
+//        Intent intent = new Intent();
+//
+//        ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setTitle("Uploading media...");
+//        progressDialog.show();
+//
+//        double[] progress = new double
+//                [imageAdapter.data.size() + videoAdapter.data.size()];
+//
+//        for (int i = 0; i < progress.length; i++) {
+//            progress[i] = 0;
+//        }
+//
+//        FirebaseImageWrapper wrapper = new FirebaseImageWrapper("memory_media");
+//        List<StorageTask<UploadTask.TaskSnapshot>> tasks = new LinkedList<>();
+//
+//        for (int i = 0; i < imageAdapter.data.size(); i++) {
+//            Uploadable u = imageAdapter.data.get(i);
+//            if (u.isUploaded()) continue;
+//            String uri = u.getUrl();
+//            int finalI = i;
+//            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
+//                Uploadable uploadable = imageAdapter.data.get(finalI);
+//                uploadable.setUploaded(true);
+//                uploadable.setUrl(taskSnapshot.getDownloadUrl().toString());
+//                progress[finalI] = 100;
+//            }).addOnProgressListener(taskSnapshot -> {
+//                // We need to set the progress relative to both the current file and the other files
+//                double currentFileProgress = taskSnapshot.getBytesTransferred() /
+//                        taskSnapshot.getTotalByteCount();
+//                progress[finalI] = currentFileProgress * 100;
+//                double progressAvg = 0;
+//                for (double p : progress)
+//                    progressAvg += p;
+//                progressAvg /= progress.length;
+//                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
+//            }));
+//        }
+//
+//        // TODO: Maybe we can avoid this code duplication
+//        for (int i = imageAdapter.data.size(); i < progress.length; i++) {
+//            Uploadable u = videoAdapter.data.get(i - imageAdapter.data.size());
+//            if (u.isUploaded()) continue;
+//            String uri = u.getUrl();
+//            int finalI = i;
+//            int offset = imageAdapter.data.size();
+//            tasks.add(wrapper.uploadImg(Uri.parse(uri)).addOnSuccessListener(taskSnapshot -> {
+//                u.setUrl(taskSnapshot.getDownloadUrl().toString());
+//                u.setUploaded(true);
+////                videoAdapter.data.set(finalI, uploadable);
+//                progress[finalI] = 100;
+//            }).addOnProgressListener(taskSnapshot -> {
+//                double currentFileProgress = taskSnapshot.getBytesTransferred() /
+//                        taskSnapshot.getTotalByteCount();
+//                progress[finalI] = currentFileProgress * 100;
+//                double progressAvg = 0;
+//                for (double p : progress)
+//                    progressAvg += p;
+//                progressAvg /= progress.length;
+//                progressDialog.setTitle("Uploading media: " + (int) Math.ceil(progressAvg) + "%");
+//            }));
+//        }
+//
+//
+//        Tasks.whenAll(tasks).addOnSuccessListener(aVoid -> {
+//            progressDialog.dismiss();
+//            ArrayList<String> pictures = new ArrayList<>();
+//            ArrayList<String> videos = new ArrayList<>();
+//            for (Uploadable u : imageAdapter.data) {
+//                pictures.add(u.getUrl());
+//            }
+//            for (Uploadable u : videoAdapter.data) {
+//                videos.add(u.getUrl());
+//            }
+//
+//            ArrayList<String> tags = new ArrayList<>();
+//            for (Tag t : tagAdapter.tags) {
+//                tags.add(t.getLabel());
+//            }
+//            if (create) {
+//                service.CreateMemory(memory)
+//                        .subscribeOn(Schedulers.newThread())
+//                        .flatMap(mem -> {
+//                            if (mem == null) return null;
+//                            long memId = mem.getId();
+//                            HashMap<String, List<String>> hm = new HashMap<>();
+//                            hm.put("pictures", pictures);
+//                            hm.put("videos", videos);
+//                            hm.put("tags", tags);
+//
+//                            return service.SetMediaToMemory(memId, hm);
+//                        })
+//                        .subscribe(finalResult -> {
+//                            intent.putExtra(KEY_MEMID, finalResult.getId());
+//                            setResult(RESULT_OK, intent);
+//                            finish();
+//                        });
+//
+//            } else {
+//                memory.getPictures().clear();
+//                memory.getVideos().clear();
+//                memory.getTags().clear();
+//                service.EditMemory(memory.getId(), memory)
+//                        .subscribeOn(Schedulers.newThread())
+//                        .flatMap(mem -> {
+//                            if (mem == null) return null;
+//                            long memId = mem.getId();
+//                            HashMap<String, List<String>> hm = new HashMap<>();
+//                            hm.put("pictures", pictures);
+//                            hm.put("videos", videos);
+//                            hm.put("tags", tags);
+//
+//                            return service.SetMediaToMemory(memId, hm);
+//                        })
+//                        .subscribe(finalResult -> {
+//                            intent.putExtra(KEY_MEMID, finalResult.getId());
+//                            setResult(RESULT_OK, intent);
+//                            finish();
+//                        });
 //                service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
 //                    @Override
 //                    public void onResponse(Call<Memory> call, Response<Memory> response) {
@@ -693,11 +684,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 //
 //                    }
 //                });
-            }
-        });
+ //           }
+ //       });
 
 
-    }
+  //  }
 
     public void selectEmoji(Feeling selected) {
         switch (selected) {

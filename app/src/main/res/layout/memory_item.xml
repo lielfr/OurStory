@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -51,7 +52,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descr"
-            app:layout_constraintVertical_bias="0.035" />
+            app:layout_constraintVertical_bias="0.035"
+            app:srcCompat="@drawable/pic" />
 
         <TextView
             android:id="@+id/feelingtxt"
@@ -192,8 +194,8 @@
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
             android:layout_width="380dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="224dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/edit_round3"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="center_vertical"
@@ -202,16 +204,15 @@
             android:textColor="@color/colorName"
             android:textSize="26sp"
             android:textStyle="bold"
-            app:colorClickableText="@color/colorGrayHint"
-            app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.258"
+            app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descr"
+            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
-            app:trimLength="17"
-            app:trimMode="trimModeLength" />
+            app:trimLength="40"
+            app:trimMode="trimModeLength"
+            app:colorClickableText="@color/colorGrayHint" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"

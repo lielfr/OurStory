@@ -65,12 +65,15 @@ org.tsofen.ourstory.model.api.User myUser;
         passwordString = currIntent.getStringExtra("password");
         stateString = currIntent.getStringExtra("state");
         cityString = currIntent.getStringExtra("city");
-        month = currIntent.getIntExtra("month", 0);
-        day = currIntent.getIntExtra("day", 0);
-        year = currIntent.getIntExtra("year", 0);
-        dateOfBirth = new Date(year, month, day);
+       month=currIntent.getIntExtra("month",0);
+       day=currIntent.getIntExtra("day",0);
+       year=currIntent.getIntExtra("year",0);
+       dateOfBirth=new Date(year,month,day);
         genderString = currIntent.getStringExtra("gender");
         profilePictureString = currIntent.getStringExtra("profilePicture");
+
+
+
 
 
     }
@@ -110,7 +113,7 @@ org.tsofen.ourstory.model.api.User myUser;
                             signInDone.putExtra("userId", userId);
                             signInDone.putExtra("user", myUser);
                             //signInDone.putExtra("index", index);
-                            mPrefs = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
+                            mPrefs = getPreferences(MODE_PRIVATE);
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
                             Gson gson = new Gson();
                             String json = gson.toJson(myUser);

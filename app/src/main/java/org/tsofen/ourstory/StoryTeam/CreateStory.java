@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.UploadTask;
@@ -24,6 +26,7 @@ import com.google.firebase.storage.UploadTask;
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
@@ -34,6 +37,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,8 +71,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     int birthDateFields = 3, deathDateFields = 3;
     Date today = new Date();
     OurStoryService Wepengine ;
-    Long userid;
-    Long Storyid;
+    Long userid ;
+    Long Storyid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,7 +230,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         Intent intent = getIntent();  //getting the user from the server
         if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
-            if (intent.getStringExtra("userId") != null) {
+            if(intent.getStringExtra("userId")!= null) {
                 userid = Long.parseLong(intent.getStringExtra("userId"));
                 Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
                     @Override
