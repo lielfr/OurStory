@@ -58,7 +58,7 @@ org.tsofen.ourstory.model.api.User myUser;
         setContentView(R.layout.activity_log_in);
         mPrefs = getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
-        keeplog = (CheckBox) findViewById(R.id.checkBoxRememberMe);
+        keeplog = findViewById(R.id.checkBoxRememberMe);
         email = findViewById(R.id.showEmail);
         password = findViewById(R.id.Password);
         passErr = findViewById(R.id.PassError);
@@ -117,12 +117,10 @@ org.tsofen.ourstory.model.api.User myUser;
                             //signInDone.putExtra("index", index);
                             Gson gson = new Gson();
                             String json = gson.toJson(myUser);
-                            if(keeplog.isChecked()==true)
-                            {prefsEditor.putString(AppHomePage.USER, json);
+                            prefsEditor.putString(AppHomePage.USER, json);
                             prefsEditor.commit();
-                            Log.d("what",mPrefs.getString(AppHomePage.USER,""));}
-                            else
-                            {
+                            if (keeplog.isChecked()) {
+                                Log.d("what",mPrefs.getString(AppHomePage.USER,""));} else {
 
                                 signInDone.putExtra("myUserJson", json);
                             }
