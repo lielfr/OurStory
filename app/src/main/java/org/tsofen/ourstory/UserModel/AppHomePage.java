@@ -99,18 +99,13 @@ public class AppHomePage extends AppCompatActivity {
                         }}
                     case R.id.nav_more:
                     {
-
-                        PopupMenu popup = new PopupMenu(AppHomePage.this, findViewById(R.id.nav_more));
-                        MenuInflater inflater = popup.getMenuInflater();
-                        popup.setOnMenuItemClickListener(AppHomePage.this::onMenuItemClick);
-                        inflater.inflate(R.menu.more_menu, popup.getMenu());
-                        popup.show();
-
-//                        prefsEditor.clear();
-//                        prefsEditor.commit();
-//
-//                        Intent login = new Intent(getApplicationContext(), AppHomePage.class);
-//                        startActivity(login);
+                        if (user1!=""||user2!=null) {
+                            PopupMenu popup = new PopupMenu(AppHomePage.this, findViewById(R.id.nav_more));
+                            MenuInflater inflater = popup.getMenuInflater();
+                            popup.setOnMenuItemClickListener(AppHomePage.this::onMenuItemClick);
+                            inflater.inflate(R.menu.more_menu, popup.getMenu());
+                            popup.show();
+                        }
 
                     }
                     default:
