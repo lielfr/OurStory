@@ -18,7 +18,4 @@
         android:id="@+id/nav_more"
         android:icon="@drawable/ic_nav_more"
         android:title="More" />
-    <item
-        android:id="@+id/logout"
-        android:title="Logout" />
 </menu>

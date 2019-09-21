@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -95,15 +97,20 @@ public class AppHomePage extends AppCompatActivity {
                             upText.setText("My Profile");
                             break;
                         }}
-                    case R.id.logout:
+                    case R.id.nav_more:
                     {
 
+                        PopupMenu popup = new PopupMenu(AppHomePage.this, findViewById(R.id.nav_more));
+                        MenuInflater inflater = popup.getMenuInflater();
+                        popup.setOnMenuItemClickListener(AppHomePage.this::onMenuItemClick);
+                        inflater.inflate(R.menu.more_menu, popup.getMenu());
+                        popup.show();
 
-                        prefsEditor.clear();
-                        prefsEditor.commit();
-
-                        Intent login = new Intent(getApplicationContext(), AppHomePage.class);
-                        startActivity(login);
+//                        prefsEditor.clear();
+//                        prefsEditor.commit();
+//
+//                        Intent login = new Intent(getApplicationContext(), AppHomePage.class);
+//                        startActivity(login);
 
                     }
                     default:
@@ -146,4 +153,17 @@ public class AppHomePage extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                prefsEditor.clear();
+                prefsEditor.commit();
+
+                Intent login = new Intent(getApplicationContext(), AppHomePage.class);
+                startActivity(login);
+                return true;
+
+            default:
+                return false;
+        }}
 }
