@@ -74,7 +74,7 @@
         android:layout_marginRight="8dp"
         android:buttonTint="@color/colorLogin"
         android:fontFamily="@font/quicksand_bold"
-        android:text="@string/RememberMe"
+        android:text="@string/keepme"
         android:textColor="@color/colorWhite"
         android:textColorHighlight="@color/colorRegister"
         android:textColorLink="@color/colorRegister"

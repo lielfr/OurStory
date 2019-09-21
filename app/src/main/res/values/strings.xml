@@ -113,47 +113,9 @@
     <string name="CreateNewAcount">Create a new account</string>
     <string name="deselect_tag">Deselect Tag</string>
 
-    <string-array name="names">
-        <item>Mance Raider</item>
-        <item>Robb Stark</item>
-        <item>Jon Snow</item>
-        <item>Robert Baratheon</item>
-        <item>Stannis Baratheon</item>
-        <item>Balon Greyjoy</item>
-        <item>Joffrey Baratheon</item>
-        <item>Tommen Baratheon</item>
-        <item>Night King</item>
-        <item>Aerys II Targaryen</item>
-        <item>Jaime Lannister</item>
-    </string-array>
+    <string name="shared_pref_key">OurStorySharedPref</string>
+    <string name="keepme">Keep me logged in</string>
 
-    <string-array name="titles">
-        <item>King Beyong The Wall</item>
-        <item>The King In The North</item>
-        <item>The King In The North</item>
-        <item>King Of Westeros</item>
-        <item>King Of Westeros</item>
-        <item>King Of Iron Islands</item>
-        <item>King Of Westeros</item>
-        <item>King Of Westeros</item>
-        <item>Night King</item>
-        <item>The Mad King</item>
-        <item>The Kingslayer</item>
-    </string-array>
-
-    <string-array name="dates">
-        <item>season2-season3</item>
-        <item>season1-season3</item>
-        <item>season1-season8</item>
-        <item>season1</item>
-        <item>season2-season6</item>
-        <item>season3-season5</item>
-        <item>season1-season5</item>
-        <item>season1-season7</item>
-        <item>season4-season8</item>
-        <item>season0</item>
-        <item>season1-season8</item>
-    </string-array>
 
 
 </resources>

@@ -1,14 +1,18 @@
 package org.tsofen.ourstory.UserModel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -22,11 +26,15 @@ import org.tsofen.ourstory.TeamsHomePage.TeamsHomePg;
 public class AppHomePage extends AppCompatActivity {
 
     public static final String KEY_SELECTED = "OurStorySelected";
+    public static final String USER = "user";
     public int selected;
     FragmentManager fragmentManager;
     Fragment currentFragment;
     BottomNavigationView nav;
-
+    SharedPreferences sh;
+    public String user1;
+    public String user2="";
+    SharedPreferences.Editor prefsEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +43,11 @@ public class AppHomePage extends AppCompatActivity {
         selected = R.id.nav_home;
         final TextView upText = findViewById(R.id.upText);
         // Fixing the icon tinting of the bottom navigation bar.
+
+        sh=getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
+        prefsEditor = sh.edit();
+        user1=sh.getString(AppHomePage.USER,"");
+        user2=currIntent.getStringExtra("myUserJson");
 
         nav = findViewById(R.id.nav_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -56,23 +69,50 @@ public class AppHomePage extends AppCompatActivity {
                 Fragment targetFragment;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        if (UserStatusCheck.getUserStatus().equals("visitor")) {
-                            targetFragment = new HomeFragment();
-                            upText.setText("Home");
-                        } else {
+
+//                        if (user1==""&&user2==null) {
+//                            Log.d("users",user1+"!"+user2);
+//                            targetFragment = new HomeFragment();
+//                            upText.setText("Home");
+//                        }
+                        if (user1!=""||user2!=null) {
+                            Log.d("users",user1+"?"+user2);
                             targetFragment = new MyMemories();
                             upText.setText("My Memories");
                         }
+                        else
+                        {
+                            Log.d("users",user1+"@"+user2);
+                            targetFragment = new HomeFragment();
+                            upText.setText("Home");
+                        }
                         break;
-                    case R.id.nav_profile:
-                        if (UserStatusCheck.getUserStatus() == "visitor") {
+                    case R.id.nav_profile:{
+                        if (user1==""&&user2==null) {
                             Intent login = new Intent(getApplicationContext(), LogIn.class);
                             startActivity(login);
+                            return true;
                         } else {
                             targetFragment = new UserProfile();
                             upText.setText("My Profile");
                             break;
-                        }
+                        }}
+                    case R.id.nav_more:
+                    {
+
+                        PopupMenu popup = new PopupMenu(AppHomePage.this, findViewById(R.id.nav_more));
+                        MenuInflater inflater = popup.getMenuInflater();
+                        popup.setOnMenuItemClickListener(AppHomePage.this::onMenuItemClick);
+                        inflater.inflate(R.menu.more_menu, popup.getMenu());
+                        popup.show();
+
+//                        prefsEditor.clear();
+//                        prefsEditor.commit();
+//
+//                        Intent login = new Intent(getApplicationContext(), AppHomePage.class);
+//                        startActivity(login);
+
+                    }
                     default:
                         return true;
                 }
@@ -112,4 +152,18 @@ public class AppHomePage extends AppCompatActivity {
         Intent intent = new Intent(AppHomePage.this , TeamsHomePg.class);
         startActivity(intent);
     }
+
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                prefsEditor.clear();
+                prefsEditor.commit();
+
+                Intent login = new Intent(getApplicationContext(), AppHomePage.class);
+                startActivity(login);
+                return true;
+
+            default:
+                return false;
+        }}
 }
