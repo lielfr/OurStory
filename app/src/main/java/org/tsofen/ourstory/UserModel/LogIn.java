@@ -120,8 +120,11 @@ org.tsofen.ourstory.model.api.User myUser;
                             prefsEditor.putString(AppHomePage.USER, json);
                             prefsEditor.commit();
                             if (keeplog.isChecked()) {
-                                Log.d("what",mPrefs.getString(AppHomePage.USER,""));} else {
-
+                                Log.d("what",mPrefs.getString(AppHomePage.USER,""));}
+                            else
+                                {
+                                    prefsEditor.clear();
+                                    prefsEditor.commit();
                                 signInDone.putExtra("myUserJson", json);
                             }
                             UserStatusCheck.setUserStatus("not a visitor");
