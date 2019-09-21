@@ -231,5 +231,3 @@ public class RegistrationPage1 extends AppCompatActivity {
 
 
 }
-
-

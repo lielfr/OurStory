@@ -70,12 +70,15 @@ org.tsofen.ourstory.model.api.User myUser;
         passwordString = currIntent.getStringExtra("password");
         stateString = currIntent.getStringExtra("state");
         cityString = currIntent.getStringExtra("city");
-        month = currIntent.getIntExtra("month", 0);
-        day = currIntent.getIntExtra("day", 0);
-        year = currIntent.getIntExtra("year", 0);
-        dateOfBirth = new Date(year, month, day);
+       month=currIntent.getIntExtra("month",0);
+       day=currIntent.getIntExtra("day",0);
+       year=currIntent.getIntExtra("year",0);
+       dateOfBirth=new Date(year,month,day);
         genderString = currIntent.getStringExtra("gender");
         profilePictureString = currIntent.getStringExtra("profilePicture");
+
+
+
 
 
     }
