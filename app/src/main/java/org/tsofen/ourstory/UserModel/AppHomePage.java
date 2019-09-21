@@ -34,6 +34,7 @@ public class AppHomePage extends AppCompatActivity {
     SharedPreferences sh;
     public String user1;
     public String user2=null;
+    User user;
     SharedPreferences.Editor prefsEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

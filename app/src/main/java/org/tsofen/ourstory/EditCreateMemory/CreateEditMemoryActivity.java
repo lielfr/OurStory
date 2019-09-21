@@ -744,4 +744,3 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 }
-
