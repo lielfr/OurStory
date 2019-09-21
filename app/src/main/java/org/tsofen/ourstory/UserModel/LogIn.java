@@ -127,6 +127,7 @@ org.tsofen.ourstory.model.api.User myUser;
                                 signInDone.putExtra("myUserJson", json);
                             }
                             UserStatusCheck.setUserStatus("not a visitor");
+                            passErr.setVisibility(View.INVISIBLE);
                             startActivity(signInDone);
 
                         }
@@ -134,6 +135,7 @@ org.tsofen.ourstory.model.api.User myUser;
                 }//end of onResponse method
                 @Override
                 public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
+                    passErr.setVisibility(View.VISIBLE);
                     passErr.setText("The email or password you entered is incorrect!");
                 }// end of onFailure method
             }   );// end of enque

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,10 @@ import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CommentActivity extends Activity {
 
@@ -61,8 +66,19 @@ public class CommentActivity extends Activity {
         comment.setText(txtview.getText().toString());
         comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        service.newComment(comment);
+        service.newComment(memoryA.getId(),comment).enqueue(new Callback<Comment>() {
+            @Override
+            public void onResponse(Call<Comment> call, Response<Comment> response) {
+                Toast.makeText(getApplicationContext(),"added",Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onFailure(Call<Comment> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_LONG).show();
+
+            }
+        });
+        adapter.notifyDataSetChanged();
 
     }
 }
