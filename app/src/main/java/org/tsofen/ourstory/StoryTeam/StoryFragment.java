@@ -41,8 +41,10 @@ public class StoryFragment extends Fragment {
     int op = 0;
     OurStoryService wb;
     static View inflatedView;
+    SearchStory parent;
 
-    public StoryFragment() {
+    public StoryFragment(SearchStory parent) {
+        this.parent = parent;
     }
 
     @Override
@@ -76,7 +78,7 @@ public class StoryFragment extends Fragment {
                     if (arr == null) {
                         Log.d("rrr", "arr is null");
                     } else {
-                        mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                        mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                         mRecyclerView.setAdapter(mAdapter);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                         mAdapter.notifyDataSetChanged();
@@ -110,7 +112,7 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
@@ -143,7 +145,7 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
@@ -178,7 +180,7 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
@@ -211,7 +213,7 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();

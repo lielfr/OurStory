@@ -51,6 +51,8 @@ public class MyMemories extends Fragment {
     MyMemoriesAdapter adapter;
     TextView storyName;
     SharedPreferences pr;
+    boolean sendUserIntent = false;
+
     public MyMemories() {
         super();
     }
@@ -67,10 +69,13 @@ public class MyMemories extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Gson gson = new Gson();
-        pr = getContext().getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
+        pr = getContext().getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
         String userJsonString = pr.getString(AppHomePage.USER, "ERROR");
-        if (!userJsonString.equals("ERROR")) {
-            User userObj = gson.fromJson(userJsonString, User.class);
+        sendUserIntent = userJsonString.equals("ERROR");
+        if (!userJsonString.equals("ERROR") || parent.user2 != null && parent.user2.length() > 0) {
+            User userObj = userJsonString.equals("ERROR") ?
+                    gson.fromJson(parent.user2, User.class) :
+                    gson.fromJson(userJsonString, User.class);
             user_id = userObj.getUserId();
             rv = view.findViewById(R.id.recycler);
             MemoryAService = WebFactory.getService();
@@ -105,6 +110,8 @@ public class MyMemories extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent myIntent = new Intent(getActivity(), SearchStory.class);
+                    if (sendUserIntent)
+                        myIntent.putExtra("user", userObj);
                     startActivity(myIntent);
                 }
             });

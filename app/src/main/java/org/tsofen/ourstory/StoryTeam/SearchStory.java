@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -43,7 +44,7 @@ public class SearchStory extends AppCompatActivity {
     int M ;
     int Y ;
     int Taplayout;
-
+    User user = null;
 
 
 
@@ -75,13 +76,14 @@ public class SearchStory extends AppCompatActivity {
         // Each page is represented by its own fragment.
         final ViewPager viewPager = findViewById(R.id.pager);
         Intent intent = getIntent() ;
+        user = (User) intent.getSerializableExtra("user");
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager==null) {
             Log.i("fragment", "you have found it the fragment manager is null........................... ");
         }
 
 
-        final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount());
+        final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount(), this);
         viewPager.setAdapter(adapter);
         memoryFragment = (MemoryFragment) adapter.getItem(1);
         CurrentFragment = (StoryFragment) adapter.getItem(0);

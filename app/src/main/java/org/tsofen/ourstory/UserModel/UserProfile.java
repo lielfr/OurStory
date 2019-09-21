@@ -76,7 +76,7 @@ public class UserProfile extends Fragment {
         ac=getActivity();
         in=ac.getIntent();
         Gson gson = new Gson();
-        SharedPreferences pr = getContext().getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
+        SharedPreferences pr = getContext().getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
         if(pr.getString(AppHomePage.USER,"")!="")
         {
             user=pr.getString(AppHomePage.USER,"");

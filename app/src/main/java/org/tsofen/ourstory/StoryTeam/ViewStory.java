@@ -372,11 +372,13 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     public void AddMemory(View view) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story_full.getStory());
+        intent.putExtra("user", getIntent().getSerializableExtra("user"));
         startActivity(intent);
     }
     public void AddMemoryLive(Story story) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
+        intent.putExtra("user", getIntent().getSerializableExtra("user"));
         startActivity(intent);
     }
 }

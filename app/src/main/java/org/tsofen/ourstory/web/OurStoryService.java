@@ -1,8 +1,6 @@
 package org.tsofen.ourstory.web;
 
 
-import android.database.Observable;
-
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
@@ -17,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 //import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

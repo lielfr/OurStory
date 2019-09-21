@@ -56,7 +56,7 @@ org.tsofen.ourstory.model.api.User myUser;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        mPrefs = getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
+        mPrefs = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
         keeplog = findViewById(R.id.checkBoxRememberMe);
         email = findViewById(R.id.showEmail);
