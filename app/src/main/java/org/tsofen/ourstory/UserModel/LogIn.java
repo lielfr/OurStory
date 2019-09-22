@@ -117,14 +117,14 @@ org.tsofen.ourstory.model.api.User myUser;
                             //signInDone.putExtra("index", index);
                             Gson gson = new Gson();
                             String json = gson.toJson(myUser);
-                            prefsEditor.putString(AppHomePage.USER, json);
-                            prefsEditor.commit();
+
                             if (keeplog.isChecked()) {
-                                Log.d("what",mPrefs.getString(AppHomePage.USER,""));}
+                                Log.d("what", mPrefs.getString(AppHomePage.USER, ""));
+                                prefsEditor.putString(AppHomePage.USER, json);
+                                prefsEditor.commit();
+                            }
                             else
                                 {
-                                    prefsEditor.clear();
-                                    prefsEditor.commit();
                                 signInDone.putExtra("myUserJson", json);
                             }
                             UserStatusCheck.setUserStatus("not a visitor");
