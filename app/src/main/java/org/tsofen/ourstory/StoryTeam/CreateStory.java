@@ -10,9 +10,7 @@ import android.os.Bundle;
 
 
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 
 import android.view.Gravity;
 import android.view.View;
@@ -39,7 +37,6 @@ import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.RegistrationPage1;
 
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
-import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;

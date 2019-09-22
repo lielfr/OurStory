@@ -6,7 +6,6 @@ import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.ListOfStory;
-import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 

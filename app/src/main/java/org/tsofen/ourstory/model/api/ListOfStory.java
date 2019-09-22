@@ -6,7 +6,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class ListOfStory implements Serializable
 {
-    public ListOfStory(Integer storyId, Owner owner, String nameOfPerson, String dateOfBirth, String dateOfDeath, Object picture) {
+    @SerializedName("owner")
+    @Expose
+    private User owner;
+
+    @SerializedName("story_id")
+    @Expose
+    private Integer storyId;
+
+    public ListOfStory(Integer storyId, User owner, String nameOfPerson, String dateOfBirth, String dateOfDeath, Object picture) {
         this.storyId = storyId;
         this.owner = owner;
         this.nameOfPerson = nameOfPerson;
@@ -14,13 +22,6 @@ public class ListOfStory implements Serializable
         this.dateOfDeath = dateOfDeath;
         this.picture = picture;
     }
-
-    @SerializedName("story_id")
-    @Expose
-    private Integer storyId;
-    @SerializedName("owner")
-    @Expose
-    private Owner owner;
     @SerializedName("name_of_person")
     @Expose
     private String nameOfPerson;
@@ -43,11 +44,11 @@ public class ListOfStory implements Serializable
         this.storyId = storyId;
     }
 
-    public Owner getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Owner owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 
