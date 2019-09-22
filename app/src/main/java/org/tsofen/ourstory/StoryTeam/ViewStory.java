@@ -205,12 +205,12 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
 
 
