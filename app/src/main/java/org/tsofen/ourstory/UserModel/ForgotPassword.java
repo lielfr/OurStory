@@ -47,7 +47,7 @@ public class ForgotPassword extends AppCompatActivity {
         TextViewInvs2 = findViewById(R.id.textView2);
         TextViewInvs1 = findViewById(R.id.textView1);
         ErrorText=findViewById(R.id.EmailError);
-        passErrorText=findViewById(R.id.passwordError);
+        passErrorText = findViewById(R.id.passwordError);
         holderpass=findViewById(R.id.holder3);
         save=findViewById(R.id.savechange);
         EditText2 = findViewById(R.id.NewPass);
@@ -111,25 +111,26 @@ public class ForgotPassword extends AppCompatActivity {
 
         newPass = EditText2.getText().toString();
         OurStoryService ss = WebFactory.getService();
-        ss.login(emailString,newPass).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+        ss.login(emailString, newPass).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
             @Override
             public void onResponse(Call<org.tsofen.ourstory.model.api.User> call,
                                    Response<org.tsofen.ourstory.model.api.User> response) {
                 currUser = response.body();
 
-                    Toast.makeText(ForgotPassword.this,"Your password has changed successfully",Toast.LENGTH_LONG).show();
-                  Intent newIn=new Intent(ForgotPassword.this,LogIn.class);
-                  passErrorText.setVisibility(View.INVISIBLE);
-                  startActivity(newIn);
+                Toast.makeText(ForgotPassword.this, "Your password has changed successfully", Toast.LENGTH_LONG).show();
+                Intent newIn = new Intent(ForgotPassword.this, LogIn.class);
+                passErrorText.setVisibility(View.INVISIBLE);
+                startActivity(newIn);
 
 
             }//end of onResponse method
+
             @Override
             public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
                 passErrorText.setVisibility(View.VISIBLE);
                 passErrorText.setText("The password you've entered is incorrect");
             }// end of onFailure method
-        }   );// end of enque
+        });// end of enque
 
     }
 

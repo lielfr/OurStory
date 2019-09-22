@@ -136,7 +136,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         AddPicTxV = findViewById(R.id.AddPicTV_cememory);
         error3 = findViewById(R.id.error3);
 
-        if(userStr.equals("ERR")){
+        if (userStr.equals("ERR") && intent.getSerializableExtra("user") == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("You are not registered.")
                     .setCancelable(false)
@@ -244,6 +244,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (userStr != "ERR") {
                 user = gson.fromJson(userStr, User.class);
                 memory.setUser(user);
+            } else {
+                user = (User) intent.getSerializableExtra("user");
             }
         } else {
             create = false;
@@ -377,7 +379,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                     addVidTV.setTextColor(getResources().getColor(R.color.colorError));
                     TextView addDesc = findViewById(R.id.AddDescriptionTV_cememory);
                     addDesc.setTextColor(getResources().getColor(R.color.colorError));
-                   // displayToast("Error , Please try filling out the fields again");
+                    // displayToast("Error , Please try filling out the fields again");
                 }
                 break;
             case R.id.Cancelbtn_cememory:
@@ -440,11 +442,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             // imageLiner.setBackground(getResources().getDrawable(R.drawable.error_image_background));
             return false;
         }
-        if((!checked1 && checked2 && !checked3) || (checked1 && checked2 && !checked3)){
+        if ((!checked1 && checked2 && !checked3) || (checked1 && checked2 && !checked3)) {
             return false;
         }
-        if (editTextLocation.toString()!=null)
-        {
+        if (editTextLocation.toString() != null) {
 
         }
         /**displayToast("You should either enter an image or a video or description for your memory!");
@@ -743,4 +744,3 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         }
     }
 }
-

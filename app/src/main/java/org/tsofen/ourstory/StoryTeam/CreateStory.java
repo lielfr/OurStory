@@ -330,7 +330,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     Intent i = new Intent(CreateStory.this, LogIn.class);
                     //startActivity(i);
                     i.putExtra("logtocreate", "logToCreate");
-                    startActivityForResult(i,1);
+                    startActivityForResult(i, 1);
                 }
             });
             myAlertBuilder.setNegativeButton("Register", new DialogInterface.OnClickListener() {
@@ -339,11 +339,11 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     Intent i = new Intent(CreateStory.this, RegistrationPage1.class);
                     //startActivity(i);
                     i.putExtra("registertocreate", "registerToCreate");
-                    startActivityForResult(i,1);
+                    startActivityForResult(i, 1);
                 }
             });
             // Create and show the AlertDialog.
-            myAlertBuilder.show() ;
+            myAlertBuilder.show();
         }
     }
 

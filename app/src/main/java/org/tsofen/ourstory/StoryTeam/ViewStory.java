@@ -79,8 +79,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     Date dob,dod;
 
     @Override
-    public void onRestart()
-    {
+    public void onRestart() {
         super.onRestart();
         finish();
         startActivity(getIntent());
@@ -222,7 +221,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(),story_full.getStory().getNameOfPerson(),story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
@@ -245,8 +244,9 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     }
                 }
             }
+
             @Override
-            public void onFailure (Call < FullViewStory > call, Throwable t){
+            public void onFailure(Call<FullViewStory> call, Throwable t) {
                 Log.d("Failure", t.toString());
 
             }
@@ -408,39 +408,41 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     public void AddMemory(View view) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story_full.getStory());
+        intent.putExtra("user", getIntent().getSerializableExtra("user"));
         startActivity(intent);
     }
 
 
     public void ShowMemoryByTag1(View view) {
-        Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
-        intent.putExtra("flag",1);
-        intent.putExtra("storyId",story_full.getStory().getStoryId());
-        intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
-        TextView textView=  findViewById(R.id.textView4);
-        intent.putExtra("tag",textView.getText().toString());
+        Intent intent = new Intent(this, MemoriesOfStoryActivity.class);
+        intent.putExtra("flag", 1);
+        intent.putExtra("storyId", story_full.getStory().getStoryId());
+        intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
+        TextView textView = findViewById(R.id.textView4);
+        intent.putExtra("tag", textView.getText().toString());
         startActivity(intent);
     }
+
     public void ShowMemoryByTag2(View view) {
-        Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
-        intent.putExtra("flag",1);
-        if (story_full.getStory()!=null) {
+        Intent intent = new Intent(this, MemoriesOfStoryActivity.class);
+        intent.putExtra("flag", 1);
+        if (story_full.getStory() != null) {
             intent.putExtra("storyId", story_full.getStory().getStoryId());
             intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
-        }
-        else
+        } else
             Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
-        TextView textView=  findViewById(R.id.textView5);
-        intent.putExtra("tag",textView.getText().toString());
+        TextView textView = findViewById(R.id.textView5);
+        intent.putExtra("tag", textView.getText().toString());
         startActivity(intent);
     }
+
     public void ShowMemoryByTag3(View view) {
-        Intent intent =new Intent(this, MemoriesOfStoryActivity.class);
-        intent.putExtra("flag",1);
-        intent.putExtra("storyId",story_full.getStory().getStoryId());
-        intent.putExtra("storyName",story_full.getStory().getNameOfPerson());
-        TextView textView=  findViewById(R.id.textView6);
-        intent.putExtra("tag",textView.getText().toString());
+        Intent intent = new Intent(this, MemoriesOfStoryActivity.class);
+        intent.putExtra("flag", 1);
+        intent.putExtra("storyId", story_full.getStory().getStoryId());
+        intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
+        TextView textView = findViewById(R.id.textView6);
+        intent.putExtra("tag", textView.getText().toString());
         startActivity(intent);
     }
 
@@ -450,6 +452,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     public void AddMemoryLive(Story story) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
+        intent.putExtra("user", getIntent().getSerializableExtra("user"));
         startActivity(intent);
     }
 

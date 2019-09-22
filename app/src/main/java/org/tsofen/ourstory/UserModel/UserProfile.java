@@ -1,5 +1,8 @@
 package org.tsofen.ourstory.UserModel;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +24,8 @@ import org.tsofen.ourstory.model.api.User;
 
 import java.util.Date;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class UserProfile extends Fragment {
 
@@ -36,9 +41,11 @@ public class UserProfile extends Fragment {
     TextView city;
     TextView email;
     Uri pictureUri;
-
+    Activity ac;
+    Intent in;
     User profileUser;
-
+    String is_checked;
+    String user="";
     public UserProfile() {
         super();
     }
@@ -66,9 +73,22 @@ public class UserProfile extends Fragment {
         pic = getView().findViewById(R.id.profilePictureImageView);
         email = getView().findViewById(R.id.showEmail);
 
+        ac=getActivity();
+        in=ac.getIntent();
         Gson gson = new Gson();
-        String userJsonString = LogIn.mPrefs.getString("myUser","");
-        User profileUser = gson.fromJson(userJsonString,User.class);
+        SharedPreferences pr = getContext().getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
+        if(pr.getString(AppHomePage.USER,"")!="")
+        {
+            user=pr.getString(AppHomePage.USER,"");
+        }
+        else {
+            user=in.getStringExtra("myUserJson");
+
+        }
+        //SharedPreferences pr=getContext().getSharedPreferences(AppHomePage.KEY_SELECTED,MODE_PRIVATE);
+        //String userJsonString = pr.getString(AppHomePage.USER,"");
+        if(user!=""){
+        User profileUser = gson.fromJson(user,User.class);
 
 
         if (profileUser.getFirstName() != null)
@@ -96,7 +116,7 @@ public class UserProfile extends Fragment {
 
 
         Glide.with(this).load(pictureUri).apply(options).into(pic);}
-    }
+    }}
 }
 
 
