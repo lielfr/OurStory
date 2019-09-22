@@ -1,3 +1,5 @@
+
+
 package org.tsofen.ourstory.StoryTeam;
 
 import android.app.Activity;
@@ -30,6 +32,10 @@ import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 import retrofit2.Call;
@@ -43,6 +49,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     Story target_story;
     Object imageView_profile;
     Tags tag;
+    String date;
     private final LinkedList<Story> mStoryList = new LinkedList<>();
 
     private RecyclerView mRecyclerView;
@@ -53,6 +60,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     //Intent intent = getIntent() ;
     long id;
     FullViewStory story_full;
+    Date dob,dod;
 
     @Override
     public void onRestart() {
@@ -117,7 +125,21 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     day = day.substring(0, 2);
 
                     date1 = day + "/" + month + "/" + year;
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+                    DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
 
+                    try {
+                        if(story_full.getStory().getDateOfBirth()!=null&&story_full.getStory().getDateOfDeath()!=null)
+                        { dob = df.parse(story_full.getStory().getDateOfBirth());
+
+                            dod = df.parse(story_full.getStory().getDateOfDeath());}
+                        date = df1.format(dob) + "-" + df1.format(dod);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+//
                     parts = date2.split("-");
                     year = parts[0];
                     month = parts[1];
@@ -125,9 +147,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     day = day.substring(0, 2);
 
                     date2 = day + "/" + month + "/" + year;
+//
 
-
-                    String date = date1 + "-" + date2;
                     TextView textView2 = (findViewById(R.id.textView2));
                     textView2.setText(date);
 

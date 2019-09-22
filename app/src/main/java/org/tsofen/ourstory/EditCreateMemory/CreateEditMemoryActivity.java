@@ -111,7 +111,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences preferences = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
         Gson gson = new Gson();
-        String userStr = preferences.getString("myUser", "ERR");
+        String userStr = preferences.getString(AppHomePage.USER, "ERR");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
 
