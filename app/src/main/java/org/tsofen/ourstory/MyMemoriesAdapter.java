@@ -217,18 +217,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         }
         else
             holder.feeling.setVisibility(View.INVISIBLE);
-       /* ArrayList<ImgItem> images=new ArrayList<>();
-        if(memory.getPictures()!=null) {
-            images.add((ImgItem) memory.getPictures());
-            ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
-            holder.imagesrv.setHasFixedSize(true);
-            holder.imagesrv.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
-            holder.imagesrv.setAdapter(imgAdapter);
-        }
-        else
-        {
-            holder.imagesrv.setVisibility(View.INVISIBLE);
-        }*/
         if (memory.getPictures() != null) {
             ArrayList<ImgItem> images = new ArrayList<>();
             ArrayList<Picture> pictures = new ArrayList<>();

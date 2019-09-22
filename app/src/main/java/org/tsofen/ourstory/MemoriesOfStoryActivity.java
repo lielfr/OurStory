@@ -101,23 +101,9 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 }
             });
         } else {
-            MemoryAService.GetMemoryById(memoryId).enqueue(new Callback<Memory>() {
-                @Override
-                public void onResponse(Call<Memory> call, Response<Memory> response) {
-                    memory = response.body();
-                    ArrayList<Memory> memoryOne = new ArrayList<>();
-                    memoryOne.add(memory);
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this, memoryOne);
-                    rv.setAdapter(adapter);
-                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onFailure(Call<Memory> call, Throwable t) {
-
-                }
-            });
+           Intent intent_mem = new Intent(getApplicationContext(), ViewMemory.class);
+            intent_mem.putExtra("id" , memoryId);
+            startActivity(intent_mem);
 
         }
 

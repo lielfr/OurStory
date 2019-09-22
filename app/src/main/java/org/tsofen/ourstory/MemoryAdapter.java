@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
@@ -138,19 +139,21 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         } else
             holder.tags.setVisibility(View.INVISIBLE);
 
-       /* ArrayList<ImgItem> images=new ArrayList<>();
-        if(memory.getPictures()!=null) {
-            images.add((ImgItem) memory.getPictures());
+        if (memory.getPictures() != null) {
+            ArrayList<ImgItem> images = new ArrayList<>();
+            ArrayList<Picture> pictures = new ArrayList<>();
+            pictures = memory.getPictures();
+            for (int i = 0; i < pictures.size(); i++) {
+                images.add(new ImgItem(" ", pictures.get(i).getLink()));
+            }
+            //images.add((ImgItem) memory.getPictures();
             ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
             holder.rvMemory.setHasFixedSize(true);
             holder.rvMemory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
             holder.rvMemory.setAdapter(imgAdapter);
-        }
-        else
-        {
-
+        } else {
             holder.rvMemory.setVisibility(View.INVISIBLE);
-        }*/
+        }
 
     }
 
