@@ -112,12 +112,24 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length()>0 && editable!=null){
-                    if (!Character.isUpperCase(editable.charAt(0))) {
-                        char c = Character.toUpperCase(editable.charAt(0));
-                        String str = editable.replace(0, 1, c + "").toString();
 
-                        firstName.setText(str);
+
+
+
+                if(editable.length()>0 && editable!=null){
+
+                    if (!editable.toString().matches("[a-zA-Z]+")) {
+                        error1.setText("Only Alphabetical characters allowed!");
+                        error1.setVisibility(View.VISIBLE);
+                    }else{
+                        if (!Character.isUpperCase(editable.charAt(0))) {
+                            char c = Character.toUpperCase(editable.charAt(0));
+                            String str = editable.replace(0, 1, c + "").toString();
+                            validateName(firstName,str,1);
+
+                            firstName.setText(str);
+                        }
+                        error1.setVisibility(View.GONE);
                     }
                 }
             }
@@ -137,12 +149,20 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length()>0&&editable!=null){
-                    if (!Character.isUpperCase(editable.charAt(0))) {
-                        char c = Character.toUpperCase(editable.charAt(0));
-                        String str = editable.replace(0, 1, c + "").toString();
 
-                        lastName.setText(str);
+                if(editable.length()>0 && editable!=null){
+
+                    if (!editable.toString().matches("[a-zA-Z]+")) {
+                        error2.setText("Only Alphabetical characters allowed!");
+                        error2.setVisibility(View.VISIBLE);
+                    }else{
+                        if (!Character.isUpperCase(editable.charAt(0))) {
+                            char c = Character.toUpperCase(editable.charAt(0));
+                            String str = editable.replace(0, 1, c + "").toString();
+                            validateName(lastName,str,1);
+                            lastName.setText(str);
+                        }
+                        error2.setVisibility(View.GONE);
                     }
                 }
             }
