@@ -128,6 +128,7 @@ org.tsofen.ourstory.model.api.User myUser;
                                 signInDone.putExtra("myUserJson", json);
                             }
                             UserStatusCheck.setUserStatus("not a visitor");
+                            AppHomePage.user2=json;
                             passErr.setVisibility(View.INVISIBLE);
                             startActivity(signInDone);
 

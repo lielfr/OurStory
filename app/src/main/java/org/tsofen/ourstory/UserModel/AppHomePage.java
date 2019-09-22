@@ -33,8 +33,7 @@ public class AppHomePage extends AppCompatActivity {
     BottomNavigationView nav;
     SharedPreferences sh;
     public String user1;
-    public String user2=null;
-    User user;
+    public static String user2=null;
     SharedPreferences.Editor prefsEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
