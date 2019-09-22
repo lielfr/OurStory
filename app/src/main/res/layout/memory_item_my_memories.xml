@@ -262,6 +262,7 @@
             android:textColor="@color/colorName"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

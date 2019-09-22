@@ -30,6 +30,8 @@ import org.tsofen.ourstory.model.api.User;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static org.tsofen.ourstory.R.color.background;
+
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
@@ -84,6 +86,11 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             else
                 holder.name.setVisibility(View.INVISIBLE);
         }
+        else
+        {
+            holder.name.setVisibility(View.INVISIBLE);
+            holder.pic.setImageResource(R.drawable.defaultprofilepicture);
+        }
         if(memory.getComments()!=null) {
             holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,7 +134,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             holder.mem_date.setText(memDate);
         } else
             holder.mem_date.setVisibility(View.INVISIBLE);
-        if (memory.getLikes() != null) {
+        if (memory.getLikes() != null && memory.getLikes().size()!=0) {
             holder.num_of_likes.setText(memory.getLikes().size() + "");
         } else {
             holder.num_of_likes.setVisibility(View.INVISIBLE);
@@ -139,12 +146,12 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         }
         if (memory.getTags() != null) {
             String s = "";
+            holder.tags.setVisibility(View.VISIBLE);
             for (Tag tag : memory.getTags()) {
                 s += "#" + tag.getLabel();
             }
             holder.tags.setText(s);
-        } else
-            holder.tags.setVisibility(View.INVISIBLE);
+        }
 
         if (memory.getPictures() != null) {
             ArrayList<ImgItem> images = new ArrayList<>();

@@ -100,11 +100,6 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
-           Intent intent_mem = new Intent(getApplicationContext(), ViewMemory.class);
-            intent_mem.putExtra("id" , memoryId);
-            startActivity(intent_mem);
-
         }
 
         // search button

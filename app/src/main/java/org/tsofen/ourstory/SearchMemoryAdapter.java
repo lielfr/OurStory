@@ -58,43 +58,37 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
         return viewHolder;
     }
 
-    //    public int calculateWidth(String text) {
-//        Rect bounds = new Rect();
-//        TextView textView = new TextView(ctx);
-//        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-//        textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
-//        return bounds.width();
-//    }
+        public int calculateWidth(String text) {
+        Rect bounds = new Rect();
+        TextView textView = new TextView(ctx);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
+        return bounds.width();
+    }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("fragment", "binded : " + position + " ");
         Memory memory = mMemories.get(position);
 
         if (memory.getDescription() != null) {
             holder.descr.setText(memory.getDescription());
+
         } else
             holder.descr.setVisibility(View.INVISIBLE);
         if (memory.getTags() != null) {
+            holder.tags.setVisibility(View.VISIBLE);
             String s = "";
             for (Tag tag : memory.getTags()) {
                 s += "#" + tag.getLabel();
             }
             holder.tags.setText(s);
-        } else
-            holder.tags.setVisibility(View.INVISIBLE);
+        }
         Story story = memory.getStory();
-        holder.name.setText(story.getNameOfPerson());
-//        String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-//        if (memory.getMemoryDate() != null) {
-//            String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + " , " + (memory.getMemoryDate().get(Calendar.YEAR));
-//            holder.mem_date.setText(memDate);
-//            holder.mem_date.setWidth(calculateWidth(memDate));
-//        } else
-//            holder.mem_date.setVisibility(View.INVISIBLE);
+        holder.name.setText(memory.getUser().getFullName());
+        holder.name.setWidth(calculateWidth(memory.getUser().getFullName()));
 
-        if (memory.getStory().getPicture() != null) {
+        if (memory.getUser().getProfilePicture() != null) {
 
-            Uri uri = Uri.parse(memory.getStory().getPicture().toString());
+            Uri uri = Uri.parse(memory.getUser().getProfilePicture().toString());
             RequestOptions options = new RequestOptions()
                     .override(300, 300)
                     .centerCrop()
@@ -139,7 +133,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
             adapter.notifyDataSetChanged();
             Intent showMemory = new Intent(view.getContext(), ViewMemory.class);
             if (showMemory != null) {
-                showMemory.putExtra("id", element.getId());
+                showMemory.putExtra("memoryId", element.getId());
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
                 ctx.startActivity(showMemory);                                                 //TODO NEED to Activate this Intent
             } else {

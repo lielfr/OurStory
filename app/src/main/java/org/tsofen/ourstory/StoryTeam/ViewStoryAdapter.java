@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.ViewMemory;
 import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.Memory;
 import org.tsofen.ourstory.model.api.Story;
@@ -145,7 +146,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
             } else if (view.getId() == img1Id) {
                 Toast.makeText(view.getContext(), "img1clicked", Toast.LENGTH_SHORT).show();
                 mCurrent = mStoryList.get(mposition);
-                Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                Intent intent = new Intent(view.getContext(), ViewMemory.class);
                 intent.putExtra("flag", 2);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
@@ -156,7 +157,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
             } else if (view.getId() == img2Id) {
                 Toast.makeText(view.getContext(), "img2clicked", Toast.LENGTH_SHORT).show();
                 mCurrent = mStoryList.get(mposition);
-                Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                Intent intent = new Intent(view.getContext(), ViewMemory.class);
                 intent.putExtra("flag", 2);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
@@ -168,7 +169,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
 
                 Toast.makeText(view.getContext(), "img3clicked", Toast.LENGTH_SHORT).show();
                 VSMemories mCurrent = mStoryList.get(mposition);
-                Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                Intent intent = new Intent(view.getContext(), ViewMemory.class);
                 intent.putExtra("flag", 2);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);

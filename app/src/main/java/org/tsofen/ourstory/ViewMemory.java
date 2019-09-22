@@ -1,10 +1,12 @@
 package org.tsofen.ourstory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -34,7 +37,7 @@ import retrofit2.Response;
 
 public class ViewMemory extends AppCompatActivity {
 
-    public TextView tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
+    public TextView nameS,tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
     public ImageView pic;
     public ImageButton commentbtn,sharebtn;
     OurStoryService MemoryAService;
@@ -46,7 +49,8 @@ public class ViewMemory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_memory);
         Intent intent = getIntent();
-        id = intent.getLongExtra("id" , id);
+        id = intent.getLongExtra("memoryId" , id);
+        nameS = findViewById(R.id.nameS);
         imagesrv= findViewById(R.id.memory_pic);
         commentbtn =  findViewById(R.id.commentbtn2);
         sharebtn = findViewById(R.id.sharebtn2);
@@ -65,6 +69,13 @@ public class ViewMemory extends AppCompatActivity {
             public void onResponse(Call<Memory> call, Response<Memory> response) {
                 memory = response.body();
               if(memory!=null) {
+                  if(memory.getStory()!=null && memory.getStory().getNameOfPerson()!=null)
+                  {
+                      nameS.setText(memory.getStory().getNameOfPerson());
+                      nameS.setWidth(calculateWidth(memory.getStory().getNameOfPerson()));
+                  }
+                  else
+                      nameS.setVisibility(View.INVISIBLE);
                   User user = memory.getUser();
                 if (user != null) {
                     if (memory.getUser().getProfilePicture() != null) {
@@ -130,24 +141,24 @@ public class ViewMemory extends AppCompatActivity {
                       mem_date.setText(memDate);
                   } else
                       mem_date.setVisibility(View.INVISIBLE);
-                  if (memory.getLikes() != null) {
+                  if (memory.getLikes() != null && memory.getLikes().size()!=0) {
                       num_of_likes.setText(memory.getLikes().size() + "");
                   } else {
                       num_of_likes.setVisibility(View.INVISIBLE);
                   }
-                  if (memory.getComments() != null) {
+                  if (memory.getComments() != null && memory.getComments().size()!=0) {
                       num_of_comments.setText(memory.getComments().size() + "");
                   } else {
                       num_of_comments.setVisibility(View.INVISIBLE);
                   }
                   if (memory.getTags() != null) {
+                      tags.setVisibility(View.VISIBLE);
                       String s = "";
                       for (Tag tag : memory.getTags()) {
                           s += "#" + tag.getLabel();
                       }
                       tags.setText(s);
-                  } else
-                      tags.setVisibility(View.INVISIBLE);
+                  }
                   if (memory.getPictures() != null) {
                       ArrayList<ImgItem> images = new ArrayList<>();
                       ArrayList<Picture> pictures = new ArrayList<>();
@@ -155,10 +166,7 @@ public class ViewMemory extends AppCompatActivity {
                       for (int i = 0; i < pictures.size(); i++) {
                           images.add(new ImgItem(" ", pictures.get(i).getLink()));
                       }
-                      //images.add((ImgItem) memory.getPictures();
-                      ImageAdapter imgAdapter = new ImageAdapter(getApplicationContext(), images);
-                     imagesrv.setHasFixedSize(true);
-
+                      ImageAdapter imgAdapter = new ImageAdapter(getApplicationContext(), images );
                       imagesrv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                       imagesrv.setAdapter(imgAdapter);
                   } else {
@@ -168,7 +176,7 @@ public class ViewMemory extends AppCompatActivity {
               }}
             @Override
             public void onFailure(Call<Memory> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),"I'm null",Toast.LENGTH_LONG);
             }
         });
     }

@@ -5,45 +5,30 @@
     android:id="@+id/list_item"
     android:layout_width="match_parent"
 
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:background="@drawable/asd">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:id="@+id/background"
-            android:layout_width="411dp"
-            android:layout_height="114dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
-            android:clickable="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/picture_person"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.172"
+            app:layout_constraintVertical_bias="0.166"
             app:srcCompat="@drawable/alex" />
 
         <TextView
             android:id="@+id/name_txt_person"
-            android:layout_width="59dp"
+            android:layout_width="200dp"
             android:layout_height="35dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -52,29 +37,30 @@
 
             android:text="Name"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/picture_person"
             app:layout_constraintEnd_toStartOf="@+id/tags_text"
-            app:layout_constraintHorizontal_bias="0.223"
+            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toEndOf="@+id/picture_person"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.363" />
+            app:layout_constraintVertical_bias="0.222" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
             android:layout_width="184dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="76dp"
+            android:layout_marginRight="76dp"
             android:background="@drawable/edit_round3"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:text="#TAG"
             android:textColor="@color/colorName"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -85,25 +71,23 @@
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
-            android:layout_width="392dp"
-            android:layout_height="26dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:gravity="start"
-            android:paddingLeft="20dp"
-            android:text="  Description about this memory"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
 
+            android:layout_marginStart="44dp"
+            android:layout_marginLeft="44dp"
+            android:fontFamily="@font/quicksand_bold"
+
+            android:gravity="start"
+            android:paddingLeft="10dp"
+            android:text="  Description about this memory"
             android:textAlignment="textStart"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-
             app:colorClickableText="@color/colorGrayHint"
-            app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/background"
-            app:layout_constraintTop_toBottomOf="@+id/picture_person"
+            app:layout_constraintStart_toEndOf="@+id/picture_person"
+            app:layout_constraintTop_toBottomOf="@+id/tags_text"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
             app:trimLength="40"

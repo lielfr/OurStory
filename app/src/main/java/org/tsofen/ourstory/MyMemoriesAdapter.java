@@ -40,6 +40,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static org.tsofen.ourstory.R.color.background;
+
 public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.ViewHolder> {
 
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
@@ -169,13 +171,13 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     } else
         holder.descr.setVisibility(View.INVISIBLE);
         if (memory.getTags() != null) {
+            holder.tags.setVisibility(View.VISIBLE);
             String s = "";
             for (Tag tag : memory.getTags()) {
                 s += "#"+tag.getLabel();
             }
             holder.tags.setText(s);
-        } else
-            holder.tags.setVisibility(View.INVISIBLE);
+        }
         Story story = memory.getStory();
         holder.name.setText(story.getNameOfPerson());
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -200,7 +202,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         else {
             holder.profile.setImageResource(R.drawable.defaultprofilepicture);
         }
-        if(memory.getLikes().isEmpty())
+        if(memory.getLikes().isEmpty() && memory.getLikes().size()!=0)
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
             holder.num_of_likes.setText(memory.getLikes().size() + "");
@@ -229,7 +231,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             }
             //images.add((ImgItem) memory.getPictures();
             ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
-            holder.imagesrv.setHasFixedSize(true);
             holder.imagesrv.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
             holder.imagesrv.setAdapter(imgAdapter);
         } else {
