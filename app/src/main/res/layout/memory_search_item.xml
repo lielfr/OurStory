@@ -1,58 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
-    android:layout_margin="4dp"
-    android:background="@drawable/asd"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
 
+    android:layout_height="wrap_content"
+    android:background="@drawable/asd">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
 
         <ImageView
-            android:id="@+id/profile_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginBottom="0dp"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:id="@+id/background"
+            android:layout_width="411dp"
+            android:layout_height="114dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/picture_person"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.172"
+            app:srcCompat="@drawable/alex" />
 
         <TextView
-            android:id="@+id/last_name_id"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/profile_name_id"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="-1dp"
-            android:layout_marginBottom="6dp"
-            android:text="@{king.title}"
+            android:id="@+id/name_txt_person"
+            android:layout_width="59dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/quicksand_bold"
+
+            android:text="Name"
             android:textColor="#FFFFFF"
-            android:textSize="12sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/picture_person"
+            app:layout_constraintEnd_toStartOf="@+id/tags_text"
+            app:layout_constraintHorizontal_bias="0.223"
+            app:layout_constraintStart_toEndOf="@+id/picture_person"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.363" />
 
-        <TextView
-            android:id="@+id/profile_name_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="4dp"
-            android:text="@{king.name}"
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/tags_text"
+            android:layout_width="184dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/edit_round3"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="#TAG"
+            android:textColor="@color/colorName"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:colorClickableText="@color/colorGrayHint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trimCollapsedText="@string/showMore"
+            app:trimExpandedText="@string/showLess"
+            app:trimLength="40"
+            app:trimMode="trimModeLength" />
+
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/descr"
+            android:layout_width="392dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="start"
+            android:paddingLeft="20dp"
+            android:text="  Description about this memory"
+
+            android:textAlignment="textStart"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
 
+            app:colorClickableText="@color/colorGrayHint"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toBottomOf="@+id/picture_person"
+            app:trimCollapsedText="@string/showMore"
+            app:trimExpandedText="@string/showLess"
+            app:trimLength="40"
+            app:trimMode="trimModeLength" />
 
-    </RelativeLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

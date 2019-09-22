@@ -1,41 +1,48 @@
 package org.tsofen.ourstory.model.api;
 
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import org.tsofen.ourstory.model.Comment;
+import org.tsofen.ourstory.model.Tag;
 
 public class MemoryA implements Serializable {
 
     private final static long serialVersionUID = 4738795329279404307L;
     @SerializedName("memory_id")
     @Expose
-    private Integer memoryId;
+    private
+    Long memoryId;
     @SerializedName("story")
     @Expose
-    private Object story;
+    private Story story;
     @SerializedName("contributer")
     @Expose
     private Contributer contributer;
     @SerializedName("description")
     @Expose
-    private Object description;
+    private String description;
     @SerializedName("memory_date")
     @Expose
-    private Object memoryDate;
+    private Date memoryDate;
     @SerializedName("create_date")
     @Expose
-    private Object createDate;
+    private Date createDate;
     @SerializedName("feeling")
     @Expose
-    private Object feeling;
+    private String feeling;
     @SerializedName("location")
     @Expose
-    private Object location;
+    private String location;
     @SerializedName("comments")
     @Expose
-    private List<Object> comments = null;
+    private List<Comment> comments = null;
     @SerializedName("is_private")
     @Expose
     private Boolean isPrivate;
@@ -48,6 +55,10 @@ public class MemoryA implements Serializable {
     @SerializedName("videos")
     @Expose
     private List<Object> videos = null;
+    @SerializedName("tags")
+    @Expose
+    private List<Tag> tags = null;
+
 
     /**
      * No args constructor for use in serialization
@@ -69,8 +80,9 @@ public class MemoryA implements Serializable {
      * @param likes
      * @param createDate
      * @param comments
+     * @param tags
      */
-    public MemoryA(Integer memoryId, Object story, Contributer contributer, Object description, Object memoryDate, Object createDate, Object feeling, Object location, List<Object> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos) {
+    public MemoryA(Long memoryId, Story story, Contributer contributer, String description, Date memoryDate, Date createDate, String feeling, String location, List<Comment> comments, Boolean isPrivate, List<Object> likes, List<Object> pictures, List<Object> videos, List<Tag> tags) {
         super();
         this.memoryId = memoryId;
         this.story = story;
@@ -85,21 +97,22 @@ public class MemoryA implements Serializable {
         this.likes = likes;
         this.pictures = pictures;
         this.videos = videos;
+        this.tags = tags;
     }
 
-    public Integer getMemoryId() {
+    public Long getMemoryId() {
         return memoryId;
     }
 
-    public void setMemoryId(Integer memoryId) {
+    public void setMemoryId(Long memoryId) {
         this.memoryId = memoryId;
     }
 
-    public Object getStory() {
+    public Story getStory() {
         return story;
     }
 
-    public void setStory(Object story) {
+    public void setStory(Story story) {
         this.story = story;
     }
 
@@ -111,51 +124,51 @@ public class MemoryA implements Serializable {
         this.contributer = contributer;
     }
 
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Object getMemoryDate() {
+    public Date getMemoryDate() {
         return memoryDate;
     }
 
-    public void setMemoryDate(Object memoryDate) {
+    public void setMemoryDate(Date memoryDate) {
         this.memoryDate = memoryDate;
     }
 
-    public Object getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Object createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public Object getFeeling() {
+    public String getFeeling() {
         return feeling;
     }
 
-    public void setFeeling(Object feeling) {
+    public void setFeeling(String feeling) {
         this.feeling = feeling;
     }
 
-    public Object getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public List<Object> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Object> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
@@ -191,4 +204,11 @@ public class MemoryA implements Serializable {
         this.videos = videos;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }

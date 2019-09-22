@@ -24,6 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+
+        abortOnError false
+
+    }
 }
 
 repositories {
@@ -48,7 +53,6 @@ dependencies {
     implementation 'com.vatsal.imagezoomer:image-zoomer:1.0.2'
 
 
-
     implementation 'com.borjabravo:readmoretextview:2.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
@@ -56,5 +60,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:9.2.1'
     implementation 'com.google.firebase:firebase-auth:9.2.1'
 
+    implementation 'com.itkacher.okhttpprofiler:okhttpprofiler:1.0.4'
 
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0-RC2'
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0-RC2"
 }

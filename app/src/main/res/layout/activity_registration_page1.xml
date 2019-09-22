@@ -7,25 +7,40 @@
     android:background="@drawable/background_gradient"
     tools:context="org.tsofen.ourstory.UserModel.RegistrationPage1">
 
+    <TextView
+        android:id="@+id/emptyView2"
+        android:layout_width="188dp"
+        android:layout_height="42dp"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/EmailHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FirstNameHolder"
+        app:layout_constraintVertical_bias="0.142" />
+
     <Button
         android:id="@+id/continue_button"
         android:layout_width="101dp"
         android:layout_height="47dp"
         android:layout_gravity="center"
-        android:background="@color/colorRegister"
-        android:fontFamily="sans-serif"
+        android:background="@drawable/register_button"
+        android:fontFamily="@font/quicksand_bold"
         android:gravity="center"
         android:onClick="Go2RegistrationPage2"
         android:text="Continue"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rePasswordHolder"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <TextView
         android:id="@+id/getStarted_text"
@@ -44,66 +59,63 @@
 
     <TextView
         android:id="@+id/emptyView1"
-        android:layout_width="387dp"
-        android:layout_height="50dp"
-        android:text="Please enter a valid full name. Only alphabethic characters allowed"
+        android:layout_width="186dp"
+        android:layout_height="43dp"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18dp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/EmailHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FirstNameHolder"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/emptyView2"
-        android:layout_width="385dp"
-        android:layout_height="50dp"
-        android:text="Please enter a valid email for example alexey19@gmail.com"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/passwordHolder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailHolder"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <TextView
         android:id="@+id/emptyView3"
         android:layout_width="385dp"
         android:layout_height="50dp"
-        android:text="Passwords must be up to 8 characters"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/passwordHolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailHolder"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/emptyView4"
+        android:layout_width="376dp"
+        android:layout_height="47dp"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/rePasswordHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordHolder"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/emptyView4"
+        android:id="@+id/emptyView5"
         android:layout_width="384dp"
         android:layout_height="50dp"
-        android:text="Passwords must match!"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/continue_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintHorizontal_bias="0.703"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rePasswordHolder"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
@@ -168,6 +180,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header_layout">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showFirst"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -180,8 +193,10 @@
             android:hint="@string/Fname"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -214,6 +229,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header_layout">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showLast"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -225,8 +241,10 @@
             android:hint="@string/last_name"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/transparent"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -263,7 +281,7 @@
 
         <EditText
             android:id="@+id/showEmail"
-            android:layout_width="380dp"
+            android:layout_width="378dp"
             android:layout_height="44dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
@@ -273,8 +291,11 @@
             android:hint="@string/Email1"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@android:color/transparent"
+            android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -305,8 +326,8 @@
         android:id="@+id/passwordHolder"
         android:layout_width="388dp"
         android:layout_height="66dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -324,8 +345,11 @@
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@color/transparent"
+            android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -354,7 +378,7 @@
         android:layout_height="66dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordHolder">
 
@@ -371,8 +395,11 @@
             android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
+            android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
+            android:textColorLink="@android:color/transparent"
+            android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
