@@ -15,7 +15,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="116dp"
         android:layout_marginRight="116dp"
-        android:background="@color/colorRegister"
+        android:background="@drawable/register_button"
+        android:fontFamily="@font/quicksand_bold"
         android:gravity="center"
         android:onClick="Go2RegistrationPage3andSave"
         android:text="Save and finish"
@@ -36,6 +37,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DateHolder">
 
+        <RadioGroup
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/showGender"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/FemaleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="128dp"
+                android:layout_marginLeft="128dp"
+                android:layout_marginTop="15dp"
+                android:buttonTint="@color/colorLogin"
+                android:onClick="onRadioButtonClicked"
+                android:shadowColor="@color/colorWhite"
+                android:text="Female"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorLogin"
+                android:textColorLink="@color/colorLogin" />
+
+            <RadioButton
+                android:id="@+id/MaleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:buttonTint="@color/colorLogin"
+                android:onClick="onRadioButtonClicked"
+                android:text="Male"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorLogin"
+                android:textColorLink="@color/blueHighlight" />
+        </RadioGroup>
+
         <TextView
             android:id="@+id/showGender"
             android:layout_width="371dp"
@@ -52,43 +92,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/FemaleRB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="128dp"
-            android:layout_marginLeft="128dp"
-            android:layout_marginTop="15dp"
-            android:buttonTint="@color/colorLogin"
-            android:onClick="onRadioButtonClicked"
-            android:shadowColor="@color/colorWhite"
-            android:text="Female"
-            android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorLogin"
-            android:textColorLink="@color/colorLogin"
-            app:layout_constraintBottom_toBottomOf="@+id/showGender"
-            app:layout_constraintStart_toStartOf="@+id/showGender"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.571" />
-
-        <RadioButton
-            android:id="@+id/MaleRB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:buttonTint="@color/colorLogin"
-            android:onClick="onRadioButtonClicked"
-            android:text="Male"
-            android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorLogin"
-            android:textColorLink="@color/blueHighlight"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/showGender"
-            app:layout_constraintHorizontal_bias="0.671"
-            app:layout_constraintStart_toEndOf="@+id/FemaleRB"
-            app:layout_constraintTop_toTopOf="@+id/showGender"
-            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
             android:id="@+id/textView4"
@@ -175,6 +178,7 @@
         app:layout_constraintTop_toBottomOf="@+id/genderHolder">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showState"
             android:layout_width="180dp"
             android:layout_height="39dp"
@@ -185,10 +189,10 @@
             android:hint="@string/State1"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
-            android:textColorHint="@color/colorGrayHint"
+            android:textColorHighlight="@color/colorRegister"
+            android:textColorHint="@color/transparent"
             android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textCursorDrawable="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -231,10 +235,11 @@
             android:hint="@string/ct"
             android:paddingLeft="5dp"
             android:textColor="@color/colorWhite"
-            android:textColorHighlight="@color/colorWhite"
-            android:textColorHint="@color/colorGrayHint"
+            android:textColorHighlight="@color/colorRegister"
+            android:textColorHint="@color/transparent"
             android:textColorLink="@color/colorError"
-            android:textCursorDrawable="@color/colorError"
+            android:textCursorDrawable="@null"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -280,6 +285,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:theme="@style/EditText"
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -295,13 +301,14 @@
                 android:textColorHighlight="@color/colorError"
                 android:textColorHint="@color/colorGrayHint"
                 android:textColorLink="@color/colorError"
-                android:textCursorDrawable="@color/colorError"
+                android:textCursorDrawable="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.727" />
 
             <EditText
+                android:theme="@style/EditText"
                 android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -314,13 +321,14 @@
                 android:textColorHighlight="@color/colorError"
                 android:textColorHint="@color/colorGrayHint"
                 android:textColorLink="@color/colorError"
-                android:textCursorDrawable="@color/colorError"
+                android:textCursorDrawable="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="@+id/month"
                 app:layout_constraintStart_toEndOf="@+id/month"
                 app:layout_constraintTop_toTopOf="@+id/month"
                 app:layout_constraintVertical_bias="1.0" />
 
             <EditText
+                android:theme="@style/EditText"
                 android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -334,7 +342,7 @@
                 android:textColorHighlight="@color/colorError"
                 android:textColorHint="@color/colorGrayHint"
                 android:textColorLink="@color/colorError"
-                android:textCursorDrawable="@color/colorError"
+                android:textCursorDrawable="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="@+id/day"
                 app:layout_constraintStart_toEndOf="@+id/day"
                 app:layout_constraintTop_toTopOf="@+id/day"
@@ -391,6 +399,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:background="@color/colorLogin"
+            android:fontFamily="@font/quicksand_bold"
             android:gravity="center"
             android:text="Choose"
             android:textColor="@color/colorWhite"

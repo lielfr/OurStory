@@ -1,6 +1,7 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.Story;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +24,13 @@ public class ViewStoryMemoryAdapter extends RecyclerView.Adapter<ViewStoryMemory
     List<MemoryItem> mItems;
     Context c;
     private LayoutInflater mInflater;
+    private Story story;
 
-    public ViewStoryMemoryAdapter(Context context, List<MemoryItem> mItems) {
+    public ViewStoryMemoryAdapter(Context context, List<MemoryItem> mItems, Story story) {
         this.mItems = mItems;
         this.mInflater = LayoutInflater.from(context);
         this.c = context;
+        this.story = story;
     }
 
     @NonNull
@@ -40,6 +45,16 @@ public class ViewStoryMemoryAdapter extends RecyclerView.Adapter<ViewStoryMemory
     public void onBindViewHolder(@NonNull ViewStoryMemoryAdapter.MemoryViewHolder holder, int position) {
         MemoryItem itemInMenu = mItems.get(position);
         holder.tv_memory_year.setText(itemInMenu.getmName());
+        holder.tv_memory_year.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(c, MemoriesOfStoryActivity.class);
+                intent.putExtra("flag", 0);
+                intent.putExtra("storyId", story.getStoryId());
+                intent.putExtra("year", Integer.parseInt(holder.tv_memory_year.getText().toString()));
+                c.startActivity(intent);
+            }
+        });
         ArrayList<Integer> arr = itemInMenu.getmImage();
         for (Integer i : arr) {
             holder.layoutParams.setMargins(20, 20, 20, 20);

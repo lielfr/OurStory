@@ -8,16 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
     </style>
-    <style name="AppTheme.CustomTheme">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
-    </style>
-
-
-
-    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/colorPrimary</item>
-    </style>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -30,12 +20,15 @@
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/ef_colorAccent</item>
     </style>
 
     <style name="DropDownListViewStyle">
         <item name="android:divider">@drawable/tags_dottedline</item>
         <item name="android:dividerHeight">2dp</item>
+    </style>
+    <style name="EditText">
+        <item name="colorAccent">@color/colorRegister</item>
     </style>
 
 </resources>

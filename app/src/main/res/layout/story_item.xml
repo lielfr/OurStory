@@ -11,6 +11,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp">
@@ -18,17 +19,19 @@
         <ImageView
             android:id="@+id/profile_pic"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/last_name_id"
+            android:id="@+id/dates"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_below="@+id/profile_name_id"
@@ -36,7 +39,6 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="-1dp"
             android:layout_marginBottom="6dp"
-            android:text="@{king.title}"
             android:textColor="#FFFFFF"
             android:textSize="12sp" />
 

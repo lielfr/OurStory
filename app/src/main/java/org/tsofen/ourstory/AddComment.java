@@ -10,16 +10,19 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 
+import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.api.CommentA;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
 public class AddComment extends Fragment {
 
-    long userId;
+    User user;
 
-    public AddComment(long userId) {
+    public AddComment(User user) {
         // Required empty public constructor
+        this.user = user;
     }
 
     @Override
@@ -33,12 +36,12 @@ public class AddComment extends Fragment {
     public void SendCmnt(View view) {
 
         Activity activity = getActivity();
-        CommentA comment = new CommentA();
+        Comment comment = new Comment();
         TextView txtview = activity.findViewById(R.id.AddComment);
         comment.setText(txtview.getText().toString());
-        comment.setUser(userId);
+        comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        service.newComment(comment);
+        /* service.newComment(comment);*/
 
     }
 }
