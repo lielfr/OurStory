@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -36,14 +37,13 @@ public class SearchStory extends AppCompatActivity {
     String item ;
     TextView searchresult ;
     StoryFragment CurrentFragment = null;
-    MemoryFragment memoryFragment = null;
     int flag = 0;
     int op = 0;
     int D;
     int M ;
     int Y ;
     int Taplayout;
-
+    User user = null;
 
 
 
@@ -75,20 +75,22 @@ public class SearchStory extends AppCompatActivity {
         // Each page is represented by its own fragment.
         final ViewPager viewPager = findViewById(R.id.pager);
         Intent intent = getIntent() ;
+        user = (User) intent.getSerializableExtra("user");
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager==null) {
             Log.i("fragment", "you have found it the fragment manager is null........................... ");
         }
 
 
-        final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount());
+        final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount(), this);
         viewPager.setAdapter(adapter);
-        memoryFragment = (MemoryFragment) adapter.getItem(1);
+
         CurrentFragment = (StoryFragment) adapter.getItem(0);
         if (CurrentFragment!=null){
             Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
         }else{
             Log.i("fragment", "fragment is not attached FROM SEARCH ACTIVITY!!! ");
+
         }
 
 
@@ -141,13 +143,11 @@ public class SearchStory extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
-
         if(CurrentFragment == null) {
             //CurrentFragment = adapter.getItem(0);
-    }else{
-        Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
-    }
+        } else {
+//            Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
+        }
         searchresult = findViewById(R.id.searchresult);
         searchresult.addTextChangedListener(new TextWatcher() {
             @Override
@@ -157,14 +157,9 @@ public class SearchStory extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // if (tabLayout)
+                SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
 
-                if(Taplayout==0) {//check which fragment we in
-                    Log.i("fragment", "story fragment text change");
-                    SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
-                }else{
-                    Log.i("fragment", "memory fragment text change");
-                    SendSearchResToMemoryFragment(searchresult.getText().toString(),memoryFragment) ;
-                }
             }
 
             @Override
@@ -185,14 +180,14 @@ public class SearchStory extends AppCompatActivity {
                 } else {
                     item = adapterView.getItemAtPosition(i).toString();
                     cat.setText(item);
-                    Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(adapterView.getContext(), "Selected:" + item, Toast.LENGTH_SHORT).show();
                     //here you want to add the parameters thar you need to send to the fragment in order to ake search by date
                     EditText editText = findViewById(R.id.searchresult);
 
                     TextView D1 = findViewById(R.id.Day);
                     String D2 = D1.getText().toString();
                     D = Integer.parseInt(D2);
-                    Toast.makeText(getApplicationContext(), "the value is " + D, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "the value is " + D, Toast.LENGTH_SHORT).show();
 
                     TextView M1 = findViewById(R.id.Month);
                     String M2 = M1.getText().toString();
@@ -259,10 +254,8 @@ public class SearchStory extends AppCompatActivity {
 
         Log.i("fragment","trying to catch fragment");
 
-        if(fragment != null){ //TODO MEMORYTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+        if (fragment != null) { //TODO MEMORYTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
             //this section for STORYTEAM Use
-            Log.i("fragment","story search commited");
-
             fragment.CommitSearch(getApplicationContext(), searchresult, flag, op, D, M, Y, SearchBy);
         }else{
             Log.i("fragment","fragment is null");
@@ -270,20 +263,6 @@ public class SearchStory extends AppCompatActivity {
 
     }
 
-    public void SendSearchResToMemoryFragment(String searchresult,MemoryFragment fragment) {
-
-        Log.i("fragment","trying to catch memory fragment");
-
-        if(fragment != null){ //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
-            //this section for STORYTEAM Use
-            Log.i("fragment","memory search commited");
-
-            fragment.CommitSearch(searchresult);
-        }else{
-            Log.i("fragment","fragment is null");
-        }
-
-    }
 
     public void finish(View view) {
         finish();

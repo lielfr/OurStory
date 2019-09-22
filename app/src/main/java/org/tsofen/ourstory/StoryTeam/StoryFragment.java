@@ -41,8 +41,10 @@ public class StoryFragment extends Fragment {
     int op = 0;
     OurStoryService wb;
     static View inflatedView;
+    SearchStory parent;
 
-    public StoryFragment() {
+    public StoryFragment(SearchStory parent) {
+        this.parent = parent;
     }
 
     @Override
@@ -61,7 +63,7 @@ public class StoryFragment extends Fragment {
     }
 
     void CommitSearch(Context context, String searchinput, int flag, int op, int D, int M, int Y, int SearchBy) {
-        Toast.makeText(context, "the Value from fragment is " + searchinput, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "the Value from fragment is " + searchinput, Toast.LENGTH_SHORT).show();
         wb = WebFactory.getService();
 
         if (SearchBy == 0) {//this mean that the user want to Search by name
@@ -76,13 +78,13 @@ public class StoryFragment extends Fragment {
                     if (arr == null) {
                         Log.d("rrr", "arr is null");
                     } else {
-                        mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                        mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                         mRecyclerView.setAdapter(mAdapter);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                         mAdapter.notifyDataSetChanged();
 
                         if (arr != null) {
-                            Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                         }
@@ -110,13 +112,13 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
@@ -143,13 +145,13 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
@@ -178,13 +180,13 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
@@ -211,13 +213,13 @@ public class StoryFragment extends Fragment {
                         if (arr == null) {
                             Log.d("rrr", "arr is null");
                         } else {
-                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr);
+                            mAdapter = new StoryAdapter(inflatedView.getContext(), arr, StoryFragment.this);
                             mRecyclerView.setAdapter(mAdapter);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(StoryFragment.this.getContext()));
                             mAdapter.notifyDataSetChanged();
 
                             if (arr != null) {
-                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }

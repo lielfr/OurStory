@@ -22,7 +22,9 @@ public class Picture implements Serializable {
         this.id = id;
     }
 
-    public String getLink() { return link; }
+    public String getLink() {
+        return link;
+    }
 
     public void setLink(String link) {
         this.link = link;

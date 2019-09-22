@@ -5,8 +5,15 @@ android:
     - tools
     - build-tools-29.0.2
     - android-29
+
 before_install:
   - chmod +x gradlew
+  - chmod +x before-install.sh
+  - ./before-install.sh
 
 script:
   ./gradlew build
+
+after_success:
+  - chmod +x post-success.sh
+  - ./post-success.sh

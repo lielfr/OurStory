@@ -22,7 +22,7 @@
         android:onClick="@string/LogIN"
         android:text="@string/Login"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.885"
@@ -74,7 +74,7 @@
         android:layout_marginRight="8dp"
         android:buttonTint="@color/colorLogin"
         android:fontFamily="@font/quicksand_bold"
-        android:text="@string/RememberMe"
+        android:text="@string/keepme"
         android:textColor="@color/colorWhite"
         android:textColorHighlight="@color/colorRegister"
         android:textColorLink="@color/colorRegister"
@@ -342,7 +342,6 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingLeft="5dp"
-            android:text="Avi1234"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
@@ -382,6 +381,7 @@
         app:layout_constraintTop_toTopOf="@+id/main_container2">
 
         <EditText
+            android:theme="@style/EditText"
             android:id="@+id/showEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -392,13 +392,11 @@
             android:fontFamily="@font/quicksand"
             android:hint="@string/Email1"
             android:paddingLeft="5dp"
-            android:text="avi.cohen@gmail.com"
             android:textColor="@color/colorWhite"
             android:textColorHighlight="@color/colorRegister"
             android:textColorHint="@color/colorGrayHint"
             android:textColorLink="@color/transparent"
             android:textCursorDrawable="@null"
-            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

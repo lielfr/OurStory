@@ -2,9 +2,9 @@ package org.tsofen.ourstory;
 
 public class ImgItem {
     String imgName;
-    String img;
+    Integer img;
 
-    public ImgItem(String name, String img){
+    public ImgItem(String name, Integer img) {
         this.imgName=name;
         this.img=img;
     }
@@ -17,11 +17,11 @@ public class ImgItem {
         this.imgName=name;
     }
 
-    public String getImg() {
+    public Integer getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(Integer img) {
         this.img = img;
     }
 }

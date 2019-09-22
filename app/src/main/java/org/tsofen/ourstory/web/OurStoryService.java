@@ -1,8 +1,6 @@
 package org.tsofen.ourstory.web;
 
 
-import android.database.Observable;
-
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
@@ -16,7 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-//import io.reactivex.rxjava3.core.Observable;
+
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -31,14 +30,14 @@ import retrofit2.http.Query;
 public interface OurStoryService {
     @FormUrlEncoded
     @Headers("Content-Type: application/json")
-    @POST("api/comments")
-    Call<Comment> newComment(@Body Comment comment);
+    @POST("comments/create/{id}")
+    Call<Comment> newComment(@Path("id") long id, @Body Comment comment);
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
     Call<ArrayList<Memory>> GetMemoriesByTag(@Path("story") long id, @Path("tag") String tag);
     @GET("memories/story/{story}/findMemoriesByYear/{year}")
-    Call<ArrayList<Memory>> GetMemoriesByYear(@Path("story") long story,@Path("year") int year);
+    Call<ArrayList<Memory>> GetMemoriesByYear(@Path("story") long story, @Path("year") int year);
     @GET("comments/findById/{id}")
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
@@ -92,6 +91,7 @@ public interface OurStoryService {
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfBirth (@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
     @GET("stories/findStoriesByDateOfDeath")
     Call<ArrayList<ListOfStory>> GetStoriesByDateOfDeath(@Query("d") int day, @Query("m") int month , @Query("y") int year , @Query("name") String name_of_person);
+
     @POST("users/create")
     Call<User> CreateUser(@Body User newUser);
     @POST("users/forgotPassword")
