@@ -179,11 +179,15 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         if (story_full != null && story_full.getTop3tags().size() > 0) {
                             textView.setText(story_full.getTop3tags().get(0));
                             Log.d("sss", story_full.getTop3tags().get(0));
+                            if (story_full.getTop3tags().size() > 1) {
+                                textView = findViewById(R.id.textView5);
+                                textView.setText(story_full.getTop3tags().get(1));
+                            }
+                            if (story_full.getTop3tags().size() > 2) {
+                                textView = findViewById(R.id.textView6);
+                                textView.setText(story_full.getTop3tags().get(2));
+                            }
 
-                            textView = findViewById(R.id.textView5);
-                            textView.setText(story_full.getTop3tags().get(1));
-                            textView = findViewById(R.id.textView6);
-                            textView.setText(story_full.getTop3tags().get(2));
                         }
 
 
