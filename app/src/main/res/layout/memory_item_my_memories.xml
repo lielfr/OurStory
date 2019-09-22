@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/background"
             android:layout_width="414dp"
-            android:layout_height="550dp"
+            android:layout_height="500dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:clickable="false"
@@ -156,7 +156,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/picture_person"
             app:layout_constraintStart_toEndOf="@+id/picture_person"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.446" />
+            app:layout_constraintVertical_bias="0.446"
+            android:layout_marginLeft="8dp" />
 
         <ImageButton
             android:id="@+id/commentbtn2"
@@ -207,7 +208,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_memoriesRv"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -248,7 +249,7 @@
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
@@ -259,7 +260,7 @@
             android:gravity="center_vertical"
             android:text="#TAG"
             android:textColor="@color/colorName"
-            android:textSize="26sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
@@ -267,7 +268,7 @@
             app:layout_constraintTop_toBottomOf="@+id/my_memoriesRv"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
-            app:trimLength="17"
+            app:trimLength="35"
             app:trimMode="trimModeLength" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -137,11 +137,11 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
             Memory element = mMemories.get(mPosition);
             mMemories.set(mPosition, element);
             adapter.notifyDataSetChanged();
-            Intent showStory = new Intent(view.getContext(), ViewStory.class);
-            if (showStory != null) {
-                showStory.putExtra("id", element.getId().toString());
+            Intent showMemory = new Intent(view.getContext(), ViewMemory.class);
+            if (showMemory != null) {
+                showMemory.putExtra("id", element.getId());
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
-                ctx.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
+                ctx.startActivity(showMemory);                                                 //TODO NEED to Activate this Intent
             } else {
                 Toast.makeText(ctx, "Warning intent is null ", Toast.LENGTH_SHORT).show();
             }

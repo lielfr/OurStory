@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
 import org.tsofen.ourstory.model.api.MemoryA;
@@ -72,21 +73,29 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
                         .centerCrop()
                         .placeholder(R.drawable.nopicyet)
                         .error(R.drawable.nopicyet);
-                Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.pic);
-            } else
-                holder.pic.setImageResource(R.drawable.defaultprofilepicture);
-            holder.name.setText(memory.getUser().getFullName());
-        }
-        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
-                intent.putExtra("memory", memory);
-                ctx.startActivity(intent);
-
+                Glide.with(ctx.getApplicationContext()).load(uri).apply(options).into(holder.pic);
             }
-        });
+            else {
+                holder.pic.setImageResource(R.drawable.defaultprofilepicture);}
+
+            if(memory.getUser().getFullName()!=null)
+            {holder.name.setText(memory.getUser().getFullName());
+            }
+            else
+                holder.name.setVisibility(View.INVISIBLE);
+        }
+        if(memory.getComments()!=null) {
+            holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                    intent.putExtra("memory", memory);
+                    ctx.startActivity(intent);
+
+                }
+            });
+        }
         holder.sharebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,15 +117,14 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             holder.location.setText(memory.getLocation());
         }
         if (memory.getFeeling() != null) {
-//         holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
+         holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
             holder.feeling.setText("#" + memory.getFeeling());
         }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
             String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + ", " + (memory.getMemoryDate().get(Calendar.YEAR));
-//           holder.mem_date.setWidth(calculateWidth(memDate));
+          holder.mem_date.setWidth(calculateWidth(memDate));
             holder.mem_date.setText(memDate);
-            Log.d("MOO", "MemDate: " + memDate);
         } else
             holder.mem_date.setVisibility(View.INVISIBLE);
         if (memory.getLikes() != null) {
@@ -124,7 +132,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         } else {
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         }
-        if (memory.getComments() != null) {
+        if (memory.getComments() != null && memory.getComments().size()!=0) {
             holder.num_of_comments.setText(memory.getComments().size() + "");
         } else {
             holder.num_of_comments.setVisibility(View.INVISIBLE);
@@ -138,19 +146,21 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         } else
             holder.tags.setVisibility(View.INVISIBLE);
 
-       /* ArrayList<ImgItem> images=new ArrayList<>();
-        if(memory.getPictures()!=null) {
-            images.add((ImgItem) memory.getPictures());
+        if (memory.getPictures() != null) {
+            ArrayList<ImgItem> images = new ArrayList<>();
+            ArrayList<Picture> pictures = new ArrayList<>();
+            pictures = memory.getPictures();
+            for (int i = 0; i < pictures.size(); i++) {
+                images.add(new ImgItem(" ", pictures.get(i).getLink()));
+            }
+            //images.add((ImgItem) memory.getPictures();
             ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
             holder.rvMemory.setHasFixedSize(true);
             holder.rvMemory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
             holder.rvMemory.setAdapter(imgAdapter);
-        }
-        else
-        {
-
+        } else {
             holder.rvMemory.setVisibility(View.INVISIBLE);
-        }*/
+        }
 
     }
 

@@ -85,17 +85,19 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Memory memory = mMemories.get(position);
-        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if(memory.getComments()!=null) {
+            holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
-                intent.putExtra("memory",memory);
-                intent.putExtra("user",user);
-                ctx.startActivity(intent);
+                    Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                    intent.putExtra("memory", memory);
+                    intent.putExtra("user", user);
+                    ctx.startActivity(intent);
 
-            }
-        });
+                }
+            });
+        }
 
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,7 +204,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
             holder.num_of_likes.setText(memory.getLikes().size() + "");
-        if(memory.getComments().isEmpty())
+        if(memory.getComments().isEmpty() && memory.getComments().size()!=0)
             holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
             holder.num_of_comments.setText(memory.getComments().size()+"");
@@ -218,18 +220,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         }
         else
             holder.feeling.setVisibility(View.INVISIBLE);
-       /* ArrayList<ImgItem> images=new ArrayList<>();
-        if(memory.getPictures()!=null) {
-            images.add((ImgItem) memory.getPictures());
-            ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
-            holder.imagesrv.setHasFixedSize(true);
-            holder.imagesrv.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
-            holder.imagesrv.setAdapter(imgAdapter);
-        }
-        else
-        {
-            holder.imagesrv.setVisibility(View.INVISIBLE);
-        }*/
         if (memory.getPictures() != null) {
             ArrayList<ImgItem> images = new ArrayList<>();
             ArrayList<Picture> pictures = new ArrayList<>();
