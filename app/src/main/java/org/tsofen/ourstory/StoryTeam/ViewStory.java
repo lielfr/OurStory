@@ -1,11 +1,9 @@
 package org.tsofen.ourstory.StoryTeam;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,16 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.URI;
-import java.text.DateFormat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,30 +19,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.esafirm.imagepicker.model.Image;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.UserModel.UsersList;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.Tags;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
+import java.io.Serializable;
+import java.util.LinkedList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-
-import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.Objects;
-
-import static android.app.PendingIntent.getActivity;
 
 public class ViewStory extends AppCompatActivity implements Serializable {
 
