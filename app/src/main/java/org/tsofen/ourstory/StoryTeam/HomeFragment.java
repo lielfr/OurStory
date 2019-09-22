@@ -26,9 +26,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class HomeFragment extends Fragment {
 
     AppHomePage parent;
+    User userObj;
 
     public HomeFragment() {
         super();
+
     }
 
     @Nullable
@@ -48,13 +50,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SearchStory.class);
-                Gson gson = new Gson();
 
-                SharedPreferences pr = getContext().getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
-                String userJsonString = pr.getString(AppHomePage.USER, "ERROR");
-                User userObj = userJsonString.equals("ERROR") ?
-                        gson.fromJson(parent.user2, User.class) :
-                        gson.fromJson(userJsonString, User.class);
                 intent.putExtra("user", userObj);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         getActivity(), view.findViewById(R.id.searchView),
@@ -68,6 +64,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CreateStory.class);
+                intent.putExtra("user", userObj);
                 startActivity(intent);
             }
         });

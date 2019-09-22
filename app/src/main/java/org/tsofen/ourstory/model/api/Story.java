@@ -14,7 +14,7 @@ public class Story implements Serializable
 
     @SerializedName("owner")
     @Expose
-    private Owner owner;
+    private User owner;
     @SerializedName("name_of_person")
     @Expose
     private String nameOfPerson;
@@ -37,12 +37,21 @@ public class Story implements Serializable
         this.storyId = storyId;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Story(Integer storyId, User owner, String nameOfPerson, String dateOfBirth, String dateOfDeath, Object picture) {
+        this.storyId = storyId;
+        this.owner = owner;
+        this.nameOfPerson = nameOfPerson;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+        this.picture = picture;
     }
 
-    public void setOwner(Owner owner) {
+    public Story(User owner, String nameOfPerson, String dateOfBirth, String dateOfDeath, Object picture) {
         this.owner = owner;
+        this.nameOfPerson = nameOfPerson;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+        this.picture = picture;
     }
 
     public String getNameOfPerson() {
@@ -77,22 +86,12 @@ public class Story implements Serializable
         this.picture = picture;
     }
 
-
-    public Story(Integer storyId, Owner owner, String nameOfPerson, String dateOfBirth, String dateOfDeath, Object picture) {
-        this.storyId = storyId;
-        this.owner = owner;
-        this.nameOfPerson = nameOfPerson;
-        this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
-        this.picture = picture;
+    public User getOwner() {
+        return owner;
     }
 
-    public Story(Owner owner, String nameOfPerson, String dateOfBirth, String dateOfDeath, Object picture) {
+    public void setOwner(User owner) {
         this.owner = owner;
-        this.nameOfPerson = nameOfPerson;
-        this.dateOfBirth = dateOfBirth;
-        this.dateOfDeath = dateOfDeath;
-        this.picture = picture;
     }
 
 

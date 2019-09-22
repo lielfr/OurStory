@@ -41,6 +41,7 @@ import org.tsofen.ourstory.UserModel.RegistrationPage1;
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -65,7 +66,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     Uri filePath;
     String fileURI;
 
-    Owner owner;
+    User owner;
     Story result;
 
     ImageView image;
@@ -297,9 +298,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
             if (intent.getStringExtra("userId") != null) {
                 userid = Long.parseLong(intent.getStringExtra("userId"));
-                Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
+                Wepengine.GetUserById(userid).enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call<Owner> call, Response<Owner> response) {
+                    public void onResponse(Call<User> call, Response<User> response) {
                         if (response.body() != null) {
                             owner = response.body();
                             Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
@@ -310,7 +311,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     }
 
                     @Override
-                    public void onFailure(Call<Owner> call, Throwable t) {
+                    public void onFailure(Call<User> call, Throwable t) {
                         Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -565,6 +566,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.putExtra("ttag2", ttag2);
 
 
+
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
 
@@ -631,6 +633,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             i.putExtra("result", result);
                             i.putExtra("Button", "createandadd");
                         }
+                        i.putExtra("user", story.getOwner());
                         startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();

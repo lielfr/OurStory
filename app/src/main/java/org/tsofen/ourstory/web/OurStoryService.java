@@ -45,7 +45,7 @@ public interface OurStoryService {
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
     @GET("users/findById/{id}")
-    Call<Owner> GetUserById(@Path("id") long id);
+    Call<User> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
 
