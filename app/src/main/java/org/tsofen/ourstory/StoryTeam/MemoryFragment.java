@@ -36,7 +36,7 @@ public class MemoryFragment extends Fragment {
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        if (mAdapter!=null) {
+        if (mAdapter != null) {
             mRecyclerView = getView().findViewById(R.id.recyclerview);
             arrayList = new ArrayList<Memory>();
             mAdapter = new MemoryAdapter(getContext(), arrayList);
@@ -45,7 +45,7 @@ public class MemoryFragment extends Fragment {
             int MemoryListSize = arrayList.size();
             mRecyclerView.getAdapter().notifyItemInserted(MemoryListSize);
             mRecyclerView.smoothScrollToPosition(MemoryListSize);
-        }else {
+        } else {
 //            Toast.makeText(getContext(), "the adapter is null", Toast.LENGTH_SHORT).show();
         }
     }

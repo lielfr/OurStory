@@ -245,7 +245,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
             ctx = itemView.getContext();
-           // imagesrv = itemView.findViewById(R.id.my_memoriesRv);
+            // imagesrv = itemView.findViewById(R.id.my_memoriesRv);
             deletebtn =itemView.findViewById(R.id.deletebtn);
             tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);

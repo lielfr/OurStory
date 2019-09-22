@@ -1,6 +1,7 @@
 package org.tsofen.ourstory;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,6 @@ import com.google.gson.Gson;
 import org.tsofen.ourstory.StoryTeam.CreateStory;
 import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.UserModel.AppHomePage;
-import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -33,6 +33,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MyMemories extends Fragment {
     private static final String LOG_TAG = CommentActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
@@ -43,6 +45,9 @@ public class MyMemories extends Fragment {
     OurStoryService MemoryAService;
     MyMemoriesAdapter adapter;
     TextView storyName;
+    SharedPreferences pr;
+    boolean sendUserIntent = false;
+
     public MyMemories() {
         super();
     }
@@ -53,55 +58,61 @@ public class MyMemories extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         parent = (AppHomePage) getActivity();
         return inflater.inflate(R.layout.fragment_my_memories, container, false);
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Gson gson = new Gson();
-        String userJsonString = LogIn.mPrefs.getString("myUser","");
-        User userObj = gson.fromJson(userJsonString,User.class);
-        user_id=userObj.getUserId();
-        rv = view.findViewById(R.id.recycler);
-        MemoryAService = WebFactory.getService();
-        MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<Memory>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
-                memories = response.body();
-                adapter = new MyMemoriesAdapter(getActivity(), memories, userObj);
-                rv.setAdapter(adapter);
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                adapter.notifyDataSetChanged();
+        pr = getContext().getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
+        String userJsonString = pr.getString(AppHomePage.USER, "ERROR");
+        sendUserIntent = userJsonString.equals("ERROR");
+        if (!userJsonString.equals("ERROR") || parent.user2 != null && parent.user2.length() > 0) {
+            User userObj = userJsonString.equals("ERROR") ?
+                    gson.fromJson(parent.user2, User.class) :
+                    gson.fromJson(userJsonString, User.class);
+            user_id = userObj.getUserId();
+            rv = view.findViewById(R.id.recycler);
+            MemoryAService = WebFactory.getService();
+            MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<Memory>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
+                    memories = response.body();
+                    adapter = new MyMemoriesAdapter(getActivity(), memories, userObj);
+                    rv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getContext()));
+                    adapter.notifyDataSetChanged();
 
-            }
+                }
 
-            @Override
-            public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
-                Log.d("Error", t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<ArrayList<Memory>> call, Throwable t) {
+                    Log.d("Error", t.toString());
+                }
+            });
 
-        final Button create_story = view.findViewById(R.id.createStroyBtn);
-        create_story.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent Create = new Intent(getActivity(), CreateStory.class);
-                Create.putExtra("userId", (userObj.getUserId()).toString());
-                startActivity(Create);
-            }
-        });
-        ImageButton btn = view.findViewById(R.id.searchview2);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(getActivity(), SearchStory.class);
-                startActivity(myIntent);
-            }
-        });
+            final Button create_story = view.findViewById(R.id.createStroyBtn);
+            create_story.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent Create = new Intent(getActivity(), CreateStory.class);
+                    Create.putExtra("userId", (userObj.getUserId()).toString());
+                    startActivity(Create);
+                }
+            });
+            ImageButton btn = view.findViewById(R.id.searchview2);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(getActivity(), SearchStory.class);
+                    if (sendUserIntent)
+                        myIntent.putExtra("user", userObj);
+                    startActivity(myIntent);
+                }
+            });
 
+        }
     }
-
-
-
     }
 
 

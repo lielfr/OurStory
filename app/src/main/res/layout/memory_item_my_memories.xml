@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -25,66 +26,59 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/feelingtxt_mymemories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="#FEELING"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/memory_date"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/memory_date"
-            app:layout_constraintTop_toBottomOf="@+id/memory_date" />
+        <ImageButton
+            android:id="@+id/deletebtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
 
-        <TextView
-            android:id="@+id/locationtxt_mymemories"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:paddingLeft="20dp"
-            android:text="@string/location"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/descr"
-            app:layout_constraintHorizontal_bias="0.242"
-            app:layout_constraintStart_toStartOf="@+id/descr"
-            app:layout_constraintTop_toBottomOf="@+id/picture_person" />
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/sharebtn"
+            app:layout_constraintEnd_toStartOf="@+id/editbtn"
+            app:layout_constraintTop_toTopOf="@+id/sharebtn"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/delete" />
 
-        <TextView
-            android:id="@+id/name_txt_person"
-            android:layout_width="129dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="8dp"
+        <ImageButton
+            android:id="@+id/editbtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="Name"
+            android:layout_marginRight="8dp"
 
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/picture_person"
-            app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/picture_person"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.446" />
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/deletebtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/deletebtn"
+            app:layout_constraintVertical_bias="0.9"
+            app:srcCompat="@drawable/edit" />
 
         <ImageView
             android:id="@+id/picture_person"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.065"
             app:srcCompat="@drawable/alex" />
+
+        <TextView
+            android:id="@+id/feelingtxt_mymemories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="end"
+            android:text="#FEELING"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:autoSizeMaxTextSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/memory_date"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/memory_date"
+            app:layout_constraintTop_toBottomOf="@+id/memory_date" />
 
         <TextView
             android:id="@+id/likesNum"
@@ -103,23 +97,22 @@
             app:layout_constraintStart_toStartOf="@+id/likebtn" />
 
         <TextView
-            android:id="@+id/memory_date"
-            android:layout_width="146dp"
-            android:layout_height="25dp"
+            android:id="@+id/locationtxt_mymemories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:editable="false"
+            android:layout_marginRight="8dp"
             android:fontFamily="@font/quicksand_bold"
-            android:gravity="end"
-            android:text="date"
-            android:textAlignment="textEnd"
+            android:text="@string/location"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.764"
-            app:layout_constraintStart_toEndOf="@+id/name_txt_person"
-            app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/picture_person" />
 
         <ImageButton
             android:id="@+id/sharebtn"
@@ -147,19 +140,23 @@
             app:layout_constraintVertical_bias="0.85"
             app:srcCompat="@drawable/like" />
 
-        <ImageButton
-            android:id="@+id/deletebtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="196dp"
+        <TextView
+            android:id="@+id/name_txt_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:maxWidth="150dp"
 
-            android:layout_marginLeft="196dp"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="@+id/sharebtn"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/sharebtn"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/delete" />
+            android:text="Name"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:autoSizeMaxTextSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/picture_person"
+            app:layout_constraintStart_toEndOf="@+id/picture_person"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.446" />
 
         <ImageButton
             android:id="@+id/commentbtn2"
@@ -188,81 +185,85 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/likesNum" />
 
+        <TextView
+            android:id="@+id/memory_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:editable="false"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="end"
+            android:text="date"
+            android:textAlignment="textEnd"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.764"
+            app:layout_constraintStart_toEndOf="@+id/name_txt_person"
+            app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_memoriesRv"
             android:layout_width="0dp"
-            android:layout_height="201dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descr"
-            app:layout_constraintVertical_bias="0.035" />
-
-        <ImageButton
-            android:id="@+id/editbtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/deletebtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/deletebtn"
-            app:layout_constraintTop_toTopOf="@+id/deletebtn"
-            app:layout_constraintVertical_bias="0.9"
-            app:srcCompat="@drawable/edit" />
+            app:layout_constraintTop_toBottomOf="@+id/descr" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:fontFamily="@font/quicksand_bold"
-            android:gravity="start"
-            android:paddingLeft="20dp"
-            android:text="  Description about this memory"
-            android:textAlignment="textStart"
 
+            android:gravity="start"
+            android:text="Description about this memory"
+            android:textAlignment="textStart"
             android:textColor="#FFFFFF"
+
             android:textSize="18sp"
             android:textStyle="bold"
+            app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="@+id/background"
-
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/background"
-            app:layout_constraintTop_toBottomOf="@+id/picture_person"
+            app:layout_constraintTop_toBottomOf="@+id/locationtxt_mymemories"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
             app:trimLength="120"
-            app:trimMode="trimModeLength"
-            app:colorClickableText="@color/colorGrayHint" />
+            app:trimMode="trimModeLength" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
-            android:layout_width="380dp"
+            android:layout_width="0dp"
             android:layout_height="70dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edit_round3"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
             android:text="#TAG"
             android:textColor="@color/colorName"
             android:textSize="26sp"
             android:textStyle="bold"
             app:colorClickableText="@color/colorGrayHint"
-            app:layout_constraintBottom_toTopOf="@+id/sharebtn"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/my_memoriesRv"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"

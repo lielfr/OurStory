@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,7 +31,7 @@ public interface OurStoryService {
     @FormUrlEncoded
     @Headers("Content-Type: application/json")
     @POST("comments/create/{id}")
-    Call<Comment> newComment(@Path("id") long id,@Body Comment comment);
+    Call<Comment> newComment(@Path("id") long id, @Body Comment comment);
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
@@ -77,6 +78,10 @@ public interface OurStoryService {
 
     @GET("stories/ViewStoryFull/{id}")
     Call<FullViewStory> GetFullViewStoryById(@Path("id") long id);
+
+    @GET("memories/findMemoriesByKeyword/{description}")
+    Call<ArrayList<Memory>> GetMemoriesByKeyword(@Path("description") String description);
+
 
     @GET("stories/findStoriesByDobYearMonth")
     Call<ArrayList<ListOfStory>> GetStoriesByDobYearMonth (@Query("m") int month, @Query("y") int year );
