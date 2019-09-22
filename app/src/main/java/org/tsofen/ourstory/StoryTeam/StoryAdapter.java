@@ -26,12 +26,14 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     private LayoutInflater mInflater;
     public Context context ;
     Uri uri;
+    StoryFragment fragment;
 
-    public StoryAdapter(Context context, List<ListOfStory> storyList) {
+    public StoryAdapter(Context context, List<ListOfStory> storyList, StoryFragment fragment) {
         mInflater = LayoutInflater.from(context);
         //Log.i("story ",storyList.get(0).getNameOfPerson());
         this.mStoryList = storyList;
         this.context = context ;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -46,7 +48,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     public void onBindViewHolder(@NonNull StoryViewHolder holder, int position) {
         ListOfStory mCurrent = mStoryList.get(position);
         holder.firstName.setText(mCurrent.getNameOfPerson());
-        holder.dates.setText("From "+mCurrent.getDateOfBirth().substring(0,10)+" To "+ mCurrent.getDateOfDeath().substring(0,10));
+        holder.dates.setText("From " + mCurrent.getDateOfBirth().substring(0, 10) + " To " + mCurrent.getDateOfDeath().substring(0, 10));
         Object p = mCurrent.getPicture();
         if (p == null) return;
         String SP = p.toString();
@@ -93,6 +95,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
             if (showStory!=null) {
                 showStory.putExtra("id", element.getStoryId().toString());
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
+                showStory.putExtra("user", fragment.parent.user);
                 context.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
             }else{
                 Toast.makeText(context, "Warning intent is null ", Toast.LENGTH_SHORT).show();

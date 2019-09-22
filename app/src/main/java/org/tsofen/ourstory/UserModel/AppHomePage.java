@@ -34,6 +34,7 @@ public class AppHomePage extends AppCompatActivity {
     SharedPreferences sh;
     public String user1;
     public String user2=null;
+    User user;
     SharedPreferences.Editor prefsEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class AppHomePage extends AppCompatActivity {
         final TextView upText = findViewById(R.id.upText);
         // Fixing the icon tinting of the bottom navigation bar.
 
-        sh=getSharedPreferences(AppHomePage.KEY_SELECTED, MODE_PRIVATE);
+        sh = getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
         prefsEditor = sh.edit();
         user1=sh.getString(AppHomePage.USER,"");
         user2=currIntent.getStringExtra("myUserJson");
