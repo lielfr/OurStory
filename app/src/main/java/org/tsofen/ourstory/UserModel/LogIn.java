@@ -49,8 +49,7 @@ public class LogIn extends AppCompatActivity {
     SharedPreferences mPrefs ;
     SharedPreferences.Editor prefsEditor;
     CheckBox keeplog ;
-
-org.tsofen.ourstory.model.api.User myUser;
+    org.tsofen.ourstory.model.api.User myUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -105,8 +104,8 @@ org.tsofen.ourstory.model.api.User myUser;
                     else {
                         userId = myUser.getUserId();
 
-                        userPass = myUser.getPassword();
-                        if (userPass.equals(inputPassword)) {
+//                        userPass = myUser.getPassword();
+//                        if (userPass.equals(inputPassword)) {
                             UserStatusCheck.setUserStatus("not a visitor");
                             //TODO move the user id to the home page and then move it to create story intent (move it under name=("userId"))
                             //
@@ -134,7 +133,7 @@ org.tsofen.ourstory.model.api.User myUser;
 
                         }
                     }
-                }//end of onResponse method
+                //end of onResponse method
                 @Override
                 public void onFailure(Call<org.tsofen.ourstory.model.api.User> call, Throwable t) {
                     passErr.setVisibility(View.VISIBLE);
