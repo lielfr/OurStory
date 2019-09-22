@@ -98,6 +98,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         Wepengine = WebFactory.getService();
 
+
         firstName = findViewById(R.id.firstNameEditText);
         firstName.addTextChangedListener(new TextWatcher() {
             @Override
