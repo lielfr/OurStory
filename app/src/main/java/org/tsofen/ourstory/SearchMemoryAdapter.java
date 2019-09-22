@@ -100,7 +100,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
                     .centerCrop()
                     .placeholder(R.drawable.nopicyet)
                     .error(R.drawable.nopicyet);
-            Glide.with(this.mInflater.getContext()).load(uri).apply(options).into(holder.profile);
+            Glide.with(this.ctx).load(uri).apply(options).into(holder.profile);
         } else {
             holder.profile.setImageResource(R.drawable.defaultprofilepicture);
         }

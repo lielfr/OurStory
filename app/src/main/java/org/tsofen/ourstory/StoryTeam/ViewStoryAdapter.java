@@ -123,10 +123,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
         @Override
         public void onClick(View view) {
             Log.d("hh", "hh");
-            int YearId = 2131362217;
-            int img1Id = 2131362015;
-            int img2Id = 2131362016;
-            int img3Id = 2131362017;
+            int YearId = R.id.textView13;
+            int img1Id = R.id.item_memory_img_1;
+            int img2Id = R.id.item_memory_img_2;
+            int img3Id = R.id.item_memory_img_3;
             mposition = getLayoutPosition();
             Toast.makeText(view.getContext(), Integer.toString(mposition), Toast.LENGTH_SHORT).show();
             Toast.makeText(view.getContext(), storyId + "", Toast.LENGTH_LONG).show();
