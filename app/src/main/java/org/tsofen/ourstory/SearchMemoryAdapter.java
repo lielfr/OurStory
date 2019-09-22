@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.tsofen.ourstory.StoryTeam.ViewStory;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.Tag;
@@ -32,10 +34,9 @@ import java.util.Calendar;
 public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapter.ViewHolder> {
     public static final String EXTRA_MESSAGE = "org.tsofen.ourstory.extra.MESSAGE";
     public final ArrayList<Memory> mMemories;
-    Memory memoryA;
     Context ctx;
     LayoutInflater mInflater;
-    User user;
+    ImageView button;
 
     public SearchMemoryAdapter(Context context,ArrayList<Memory> memories)
     {
@@ -104,11 +105,14 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
         }
     }
 
+
+
     @Override
     public int getItemCount() {
         return mMemories.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //RecyclerView rvMemory;
         public TextView tags, feeling, location, name, mem_date, descr;
         public ImageView profile;
@@ -122,7 +126,24 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
             descr = itemView.findViewById(R.id.descr);
             profile = itemView.findViewById(R.id.picture_person);
             this.adapter = memoryAdapter;
+            itemView.setOnClickListener(this);
 
+
+        }
+        @Override
+        public void onClick(View view) {
+            int mPosition = getLayoutPosition();
+            Memory element = mMemories.get(mPosition);
+            mMemories.set(mPosition, element);
+            adapter.notifyDataSetChanged();
+            Intent showStory = new Intent(view.getContext(), ViewStory.class);
+            if (showStory!=null) {
+                showStory.putExtra("id",element.getId().toString());
+                //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
+                ctx.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
+            }else{
+                Toast.makeText(ctx, "Warning intent is null ", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
