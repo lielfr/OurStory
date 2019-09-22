@@ -38,7 +38,6 @@ public class ForgotPassword extends AppCompatActivity {
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         TextViewInvs1 = findViewById(R.id.textView1);
