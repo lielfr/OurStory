@@ -101,6 +101,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ctx.getApplicationContext(), CreateEditMemoryActivity.class);
+                i.putExtra("user", user);
                 mem = memory;
                 i.putExtra("CEMemoryEdit", mem);
                 ctx.startActivity(i);
