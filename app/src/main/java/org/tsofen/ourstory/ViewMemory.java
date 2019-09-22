@@ -48,7 +48,7 @@ public class ViewMemory extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getLongExtra("id" , id);
         imagesrv= findViewById(R.id.memory_pic);
-        commentbtn = findViewById(R.id.commentbtn2);
+        commentbtn =  findViewById(R.id.commentbtn2);
         sharebtn = findViewById(R.id.sharebtn2);
         feeling = findViewById(R.id.feelingtxt);
         location = findViewById(R.id.locationtxt);
@@ -64,9 +64,8 @@ public class ViewMemory extends AppCompatActivity {
             @Override
             public void onResponse(Call<Memory> call, Response<Memory> response) {
                 memory = response.body();
-                ArrayList<Memory> memoryOne = new ArrayList<>();
-                memoryOne.add(memory);
-                User user = memory.getUser();
+              if(memory!=null) {
+                  User user = memory.getUser();
                 if (user != null) {
                     if (memory.getUser().getProfilePicture() != null) {
                         Uri uri = Uri.parse(memory.getUser().getProfilePicture());
@@ -76,91 +75,104 @@ public class ViewMemory extends AppCompatActivity {
                                 .placeholder(R.drawable.nopicyet)
                                 .error(R.drawable.nopicyet);
                         Glide.with(getApplicationContext()).load(uri).apply(options).into(pic);
-                    } else
-                       pic.setImageResource(R.drawable.defaultprofilepicture);
-                   name.setText(memory.getUser().getFullName());
-                }
-               commentbtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                    }
+                    else {
+                        pic.setImageResource(R.drawable.defaultprofilepicture);}
 
-                        Intent intent = new Intent(getApplicationContext(), CommentActivity.class);
-                        intent.putExtra("memory", memory);
-                        startActivity(intent);
+                      if(memory.getUser().getFullName()!=null)
+                      {name.setText(memory.getUser().getFullName());
+                    }
+                      else
+                          name.setVisibility(View.INVISIBLE);
+                }
+                  commentbtn.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
 
-                    }
-                });
-               sharebtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent sendIntent = new Intent();
-                        sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
-                        sendIntent.setType("text/plain");
-                        Intent shareIntent = Intent.createChooser(sendIntent, null);
-                        startActivity(shareIntent);
-                    }
-                });
-                if (memory.getDescription() != null) {
-                   descr.setText(memory.getDescription());
-                }
-                if (memory.getLocation() != null) {
-                   location.setWidth(calculateWidth(memory.getLocation()));
-                   location.setText(memory.getLocation());
-                }
-                if (memory.getFeeling() != null) {
-//        feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
-                   feeling.setText("#" + memory.getFeeling());
-                }
-                String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-                if (memory.getMemoryDate() != null) {
-                    String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + ", " + (memory.getMemoryDate().get(Calendar.YEAR));
-//          mem_date.setWidth(calculateWidth(memDate));
-                   mem_date.setText(memDate);
-                    Log.d("MOO", "MemDate: " + memDate);
-                } else
-                   mem_date.setVisibility(View.INVISIBLE);
-                if (memory.getLikes() != null) {
-                   num_of_likes.setText(memory.getLikes().size() + "");
-                } else {
-                   num_of_likes.setVisibility(View.INVISIBLE);
-                }
-                if (memory.getComments() != null) {
-                   num_of_comments.setText(memory.getComments().size() + "");
-                } else {
-                   num_of_comments.setVisibility(View.INVISIBLE);
-                }
-                if (memory.getTags() != null) {
-                    String s = "";
-                    for (Tag tag : memory.getTags()) {
-                        s += "#" + tag.getLabel();
-                    }
-                   tags.setText(s);
-                } else
-                   tags.setVisibility(View.INVISIBLE);
-                if (memory.getPictures() != null) {
-                    ArrayList<ImgItem> images = new ArrayList<>();
-                    ArrayList<Picture> pictures = new ArrayList<>();
-                    pictures = memory.getPictures();
-                    for (int i = 0; i < pictures.size(); i++) {
-                        images.add(new ImgItem(" ", pictures.get(i).getLink()));
-                    }
-                    //images.add((ImgItem) memory.getPictures();
-                    ImageAdapter imgAdapter = new ImageAdapter(getApplicationContext(), images);
-                    imagesrv.setHasFixedSize(true);
-                    imagesrv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                    imagesrv.setAdapter(imgAdapter);
-                } else {
-                    imagesrv.setVisibility(View.INVISIBLE);
-                }
+                          Intent intent = new Intent(getApplicationContext(), CommentActivity.class);
+                          intent.putExtra("memory", memory);
+                          startActivity(intent);
 
-            }
+                      }
+                  });
+                  sharebtn.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          Intent sendIntent = new Intent();
+                          sendIntent.setAction(Intent.ACTION_SEND);
+                          sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                          sendIntent.setType("text/plain");
+                          Intent shareIntent = Intent.createChooser(sendIntent, null);
+                          startActivity(shareIntent);
+                      }
+                  });
+                  if (memory.getDescription() != null) {
+                      descr.setText(memory.getDescription());
+                  } else if (descr != null) {
+                      descr.setVisibility(View.INVISIBLE);
+                  }
+                  if (memory.getLocation() != null) {
+                      location.setWidth(calculateWidth(memory.getLocation()));
+                      location.setText(memory.getLocation());
+                  } else {
+                      location.setVisibility(View.INVISIBLE);
+                  }
+                  if (memory.getFeeling() != null) {
+                      feeling.setWidth(calculateWidth("#" + memory.getFeeling()));
+                      feeling.setText("#" + memory.getFeeling());
+                  } else {
+                      feeling.setVisibility(View.INVISIBLE);
+                  }
+                  String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+                  if (memory.getMemoryDate() != null) {
+                      String memDate = monthNames[memory.getMemoryDate().get(Calendar.MONTH) + 1] + " " + memory.getMemoryDate().get(Calendar.DAY_OF_MONTH) + ", " + (memory.getMemoryDate().get(Calendar.YEAR));
+                      mem_date.setWidth(calculateWidth(memDate));
+                      mem_date.setText(memDate);
+                  } else
+                      mem_date.setVisibility(View.INVISIBLE);
+                  if (memory.getLikes() != null) {
+                      num_of_likes.setText(memory.getLikes().size() + "");
+                  } else {
+                      num_of_likes.setVisibility(View.INVISIBLE);
+                  }
+                  if (memory.getComments() != null) {
+                      num_of_comments.setText(memory.getComments().size() + "");
+                  } else {
+                      num_of_comments.setVisibility(View.INVISIBLE);
+                  }
+                  if (memory.getTags() != null) {
+                      String s = "";
+                      for (Tag tag : memory.getTags()) {
+                          s += "#" + tag.getLabel();
+                      }
+                      tags.setText(s);
+                  } else
+                      tags.setVisibility(View.INVISIBLE);
+                  if (memory.getPictures() != null) {
+                      ArrayList<ImgItem> images = new ArrayList<>();
+                      ArrayList<Picture> pictures = new ArrayList<>();
+                      pictures = memory.getPictures();
+                      for (int i = 0; i < pictures.size(); i++) {
+                          images.add(new ImgItem(" ", pictures.get(i).getLink()));
+                      }
+                      //images.add((ImgItem) memory.getPictures();
+                      ImageAdapter imgAdapter = new ImageAdapter(getApplicationContext(), images);
+                     imagesrv.setHasFixedSize(true);
+
+                      imagesrv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                      imagesrv.setAdapter(imgAdapter);
+                  } else {
+                      imagesrv.setVisibility(View.INVISIBLE);
+                  }
+
+              }}
             @Override
             public void onFailure(Call<Memory> call, Throwable t) {
 
             }
         });
     }
+
     public int calculateWidth(String text) {
         Rect bounds = new Rect();
         TextView textView = new TextView(getApplicationContext());

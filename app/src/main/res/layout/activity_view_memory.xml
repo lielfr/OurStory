@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/background"
             android:layout_width="414dp"
-            android:layout_height="550dp"
+            android:layout_height="500dp"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:clickable="false"
@@ -103,8 +103,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memory_pic"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="201dp"
+            android:layout_margin="4dp"
+            android:padding="12dp"
+            android:paddingHorizontal="12dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -188,14 +191,14 @@
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
             android:layout_width="380dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_marginTop="224dp"
             android:background="@drawable/edit_round3"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="center_vertical"
             android:text="#TAG"
             android:textColor="@color/colorName"
-            android:textSize="26sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
@@ -205,7 +208,7 @@
             app:layout_constraintTop_toBottomOf="@+id/descr"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
-            app:trimLength="17"
+            app:trimLength="35"
             app:trimMode="trimModeLength" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView

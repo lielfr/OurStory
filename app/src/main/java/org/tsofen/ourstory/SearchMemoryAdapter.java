@@ -139,7 +139,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
             adapter.notifyDataSetChanged();
             Intent showMemory = new Intent(view.getContext(), ViewMemory.class);
             if (showMemory != null) {
-                showMemory.putExtra("id", element.getId().toString());
+                showMemory.putExtra("id", element.getId());
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
                 ctx.startActivity(showMemory);                                                 //TODO NEED to Activate this Intent
             } else {

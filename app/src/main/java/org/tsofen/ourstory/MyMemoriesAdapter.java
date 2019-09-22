@@ -85,17 +85,19 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Memory memory = mMemories.get(position);
-        holder.commentbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if(memory.getComments()!=null) {
+            holder.commentbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
-                intent.putExtra("memory",memory);
-                intent.putExtra("user",user);
-                ctx.startActivity(intent);
+                    Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                    intent.putExtra("memory", memory);
+                    intent.putExtra("user", user);
+                    ctx.startActivity(intent);
 
-            }
-        });
+                }
+            });
+        }
 
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +203,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             holder.num_of_likes.setVisibility(View.INVISIBLE);
         else
             holder.num_of_likes.setText(memory.getLikes().size() + "");
-        if(memory.getComments().isEmpty())
+        if(memory.getComments().isEmpty() && memory.getComments().size()!=0)
             holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
             holder.num_of_comments.setText(memory.getComments().size()+"");
