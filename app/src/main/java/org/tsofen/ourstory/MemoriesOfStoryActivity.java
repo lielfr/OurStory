@@ -43,8 +43,8 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     TextView story_name;
     long storyId, memoryId;
     Memory memory;
-    int year,flag;
-    String storyName,tag;
+    int year, flag;
+    String storyName, tag;
     private ArrayList<Memory> memories;
 
     @Override
@@ -53,11 +53,11 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_memories);
         Intent intent = getIntent();
         tag = intent.getStringExtra("tag");
-        storyId= intent.getLongExtra("storyId",storyId);
-        memoryId= intent.getLongExtra("memoryId",memoryId);
-        storyName= intent.getStringExtra("storyName");
-        year= intent.getIntExtra("year",year);
-        flag = intent.getIntExtra("flag",flag);
+        storyId = intent.getLongExtra("storyId", storyId);
+        memoryId = intent.getLongExtra("memoryId", memoryId);
+        storyName = intent.getStringExtra("storyName");
+        year = intent.getIntExtra("year", year);
+        flag = intent.getIntExtra("flag", flag);
         rv = findViewById(R.id.recycler_mem);
         story_name = findViewById(R.id.memoriestxt);
         int story_name_color = ResourcesCompat.getColor(getResources(), R.color.colorLogin, getTheme());
@@ -68,12 +68,12 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         story_name.setText(spannable, TextView.BufferType.SPANNABLE);
         MemoryAService = WebFactory.getService();
-        if(flag==0) {
+        if (flag == 0) {
             MemoryAService.GetMemoriesByYear(storyId, year).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memories);
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this, memories);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     adapter.notifyDataSetChanged();
@@ -84,9 +84,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
                 }
             });
-        }
-
-        else if(flag==1){
+        } else if (flag == 1) {
             MemoryAService.GetMemoriesByTag(storyId, tag).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
@@ -102,16 +100,14 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
                 }
             });
-        }
-        else
-        {
+        } else {
             MemoryAService.GetMemoryById(memoryId).enqueue(new Callback<Memory>() {
                 @Override
                 public void onResponse(Call<Memory> call, Response<Memory> response) {
                     memory = response.body();
                     ArrayList<Memory> memoryOne = new ArrayList<>();
                     memoryOne.add(memory);
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this,memoryOne );
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this, memoryOne);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     adapter.notifyDataSetChanged();
@@ -127,9 +123,9 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
         // search button
         ImageButton btn = findViewById(R.id.searchview);
-        btn.setOnClickListener(new View.OnClickListener(){
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent myIntent = new Intent(MemoriesOfStoryActivity.this, SearchStory.class);
                 MemoriesOfStoryActivity.this.startActivity(myIntent);
             }

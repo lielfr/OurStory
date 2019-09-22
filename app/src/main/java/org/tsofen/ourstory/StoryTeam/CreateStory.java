@@ -112,11 +112,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!Character.isUpperCase(editable.charAt(0))) {
-                    char c = Character.toUpperCase(editable.charAt(0));
-                    String str = editable.replace(0, 1, c + "").toString();
+                if(editable.length()>0 && editable!=null){
+                    if (!Character.isUpperCase(editable.charAt(0))) {
+                        char c = Character.toUpperCase(editable.charAt(0));
+                        String str = editable.replace(0, 1, c + "").toString();
 
-                    firstName.setText(str);
+                        firstName.setText(str);
+                    }
                 }
             }
         });
@@ -135,11 +137,13 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!Character.isUpperCase(editable.charAt(0))) {
-                    char c = Character.toUpperCase(editable.charAt(0));
-                    String str = editable.replace(0, 1, c + "").toString();
+                if(editable.length()>0&&editable!=null){
+                    if (!Character.isUpperCase(editable.charAt(0))) {
+                        char c = Character.toUpperCase(editable.charAt(0));
+                        String str = editable.replace(0, 1, c + "").toString();
 
-                    lastName.setText(str);
+                        lastName.setText(str);
+                    }
                 }
             }
         });
@@ -310,7 +314,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                         Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }else{
+            } else {
                 Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
             }
         } else if (UserStatusCheck.getUserStatus().equals("visitor")) {
@@ -326,7 +330,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     Intent i = new Intent(CreateStory.this, LogIn.class);
                     //startActivity(i);
                     i.putExtra("logtocreate", "logToCreate");
-                    startActivityForResult(i,1);
+                    startActivityForResult(i, 1);
                 }
             });
             myAlertBuilder.setNegativeButton("Register", new DialogInterface.OnClickListener() {
@@ -335,22 +339,20 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     Intent i = new Intent(CreateStory.this, RegistrationPage1.class);
                     //startActivity(i);
                     i.putExtra("registertocreate", "registerToCreate");
-                    startActivityForResult(i,1);
+                    startActivityForResult(i, 1);
                 }
             });
             // Create and show the AlertDialog.
             myAlertBuilder.show();
         }
-
-
-
     }
 
 
     private void Birth() {
 
         StringBuffer strBuffer = new StringBuffer();
-        strBuffer.append("Birth Date: ");
+        //strBuffer.append("Birth Date: ");
+
         if (!checked1 && !checked2) {
             birthDateFields = 3;
             // three fields are shown
@@ -383,7 +385,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         }
         f3 = true;
         showBirthDate.setText(strBuffer.toString());
-        showBirthDate.setTextColor(getResources().getColor(R.color.colorGrayHint));
+        showBirthDate.setTextColor(getResources().getColor(R.color.textColor));
         showBirthDate.setGravity(Gravity.CENTER);
         showBirthDate.setTextSize(getResources().getDimension(R.dimen.textSize));
     }
@@ -391,7 +393,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     private void Death() {
 
         StringBuffer strBuffer = new StringBuffer();
-        strBuffer.append("Death Date: ");
+        //strBuffer.append("Death Date: ");
 
         if (!checked3 && !checked4) {
             deathDateFields = 3;
@@ -425,7 +427,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         }
         f4 = true;
         showDeathDate.setText(strBuffer.toString());
-        showDeathDate.setTextColor(getResources().getColor(R.color.colorGrayHint));
+        showDeathDate.setTextColor(getResources().getColor(R.color.textColor));
         showDeathDate.setGravity(Gravity.CENTER);
         showDeathDate.setTextSize(getResources().getDimension(R.dimen.textSize));
     }
@@ -700,3 +702,4 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         finish();
     }
 }
+

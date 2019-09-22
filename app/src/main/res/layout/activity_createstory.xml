@@ -105,8 +105,8 @@
                     android:fontFamily="@font/quicksand"
                     android:hint="@string/first_name"
 
-                    android:inputType="text|textPersonName|textCapWords|textCapSentences"
                     android:capitalize="words"
+                    android:inputType="text|textPersonName|textCapWords|textCapSentences"
                     android:maxLines="1"
                     android:paddingLeft="5dp"
                     android:textColorHint="@color/colorGrayHint"
@@ -157,8 +157,8 @@
                     android:background="@drawable/edittext_legend_continuous"
                     android:fontFamily="@font/quicksand"
                     android:hint="@string/last_name"
-                    android:inputType="text|textPersonName|textCapWords"
                     android:capitalize="words"
+                    android:inputType="text|textPersonName|textCapWords"
                     android:maxLines="1"
                     android:paddingLeft="5dp"
                     android:textColorHint="@color/colorGrayHint"
@@ -206,6 +206,18 @@
                     android:orientation="vertical"
                     android:layout_marginTop="12dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/birthTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColor"
+                        android:text="Birth date is: "
+                        android:textSize="18dp" />
+
                     <TextView
                         android:id="@+id/showBirthDate"
                         android:layout_width="wrap_content"
@@ -213,6 +225,7 @@
                         android:calendarTextColor="@color/colorGrayHint"
                         android:text=""
                         android:textSize="@dimen/textSize" />
+                </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -276,6 +289,18 @@
                     android:orientation="vertical"
                     android:layout_marginTop="12dp" >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/deathTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGrayHint"
+                        android:text="Death date is: "
+                        android:textSize="18dp" />
+
                     <TextView
                         android:id="@+id/showDeathDate"
                         android:layout_width="wrap_content"
@@ -283,6 +308,7 @@
                         android:calendarTextColor="@color/colorGrayHint"
                         android:textSize="@dimen/textSize"
                         android:text="" />
+                </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -4,7 +4,7 @@ public class ImgItem {
     String imgName;
     Integer img;
 
-    public ImgItem(String name, Integer img){
+    public ImgItem(String name, Integer img) {
         this.imgName=name;
         this.img=img;
     }

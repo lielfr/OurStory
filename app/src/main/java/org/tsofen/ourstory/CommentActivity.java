@@ -66,15 +66,15 @@ public class CommentActivity extends Activity {
         comment.setText(txtview.getText().toString());
         comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        service.newComment(memoryA.getId(),comment).enqueue(new Callback<Comment>() {
+        service.newComment(memoryA.getId(), comment).enqueue(new Callback<Comment>() {
             @Override
             public void onResponse(Call<Comment> call, Response<Comment> response) {
-                Toast.makeText(getApplicationContext(),"added",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<Comment> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
 
             }
         });

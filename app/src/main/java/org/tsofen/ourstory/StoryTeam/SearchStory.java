@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -35,14 +36,14 @@ public class SearchStory extends AppCompatActivity {
     private Spinner spinner;
     String item ;
     TextView searchresult ;
-    StoryFragment CurrentFragment = null ;
+    StoryFragment CurrentFragment = null;
     int flag = 0;
     int op = 0;
     int D;
     int M ;
     int Y ;
     int Taplayout;
-
+    User user = null;
 
 
 
@@ -74,16 +75,17 @@ public class SearchStory extends AppCompatActivity {
         // Each page is represented by its own fragment.
         final ViewPager viewPager = findViewById(R.id.pager);
         Intent intent = getIntent() ;
+        user = (User) intent.getSerializableExtra("user");
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager==null) {
             Log.i("fragment", "you have found it the fragment manager is null........................... ");
         }
 
 
-        final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount());
+        final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount(), this);
         viewPager.setAdapter(adapter);
 
-       CurrentFragment = (StoryFragment) adapter.getItem(0);
+        CurrentFragment = (StoryFragment) adapter.getItem(0);
         if (CurrentFragment!=null){
             Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
         }else{
@@ -143,7 +145,7 @@ public class SearchStory extends AppCompatActivity {
         });
         if(CurrentFragment == null) {
             //CurrentFragment = adapter.getItem(0);
-        }else{
+        } else {
 //            Toast.makeText(this, "the current Fragmen is null ", Toast.LENGTH_SHORT).show();
         }
         searchresult = findViewById(R.id.searchresult);
@@ -156,7 +158,7 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // if (tabLayout)
-                SendSearchResToFragment(searchresult.getText().toString(),0,CurrentFragment);
+                SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
 
             }
 
