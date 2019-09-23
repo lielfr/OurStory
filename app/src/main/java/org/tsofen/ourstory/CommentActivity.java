@@ -47,18 +47,38 @@ public class CommentActivity extends Activity {
         rv.setLayoutManager(new LinearLayoutManager(CommentActivity.this));
         adapter.notifyDataSetChanged();
 
-        Button btn = findViewById(R.id.sendBtn2);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
+//        Button btn = findViewById(R.id.sendBtn2);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
 
 
 
     }
+
+    private void updateComments() {
+        OurStoryService service = WebFactory.getService();
+        service.GetMemoryById(memoryA.getId()).enqueue(new Callback<Memory>() {
+            @Override
+            public void onResponse(Call<Memory> call, Response<Memory> response) {
+                if (response.code() == 200) {
+                    memoryA = response.body();
+                    adapter.comments = memoryA.getComments();
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Memory> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void SendCmnt(View view) {
 
         Comment comment = new Comment();
@@ -70,6 +90,7 @@ public class CommentActivity extends Activity {
             @Override
             public void onResponse(Call<Comment> call, Response<Comment> response) {
                 Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
+                updateComments();
             }
 
             @Override

@@ -27,7 +27,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface OurStoryService {
-    @FormUrlEncoded
     @Headers("Content-Type: application/json")
     @POST("comments/create/{id}")
     Call<Comment> newComment(@Path("id") long id, @Body Comment comment);
