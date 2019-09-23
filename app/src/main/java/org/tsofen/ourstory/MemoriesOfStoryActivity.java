@@ -54,7 +54,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tag = intent.getStringExtra("tag");
         storyId = intent.getLongExtra("storyId", storyId);
-        memoryId = intent.getLongExtra("memoryId", memoryId);
+       // memoryId = intent.getLongExtra("memoryId", memoryId);
         storyName = intent.getStringExtra("storyName");
         year = intent.getIntExtra("year", year);
         flag = intent.getIntExtra("flag", flag);
