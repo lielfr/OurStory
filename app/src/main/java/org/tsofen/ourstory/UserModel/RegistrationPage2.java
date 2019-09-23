@@ -123,7 +123,7 @@ Date date;
         day_string = day;
         year_string = year;
         String dateMessage = (month_string + "/" + day_string + "/" + year_string);
-        date = new Date(year, month, day);
+        date = new Date(year-1900, month, day);
 
         TextView year1 = findViewById(R.id.year);
         year1.setText(year_string + "");
