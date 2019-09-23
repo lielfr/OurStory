@@ -63,20 +63,18 @@ public class MemoryFragment extends Fragment {
 
     public void CommitSearch(String searchinput) {
         Log.i("fragment", "commited : searching for " + searchinput);
-
         wb = WebFactory.getService();
-
         wb.GetMemoriesByKeyword(searchinput).enqueue(new Callback<ArrayList<Memory>>() {
             @Override
             public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
-                memories = response.body();
+                    memories = response.body();
                 if (memories == null) {
                     Log.d("fragment", "No Memories");
                 } else {
-                    Log.d("fragment", "number of memories " + memories.size() + " ");
+                    Log.d("fragment", " on response number of memories " + memories.size() + " ");
+                    mAdapter = new SearchMemoryAdapter(inflatedView.getContext(), memories);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mRecyclerView.setAdapter(mAdapter);
-                    mAdapter = new SearchMemoryAdapter(inflatedView.getContext(), memories);
                     mAdapter.notifyDataSetChanged();
                 }
             }
