@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.User;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -97,7 +98,10 @@ public class UserProfile extends Fragment {
             lName.setText(profileUser.getLastName());
         if (profileUser.getDateOfBirth() != null) {
             Date date = profileUser.getDateOfBirth();
-            dOfBirth.setText(profileUser.getDateOfBirth().toString());
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String userDate = simpleDateFormat.format(date);
+            dOfBirth.setText(userDate);
         }
         if (profileUser.getGender() != null)
             gender.setText(profileUser.getGender());
