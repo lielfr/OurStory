@@ -26,6 +26,7 @@ import com.bumptech.glide.request.RequestOptions;
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.StoryTeam.MainActivity;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
@@ -228,6 +229,21 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         {
             holder.imagesrv.setVisibility(View.INVISIBLE);
         }*/
+        if (memory.getPictures() != null) {
+            ArrayList<ImgItem> images = new ArrayList<>();
+            ArrayList<Picture> pictures = new ArrayList<>();
+            pictures = memory.getPictures();
+            for (int i = 0; i < pictures.size(); i++) {
+                images.add(new ImgItem(" ", pictures.get(i).getLink()));
+            }
+            //images.add((ImgItem) memory.getPictures();
+            ImageAdapter imgAdapter = new ImageAdapter(ctx, images);
+            holder.imagesrv.setHasFixedSize(true);
+            holder.imagesrv.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
+            holder.imagesrv.setAdapter(imgAdapter);
+        } else {
+            holder.imagesrv.setVisibility(View.INVISIBLE);
+        }
     }
     @Override
     public int getItemCount() {
@@ -239,13 +255,13 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         public ImageView profile;
         ImageButton sharebtn,commentbtn, editbtn,deletebtn;
         public MyMemoriesAdapter adapter;
-        //RecyclerView imagesrv;
+        RecyclerView imagesrv;
 
 
         public ViewHolder(@NonNull View itemView, MyMemoriesAdapter MyMemoriesAdapter) {
             super(itemView);
             ctx = itemView.getContext();
-            // imagesrv = itemView.findViewById(R.id.my_memoriesRv);
+            imagesrv = itemView.findViewById(R.id.my_memoriesRv);
             deletebtn =itemView.findViewById(R.id.deletebtn);
             tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);

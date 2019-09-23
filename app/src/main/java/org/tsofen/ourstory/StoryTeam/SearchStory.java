@@ -37,6 +37,7 @@ public class SearchStory extends AppCompatActivity {
     String item ;
     TextView searchresult ;
     StoryFragment CurrentFragment = null;
+    MemoryFragment memoryFragment = null;
     int flag = 0;
     int op = 0;
     int D;
@@ -84,7 +85,7 @@ public class SearchStory extends AppCompatActivity {
 
         final PageAdapter adapter = new PageAdapter(fragmentManager, tabLayout.getTabCount(), this);
         viewPager.setAdapter(adapter);
-
+        memoryFragment = (MemoryFragment) adapter.getItem(1);
         CurrentFragment = (StoryFragment) adapter.getItem(0);
         if (CurrentFragment!=null){
             Log.i("fragment", "fragment has been attached !!!!!!!!!!!!1");
@@ -158,7 +159,13 @@ public class SearchStory extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // if (tabLayout)
-                SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
+                if (Taplayout == 0) {//check which fragment we in
+                    Log.i("fragment", "story fragment text change");
+                    SendSearchResToFragment(searchresult.getText().toString(), 0, CurrentFragment);
+                } else {
+                    Log.i("fragment", "memory fragment text change");
+                    SendSearchResToMemoryFragment(searchresult.getText().toString(), memoryFragment);
+                }
 
             }
 
@@ -259,6 +266,21 @@ public class SearchStory extends AppCompatActivity {
             fragment.CommitSearch(getApplicationContext(), searchresult, flag, op, D, M, Y, SearchBy);
         }else{
             Log.i("fragment","fragment is null");
+        }
+
+    }
+
+    public void SendSearchResToMemoryFragment(String searchresult, MemoryFragment fragment) {
+
+        Log.i("fragment", "trying to catch memory fragment");
+
+        if (fragment != null) { //TODO MemoryTEAM Please check if the fragment parameter is story fragment Or MEMORYFRAGMENT AND ACT ACCORDINGLY
+            //this section for STORYTEAM Use
+            Log.i("fragment", "memory search commited");
+
+            fragment.CommitSearch(searchresult);
+        } else {
+            Log.i("fragment", "fragment is null");
         }
 
     }
