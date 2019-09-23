@@ -54,7 +54,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tag = intent.getStringExtra("tag");
         storyId = intent.getLongExtra("storyId", storyId);
-        memoryId = intent.getLongExtra("memoryId", memoryId);
+       // memoryId = intent.getLongExtra("memoryId", memoryId);
         storyName = intent.getStringExtra("storyName");
         year = intent.getIntExtra("year", year);
         flag = intent.getIntExtra("flag", flag);
@@ -100,25 +100,6 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
-            MemoryAService.GetMemoryById(memoryId).enqueue(new Callback<Memory>() {
-                @Override
-                public void onResponse(Call<Memory> call, Response<Memory> response) {
-                    memory = response.body();
-                    ArrayList<Memory> memoryOne = new ArrayList<>();
-                    memoryOne.add(memory);
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this, memoryOne);
-                    rv.setAdapter(adapter);
-                    rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onFailure(Call<Memory> call, Throwable t) {
-
-                }
-            });
-
         }
 
         // search button

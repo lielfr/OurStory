@@ -626,7 +626,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             i.putExtra("Button", "justcreate");
                             //startActivity(i);
                         } else {
-                            // i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("id", String.valueOf(result.getStoryId()));
                             i.putExtra("result", result);
                             i.putExtra("Button", "createandadd");
                         }

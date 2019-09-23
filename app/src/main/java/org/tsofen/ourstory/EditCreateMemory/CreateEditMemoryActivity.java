@@ -664,6 +664,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                         })
                         .subscribe(finalResult -> {
                             intent.putExtra(KEY_MEMID, finalResult.getId());
+                            intent.putExtra("id", Long.toString(memory.getStory().getStoryId()));
                             setResult(RESULT_OK, intent);
                             finish();
 
