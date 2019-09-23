@@ -202,14 +202,14 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
         else {
             holder.profile.setImageResource(R.drawable.defaultprofilepicture);
         }
-        if(memory.getLikes().isEmpty() && memory.getLikes().size()!=0)
-            holder.num_of_likes.setVisibility(View.INVISIBLE);
-        else
+        if(memory.getLikes()!=null && memory.getLikes().size()!=0)
             holder.num_of_likes.setText(memory.getLikes().size() + "");
-        if(memory.getComments().isEmpty() && memory.getComments().size()!=0)
-            holder.num_of_comments.setVisibility(View.INVISIBLE);
         else
+            holder.num_of_likes.setVisibility(View.INVISIBLE);
+        if(memory.getComments()!=null && memory.getComments().size()!=0)
             holder.num_of_comments.setText(memory.getComments().size()+"");
+        else
+            holder.num_of_comments.setVisibility(View.INVISIBLE);
        if(memory.getLocation()!=null) {
            holder.location.setText(memory.getLocation());
            holder.location.setWidth(calculateWidth(memory.getLocation()));
