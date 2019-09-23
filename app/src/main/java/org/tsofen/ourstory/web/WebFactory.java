@@ -35,6 +35,8 @@ public class WebFactory {
                 return chain.proceed(request);
             }
         });
+        builder.addInterceptor(new GzipRequestInterceptor());
+        builder.addInterceptor(new UnzippingInterceptor());
         // We need that in order to allow passing Date objects.
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
