@@ -3,6 +3,7 @@ package org.tsofen.ourstory.web;
 
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
+import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.ListOfStory;
@@ -60,6 +61,10 @@ public interface OurStoryService {
 
     @PUT("memories/update/{id}")
     Observable<Memory> EditMemory(@Path("id") long id, @Body Memory memory);
+
+    @GET("tags/findAll")
+    Call<List<Tag>> GetAllTags();
+
     @GET("users/login")
     Call<User> login(@Query("mail")String email,@Query("password") String password);
 
