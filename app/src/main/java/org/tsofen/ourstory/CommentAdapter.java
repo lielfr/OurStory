@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.model.Comment;
-import org.tsofen.ourstory.model.api.Owner;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     OurStoryService user_comment;
     Context ctx;
     LayoutInflater mInflater;
-    Owner user;
+    User user;
 
     public CommentAdapter(Context context, List<Comment> comments) {
         this.comments = comments;

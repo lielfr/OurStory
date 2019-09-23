@@ -6,14 +6,12 @@ import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.CommentA;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.ListOfStory;
-import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
@@ -46,7 +44,7 @@ public interface OurStoryService {
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
     @GET("users/findById/{id}")
-    Call<Owner> GetUserById(@Path("id") long id);
+    Call<User> GetUserById(@Path("id") long id);
     @GET("stories/findStoriesByKeyword/")
     Call<ArrayList<ListOfStory>> GetStoriesByName(@Query("name") String n);
 

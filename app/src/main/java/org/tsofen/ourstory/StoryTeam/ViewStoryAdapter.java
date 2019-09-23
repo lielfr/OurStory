@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.ViewMemory;
 import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.Memory;
 import org.tsofen.ourstory.model.api.Story;
@@ -123,10 +124,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
         @Override
         public void onClick(View view) {
             Log.d("hh", "hh");
-            int YearId = 2131362217;
-            int img1Id = 2131362015;
-            int img2Id = 2131362016;
-            int img3Id = 2131362017;
+            int YearId = R.id.textView13;
+            int img1Id = R.id.item_memory_img_1;
+            int img2Id = R.id.item_memory_img_2;
+            int img3Id = R.id.item_memory_img_3;
             mposition = getLayoutPosition();
             Toast.makeText(view.getContext(), Integer.toString(mposition), Toast.LENGTH_SHORT).show();
             Toast.makeText(view.getContext(), storyId + "", Toast.LENGTH_LONG).show();
@@ -146,10 +147,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 Toast.makeText(view.getContext(), "img1clicked", Toast.LENGTH_SHORT).show();
                 mCurrent = mStoryList.get(mposition);
                 Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-                intent.putExtra("flag", 2);
+                intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
-                intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
+                intent.putExtra("year", mCurrent.getYear());
                 Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2) + "hhhh", Toast.LENGTH_LONG).show();
                 context.startActivity(intent);
 
@@ -157,10 +158,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 Toast.makeText(view.getContext(), "img2clicked", Toast.LENGTH_SHORT).show();
                 mCurrent = mStoryList.get(mposition);
                 Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-                intent.putExtra("flag", 2);
+                intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
-                intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
+                intent.putExtra("year", mCurrent.getYear());
                 Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
 
@@ -169,11 +170,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 Toast.makeText(view.getContext(), "img3clicked", Toast.LENGTH_SHORT).show();
                 VSMemories mCurrent = mStoryList.get(mposition);
                 Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
-                intent.putExtra("flag", 2);
+                intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
-                intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
-                Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
+                intent.putExtra("year", mCurrent.getYear());
                 context.startActivity(intent);
 
             }

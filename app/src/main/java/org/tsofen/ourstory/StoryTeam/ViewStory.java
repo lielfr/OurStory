@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,7 +61,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     //Intent intent = getIntent() ;
     long id;
     FullViewStory story_full;
-    Date dob,dod;
+    Date dob, dod;
+    Intent intent;
 
     @Override
     public void onRestart() {
@@ -73,34 +75,25 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_story);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Boolean flag = Boolean.FALSE;
 
-
-        Story story = new Story("pini Cohen", "12/8/1930", "5/4/2002", "mm");
-//        String Name=story.getNameOfPerson();
-//        String date1= story.getDateOfBirth();
-//        String date2=story.getDateOfDeath();
-//
-        for (int i = 0; i < 20; i++) {
-            mStoryList.addLast(new Story("pini Cohen" + i, "12/8/1930" + i, "5/4/2002", "m"));
-
-        }
         Activity aa = this;
-        Intent intent = getIntent();
-        if(intent.getStringExtra("id")!=null)
+        if (intent == null)
+            intent = getIntent();
+        if (intent.getStringExtra("id") != null && id == 0)
             id = Long.parseLong(intent.getStringExtra("id"));
 
-        if(intent.getStringExtra("Button")!=null && intent.getStringExtra("Button").equals("createandadd")){
+        if (intent.getStringExtra("Button") != null && intent.getStringExtra("Button").equals("createandadd")) {
+            intent.removeExtra("Button"); // Make sure we don't go back
             AddMemoryLive((Story) intent.getSerializableExtra("result"));
             Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
         }
-        // Toast.makeText(this, mStoryList.get(7).getNameOfPerson(), Toast.LENGTH_SHORT).show();
-//
-//        if(intent.getStringExtra("id")!=null)
-//        id = Long.parseLong(intent.getStringExtra("id"));
-
-
-
 
         story_api = WebFactory.getService();
         story_api.GetFullViewStoryById(id).enqueue(new Callback<FullViewStory>() {
@@ -112,7 +105,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                 } else {
 
                     String personName = story_full.getStory().getNameOfPerson();
-//                    Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_LONG).show();
 
                     TextView textView1 = (findViewById(R.id.textView));
                     textView1.setText(personName);
@@ -129,17 +121,17 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
 
                     try {
-                        if(story_full.getStory().getDateOfBirth()!=null&&story_full.getStory().getDateOfDeath()!=null)
-                        { dob = df.parse(story_full.getStory().getDateOfBirth());
+                        if (story_full.getStory().getDateOfBirth() != null && story_full.getStory().getDateOfDeath() != null) {
+                            dob = df.parse(story_full.getStory().getDateOfBirth());
 
-                            dod = df.parse(story_full.getStory().getDateOfDeath());}
+                            dod = df.parse(story_full.getStory().getDateOfDeath());
+                        }
                         date = df1.format(dob) + "-" + df1.format(dod);
 
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
-//
                     parts = date2.split("-");
                     year = parts[0];
                     month = parts[1];
@@ -147,7 +139,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                     day = day.substring(0, 2);
 
                     date2 = day + "/" + month + "/" + year;
-//
 
                     TextView textView2 = (findViewById(R.id.textView2));
                     textView2.setText(date);
@@ -165,9 +156,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                                 .error(R.drawable.nopicyet);
 
                         Glide.with(aa).load(uri).apply(options).into(pic);
-                    } else {
-//                            ImageView profile_Pic = (ImageView) findViewById(R.id.imageButton3); //if ther eis no profile pic we need to set the defult one
-//                            profile_Pic.setImageResource(R.drawable.nopicyet);
                     }
 
 
@@ -178,9 +166,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
                         constraintLayout.setVisibility(View.VISIBLE);
                         Toast.makeText(aa, "dsflkhjvfkd", Toast.LENGTH_SHORT).show();
-//            ImageView image4 = findViewById(R.id.imageView3);
-//            image4.setImageResource(R.drawable.nopicyet);
-//
 
                     } else {
                         LinearLayout linearLayout = findViewById(R.id.linearLayout3);
@@ -194,25 +179,28 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         if (story_full != null && story_full.getTop3tags().size() > 0) {
                             textView.setText(story_full.getTop3tags().get(0));
                             Log.d("sss", story_full.getTop3tags().get(0));
+                            if (story_full.getTop3tags().size() > 1) {
+                                textView = findViewById(R.id.textView5);
+                                textView.setText(story_full.getTop3tags().get(1));
+                            }
+                            if (story_full.getTop3tags().size() > 2) {
+                                textView = findViewById(R.id.textView6);
+                                textView.setText(story_full.getTop3tags().get(2));
+                            }
 
-                            textView = findViewById(R.id.textView5);
-                            textView.setText(story_full.getTop3tags().get(1));
-                            textView = findViewById(R.id.textView6);
-                            textView.setText(story_full.getTop3tags().get(2));
                         }
 
 
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(aa.getApplicationContext(), story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
-
 
 
                         // Connect the adapter with the RecyclerView.
@@ -238,129 +226,13 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         });
 
 
-
     }
 
-
-//
-//            story_api = WebFactory.getService();
-//            story_api.GetStoryById(new Long(23)).enqueue(new Callback<Story>() {
-//                @Override
-//                public void onResponse(Call<Story> call, Response<Story> response) {
-//                    Log.d("Response", "Response");
-//                    story = response.body();
-//                    String name_p = story.getNameOfPerson();
-//                    Toast.makeText(getApplicationContext(), name_p, Toast.LENGTH_LONG).show();
-//                    TextView textView1 = (findViewById(R.id.textView));
-//                    textView1.setText(name_p);
-//
-//                    String date1 = story.getDateOfBirth();
-//                    String date2 = story.getDateOfDeath();
-//                    String[] parts = date1.split("-");
-//                    String year = parts[0];
-//                    String month = parts[1];
-//                    String day = parts[2];
-//                    day=day.substring(0,2);
-//
-//                    date1=day+"/"+month+"/"+year;
-//
-//                    parts = date2.split("-");
-//                    year = parts[0];
-//                    month = parts[1];
-//                    day = parts[2];
-//                    day=day.substring(0,2);
-//
-//                    date2= day+"/"+month+"/"+year;
-//
-//
-//                    String date = date1 + "-" + date2;
-//                    TextView textView2 = (findViewById(R.id.textView2));
-//                    textView2.setText(date);
-//
-//
-//
-//
-//
-//
-//
-//                    ImageView pic = findViewById(R.id.imageView3);
-//                    imageView_profile = story.getPicture();
-//                    String st=imageView_profile.toString();
-//                    Uri uri=Uri.parse(st);
-//                    RequestOptions options = new RequestOptions()
-//                            .override(375,192)
-//                            .centerCrop()
-//                            .placeholder(R.drawable.nopicyet)
-//                            .error(R.drawable.nopicyet);
-//
-//                    Glide.with(aa).load(uri).apply(options).into(pic);
-//
-//
-//
-//                    story_api2 = WebFactory.getService();
-//                    story_api2.GetListPicById(23).enqueue(call<);
-//
-//
-//
-////                    story_api = WebFactory.getService();
-////                    story_api.GetTop3TagsByStoryId(new Long(23)).enqueue(new Callback<Tags>() {
-////                        @Override
-////                        public void onResponse(Call<Tags> call, Response<Tags> response) {
-////                            Log.d("Response", "Response");
-////                            tag = response.body();
-////                            Toast.makeText(getApplicationContext(),tag.getHref(),Toast.LENGTH_LONG).show();
-////                            String texttag = tag.getHref();
-////                        }
-////
-////
-////
-////                    @Override
-////                    public void onFailure(Call<Tags> call, Throwable t) {
-////                        Log.d("Failure", t.toString());
-////                    }
-////
-////                });
-//
-//
-//
-//
-//                }
-//
-//
-//                @Override
-//                public void onFailure(Call<Story> call, Throwable t) {
-//                    Log.d("Failure", t.toString());
-//
-//                }
-//
-//            });
-//        }
-
-    // Story story = new Story(fName, lName, date1, date2, iv, tag1, tag2, tag3, ic1, ic2, ic3);
-
-//        String date;
-//        date = date1 + "-" + date2;
-//        TextView textView2 = (findViewById(R.id.textView2));
-//        textView2.setText(date);
-
-//        TextView textView4 = (findViewById(R.id.textView4));
-//        textView4.setText(story.getTag1());
-//
-//        TextView textView5 = (findViewById(R.id.textView5));
-//        textView5.setText(story.getTag2());
-//
-//        TextView textView6 = (findViewById(R.id.textView6));
-//        textView6.setText(story.getTag3());
-//
-//        ImageView image1 = findViewById(R.id.imageView5);
-//        image1.setImageResource(story.getTag_icon1());
-//
-//        ImageView image2 = findViewById(R.id.imageView7);
-//        image2.setImageResource(story.getTag_icon2());
-//
-//        ImageView image3 = findViewById(R.id.imageView6);
-//        image3.setImageResource(story.getTag_icon3());
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        intent = data;
+    }
 
     public void launchSearchActivity(View view) {
         Intent i = new Intent(ViewStory.this, SearchStory.class);
@@ -393,7 +265,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story_full.getStory());
         intent.putExtra("user", getIntent().getSerializableExtra("user"));
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
 
@@ -431,13 +303,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     }
 
 
-
-
     public void AddMemoryLive(Story story) {
         Intent intent = new Intent(this, CreateEditMemoryActivity.class);
         intent.putExtra(CreateEditMemoryActivity.KEY_CREATE, story);
         intent.putExtra("user", getIntent().getSerializableExtra("user"));
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 
 }
