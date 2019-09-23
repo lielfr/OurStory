@@ -146,22 +146,22 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
             } else if (view.getId() == img1Id) {
                 Toast.makeText(view.getContext(), "img1clicked", Toast.LENGTH_SHORT).show();
                 mCurrent = mStoryList.get(mposition);
-                Intent intent = new Intent(view.getContext(), ViewMemory.class);
-                intent.putExtra("flag", 2);
+                Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
-                intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
+                intent.putExtra("year", mCurrent.getYear());
                 Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2) + "hhhh", Toast.LENGTH_LONG).show();
                 context.startActivity(intent);
 
             } else if (view.getId() == img2Id) {
                 Toast.makeText(view.getContext(), "img2clicked", Toast.LENGTH_SHORT).show();
                 mCurrent = mStoryList.get(mposition);
-                Intent intent = new Intent(view.getContext(), ViewMemory.class);
-                intent.putExtra("flag", 2);
+                Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
-                intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
+                intent.putExtra("year", mCurrent.getYear());
                 Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
 
@@ -169,12 +169,11 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
 
                 Toast.makeText(view.getContext(), "img3clicked", Toast.LENGTH_SHORT).show();
                 VSMemories mCurrent = mStoryList.get(mposition);
-                Intent intent = new Intent(view.getContext(), ViewMemory.class);
-                intent.putExtra("flag", 2);
+                Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
+                intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
-                intent.putExtra("memoryId", mCurrent.getPics().get(mposition).get(2));
-                Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
+                intent.putExtra("year", mCurrent.getYear());
                 context.startActivity(intent);
 
             }

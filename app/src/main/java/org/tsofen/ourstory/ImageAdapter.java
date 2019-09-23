@@ -62,7 +62,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         String st = mCurrent.getImg();
         Uri uri = Uri.parse(st);
         RequestOptions options = new RequestOptions()
-                .override(600, 600)
+                .override(650, 600)
                 .centerCrop()
                 .placeholder(R.drawable.nopicyet)
                 .error(R.drawable.nopicyet);
