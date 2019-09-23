@@ -3,10 +3,6 @@
     package="org.tsofen.ourstory"
     android:installLocation="preferExternal">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ourstory_logo"
@@ -15,41 +11,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="org.tsofen.ourstory.UserModel.AppHomePage">
-                    <intent-filter>
+        <activity android:name=".ViewMemory"></activity>
+        <activity android:name=".UserModel.AppHomePage">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.tsofen.ourstory.UserModel.LogIn" />
-        <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage1" />
-        <activity android:name="org.tsofen.ourstory.UserModel.RegistrationPage2" />
-        <activity android:name="org.tsofen.ourstory.UserModel.ForgotPassword" />
+        <activity android:name=".UserModel.LogIn" />
+        <activity android:name=".UserModel.RegistrationPage1" />
+        <activity android:name=".UserModel.RegistrationPage2" />
+        <activity android:name=".UserModel.ForgotPassword" />
         <activity
-            android:name="org.tsofen.ourstory.StoryTeam.CreateStory"
+            android:name=".StoryTeam.CreateStory"
             android:label="CreateStory"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
-
-
-        <activity android:name="org.tsofen.ourstory.StoryTeam.ViewStory"></activity>
-        <activity android:name="org.tsofen.ourstory.StoryTeam.SearchStory"></activity>
+        <activity android:name=".StoryTeam.ViewStory" />
+        <activity android:name=".StoryTeam.SearchStory" />
         <activity
-            android:name="org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity"
+            android:name=".EditCreateMemory.CreateEditMemoryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="org.tsofen.ourstory.TeamsHomePage.TeamsHomePg" />
+        <activity android:name=".TeamsHomePage.TeamsHomePg" />
         <activity
-            android:name="org.tsofen.ourstory.CommentActivity"
+            android:name=".CommentActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
-            android:name="org.tsofen.ourstory.MemoriesOfStoryActivity"
+            android:name=".MemoriesOfStoryActivity"
             android:label="Memories" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

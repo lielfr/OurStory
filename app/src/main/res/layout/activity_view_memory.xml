@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/list_item"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="51.33dp"
+            android:layout_height="23.85dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ourstory_logo" />
+
+        <TextView
+            android:id="@+id/memoryOf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="104dp"
+            android:layout_marginLeft="104dp"
+            android:layout_marginBottom="16dp"
+            android:text="Memory of"
+            android:textColor="@color/colorWhite"
+            android:textSize="21sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/nameS"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="5dp"
+            android:text="name"
+            android:textColor="@color/colorLogin"
+            android:textSize="21sp"
+            app:layout_constraintBottom_toBottomOf="@+id/memoryOf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintStart_toEndOf="@+id/memoryOf"
+            app:layout_constraintTop_toTopOf="@+id/memoryOf"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="100dp"
         android:layout_weight="1"
-        android:background="@color/colorPrimary">
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="@id/header_layout">
 
         <ImageView
             android:id="@+id/background"
@@ -20,10 +80,10 @@
             android:clickable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/picture_person"
@@ -72,16 +132,16 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/quicksand_bold"
-            android:text="Name"
 
+            android:text="Name"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/picture_person"
             app:layout_constraintStart_toEndOf="@+id/picture_person"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="8dp"
             app:layout_constraintVertical_bias="0.446" />
 
         <TextView
@@ -89,6 +149,7 @@
             android:layout_width="0dp"
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="end"
             android:text="date"
@@ -98,24 +159,18 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/name_txt_person"
-            android:layout_marginRight="8dp"
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/memory_pic"
-            android:layout_width="0dp"
-            android:layout_height="201dp"
-            android:layout_margin="12dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="center"
-            android:padding="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descr"
-            app:layout_constraintVertical_bias="0.035" />
+        <ImageButton
+            android:id="@+id/sharebtn2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:background="@color/colorPrimaryDark"
+            android:onClick="shareMyMemories"
+            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
+            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
+            app:srcCompat="@drawable/sharenew" />
 
         <ImageButton
             android:id="@+id/commentbtn2"
@@ -133,9 +188,9 @@
             android:id="@+id/commentNum"
             android:layout_width="22dp"
             android:layout_height="17dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginBottom="16dp"
 
             android:fontFamily="@font/quicksand_bold"
             android:text="9"
@@ -165,7 +220,7 @@
             android:layout_height="17dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/quicksand_bold"
             android:text="15"
             android:textColor="@color/colorLogin"
@@ -175,16 +230,24 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/likebtn" />
 
-        <ImageButton
-            android:id="@+id/sharebtn2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-
-            android:background="@color/colorPrimaryDark"
-            android:onClick="shareMyMemories"
-            app:layout_constraintStart_toEndOf="@+id/commentbtn2"
-            app:layout_constraintTop_toTopOf="@+id/commentbtn2"
-            app:srcCompat="@drawable/sharenew" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memory_pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descr"
+            android:clipToPadding="false"
+            android:padding="@dimen/ef_spacing"
+            app:layout_constraintVertical_bias="0.035" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
@@ -194,12 +257,11 @@
             android:background="@drawable/edit_round3"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp"
             android:text="#TAG"
             android:textColor="@color/colorName"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -239,4 +301,4 @@
             app:trimMode="trimModeLength" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

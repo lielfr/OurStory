@@ -10,9 +10,7 @@ import android.os.Bundle;
 
 
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 
 import android.view.Gravity;
 import android.view.View;
@@ -39,8 +37,8 @@ import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.RegistrationPage1;
 
 import org.tsofen.ourstory.UserModel.UserStatusCheck;
-import org.tsofen.ourstory.model.api.Owner;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -65,7 +63,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
     Uri filePath;
     String fileURI;
 
-    Owner owner;
+    User owner;
     Story result;
 
     ImageView image;
@@ -98,6 +96,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         Wepengine = WebFactory.getService();
 
+
         firstName = findViewById(R.id.firstNameEditText);
         firstName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,12 +111,24 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length()>0 && editable!=null){
-                    if (!Character.isUpperCase(editable.charAt(0))) {
-                        char c = Character.toUpperCase(editable.charAt(0));
-                        String str = editable.replace(0, 1, c + "").toString();
 
-                        firstName.setText(str);
+
+
+
+                if(editable.length()>0 && editable!=null){
+
+                    if (!editable.toString().matches("[a-zA-Z]+")) {
+                        error1.setText("Only Alphabetical characters allowed!");
+                        error1.setVisibility(View.VISIBLE);
+                    }else{
+                        if (!Character.isUpperCase(editable.charAt(0))) {
+                            char c = Character.toUpperCase(editable.charAt(0));
+                            String str = editable.replace(0, 1, c + "").toString();
+                            validateName(firstName,str,1);
+
+                            firstName.setText(str);
+                        }
+                        error1.setVisibility(View.GONE);
                     }
                 }
             }
@@ -137,12 +148,20 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length()>0&&editable!=null){
-                    if (!Character.isUpperCase(editable.charAt(0))) {
-                        char c = Character.toUpperCase(editable.charAt(0));
-                        String str = editable.replace(0, 1, c + "").toString();
 
-                        lastName.setText(str);
+                if(editable.length()>0 && editable!=null){
+
+                    if (!editable.toString().matches("[a-zA-Z]+")) {
+                        error2.setText("Only Alphabetical characters allowed!");
+                        error2.setVisibility(View.VISIBLE);
+                    }else{
+                        if (!Character.isUpperCase(editable.charAt(0))) {
+                            char c = Character.toUpperCase(editable.charAt(0));
+                            String str = editable.replace(0, 1, c + "").toString();
+                            validateName(lastName,str,1);
+                            lastName.setText(str);
+                        }
+                        error2.setVisibility(View.GONE);
                     }
                 }
             }
@@ -297,9 +316,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
             if (intent.getStringExtra("userId") != null) {
                 userid = Long.parseLong(intent.getStringExtra("userId"));
-                Wepengine.GetUserById(userid).enqueue(new Callback<Owner>() {
+                Wepengine.GetUserById(userid).enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call<Owner> call, Response<Owner> response) {
+                    public void onResponse(Call<User> call, Response<User> response) {
                         if (response.body() != null) {
                             owner = response.body();
                             Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
@@ -310,8 +329,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     }
 
                     @Override
-                    public void onFailure(Call<Owner> call, Throwable t) {
-                        Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(CreateStory.this, "Cant connect to Server In order to get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
@@ -320,6 +339,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         } else if (UserStatusCheck.getUserStatus().equals("visitor")) {
             // show a pop up with a log in option
             AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(CreateStory.this);
+            myAlertBuilder.setCancelable(false);
             // Set the dialog title and message
             myAlertBuilder.setTitle("Alert");
             myAlertBuilder.setMessage("You need to Log In / Register first in order to create a new story.");
@@ -342,6 +362,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     startActivityForResult(i, 1);
                 }
             });
+            
             // Create and show the AlertDialog.
             myAlertBuilder.show();
         }
@@ -565,6 +586,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         i.putExtra("ttag2", ttag2);
 
 
+
         ImageView iv = findViewById(R.id.profilePic); //pass the profile image
 
 
@@ -627,10 +649,11 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             i.putExtra("Button", "justcreate");
                             //startActivity(i);
                         } else {
-                            // i.putExtra("id", String.valueOf(result.getStoryId()));
+                            i.putExtra("id", String.valueOf(result.getStoryId()));
                             i.putExtra("result", result);
                             i.putExtra("Button", "createandadd");
                         }
+                        i.putExtra("user", story.getOwner());
                         startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();

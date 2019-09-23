@@ -18,9 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.Tag;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapter.ViewHolder> {
 
@@ -81,13 +88,41 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
              * just added, the user may want to click on it to open the suggestions menu again.*/
             editText.setOnClickListener(view -> editText.showDropDown());
             editText.setOnFocusChangeListener((view, b) -> {
-                if (b) editText.showDropDown();
+
+                if (!b) {
+                    Tag t = new Tag();
+                    t.setLabel(editText.getText().toString());
+                    tags.add(t);
+                    notifyItemInserted(tags.size() - 1);
+                    editText.setText("");
+                    rv.scrollToPosition(tags.size());
+                }
             });
             // TODO: Replace this with using a suggestion API
-            final String[] suggestions = new String[]{"sunset", "beach", "water", "sky", "beer"};
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
-                    R.layout.tags_dropdown_item, suggestions);
-            editText.setAdapter(adapter);
+//            final String[] suggestions = new String[]{"sunset", "beach", "water", "sky", "beer"};
+            OurStoryService service = WebFactory.getService();
+            service.GetAllTags().enqueue(new Callback<List<Tag>>() {
+                @Override
+                public void onResponse(Call<List<Tag>> call, Response<List<Tag>> response) {
+                    if (response.code() != 200) return;
+                    List<Tag> suggestionsList = response.body();
+                    if (suggestionsList == null) return;
+                    List<String> suggestionsStrList = new LinkedList<>();
+                    int i = 0;
+                    for (Tag tag : suggestionsList)
+                        suggestionsStrList.add(tag.getLabel());
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
+                            R.layout.tags_dropdown_item, suggestionsStrList);
+                    editText.setAdapter(adapter);
+                }
+
+                @Override
+                public void onFailure(Call<List<Tag>> call, Throwable t) {
+
+                }
+            });
+
+
 //            editText.showDropDown();
         } else {
             String text = tags.get(position).getLabel();

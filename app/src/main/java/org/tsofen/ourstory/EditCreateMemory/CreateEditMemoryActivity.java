@@ -287,7 +287,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             tagAdapter.tags.addAll(memory.getTags());
             tagAdapter.notifyDataSetChanged();
         }
-
+       // /*Story*/ story = (Story) intent.getSerializableExtra(KEY_CREATE);
+        //please replace line 270 with line above - 269
         Story story = (Story) intent.getSerializableExtra(KEY_CREATE);
         if (story != null) {
             memory.setStory(story);
@@ -663,8 +664,16 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                         })
                         .subscribe(finalResult -> {
                             intent.putExtra(KEY_MEMID, finalResult.getId());
+                            intent.putExtra("id", Long.toString(memory.getStory().getStoryId()));
                             setResult(RESULT_OK, intent);
                             finish();
+
+                            //please replace finish with lines below
+
+                           // Intent intent1 = new Intent(CreateEditMemoryActivity.this , ViewStory.class);
+                          //  intent1.putExtra("id",Long.toString(story.getStoryId()));
+                          //  startActivity(intent1);
+
                         });
 
             } else {
