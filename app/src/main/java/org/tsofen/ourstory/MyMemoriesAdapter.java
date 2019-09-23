@@ -171,12 +171,15 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     } else
         holder.descr.setVisibility(View.INVISIBLE);
         if (memory.getTags() != null) {
-            holder.tags.setVisibility(View.VISIBLE);
             String s = "";
             for (Tag tag : memory.getTags()) {
                 s += "#"+tag.getLabel();
             }
             holder.tags.setText(s);
+        }
+        else
+        {
+            holder.tags.setVisibility(View.INVISIBLE);
         }
         Story story = memory.getStory();
         holder.name.setText(story.getNameOfPerson());
