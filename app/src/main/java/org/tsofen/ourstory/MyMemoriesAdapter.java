@@ -87,7 +87,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Memory memory = mMemories.get(position);
-        if(memory.getComments()!=null) {
             holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -99,7 +98,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
                 }
             });
-        }
+
 
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
