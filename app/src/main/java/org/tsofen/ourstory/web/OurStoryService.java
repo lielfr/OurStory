@@ -77,8 +77,8 @@ public interface OurStoryService {
     @GET("stories/ViewStoryFull/{id}")
     Call<FullViewStory> GetFullViewStoryById(@Path("id") long id);
 
-    @GET("memories/findMemoriesByKeyword/{description}")
-    Call<ArrayList<Memory>> GetMemoriesByKeyword(@Path("description") String description);
+    @GET("memories/findMemoriesByKeyword/")
+    Call<ArrayList<Memory>> GetMemoriesByKeyword(@Query("description") String description);
 
 
     @GET("stories/findStoriesByDobYearMonth")
