@@ -87,7 +87,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Memory memory = mMemories.get(position);
-        if(memory.getComments()!=null) {
             holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -99,7 +98,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
                 }
             });
-        }
+
 
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +111,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
             }
         });
-
         holder.deletebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,7 +128,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
                             @Override
                             public void onResponse(Call<Object> call, Response<Object> response) {
-
+                                mMemories.remove(memory);
+                                notifyDataSetChanged();
                             }
 
                             @Override
@@ -171,12 +170,15 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     } else
         holder.descr.setVisibility(View.INVISIBLE);
         if (memory.getTags() != null) {
-            holder.tags.setVisibility(View.VISIBLE);
             String s = "";
             for (Tag tag : memory.getTags()) {
                 s += "#"+tag.getLabel();
             }
             holder.tags.setText(s);
+        }
+        else
+        {
+            holder.tags.setVisibility(View.INVISIBLE);
         }
         Story story = memory.getStory();
         holder.name.setText(story.getNameOfPerson());
@@ -245,7 +247,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tags, feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
-        ImageButton sharebtn,commentbtn, editbtn,deletebtn;
+        ImageButton sharebtn, commentbtn, editbtn, deletebtn;
         public MyMemoriesAdapter adapter;
         RecyclerView imagesrv;
 
@@ -254,7 +256,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             super(itemView);
             ctx = itemView.getContext();
             imagesrv = itemView.findViewById(R.id.my_memoriesRv);
-            deletebtn =itemView.findViewById(R.id.deletebtn);
+            deletebtn = itemView.findViewById(R.id.deletebtn);
             tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
@@ -271,7 +273,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
 
         }
+
     }
-
-
 }

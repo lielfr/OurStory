@@ -146,11 +146,14 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         }
         if (memory.getTags() != null) {
             String s = "";
-            holder.tags.setVisibility(View.VISIBLE);
             for (Tag tag : memory.getTags()) {
                 s += "#" + tag.getLabel();
             }
             holder.tags.setText(s);
+        }
+        else
+        {
+            holder.tags.setVisibility(View.INVISIBLE);
         }
 
         if (memory.getPictures() != null) {

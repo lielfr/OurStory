@@ -152,12 +152,15 @@ public class ViewMemory extends AppCompatActivity {
                       num_of_comments.setVisibility(View.INVISIBLE);
                   }
                   if (memory.getTags() != null) {
-                      tags.setVisibility(View.VISIBLE);
                       String s = "";
                       for (Tag tag : memory.getTags()) {
                           s += "#" + tag.getLabel();
                       }
                       tags.setText(s);
+                  }
+                  else
+                  {
+                     tags.setVisibility(View.INVISIBLE);
                   }
                   if (memory.getPictures() != null) {
                       ArrayList<ImgItem> images = new ArrayList<>();

@@ -60,7 +60,7 @@
             android:textColor="@color/colorName"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

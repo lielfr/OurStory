@@ -199,7 +199,7 @@
             android:textColor="@color/colorName"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
             app:layout_constraintEnd_toEndOf="parent"

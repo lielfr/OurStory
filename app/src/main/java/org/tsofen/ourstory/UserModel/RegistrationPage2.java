@@ -123,7 +123,7 @@ Date date;
         day_string = day;
         year_string = year;
         String dateMessage = (month_string + "/" + day_string + "/" + year_string);
-        date = new Date(year, month, day);
+        date = new Date(year-1900, month, day);
 
         TextView year1 = findViewById(R.id.year);
         year1.setText(year_string + "");
@@ -250,6 +250,31 @@ Date date;
                                     + lastNameString + " " + passwordString + " "
                                     + stateString + " " + cityString + " " + date + " " + gender + " " + profilePicture);
 
+                            OurStoryService saveUser = WebFactory.getService();
+                            org.tsofen.ourstory.model.api.User newUser = new org.tsofen.ourstory.model.api.User();
+                            newUser.setFirstName(firstNameString);
+                            newUser.setLastName(lastNameString);
+                            newUser.setProfilePicture(profilePicture);
+                            newUser.setDateOfBirth(date);
+                            newUser.setEmail(emailString);
+                            newUser.setPassword(passwordString);
+                            newUser.setCity(cityString);
+                            newUser.setState(stateString);
+                            newUser.setGender(gender);
+                            saveUser.CreateUser(newUser).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+                                @Override
+                                public void onResponse(Call<User> call, Response<User> response) {
+                                    Toast.makeText(RegistrationPage2.this, "UserSaved Check Database", Toast.LENGTH_LONG).show();
+                                }
+
+                                @Override
+                                public void onFailure(Call<User> call, Throwable t) {
+                                    Toast.makeText(RegistrationPage2.this, "Saving user Failed", Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+                            startActivity(regIntent3);
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -269,30 +294,7 @@ Date date;
                     });
 
         }
-        OurStoryService saveUser = WebFactory.getService();
-        org.tsofen.ourstory.model.api.User newUser = new org.tsofen.ourstory.model.api.User();
-        newUser.setFirstName(firstNameString);
-        newUser.setLastName(lastNameString);
-        newUser.setProfilePicture(profilePicture);
-        newUser.setDateOfBirth(date);
-        newUser.setEmail(emailString);
-        newUser.setPassword(passwordString);
-        newUser.setCity(cityString);
-        newUser.setState(stateString);
-        newUser.setGender(gender);
-        saveUser.CreateUser(newUser).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(RegistrationPage2.this, "UserSaved Check Database", Toast.LENGTH_LONG).show();
-            }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(RegistrationPage2.this, "Saving user Failed", Toast.LENGTH_LONG).show();
-
-            }
-        });
-            startActivity(regIntent3);
 
 
     }//end of upload method

@@ -88,7 +88,15 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
              * just added, the user may want to click on it to open the suggestions menu again.*/
             editText.setOnClickListener(view -> editText.showDropDown());
             editText.setOnFocusChangeListener((view, b) -> {
-                if (b) editText.showDropDown();
+
+                if (!b) {
+                    Tag t = new Tag();
+                    t.setLabel(editText.getText().toString());
+                    tags.add(t);
+                    notifyItemInserted(tags.size() - 1);
+                    editText.setText("");
+                    rv.scrollToPosition(tags.size());
+                }
             });
             // TODO: Replace this with using a suggestion API
 //            final String[] suggestions = new String[]{"sunset", "beach", "water", "sky", "beer"};
@@ -98,14 +106,11 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                 public void onResponse(Call<List<Tag>> call, Response<List<Tag>> response) {
                     if (response.code() != 200) return;
                     List<Tag> suggestionsList = response.body();
+                    if (suggestionsList == null) return;
                     List<String> suggestionsStrList = new LinkedList<>();
                     int i = 0;
-                    for (Tag tag : suggestionsList) {
-                        if (i > 5)
-                            break;
+                    for (Tag tag : suggestionsList)
                         suggestionsStrList.add(tag.getLabel());
-                        ++i;
-                    }
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx,
                             R.layout.tags_dropdown_item, suggestionsStrList);
                     editText.setAdapter(adapter);

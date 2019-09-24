@@ -68,35 +68,46 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
+        if(memory != null) {
+            if (memory.getDescription() != null) {
+                holder.descr.setText(memory.getDescription());
 
-        if (memory.getDescription() != null) {
-            holder.descr.setText(memory.getDescription());
+            } else
+                holder.descr.setVisibility(View.INVISIBLE);
+            if (memory.getTags() != null) {
 
-        } else
-            holder.descr.setVisibility(View.INVISIBLE);
-        if (memory.getTags() != null) {
-            holder.tags.setVisibility(View.VISIBLE);
-            String s = "";
-            for (Tag tag : memory.getTags()) {
-                s += "#" + tag.getLabel();
+                String s = "";
+                for (Tag tag : memory.getTags()) {
+                    s += "#" + tag.getLabel();
+                }
+                holder.tags.setText(s);
+            } else {
+                holder.tags.setVisibility(View.INVISIBLE);
             }
-            holder.tags.setText(s);
-        }
-        Story story = memory.getStory();
-        holder.name.setText(memory.getUser().getFullName());
-        holder.name.setWidth(calculateWidth(memory.getUser().getFullName()));
+            if (memory.getUser() != null) {
+                if(memory.getUser().getFullName()!=null) {
+                    Story story = memory.getStory();
+                    holder.name.setText(memory.getUser().getFullName());
+                    holder.name.setWidth(calculateWidth(memory.getUser().getFullName()));
+                }
 
-        if (memory.getUser().getProfilePicture() != null) {
 
-            Uri uri = Uri.parse(memory.getUser().getProfilePicture().toString());
-            RequestOptions options = new RequestOptions()
-                    .override(300, 300)
-                    .centerCrop()
-                    .placeholder(R.drawable.nopicyet)
-                    .error(R.drawable.nopicyet);
-            Glide.with(this.ctx).load(uri).apply(options).into(holder.profile);
-        } else {
-            holder.profile.setImageResource(R.drawable.defaultprofilepicture);
+                if (memory.getUser().getProfilePicture() != null) {
+
+                    Uri uri = Uri.parse(memory.getUser().getProfilePicture().toString());
+                    RequestOptions options = new RequestOptions()
+                            .override(300, 300)
+                            .centerCrop()
+                            .placeholder(R.drawable.nopicyet)
+                            .error(R.drawable.nopicyet);
+                    Glide.with(this.ctx).load(uri).apply(options).into(holder.profile);
+                } else {
+                    holder.profile.setImageResource(R.drawable.defaultprofilepicture);
+                }
+            } else {
+                Toast toast = Toast.makeText(ctx, "there is no memories", Toast.LENGTH_SHORT);
+
+            }
         }
     }
 
