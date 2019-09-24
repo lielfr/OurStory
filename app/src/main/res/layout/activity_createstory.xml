@@ -120,6 +120,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="7dp"
                     android:background="@drawable/background_gradient"
+                    android:capitalize="words"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="First Name"
                     android:textColor="@color/colorGrayHint"
