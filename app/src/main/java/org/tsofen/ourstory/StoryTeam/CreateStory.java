@@ -323,18 +323,18 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             owner = response.body();
                             Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(CreateStory.this, "Cant connect to Server In order to get the user", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CreateStory.this, "Cant connect to Server In order to get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
-                Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
             }
         } else if (UserStatusCheck.getUserStatus().equals("visitor")) {
             // show a pop up with a log in option

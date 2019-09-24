@@ -93,7 +93,7 @@ public class CommentActivity extends Activity {
             service.newComment(memoryA.getId(), comment).enqueue(new Callback<Comment>() {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
-                    Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
                     updateComments();
                 }
 

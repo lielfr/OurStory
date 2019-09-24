@@ -237,7 +237,7 @@ public class ViewMemory extends AppCompatActivity {
               }}
             @Override
             public void onFailure(Call<Memory> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"I'm null",Toast.LENGTH_LONG);
+//                Toast.makeText(getApplicationContext(),"I'm null",Toast.LENGTH_LONG);
             }
         });
     }
