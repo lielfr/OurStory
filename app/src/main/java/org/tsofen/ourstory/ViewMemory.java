@@ -249,4 +249,8 @@ public class ViewMemory extends AppCompatActivity {
         textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
         return bounds.width();
     }
+
+    public void closeActivity(View view) {
+        finish();
+    }
 }
