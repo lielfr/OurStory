@@ -96,7 +96,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         }
 
         story_api = WebFactory.getService();
-        story_api.GetFullViewStoryById(id).enqueue(new Callback<FullViewStory>() {
+        story_api.GetFullViewStoryById(id)
+                .enqueue(new Callback<FullViewStory>() {
             @Override
             public void onResponse(Call<FullViewStory> call, Response<FullViewStory> response) {
                 story_full = response.body();

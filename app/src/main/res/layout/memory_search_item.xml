@@ -35,6 +35,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/quicksand_bold"
 
+            android:paddingLeft="5dp"
             android:text="Name"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
@@ -46,12 +47,30 @@
             app:layout_constraintVertical_bias="0.222" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/descr"
+            android:layout_width="300dp"
+            android:layout_height="20dp"
+
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="start"
+            android:paddingLeft="10dp"
+            android:text="  Description about this memory"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:colorClickableText="@color/colorGrayHint"
+            app:layout_constraintStart_toEndOf="@+id/picture_person"
+            app:layout_constraintTop_toBottomOf="@+id/name_txt_person"
+            app:trimCollapsedText="@string/showMore"
+            app:trimExpandedText="@string/showLess"
+            app:trimLength="40"
+            app:trimMode="trimModeLength" />
+
+        <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/tags_text"
             android:layout_width="184dp"
             android:layout_height="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="76dp"
-            android:layout_marginRight="76dp"
             android:background="@drawable/edit_round3"
             android:fontFamily="@font/quicksand_bold"
             android:gravity="center_vertical"
@@ -63,31 +82,9 @@
             android:visibility="visible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:trimCollapsedText="@string/showMore"
-            app:trimExpandedText="@string/showLess"
-            app:trimLength="40"
-            app:trimMode="trimModeLength" />
-
-        <com.borjabravo.readmoretextview.ReadMoreTextView
-            android:id="@+id/descr"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-
-            android:layout_marginStart="44dp"
-            android:layout_marginLeft="44dp"
-            android:fontFamily="@font/quicksand_bold"
-
-            android:gravity="start"
-            android:paddingLeft="10dp"
-            android:text="  Description about this memory"
-            android:textAlignment="textStart"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:colorClickableText="@color/colorGrayHint"
-            app:layout_constraintStart_toEndOf="@+id/picture_person"
-            app:layout_constraintTop_toBottomOf="@+id/tags_text"
+            app:layout_constraintHorizontal_bias="0.458"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descr"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
             app:trimLength="40"
