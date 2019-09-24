@@ -96,6 +96,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
         Wepengine = WebFactory.getService();
 
+
         firstName = findViewById(R.id.firstNameEditText);
         firstName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,12 +111,24 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length()>0 && editable!=null){
-                    if (!Character.isUpperCase(editable.charAt(0))) {
-                        char c = Character.toUpperCase(editable.charAt(0));
-                        String str = editable.replace(0, 1, c + "").toString();
 
-                        firstName.setText(str);
+
+
+
+                if(editable.length()>0 && editable!=null){
+
+                    if (!editable.toString().matches("[a-zA-Z]+")) {
+                        error1.setText("Only Alphabetical characters allowed!");
+                        error1.setVisibility(View.VISIBLE);
+                    }else{
+                        if (!Character.isUpperCase(editable.charAt(0))) {
+                            char c = Character.toUpperCase(editable.charAt(0));
+                            String str = editable.replace(0, 1, c + "").toString();
+                            validateName(firstName,str,1);
+
+                            firstName.setText(str);
+                        }
+                        error1.setVisibility(View.GONE);
                     }
                 }
             }
@@ -135,12 +148,20 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length()>0&&editable!=null){
-                    if (!Character.isUpperCase(editable.charAt(0))) {
-                        char c = Character.toUpperCase(editable.charAt(0));
-                        String str = editable.replace(0, 1, c + "").toString();
 
-                        lastName.setText(str);
+                if(editable.length()>0 && editable!=null){
+
+                    if (!editable.toString().matches("[a-zA-Z]+")) {
+                        error2.setText("Only Alphabetical characters allowed!");
+                        error2.setVisibility(View.VISIBLE);
+                    }else{
+                        if (!Character.isUpperCase(editable.charAt(0))) {
+                            char c = Character.toUpperCase(editable.charAt(0));
+                            String str = editable.replace(0, 1, c + "").toString();
+                            validateName(lastName,str,1);
+                            lastName.setText(str);
+                        }
+                        error2.setVisibility(View.GONE);
                     }
                 }
             }
@@ -309,7 +330,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(CreateStory.this, "Cant connect to Server In order ro get the user", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateStory.this, "Cant connect to Server In order to get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
@@ -318,6 +339,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         } else if (UserStatusCheck.getUserStatus().equals("visitor")) {
             // show a pop up with a log in option
             AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(CreateStory.this);
+            myAlertBuilder.setCancelable(false);
             // Set the dialog title and message
             myAlertBuilder.setTitle("Alert");
             myAlertBuilder.setMessage("You need to Log In / Register first in order to create a new story.");
@@ -340,6 +362,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     startActivityForResult(i, 1);
                 }
             });
+            
             // Create and show the AlertDialog.
             myAlertBuilder.show();
         }

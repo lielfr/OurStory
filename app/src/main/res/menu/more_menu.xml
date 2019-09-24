@@ -6,4 +6,7 @@
         android:id="@+id/logout"
         android:title="Logout"
         />
+    <item
+        android:id="@+id/teams_menu"
+        android:title="Teams Menu" />
 </menu>

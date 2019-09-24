@@ -59,6 +59,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
 
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
@@ -652,6 +653,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (create) {
                 service.CreateMemory(memory)
                         .subscribeOn(Schedulers.newThread())
+                        .onErrorReturnItem(null)
                         .flatMap(mem -> {
                             if (mem == null) return null;
                             long memId = mem.getId();
@@ -662,7 +664,10 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
                             return service.SetMediaToMemory(memId, hm);
                         })
+                        .onErrorReturnItem(null)
                         .subscribe(finalResult -> {
+                            if (finalResult == null)
+                                finish();
                             intent.putExtra(KEY_MEMID, finalResult.getId());
                             intent.putExtra("id", Long.toString(memory.getStory().getStoryId()));
                             setResult(RESULT_OK, intent);
@@ -674,7 +679,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                           //  intent1.putExtra("id",Long.toString(story.getStoryId()));
                           //  startActivity(intent1);
 
-                        });
+                        }, throwable -> finish());
 
             } else {
                 memory.getPictures().clear();
@@ -696,35 +701,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
                             intent.putExtra(KEY_MEMID, finalResult.getId());
                             setResult(RESULT_OK, intent);
                             finish();
-                        });
-//                service.EditMemory(memory.getId(), memory).enqueue(new Callback<Memory>() {
-//                    @Override
-//                    public void onResponse(Call<Memory> call, Response<Memory> response) {
-//                        HashMap<String, List<String>> hm = new HashMap<>();
-//                        hm.put("pictures", pictures);
-//                        hm.put("videos", videos);
-//                        hm.put("tags", tags);
-//
-////                        service.SetMediaToMemory(memory.getId(), hm).enqueue(new Callback<Memory>() {
-////                            @Override
-////                            public void onResponse(Call<Memory> call, Response<Memory> response) {
-////                                intent.putExtra(KEY_MEMID, memory.getId());
-////                                setResult(RESULT_OK, intent);
-////                                finish();
-////                            }
-////
-////                            @Override
-////                            public void onFailure(Call<Memory> call, Throwable t) {
-////
-////                            }
-////                        });
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Memory> call, Throwable t) {
-//
-//                    }
-//                });
+                        }, throwable -> finish());
             }
         });
 
