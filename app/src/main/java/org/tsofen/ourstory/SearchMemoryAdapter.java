@@ -39,7 +39,6 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
     ImageView button;
 
     public SearchMemoryAdapter(Context context, ArrayList<Memory> memories) {
-        Log.d("fragment", "adapter created");
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
 
@@ -54,7 +53,6 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
 
         ctx = parent.getContext();
         ViewHolder viewHolder = new ViewHolder(contactView, this);
-        Log.d("fragment", "holder created");
         return viewHolder;
     }
 
