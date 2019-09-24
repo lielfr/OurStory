@@ -51,13 +51,14 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     User user;
     LayoutInflater mInflater;
     Memory mem;
+    RecyclerView rv;
 
 
-
-    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj) {
+    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj, RecyclerView rv) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
         this.user = userObj;
+        this.rv = rv;
     }
 
 
@@ -133,17 +134,18 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                             public void onClick(DialogInterface dialog, int which) {
                                 OurStoryService deleteMemory;
                         deleteMemory = WebFactory.getService();
-                        deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Object>() {
+                                deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Void>() {
 
                             @Override
-                            public void onResponse(Call<Object> call, Response<Object> response) {
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                Log.d("MOO", "Should update it now");
                                 mMemories.remove(position);
                                 notifyItemRemoved(position);
-                                notifyDataSetChanged();
+                                rv.scrollToPosition(0);
                             }
 
                             @Override
-                            public void onFailure(Call<Object> call, Throwable t) {
+                            public void onFailure(Call<Void> call, Throwable t) {
 
                             }
                         });

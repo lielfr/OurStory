@@ -42,7 +42,7 @@ public interface OurStoryService {
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
     @DELETE("memories/delete/{id}")
-    Call<Object> DeleteMemory(@Path("id") long id);
+    Call<Void> DeleteMemory(@Path("id") long id);
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
     @GET("users/findById/{id}")
