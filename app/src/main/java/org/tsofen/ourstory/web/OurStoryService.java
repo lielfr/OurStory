@@ -30,6 +30,8 @@ public interface OurStoryService {
     @Headers("Content-Type: application/json")
     @POST("comments/create/{id}")
     Call<Comment> newComment(@Path("id") long id, @Body Comment comment);
+   /* @POST("likes/create/{id}")
+    Call<Object> addLike(@Path("id") long id,@Body Like like);*/
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
@@ -40,7 +42,7 @@ public interface OurStoryService {
     Call<ArrayList<CommentA>> GetCommentbyId(@Path("id") long id);
     @Headers({"Content-Type: application/json"})
     @DELETE("memories/delete/{id}")
-    Call<Object> DeleteMemory(@Path("id") long id);
+    Call<Void> DeleteMemory(@Path("id") long id);
     @POST("stories/create")
     Call<Story> CreateStory(@Body Story story);
     @GET("users/findById/{id}")
