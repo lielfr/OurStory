@@ -653,7 +653,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             if (create) {
                 service.CreateMemory(memory)
                         .subscribeOn(Schedulers.newThread())
-                        .onErrorReturnItem(null)
                         .flatMap(mem -> {
                             if (mem == null) return null;
                             long memId = mem.getId();
@@ -664,7 +663,6 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
                             return service.SetMediaToMemory(memId, hm);
                         })
-                        .onErrorReturnItem(null)
                         .subscribe(finalResult -> {
                             if (finalResult == null)
                                 finish();
