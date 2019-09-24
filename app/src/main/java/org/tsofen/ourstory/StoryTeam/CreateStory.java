@@ -58,7 +58,7 @@ import retrofit2.Response;
 public class CreateStory extends AppCompatActivity implements Serializable {
 
     ScrollView sv;
-
+    int imageuploaded =1 ;
     Bitmap bitmap;
     Uri filePath;
     String fileURI;
@@ -505,6 +505,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
+            imageuploaded=0;
             try {
                 filePath = data.getData();
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
@@ -515,6 +516,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         fileURI = taskSnapshot.getDownloadUrl().toString();
+                        imageuploaded=1;
                         Toast.makeText(CreateStory.this, "upload image and save the download URI Succeeded", Toast.LENGTH_SHORT).show();
 
                     }
@@ -610,7 +612,9 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
             // Send data to next activity / creating local Story object and building a custom made dates
             String nameofperson = fns + " " + lns; // name is done
-
+            if(imageuploaded==0){
+                Toast.makeText(CreateStory.this, "uploading image in process please wait...", Toast.LENGTH_SHORT).show();
+                return;}
             Story story;
             if (fileURI == null) {
                 story = new Story(owner, nameofperson, BirthDate, DeathDate, null);
@@ -654,6 +658,8 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             i.putExtra("Button", "createandadd");
                         }
                         i.putExtra("user", story.getOwner());
+
+                        i.putExtra("from","create");
                         startActivity(i);
                     } else {
                         Toast.makeText(CreateStory.this, "creating story was failed please try again later", Toast.LENGTH_SHORT).show();

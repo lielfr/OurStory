@@ -26,6 +26,7 @@ import com.bumptech.glide.request.RequestOptions;
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
+import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.Tags;
@@ -155,7 +156,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                                 .placeholder(R.drawable.nopicyet)
                                 .error(R.drawable.nopicyet);
 
-                        Glide.with(aa).load(uri).apply(options).into(pic);
+                        Glide.with(ViewStory.this).load(uri).apply(options).into(pic);
                     }
 
 
@@ -258,6 +259,11 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     }
 
     public void back(View view) {
+        Intent from = getIntent() ;
+        if(from!=null && from.getStringExtra("from")!=null){
+            Intent back = new Intent(ViewStory.this, AppHomePage.class);
+            startActivity(back);
+        }
         finish();
     }
 
