@@ -217,6 +217,7 @@
         android:id="@+id/or"
         android:layout_width="47dp"
         android:layout_height="33dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/OR"
