@@ -89,7 +89,7 @@ public class CommentActivity extends Activity {
         comment.setText(txtview.getText().toString());
         comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        if(AppHomePage.user2!=null || AppHomePage.user1!="") {
+        if (user != null) {
             service.newComment(memoryA.getId(), comment).enqueue(new Callback<Comment>() {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
