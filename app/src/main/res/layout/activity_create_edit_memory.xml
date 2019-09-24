@@ -322,7 +322,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorError"
-                        android:text="year Unknown"
+                        android:text="Year Unknown"
                         android:textColor="@color/colorGrayHint" />
                 </LinearLayout>
 
