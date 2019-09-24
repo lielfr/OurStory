@@ -7,7 +7,7 @@
     <string name="add_video">Add Video</string>
     <string name="location">Location</string>
     <string name="feeling">Feeling</string>
-    <string name="this_was_at">This was at</string>
+    <string name="this_was_at">This was at: </string>
     <string name="month">mm</string>
     <string name="year">yyyy</string>
     <string name="day">dd</string>
