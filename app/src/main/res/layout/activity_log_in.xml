@@ -153,15 +153,12 @@
         android:id="@+id/imageView6"
         android:layout_width="51dp"
         android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/holder2"
+        app:layout_constraintTop_toTopOf="@id/textView3"
         app:srcCompat="@drawable/line" />
 
     <ImageView
@@ -180,8 +177,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="158dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
@@ -204,8 +201,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="128dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="28dp"
