@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
@@ -88,7 +89,7 @@ public class CommentActivity extends Activity {
         comment.setText(txtview.getText().toString());
         comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        if(user!=null) {
+        if (user != null) {
             service.newComment(memoryA.getId(), comment).enqueue(new Callback<Comment>() {
                 @Override
                 public void onResponse(Call<Comment> call, Response<Comment> response) {

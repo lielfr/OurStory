@@ -1,6 +1,9 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,11 +28,18 @@ import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.Picture;
 import org.tsofen.ourstory.model.Tag;
 import org.tsofen.ourstory.model.api.Contributer;
+import org.tsofen.ourstory.model.api.Like;
 import org.tsofen.ourstory.model.api.MemoryA;
 import org.tsofen.ourstory.model.api.User;
+import org.tsofen.ourstory.web.OurStoryService;
+import org.tsofen.ourstory.web.WebFactory;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static org.tsofen.ourstory.R.color.background;
 
@@ -40,11 +51,13 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     Context ctx;
     LayoutInflater mInflater;
     Memory mem;
+    MemoriesOfStoryActivity parent;
 
-    public MemoryAdapter(Context context,ArrayList<Memory> memories)
+    public MemoryAdapter(Context context, ArrayList<Memory> memories, MemoriesOfStoryActivity parent)
     {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
+        this.parent = parent;
     }
     @NonNull
     @Override
@@ -67,6 +80,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Memory memory = mMemories.get(position);
         User user = memory.getUser();
+
         if (user != null) {
             if (memory.getUser().getProfilePicture() != null) {
                 Uri uri = Uri.parse(memory.getUser().getProfilePicture());
@@ -91,18 +105,70 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             holder.name.setVisibility(View.INVISIBLE);
             holder.pic.setImageResource(R.drawable.defaultprofilepicture);
         }
-        if(memory.getComments()!=null) {
+        if (user != null) {
+            holder.likebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    OurStoryService Like = WebFactory.getService();
+                    Like like = new Like();
+                    like.setUser(user);
+                    Like.addLike(memory.getId(), like).enqueue(new Callback<Like>() {
+
+                        @Override
+                        public void onResponse(Call<org.tsofen.ourstory.model.api.Like> call, Response<org.tsofen.ourstory.model.api.Like> response) {
+                            Toast.makeText(ctx.getApplicationContext(), "like added", Toast.LENGTH_LONG).show();
+                            OurStoryService service = WebFactory.getService();
+                            service.GetMemoryById(memory.getId()).enqueue(new Callback<Memory>() {
+                                @Override
+                                public void onResponse(Call<Memory> call, Response<Memory> response) {
+                                    if (response.code() == 200) {
+                                        Memory memorya = response.body();
+                                        holder.num_of_likes.setText(memorya.getLikes().size() + "");
+                                        //notifyDataSetChanged();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Memory> call, Throwable t) {
+
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<org.tsofen.ourstory.model.api.Like> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+            });
+        } else {
+            AlertDialog.Builder myAlertBuilder = new
+                    AlertDialog.Builder(ctx.getApplicationContext());
+            myAlertBuilder.setTitle("Error");
+            myAlertBuilder.setMessage("Please Sign in to like this memory.");
+            // Set the dialog title and message.
+            myAlertBuilder.setPositiveButton("Ok", new
+                    DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            myAlertBuilder.show();
+        }
             holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                    intent.putExtra("user", parent.user);
                     intent.putExtra("memory", memory);
                     ctx.startActivity(intent);
 
                 }
             });
-        }
         holder.sharebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,13 +185,25 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         if (memory.getDescription() != null) {
             holder.descr.setText(memory.getDescription());
         }
+        else
+        {
+            holder.descr.setVisibility(View.INVISIBLE);
+        }
         if (memory.getLocation() != null) {
             holder.location.setWidth(calculateWidth(memory.getLocation()));
             holder.location.setText(memory.getLocation());
         }
+        else
+        {
+            holder.location.setVisibility(View.INVISIBLE);
+        }
         if (memory.getFeeling() != null) {
          holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
             holder.feeling.setText("#" + memory.getFeeling());
+        }
+        else
+        {
+            holder.feeling.setVisibility(View.INVISIBLE);
         }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
@@ -182,13 +260,14 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         RecyclerView rvMemory;
         public TextView tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
         public ImageView pic;
-        public ImageButton commentbtn,sharebtn;
+        public ImageButton likebtn,commentbtn,sharebtn;
         public MemoryAdapter adapter;
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
             rvMemory = itemView.findViewById(R.id.memory_pic);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
+            likebtn = itemView.findViewById(R.id.likebtn);
             sharebtn = itemView.findViewById(R.id.sharebtn2);
             feeling = itemView.findViewById(R.id.feelingtxt);
             location = itemView.findViewById(R.id.locationtxt);

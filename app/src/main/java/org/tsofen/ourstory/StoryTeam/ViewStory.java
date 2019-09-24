@@ -29,6 +29,7 @@ import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.Tags;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -63,6 +64,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     FullViewStory story_full;
     Date dob, dod;
     Intent intent;
+    User user;
 
     @Override
     public void onRestart() {
@@ -94,6 +96,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             AddMemoryLive((Story) intent.getSerializableExtra("result"));
             Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
         }
+
+        user = (User) intent.getSerializableExtra("user");
 
         story_api = WebFactory.getService();
         story_api.GetFullViewStoryById(id)
@@ -156,7 +160,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                                 .placeholder(R.drawable.nopicyet)
                                 .error(R.drawable.nopicyet);
 
-                        Glide.with(ViewStory.this).load(uri).apply(options).into(pic);
+                        Glide.with(getApplicationContext()).load(uri).apply(options).into(pic);
                     }
 
 
@@ -195,12 +199,12 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId(), user);
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
                         // Get a handle to the RecyclerView.
                         mRecyclerView = findViewById(R.id.recyclerview);
                         // Create an adapter and supply the data to be displayed.
-                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId());
+                        mAdapter = new ViewStoryAdapter(ViewStory.this, story_full.getMemories(), story_full.getStory().getNameOfPerson(), story_full.getStory().getStoryId(), user);
                         //     Toast.makeText(aa, mAdapter.mStoryList.get(7).(), Toast.LENGTH_SHORT).show();
 
 
@@ -277,6 +281,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
         TextView textView = findViewById(R.id.textView4);
         intent.putExtra("tag", textView.getText().toString());
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 
@@ -286,6 +291,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         if (story_full.getStory() != null) {
             intent.putExtra("storyId", story_full.getStory().getStoryId());
             intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
+            intent.putExtra("user", user);
         } else
             Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
         TextView textView = findViewById(R.id.textView5);
@@ -300,6 +306,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
         TextView textView = findViewById(R.id.textView6);
         intent.putExtra("tag", textView.getText().toString());
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 

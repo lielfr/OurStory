@@ -3,11 +3,11 @@ package org.tsofen.ourstory.UserModel;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -116,7 +116,7 @@ public class ForgotPassword extends AppCompatActivity {
                                    Response<org.tsofen.ourstory.model.api.User> response) {
                 currUser = response.body();
 
-                Toast.makeText(ForgotPassword.this, "Your password has changed successfully", Toast.LENGTH_LONG).show();
+               Log.d("changed successfully","changed successfully");
                 Intent newIn = new Intent(ForgotPassword.this, LogIn.class);
                 passErrorText.setVisibility(View.INVISIBLE);
                 startActivity(newIn);

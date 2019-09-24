@@ -235,12 +235,13 @@ Date date;
         saveUser.CreateUser(newUser).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(RegistrationPage2.this, "UserSaved Check Database", Toast.LENGTH_LONG).show();
+
+                Log.d( "UserSaved", "UserSaved Check Database");
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(RegistrationPage2.this, "Saving user Failed", Toast.LENGTH_LONG).show();
+                Log.d( "Saving user Failed", "Saving user Failed");
 
             }
         });
@@ -268,7 +269,7 @@ Date date;
                             Log.d("uri log", "the uri string is " + profileImagePathUriString);
                             progressDialog.dismiss();
 
-                            Toast.makeText(RegistrationPage2.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Log.d("Uploaded","Uploaded");
 
                             profilePicture = profileImagePathUriString;
                             Log.d("profileString", "profile string is " + profilePicture);
