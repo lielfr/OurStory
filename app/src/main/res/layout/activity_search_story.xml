@@ -173,10 +173,10 @@
         <Spinner
             android:id="@+id/sp"
             android:layout_width="23dp"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_marginStart="152dp"
             android:layout_marginLeft="152dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="108dp"
             android:background="@mipmap/down"
             android:popupBackground="#34495E"
             android:spinnerMode="dropdown"
