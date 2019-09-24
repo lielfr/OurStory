@@ -31,12 +31,13 @@ public class WebFactory {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request().newBuilder()
-                        .addHeader("Authorization", authHeader).build();
+                        .addHeader("Authorization", authHeader)
+                        .build();
                 return chain.proceed(request);
             }
         });
-        builder.addInterceptor(new GzipRequestInterceptor());
-        builder.addInterceptor(new UnzippingInterceptor());
+//        builder.addInterceptor(new GzipRequestInterceptor());
+//        builder.addInterceptor(new UnzippingInterceptor());
         // We need that in order to allow passing Date objects.
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
