@@ -43,7 +43,12 @@ public class StoryFragment extends Fragment {
     static View inflatedView;
     SearchStory parent;
 
+    public StoryFragment() {
+        super();
+    }
+
     public StoryFragment(SearchStory parent) {
+        super();
         this.parent = parent;
     }
 

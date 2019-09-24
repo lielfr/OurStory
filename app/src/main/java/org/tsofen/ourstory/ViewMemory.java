@@ -103,6 +103,7 @@ public class ViewMemory extends AppCompatActivity {
 
                           Intent intent = new Intent(getApplicationContext(), CommentActivity.class);
                           intent.putExtra("memory", memory);
+                          intent.putExtra("user", user);
                           startActivity(intent);
 
                       }

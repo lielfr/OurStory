@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,14 @@ public class ViewStoryMemoryAdapter extends RecyclerView.Adapter<ViewStoryMemory
     Context c;
     private LayoutInflater mInflater;
     private Story story;
+    User user;
 
-    public ViewStoryMemoryAdapter(Context context, List<MemoryItem> mItems, Story story) {
+    public ViewStoryMemoryAdapter(Context context, List<MemoryItem> mItems, Story story, User user) {
         this.mItems = mItems;
         this.mInflater = LayoutInflater.from(context);
         this.c = context;
         this.story = story;
+        this.user = user;
     }
 
     @NonNull
@@ -52,6 +55,7 @@ public class ViewStoryMemoryAdapter extends RecyclerView.Adapter<ViewStoryMemory
                 intent.putExtra("flag", 0);
                 intent.putExtra("storyId", story.getStoryId());
                 intent.putExtra("year", Integer.parseInt(holder.tv_memory_year.getText().toString()));
+                intent.putExtra("user", user);
                 c.startActivity(intent);
             }
         });

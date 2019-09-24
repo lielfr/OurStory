@@ -1,5 +1,6 @@
 package org.tsofen.ourstory;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -40,11 +41,13 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     Context ctx;
     LayoutInflater mInflater;
     Memory mem;
+    MemoriesOfStoryActivity parent;
 
-    public MemoryAdapter(Context context,ArrayList<Memory> memories)
+    public MemoryAdapter(Context context, ArrayList<Memory> memories, MemoriesOfStoryActivity parent)
     {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
+        this.parent = parent;
     }
     @NonNull
     @Override
@@ -97,6 +100,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
                 public void onClick(View view) {
 
                     Intent intent = new Intent(ctx.getApplicationContext(), CommentActivity.class);
+                    intent.putExtra("user", parent.user);
                     intent.putExtra("memory", memory);
                     ctx.startActivity(intent);
 

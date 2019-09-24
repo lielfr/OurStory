@@ -27,6 +27,7 @@ import org.tsofen.ourstory.ViewMemory;
 import org.tsofen.ourstory.model.api.ListOfStory;
 import org.tsofen.ourstory.model.api.Memory;
 import org.tsofen.ourstory.model.api.Story;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.model.api.VSMemories;
 
 import java.util.LinkedList;
@@ -41,14 +42,16 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
     public long storyId;
     public String storyName;
     VSMemories mCurrent;
+    User user;
 
 
-    public ViewStoryAdapter(ViewStory context, List<VSMemories> StoryList, String storyName, long storyId) {
+    public ViewStoryAdapter(ViewStory context, List<VSMemories> StoryList, String storyName, long storyId, User user) {
         mInflater = LayoutInflater.from(context);
         this.mStoryList = StoryList;
         this.context = context.getApplicationContext();
         this.storyName = storyName;
         this.storyId = storyId;
+        this.user = user;
     }
 
     @NonNull
@@ -140,6 +143,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
                 intent.putExtra("year", mCurrent.getYear());
+                intent.putExtra("user", user);
                 Toast.makeText(view.getContext(), mCurrent.getYear().toString(), Toast.LENGTH_SHORT).show();
                 view.getContext().startActivity(intent);
 
@@ -151,6 +155,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
                 intent.putExtra("year", mCurrent.getYear());
+                intent.putExtra("user", user);
                 Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2) + "hhhh", Toast.LENGTH_LONG).show();
                 view.getContext().startActivity(intent);
 
@@ -162,6 +167,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
                 intent.putExtra("year", mCurrent.getYear());
+                intent.putExtra("user", user);
                 Toast.makeText(view.getContext(), Long.toString( storyId ) /*mCurrent.getPics().get(mposition).get(2)*/, Toast.LENGTH_SHORT).show();
                 view.getContext().startActivity(intent);
 
@@ -173,6 +179,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
                 intent.putExtra("year", mCurrent.getYear());
+                intent.putExtra("user", user);
                 view.getContext().startActivity(intent);
 
             }
