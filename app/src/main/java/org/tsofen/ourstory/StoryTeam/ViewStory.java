@@ -155,7 +155,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                                 .placeholder(R.drawable.nopicyet)
                                 .error(R.drawable.nopicyet);
 
-                        Glide.with(aa).load(uri).apply(options).into(pic);
+                        Glide.with(getApplicationContext()).load(uri).apply(options).into(pic);
                     }
 
 
