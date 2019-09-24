@@ -1,6 +1,8 @@
 package org.tsofen.ourstory;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.Comment;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.User;
@@ -86,20 +89,37 @@ public class CommentActivity extends Activity {
         comment.setText(txtview.getText().toString());
         comment.setUser(user);
         OurStoryService service = WebFactory.getService();
-        service.newComment(memoryA.getId(), comment).enqueue(new Callback<Comment>() {
-            @Override
-            public void onResponse(Call<Comment> call, Response<Comment> response) {
-                Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
-                updateComments();
-            }
+        if(AppHomePage.user2!=null || AppHomePage.user1!="") {
+            service.newComment(memoryA.getId(), comment).enqueue(new Callback<Comment>() {
+                @Override
+                public void onResponse(Call<Comment> call, Response<Comment> response) {
+                    Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
+                    updateComments();
+                }
 
-            @Override
-            public void onFailure(Call<Comment> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
+                @Override
+                public void onFailure(Call<Comment> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
 
-            }
-        });
-        adapter.notifyDataSetChanged();
+                }
+            });
+            adapter.notifyDataSetChanged();
+        }
+        else
+        {
+            AlertDialog.Builder myAlertBuilder = new
+                    AlertDialog.Builder(this);
+            myAlertBuilder.setTitle("Error");
+            myAlertBuilder.setMessage("Please Sign in to add a comment.");
+            // Set the dialog title and message.
+            myAlertBuilder.setPositiveButton("Ok", new
+                    DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-    }
+                        }
+                    });
+            myAlertBuilder.show();
+
+        }
+        }
 }

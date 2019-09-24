@@ -32,7 +32,7 @@ public class AppHomePage extends AppCompatActivity {
     Fragment currentFragment;
     BottomNavigationView nav;
     SharedPreferences sh;
-    public String user1;
+    public static String user1;
     public static String user2=null;
     SharedPreferences.Editor prefsEditor;
     @Override
@@ -99,13 +99,16 @@ public class AppHomePage extends AppCompatActivity {
                         }}
                     case R.id.nav_more:
                     {
-                        if (user1!=""||user2!=null) {
+//                        if (user1!=""||user2!=null) {
                             PopupMenu popup = new PopupMenu(AppHomePage.this, findViewById(R.id.nav_more));
                             MenuInflater inflater = popup.getMenuInflater();
                             popup.setOnMenuItemClickListener(AppHomePage.this::onMenuItemClick);
                             inflater.inflate(R.menu.more_menu, popup.getMenu());
                             popup.show();
+                        if (user1 == "" && user2 == null) {
+                            popup.getMenu().findItem(R.id.logout).setEnabled(false);
                         }
+//                        }
 
                     }
                     default:
@@ -143,7 +146,7 @@ public class AppHomePage extends AppCompatActivity {
 
     }
 
-    public void movetoteamsactivity(View view) {
+    public void movetoteamsactivity() {
         Intent intent = new Intent(AppHomePage.this , TeamsHomePg.class);
         startActivity(intent);
     }
@@ -151,11 +154,18 @@ public class AppHomePage extends AppCompatActivity {
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                prefsEditor.clear();
-                prefsEditor.commit();
+                if (user1 != "" || user2 != null) {
+                    prefsEditor.clear();
+                    prefsEditor.commit();
 
-                Intent login = new Intent(getApplicationContext(), AppHomePage.class);
-                startActivity(login);
+                    Intent login = new Intent(getApplicationContext(), AppHomePage.class);
+                    startActivity(login);
+
+                }
+                return true;
+
+            case R.id.teams_menu:
+                movetoteamsactivity();
                 return true;
 
             default:

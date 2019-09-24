@@ -48,19 +48,19 @@
 
     <TextView
         android:id="@+id/name_comment"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginEnd="228dp"
         android:layout_marginRight="228dp"
         android:layout_marginBottom="16dp"
+        android:paddingLeft="10dp"
         android:text="Name"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/colorLogin"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/comment_to_show"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/profile_comment"
-        app:layout_constraintTop_toTopOf="@+id/profile_comment" />
+        app:layout_constraintTop_toTopOf="@+id/profile_comment"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

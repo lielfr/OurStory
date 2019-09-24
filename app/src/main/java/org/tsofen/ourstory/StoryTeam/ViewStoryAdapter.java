@@ -43,10 +43,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
     VSMemories mCurrent;
 
 
-    public ViewStoryAdapter(Context context, List<VSMemories> StoryList, String storyName, long storyId) {
+    public ViewStoryAdapter(ViewStory context, List<VSMemories> StoryList, String storyName, long storyId) {
         mInflater = LayoutInflater.from(context);
         this.mStoryList = StoryList;
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.storyName = storyName;
         this.storyId = storyId;
     }
@@ -134,7 +134,7 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
             Toast.makeText(view.getContext(), view.getId() + "", Toast.LENGTH_LONG).show();
             if (view.getId() == YearId) {
                 Toast.makeText(view.getContext(), "yearclicked", Toast.LENGTH_SHORT).show();
-                mCurrent = mStoryList.get(mposition);
+                //mCurrent = mStoryList.get(mposition);
                 Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
                 intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);
@@ -162,13 +162,12 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
                 intent.putExtra("storyId", storyId);
                 intent.putExtra("storyName", storyName);
                 intent.putExtra("year", mCurrent.getYear());
-                Toast.makeText(view.getContext(), mCurrent.getPics().get(mposition).get(2), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), Long.toString( storyId ) /*mCurrent.getPics().get(mposition).get(2)*/, Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
 
             } else if (view.getId() == img3Id) {
-
                 Toast.makeText(view.getContext(), "img3clicked", Toast.LENGTH_SHORT).show();
-                VSMemories mCurrent = mStoryList.get(mposition);
+                mCurrent = mStoryList.get(mposition);
                 Intent intent = new Intent(view.getContext(), MemoriesOfStoryActivity.class);
                 intent.putExtra("flag", 0);
                 intent.putExtra("storyId", storyId);

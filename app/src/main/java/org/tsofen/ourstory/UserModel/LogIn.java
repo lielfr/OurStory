@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -99,8 +98,7 @@ public class LogIn extends AppCompatActivity {
                     myUser = response.body();
                     if(myUser==null)
 
-                    Toast.makeText(getApplicationContext(),   "The email or password you entered is incorrect!",
-                            Toast.LENGTH_SHORT).show();
+                   Log.d("incorrect","incorrect");
                     else {
                         userId = myUser.getUserId();
 

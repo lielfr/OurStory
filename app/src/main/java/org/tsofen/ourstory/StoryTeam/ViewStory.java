@@ -96,7 +96,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         }
 
         story_api = WebFactory.getService();
-        story_api.GetFullViewStoryById(id).enqueue(new Callback<FullViewStory>() {
+        story_api.GetFullViewStoryById(id)
+                .enqueue(new Callback<FullViewStory>() {
             @Override
             public void onResponse(Call<FullViewStory> call, Response<FullViewStory> response) {
                 story_full = response.body();
@@ -155,7 +156,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                                 .placeholder(R.drawable.nopicyet)
                                 .error(R.drawable.nopicyet);
 
-                        Glide.with(aa).load(uri).apply(options).into(pic);
+                        Glide.with(getApplicationContext()).load(uri).apply(options).into(pic);
                     }
 
 

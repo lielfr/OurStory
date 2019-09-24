@@ -157,7 +157,9 @@ Date date;
         regIntent3.putExtra("gender", gender);
 
         //Uploading the image to Firebase + passing Uri to next activity
-        uploadImage(); ///goes to upload image. Next activity is started from there.
+        if (filePath != null)
+            uploadImage(); ///goes to upload image. Next activity is started from there.
+        else finishSignup();
 
 
 
@@ -218,6 +220,35 @@ Date date;
         }
     }
 
+    private void finishSignup() {
+        OurStoryService saveUser = WebFactory.getService();
+        org.tsofen.ourstory.model.api.User newUser = new org.tsofen.ourstory.model.api.User();
+        newUser.setFirstName(firstNameString);
+        newUser.setLastName(lastNameString);
+        newUser.setProfilePicture(profilePicture);
+        newUser.setDateOfBirth(date);
+        newUser.setEmail(emailString);
+        newUser.setPassword(passwordString);
+        newUser.setCity(cityString);
+        newUser.setState(stateString);
+        newUser.setGender(gender);
+        saveUser.CreateUser(newUser).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                Log.d( "UserSaved", "UserSaved Check Database");
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d( "Saving user Failed", "Saving user Failed");
+
+            }
+        });
+
+        startActivity(regIntent3);
+    }
+
     private void uploadImage() {
 
         if (filePath != null) {
@@ -238,7 +269,7 @@ Date date;
                             Log.d("uri log", "the uri string is " + profileImagePathUriString);
                             progressDialog.dismiss();
 
-                            Toast.makeText(RegistrationPage2.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Log.d("Uploaded","Uploaded");
 
                             profilePicture = profileImagePathUriString;
                             Log.d("profileString", "profile string is " + profilePicture);
@@ -250,30 +281,9 @@ Date date;
                                     + lastNameString + " " + passwordString + " "
                                     + stateString + " " + cityString + " " + date + " " + gender + " " + profilePicture);
 
-                            OurStoryService saveUser = WebFactory.getService();
-                            org.tsofen.ourstory.model.api.User newUser = new org.tsofen.ourstory.model.api.User();
-                            newUser.setFirstName(firstNameString);
-                            newUser.setLastName(lastNameString);
-                            newUser.setProfilePicture(profilePicture);
-                            newUser.setDateOfBirth(date);
-                            newUser.setEmail(emailString);
-                            newUser.setPassword(passwordString);
-                            newUser.setCity(cityString);
-                            newUser.setState(stateString);
-                            newUser.setGender(gender);
-                            saveUser.CreateUser(newUser).enqueue(new Callback<org.tsofen.ourstory.model.api.User>() {
-                                @Override
-                                public void onResponse(Call<User> call, Response<User> response) {
-                                    Toast.makeText(RegistrationPage2.this, "UserSaved Check Database", Toast.LENGTH_LONG).show();
-                                }
+                            finishSignup();
 
-                                @Override
-                                public void onFailure(Call<User> call, Throwable t) {
-                                    Toast.makeText(RegistrationPage2.this, "Saving user Failed", Toast.LENGTH_LONG).show();
 
-                                }
-                            });
-                            startActivity(regIntent3);
 
                         }
                     })
