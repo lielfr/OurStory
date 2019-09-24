@@ -19,6 +19,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/back_button_memories"
+        android:layout_width="32dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/ic_arrow_back"
+        android:onClick="closeActivity"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_mem"
+        app:layout_constraintEnd_toStartOf="@id/imageView14"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView14"
         android:layout_width="70dp"

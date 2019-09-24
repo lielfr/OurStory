@@ -57,7 +57,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
         user = (User) intent.getSerializableExtra("user");
         tag = intent.getStringExtra("tag");
         storyId = intent.getLongExtra("storyId", storyId);
-       // memoryId = intent.getLongExtra("memoryId", memoryId);
+        // memoryId = intent.getLongExtra("memoryId", memoryId);
         storyName = intent.getStringExtra("storyName");
         year = intent.getIntExtra("year", year);
         flag = intent.getIntExtra("flag", flag);
@@ -115,5 +115,9 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void closeActivity(View view) {
+        finish();
     }
 }
