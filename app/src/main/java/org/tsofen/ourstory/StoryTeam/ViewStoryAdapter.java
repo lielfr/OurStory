@@ -43,10 +43,10 @@ public class ViewStoryAdapter extends RecyclerView.Adapter<ViewStoryAdapter.Stor
     VSMemories mCurrent;
 
 
-    public ViewStoryAdapter(Context context, List<VSMemories> StoryList, String storyName, long storyId) {
+    public ViewStoryAdapter(ViewStory context, List<VSMemories> StoryList, String storyName, long storyId) {
         mInflater = LayoutInflater.from(context);
         this.mStoryList = StoryList;
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.storyName = storyName;
         this.storyId = storyId;
     }

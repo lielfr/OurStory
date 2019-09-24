@@ -26,7 +26,6 @@ import com.bumptech.glide.request.RequestOptions;
 import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.MemoriesOfStoryActivity;
 import org.tsofen.ourstory.R;
-import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.model.api.FullViewStory;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.Tags;
@@ -97,7 +96,8 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         }
 
         story_api = WebFactory.getService();
-        story_api.GetFullViewStoryById(id).enqueue(new Callback<FullViewStory>() {
+        story_api.GetFullViewStoryById(id)
+                .enqueue(new Callback<FullViewStory>() {
             @Override
             public void onResponse(Call<FullViewStory> call, Response<FullViewStory> response) {
                 story_full = response.body();
@@ -259,11 +259,6 @@ public class ViewStory extends AppCompatActivity implements Serializable {
     }
 
     public void back(View view) {
-        Intent from = getIntent() ;
-        if(from!=null && from.getStringExtra("from")!=null){
-            Intent back = new Intent(ViewStory.this, AppHomePage.class);
-            startActivity(back);
-        }
         finish();
     }
 
