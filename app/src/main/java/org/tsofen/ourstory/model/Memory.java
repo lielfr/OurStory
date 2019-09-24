@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-import org.tsofen.ourstory.model.api.Contributer;
+import org.tsofen.ourstory.model.api.Like;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 
@@ -49,7 +49,7 @@ public class Memory implements Serializable {
     private ArrayList<Tag> tags = new ArrayList<>();
     @SerializedName("likes")
     @Expose
-    private ArrayList<Object> likes = new ArrayList<Object>();
+    private ArrayList<Like> likes = new ArrayList<Like>();
     @SerializedName("comments")
     @Expose
     private ArrayList<Comment> comments;
@@ -150,11 +150,11 @@ public class Memory implements Serializable {
         this.tags = tags;
     }
 
-    public ArrayList<Object> getLikes() {
+    public ArrayList<Like> getLikes() {
         return likes;
     }
 
-    public void setLikes(ArrayList<Object> likes) {
+    public void setLikes(ArrayList<Like> likes) {
         this.likes = likes;
     }
 
