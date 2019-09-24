@@ -32,7 +32,7 @@ public class AppHomePage extends AppCompatActivity {
     Fragment currentFragment;
     BottomNavigationView nav;
     SharedPreferences sh;
-    public String user1;
+    public static String user1;
     public static String user2=null;
     SharedPreferences.Editor prefsEditor;
     @Override

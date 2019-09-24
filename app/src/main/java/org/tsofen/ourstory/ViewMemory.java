@@ -39,7 +39,7 @@ public class ViewMemory extends AppCompatActivity {
 
     public TextView nameS,tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
     public ImageView pic;
-    public ImageButton commentbtn,sharebtn;
+    public ImageButton commentbtn,sharebtn,likebtn;
     OurStoryService MemoryAService;
     long id;
     RecyclerView imagesrv;
@@ -53,6 +53,7 @@ public class ViewMemory extends AppCompatActivity {
         nameS = findViewById(R.id.nameS);
         imagesrv= findViewById(R.id.memory_pic);
         commentbtn =  findViewById(R.id.commentbtn2);
+        likebtn=  findViewById(R.id.likebtn);
         sharebtn = findViewById(R.id.sharebtn2);
         feeling = findViewById(R.id.feelingtxt);
         location = findViewById(R.id.locationtxt);
