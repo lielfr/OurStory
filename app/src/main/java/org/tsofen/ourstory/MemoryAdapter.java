@@ -119,13 +119,25 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         if (memory.getDescription() != null) {
             holder.descr.setText(memory.getDescription());
         }
+        else
+        {
+            holder.descr.setVisibility(View.INVISIBLE);
+        }
         if (memory.getLocation() != null) {
             holder.location.setWidth(calculateWidth(memory.getLocation()));
             holder.location.setText(memory.getLocation());
         }
+        else
+        {
+            holder.location.setVisibility(View.INVISIBLE);
+        }
         if (memory.getFeeling() != null) {
          holder.feeling.setWidth(calculateWidth("#"+memory.getFeeling()));
             holder.feeling.setText("#" + memory.getFeeling());
+        }
+        else
+        {
+            holder.feeling.setVisibility(View.INVISIBLE);
         }
         String[] monthNames = {" ", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         if (memory.getMemoryDate() != null) {
@@ -182,13 +194,14 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         RecyclerView rvMemory;
         public TextView tags, feeling, location, name, mem_date, descr, num_of_likes, num_of_comments;
         public ImageView pic;
-        public ImageButton commentbtn,sharebtn;
+        public ImageButton likebtn,commentbtn,sharebtn;
         public MemoryAdapter adapter;
 
         public ViewHolder(@NonNull View itemView, MemoryAdapter memoryAdapter) {
             super(itemView);
             rvMemory = itemView.findViewById(R.id.memory_pic);
             commentbtn = itemView.findViewById(R.id.commentbtn2);
+            likebtn = itemView.findViewById(R.id.likebtn);
             sharebtn = itemView.findViewById(R.id.sharebtn2);
             feeling = itemView.findViewById(R.id.feelingtxt);
             location = itemView.findViewById(R.id.locationtxt);

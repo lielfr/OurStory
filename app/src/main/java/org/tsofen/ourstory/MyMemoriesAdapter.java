@@ -87,6 +87,15 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Memory memory = mMemories.get(position);
+       /* holder.likebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OurStoryService Like = WebFactory.getService();
+                Like like = new Like()
+                Like.AddLike(memory.getId(),)
+
+            }
+        });*/
             holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -128,7 +137,8 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
                             @Override
                             public void onResponse(Call<Object> call, Response<Object> response) {
-                                mMemories.remove(memory);
+                                mMemories.remove(position);
+                                notifyItemRemoved(position);
                                 notifyDataSetChanged();
                             }
 
@@ -247,7 +257,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tags, feeling, name, mem_date, descr, num_of_likes, num_of_comments, location;
         public ImageView profile;
-        ImageButton sharebtn, commentbtn, editbtn, deletebtn;
+        ImageButton likebtn,sharebtn, commentbtn, editbtn, deletebtn;
         public MyMemoriesAdapter adapter;
         RecyclerView imagesrv;
 
@@ -257,6 +267,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
             ctx = itemView.getContext();
             imagesrv = itemView.findViewById(R.id.my_memoriesRv);
             deletebtn = itemView.findViewById(R.id.deletebtn);
+            likebtn = itemView.findViewById(R.id.likebtn);
             tags = itemView.findViewById(R.id.tags_text);
             sharebtn = itemView.findViewById(R.id.sharebtn);
             commentbtn = itemView.findViewById(R.id.commentbtn2);

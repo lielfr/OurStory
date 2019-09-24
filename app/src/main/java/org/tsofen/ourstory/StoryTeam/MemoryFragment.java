@@ -46,6 +46,7 @@ public class MemoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        memories.clear();
         inflatedView = getLayoutInflater().inflate(R.layout.activity_search_story, null);
         mRecyclerView = getView().findViewById(R.id.recyclerview1);
         if (mRecyclerView == null) {

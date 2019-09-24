@@ -30,6 +30,8 @@ public interface OurStoryService {
     @Headers("Content-Type: application/json")
     @POST("comments/create/{id}")
     Call<Comment> newComment(@Path("id") long id, @Body Comment comment);
+   /* @POST("likes/create/{id}")
+    Call<Object> addLike(@Path("id") long id,@Body Like like);*/
     @GET("memories/getUserMemories/{id}")
     Call<ArrayList<Memory>> GetMemoriesByUser(@Path("id") long id);
     @GET("memories/story/{story}/findMemoriesByTag/{tag}")
