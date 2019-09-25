@@ -100,61 +100,6 @@ public class ViewMemory extends AppCompatActivity {
                       else
                           name.setVisibility(View.INVISIBLE);
                 }
-                  if(user!=null) {
-                      likebtn.setOnClickListener(new View.OnClickListener() {
-                          @Override
-                          public void onClick(View view) {
-                              OurStoryService Like = WebFactory.getService();
-                              Like like = new Like();
-                              like.setUser(user);
-                              Like.addLike(memory.getId(), like).enqueue(new Callback<org.tsofen.ourstory.model.api.Like>() {
-
-                                  @Override
-                                  public void onResponse(Call<org.tsofen.ourstory.model.api.Like> call, Response<org.tsofen.ourstory.model.api.Like> response) {
-                                      Toast.makeText(getApplicationContext(), "like added", Toast.LENGTH_LONG).show();
-                                      OurStoryService service = WebFactory.getService();
-                                      service.GetMemoryById(memory.getId()).enqueue(new Callback<Memory>() {
-                                          @Override
-                                          public void onResponse(Call<Memory> call, Response<Memory> response) {
-                                              if (response.code() == 200) {
-                                                  Memory memorya = response.body();
-                                                  num_of_likes.setText(memorya.getLikes().size() + "");
-                                                  //notifyDataSetChanged();
-                                              }
-                                          }
-
-                                          @Override
-                                          public void onFailure(Call<Memory> call, Throwable t) {
-
-                                          }
-                                      });
-
-                                  }
-
-                                  @Override
-                                  public void onFailure(Call<org.tsofen.ourstory.model.api.Like> call, Throwable t) {
-
-                                  }
-                              });
-
-                          }
-                      });
-                  }
-                  else
-                  {
-                      AlertDialog.Builder myAlertBuilder = new
-                              AlertDialog.Builder(getApplicationContext());
-                      myAlertBuilder.setTitle("Error");
-                      myAlertBuilder.setMessage("Please Sign in to like this memory.");
-                      // Set the dialog title and message.
-                      myAlertBuilder.setPositiveButton("Ok", new
-                              DialogInterface.OnClickListener() {
-                                  public void onClick(DialogInterface dialog, int which) {
-
-                                  }
-                              });
-                      myAlertBuilder.show();
-                  }
                   commentbtn.setOnClickListener(new View.OnClickListener() {
                       @Override
                       public void onClick(View view) {
@@ -238,7 +183,7 @@ public class ViewMemory extends AppCompatActivity {
               }}
             @Override
             public void onFailure(Call<Memory> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"I'm null",Toast.LENGTH_LONG);
+//                Toast.makeText(getApplicationContext(),"I'm null",Toast.LENGTH_LONG);
             }
         });
     }
@@ -249,5 +194,9 @@ public class ViewMemory extends AppCompatActivity {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
         return bounds.width();
+    }
+
+    public void closeActivity(View view) {
+        finish();
     }
 }

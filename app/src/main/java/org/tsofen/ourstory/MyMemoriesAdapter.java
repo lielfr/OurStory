@@ -52,13 +52,14 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     User user;
     LayoutInflater mInflater;
     Memory mem;
+    RecyclerView rv;
 
 
-
-    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj) {
+    public MyMemoriesAdapter(Context context, ArrayList<Memory> memories, User userObj, RecyclerView rv) {
         this.mMemories = memories;
         mInflater = LayoutInflater.from(context);
         this.user = userObj;
+        this.rv = rv;
     }
 
 
@@ -88,43 +89,43 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Memory memory = mMemories.get(position);
-        holder.likebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OurStoryService Like = WebFactory.getService();
-                Like like = new Like();
-                like.setUser(user);
-                Like.addLike(memory.getId(),like).enqueue(new Callback<Like>() {
-
-                    @Override
-                    public void onResponse(Call<Like> call, Response<org.tsofen.ourstory.model.api.Like> response) {
-                        Toast.makeText(ctx.getApplicationContext(),"like added",Toast.LENGTH_LONG).show();
-                        OurStoryService service = WebFactory.getService();
-                        service.GetMemoryById(memory.getId()).enqueue(new Callback<Memory>() {
-                            @Override
-                            public void onResponse(Call<Memory> call, Response<Memory> response) {
-                                if (response.code() == 200) {
-                                    Memory memorya = response.body();
-                                    holder.num_of_likes.setText(memorya.getLikes().size()+"");
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Memory> call, Throwable t) {
-
-                            }
-                        });
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<org.tsofen.ourstory.model.api.Like> call, Throwable t) {
-
-                    }
-                });
-
-            }
-        });
+//        holder.likebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                OurStoryService Like = WebFactory.getService();
+//                Like like = new Like();
+//                like.setUser(user);
+//                Like.addLike(memory.getId(), like).enqueue(new Callback<Like>() {
+//
+//                    @Override
+//                    public void onResponse(Call<Like> call, Response<org.tsofen.ourstory.model.api.Like> response) {
+//                        Toast.makeText(ctx.getApplicationContext(),"like added",Toast.LENGTH_LONG).show();
+//                        OurStoryService service = WebFactory.getService();
+//                        service.GetMemoryById(memory.getId()).enqueue(new Callback<Memory>() {
+//                            @Override
+//                            public void onResponse(Call<Memory> call, Response<Memory> response) {
+//                                if (response.code() == 200) {
+//                                    Memory memorya = response.body();
+//                                    holder.num_of_likes.setText(memorya.getLikes().size() + "");
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<Memory> call, Throwable t) {
+//
+//                            }
+//                        });
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<org.tsofen.ourstory.model.api.Like> call, Throwable t) {
+//
+//                    }
+//                });
+//
+//            }
+//        });
             holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -171,17 +172,18 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                             public void onClick(DialogInterface dialog, int which) {
                                 OurStoryService deleteMemory;
                         deleteMemory = WebFactory.getService();
-                        deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Object>() {
+                                deleteMemory.DeleteMemory(((memory).getId())).enqueue(new Callback<Void>() {
 
                             @Override
-                            public void onResponse(Call<Object> call, Response<Object> response) {
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                Log.d("MOO", "Should update it now");
                                 mMemories.remove(position);
                                 notifyItemRemoved(position);
-                                notifyDataSetChanged();
+                                rv.scrollToPosition(0);
                             }
 
                             @Override
-                            public void onFailure(Call<Object> call, Throwable t) {
+                            public void onFailure(Call<Void> call, Throwable t) {
 
                             }
                         });
