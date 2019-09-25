@@ -103,5 +103,8 @@ public interface OurStoryService {
     @POST("users/forgotPassword")
     Call<Object> resetPassword(@Query("mail") String mail);
 
+    @GET("comments/getMemoryComments/{id}")
+    Call<ArrayList<Comment>> GetMemoryComments(@Path("id") long id);
+
 
 }

@@ -21,6 +21,8 @@ import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,18 +68,33 @@ public class CommentActivity extends Activity {
 
     private void updateComments() {
         OurStoryService service = WebFactory.getService();
-        service.GetMemoryById(memoryA.getId()).enqueue(new Callback<Memory>() {
+//        service.GetMemoryById(memoryA.getId()).enqueue(new Callback<Memory>() {
+//            @Override
+//            public void onResponse(Call<Memory> call, Response<Memory> response) {
+//                if (response.code() == 200) {
+//                    memoryA = response.body();
+//                    adapter.comments.clear();
+//                    adapter.comments = memoryA.getComments();
+//                    adapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Memory> call, Throwable t) {
+//
+//            }
+//        });
+        service.GetMemoryComments(memoryA.getId()).enqueue(new Callback<ArrayList<Comment>>() {
             @Override
-            public void onResponse(Call<Memory> call, Response<Memory> response) {
-                if (response.code() == 200) {
-                    memoryA = response.body();
-                    adapter.comments = memoryA.getComments();
-                    adapter.notifyDataSetChanged();
-                }
+            public void onResponse(Call<ArrayList<Comment>> call, Response<ArrayList<Comment>> response) {
+                if (response.code() != 200) return;
+                adapter.comments.clear();
+                adapter.comments.addAll(response.body());
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<Memory> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Comment>> call, Throwable t) {
 
             }
         });
