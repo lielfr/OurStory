@@ -101,6 +101,8 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
     boolean checked1 = false, checked2 = false, checked3 = false;
     DatePicker memoryDatePicker;
 
+    RecyclerView tagsRV, imagesRV, videosRV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,10 +111,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         String userStr = preferences.getString(AppHomePage.USER, "ERR");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_memory);
-
-        imageAdapter = new AddMemoryImageAdapter(this);
-        videoAdapter = new AddMemoryVideoAdapter(this);
-        RecyclerView tagsRV = findViewById(R.id.tagsLayout_cememory);
+        imagesRV = findViewById(R.id.add_pictures_rv_cememory);
+        videosRV = findViewById(R.id.add_videos_rv_cememory);
+        imageAdapter = new AddMemoryImageAdapter(this, imagesRV);
+        videoAdapter = new AddMemoryVideoAdapter(this, videosRV);
+        tagsRV = findViewById(R.id.tagsLayout_cememory);
         tagAdapter = new AddMemoryTagAdapter(new LinkedList<>(), tagsRV);
 
         Intent intent = getIntent();
@@ -171,48 +174,42 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
         });
 
         monthChckBx1 = findViewById(R.id.monthChckBx1);
-        monthChckBx1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked2 = ((CheckBox) v).isChecked();
-                int monthSpinnerI1 = Resources.getSystem().getIdentifier("month", "id", "android");
-                View monthSpinnerV1 = memoryDatePicker.findViewById(monthSpinnerI1);
+        monthChckBx1.setOnClickListener(v -> {
+            checked2 = ((CheckBox) v).isChecked();
+            int monthSpinnerI1 = Resources.getSystem().getIdentifier("month", "id", "android");
+            View monthSpinnerV1 = memoryDatePicker.findViewById(monthSpinnerI1);
 
-                if (checked2) {
-                    if (monthSpinnerI1 != 0) {
-                        if (monthSpinnerV1 != null) {
-                            monthSpinnerV1.setVisibility(View.GONE);
-                        }
+            if (checked2) {
+                if (monthSpinnerI1 != 0) {
+                    if (monthSpinnerV1 != null) {
+                        monthSpinnerV1.setVisibility(View.GONE);
                     }
-                } else {
-                    if (monthSpinnerI1 != 0) {
-                        if (monthSpinnerV1 != null) {
-                            monthSpinnerV1.setVisibility(View.VISIBLE);
-                        }
+                }
+            } else {
+                if (monthSpinnerI1 != 0) {
+                    if (monthSpinnerV1 != null) {
+                        monthSpinnerV1.setVisibility(View.VISIBLE);
                     }
                 }
             }
         });
 
         dayChckBx1 = findViewById(R.id.dayChckBx1);
-        dayChckBx1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked3 = ((CheckBox) v).isChecked();
-                int daySpinnerI1 = Resources.getSystem().getIdentifier("day", "id", "android");
-                View daySpinnerV1 = memoryDatePicker.findViewById(daySpinnerI1);
+        dayChckBx1.setOnClickListener(v -> {
+            checked3 = ((CheckBox) v).isChecked();
+            int daySpinnerI1 = Resources.getSystem().getIdentifier("day", "id", "android");
+            View daySpinnerV1 = memoryDatePicker.findViewById(daySpinnerI1);
 
-                if (checked3) {
-                    if (daySpinnerI1 != 0) {
-                        if (daySpinnerV1 != null) {
-                            daySpinnerV1.setVisibility(View.GONE);
-                        }
+            if (checked3) {
+                if (daySpinnerI1 != 0) {
+                    if (daySpinnerV1 != null) {
+                        daySpinnerV1.setVisibility(View.GONE);
                     }
-                } else {
-                    if (daySpinnerI1 != 0) {
-                        if (daySpinnerV1 != null) {
-                            daySpinnerV1.setVisibility(View.VISIBLE);
-                        }
+                }
+            } else {
+                if (daySpinnerI1 != 0) {
+                    if (daySpinnerV1 != null) {
+                        daySpinnerV1.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -244,8 +241,11 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             }
         } else {
             create = false;
-            tagAdapter.tags.clear();
-            tagAdapter.notifyDataSetChanged();
+            tagsRV.post(() -> {
+                tagAdapter.tags.clear();
+                tagAdapter.notifyDataSetChanged();
+            });
+
             pageTitle.setText("Edit Memory");
             user = memory.getUser();
             editTextDescription.setText(memory.getDescription());
@@ -275,12 +275,22 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 //                videoAdapter.upload_start++;
             }
 
-            imageAdapter.data.addAll(image_uris);
-            imageAdapter.notifyDataSetChanged();
-            videoAdapter.data.addAll(video_uris);
-            videoAdapter.notifyDataSetChanged();
-            tagAdapter.tags.addAll(memory.getTags());
-            tagAdapter.notifyDataSetChanged();
+            imagesRV.post(() -> {
+                imageAdapter.data.addAll(image_uris);
+                imageAdapter.notifyDataSetChanged();
+            });
+
+            videosRV.post(() -> {
+                videoAdapter.data.addAll(video_uris);
+                videoAdapter.notifyDataSetChanged();
+            });
+
+            tagsRV.post(() -> {
+                tagAdapter.tags.addAll(memory.getTags());
+                tagAdapter.notifyDataSetChanged();
+            });
+
+
         }
        // /*Story*/ story = (Story) intent.getSerializableExtra(KEY_CREATE);
         //please replace line 270 with line above - 269
@@ -494,7 +504,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
 
 
             }
-            imageAdapter.notifyDataSetChanged();
+            imagesRV.post(() -> imageAdapter.notifyDataSetChanged());
         } else if (requestCode == AddMemoryVideoAdapter.ADDMEMORY_VIDEO) {
             if (data.getClipData() != null) {
                 int count = data.getClipData().getItemCount();
@@ -505,7 +515,7 @@ public class CreateEditMemoryActivity extends AppCompatActivity implements View.
             } else if (data.getData() != null) {
                 videoAdapter.data.add(new Uploadable(data.getData().toString()));
             }
-            videoAdapter.notifyDataSetChanged();
+            videosRV.post(() -> videoAdapter.notifyDataSetChanged());
         }
     }
 
