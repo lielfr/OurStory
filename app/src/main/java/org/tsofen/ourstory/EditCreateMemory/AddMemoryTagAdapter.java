@@ -72,13 +72,14 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                 // This actually adds the tag whenever the user presses Done on the soft keyboard.
                 // TODO: This needs more fine tuning, like maybe allowing other events to trigger it
                 if ((i == EditorInfo.IME_ACTION_DONE && keyEvent == null)) {
-                    Tag t = new Tag();
-                    t.setLabel(editText.getText().toString());
-                    tags.add(t);
-                    notifyItemInserted(tags.size() - 1);
-                    editText.setText("");
-                    rv.scrollToPosition(tags.size());
-
+                    rv.post(() -> {
+                        Tag t = new Tag();
+                        t.setLabel(editText.getText().toString());
+                        tags.add(t);
+                        notifyItemInserted(tags.size() - 1);
+                        editText.setText("");
+                        rv.scrollToPosition(tags.size());
+                    });
                 }
                 return true;
             });
@@ -135,8 +136,10 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             editText.setWidth(calculateWidth(text + " "));
             closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
-                tags.remove(position);
-                notifyItemRemoved(position);
+                rv.post(() -> {
+                    tags.remove(position);
+                    notifyItemRemoved(position);
+                });
             });
         }
     }
