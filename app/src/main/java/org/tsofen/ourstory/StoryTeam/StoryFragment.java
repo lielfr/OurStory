@@ -91,7 +91,7 @@ public class StoryFragment extends Fragment {
                         if (arr != null) {
 //                            Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -99,7 +99,7 @@ public class StoryFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                    Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -107,7 +107,7 @@ public class StoryFragment extends Fragment {
 
         } else if (flag == 0) {//this mean that the user want to search by DATE
             if (op == 1) {//search by birthday
-                Toast.makeText(context, "search by Birthday", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "search by Birthday", Toast.LENGTH_SHORT).show();
 
                 wb.GetStoriesByDobFull(D, M, Y).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
@@ -125,7 +125,7 @@ public class StoryFragment extends Fragment {
                             if (arr != null) {
 //                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -133,14 +133,14 @@ public class StoryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
             } else if (op == 2) { //search by Deathday
 
-                Toast.makeText(context, "search by Deathday from API", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "search by Deathday from API", Toast.LENGTH_SHORT).show();
 
                 wb.GetStoriesByDodFull(D, M, Y).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
@@ -158,14 +158,14 @@ public class StoryFragment extends Fragment {
                             if (arr != null) {
 //                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -175,7 +175,7 @@ public class StoryFragment extends Fragment {
         } else { //search by both!!! activating the search by name
 
             if (op == 1) {//search by birthday and name
-                Toast.makeText(context, "search by BirthDay and name from API", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "search by BirthDay and name from API", Toast.LENGTH_SHORT).show();
 
                 wb.GetStoriesByDateOfBirth(D, M, Y, searchinput).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
@@ -193,7 +193,7 @@ public class StoryFragment extends Fragment {
                             if (arr != null) {
 //                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -201,14 +201,14 @@ public class StoryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
 
             } else if (op == 2) { //search by Deathday and activating seachByName
 
-                Toast.makeText(context, "search by Deathday and Name from API", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "search by Deathday and Name from API", Toast.LENGTH_SHORT).show();
 
                 wb.GetStoriesByDateOfDeath(D, M, Y, searchinput).enqueue(new Callback<ArrayList<ListOfStory>>() {
                     @Override
@@ -226,7 +226,7 @@ public class StoryFragment extends Fragment {
                             if (arr != null) {
 //                                Toast.makeText(context, "size =" + arr.size(), Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -234,7 +234,7 @@ public class StoryFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<ArrayList<ListOfStory>> call, Throwable t) {
-                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "getting was failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });

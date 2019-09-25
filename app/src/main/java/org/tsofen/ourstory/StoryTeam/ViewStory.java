@@ -94,7 +94,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
         if (intent.getStringExtra("Button") != null && intent.getStringExtra("Button").equals("createandadd")) {
             intent.removeExtra("Button"); // Make sure we don't go back
             AddMemoryLive((Story) intent.getSerializableExtra("result"));
-            Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(aa, "backfromadd memory", Toast.LENGTH_SHORT).show();
         }
 
         user = (User) intent.getSerializableExtra("user");
@@ -106,7 +106,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             public void onResponse(Call<FullViewStory> call, Response<FullViewStory> response) {
                 story_full = response.body();
                 if (story_full == null) {
-                    Toast.makeText(getApplicationContext(), "there is no story like this null ", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "there is no story like this null ", Toast.LENGTH_LONG).show();
                 } else {
 
                     String personName = story_full.getStory().getNameOfPerson();
@@ -170,7 +170,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
 
                         ConstraintLayout constraintLayout = findViewById(R.id.constrainlayout2);
                         constraintLayout.setVisibility(View.VISIBLE);
-                        Toast.makeText(aa, "dsflkhjvfkd", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(aa, "dsflkhjvfkd", Toast.LENGTH_SHORT).show();
 
                     } else {
                         LinearLayout linearLayout = findViewById(R.id.linearLayout3);
@@ -214,7 +214,7 @@ public class ViewStory extends AppCompatActivity implements Serializable {
                             // Give the RecyclerView a default layout manager.
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(aa));
                         } else {
-                            Toast.makeText(getApplicationContext(), " the recycle View is null ", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), " the recycle View is null ", Toast.LENGTH_LONG).show();
                         }
 
 
@@ -292,8 +292,9 @@ public class ViewStory extends AppCompatActivity implements Serializable {
             intent.putExtra("storyId", story_full.getStory().getStoryId());
             intent.putExtra("storyName", story_full.getStory().getNameOfPerson());
             intent.putExtra("user", user);
-        } else
-            Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
+        }
+//        else
+//            Toast.makeText(getApplicationContext(), " in tag the story null ", Toast.LENGTH_LONG).show();
         TextView textView = findViewById(R.id.textView5);
         intent.putExtra("tag", textView.getText().toString());
         startActivity(intent);

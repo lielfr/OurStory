@@ -99,7 +99,7 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
 
                     @Override
                     public void onResponse(Call<org.tsofen.ourstory.model.api.Like> call, Response<org.tsofen.ourstory.model.api.Like> response) {
-                        Toast.makeText(ctx.getApplicationContext(), "like added", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(ctx.getApplicationContext(), "like added", Toast.LENGTH_LONG).show();
                         OurStoryService service = WebFactory.getService();
                         service.GetMemoryById(memory.getId()).enqueue(new Callback<Memory>() {
                             @Override

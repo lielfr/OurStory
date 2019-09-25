@@ -321,7 +321,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (response.body() != null) {
                             owner = response.body();
-                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
                         } else {
 //                            Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
                         }
@@ -627,7 +627,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                 public void onResponse(Call<Story> call, Response<Story> response) {
                     result = response.body();
                     if (result != null) {
-                        Toast.makeText(CreateStory.this, "the story " + result.getNameOfPerson() + " was created succefully", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CreateStory.this, "the story " + result.getNameOfPerson() + " was created succefully", Toast.LENGTH_SHORT).show();
 
                         // pass birth date to the next activity
                         if (birthDateFields == 3) {

@@ -98,7 +98,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
                 showStory.putExtra("user", fragment.parent.user);
                 context.startActivity(showStory);                                                 //TODO NEED to Activate this Intent
             }else{
-                Toast.makeText(context, "Warning intent is null ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Warning intent is null ", Toast.LENGTH_SHORT).show();
             }
         }
     }

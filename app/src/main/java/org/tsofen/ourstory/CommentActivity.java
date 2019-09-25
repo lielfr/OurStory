@@ -120,7 +120,7 @@ public class CommentActivity extends Activity {
 
                 @Override
                 public void onFailure(Call<Comment> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
 
                 }
             });
