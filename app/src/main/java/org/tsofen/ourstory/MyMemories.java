@@ -78,7 +78,7 @@ public class MyMemories extends Fragment {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    adapter = new MyMemoriesAdapter(getActivity(), memories, userObj);
+                    adapter = new MyMemoriesAdapter(getActivity(), memories, userObj,rv);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getContext()));
                     adapter.notifyDataSetChanged();

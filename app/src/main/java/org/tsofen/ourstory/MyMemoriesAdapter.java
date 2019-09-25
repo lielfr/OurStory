@@ -138,16 +138,6 @@ public class MyMemoriesAdapter extends RecyclerView.Adapter<MyMemoriesAdapter.Vi
                 }
             });
 
-
-            ArrayList<Like> likes = memory.getLikes();
-            for(Like like:likes)
-            {
-                if(like.getUser().getUserId()==user.getUserId())
-                {
-                    holder.likebtn.setImageResource(R.drawable.alex);
-                }
-            }
-
         holder.editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
