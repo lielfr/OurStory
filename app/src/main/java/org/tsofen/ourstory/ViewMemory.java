@@ -159,7 +159,7 @@ public class ViewMemory extends AppCompatActivity {
 
                           Intent intent = new Intent(getApplicationContext(), CommentActivity.class);
                           intent.putExtra("memory", memory);
-                          intent.putExtra("user", user);
+                          intent.putExtra("user", getIntent().getSerializableExtra("user"));
                           startActivity(intent);
 
                       }
@@ -169,7 +169,7 @@ public class ViewMemory extends AppCompatActivity {
                       public void onClick(View view) {
                           Intent sendIntent = new Intent();
                           sendIntent.setAction(Intent.ACTION_SEND);
-                          sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+                          sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_txt));
                           sendIntent.setType("text/plain");
                           Intent shareIntent = Intent.createChooser(sendIntent, null);
                           startActivity(shareIntent);

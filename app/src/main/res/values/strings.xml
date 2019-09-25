@@ -74,6 +74,7 @@
     <string name="deselect_tag">Deselect Tag</string>
     <string name="shared_pref_key">OurStorySharedPref</string>
     <string name="keepme">Keep me logged in</string>
+    <string name="share_txt">Find OurStory on Google Play</string>
 
 
 </resources>
