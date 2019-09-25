@@ -104,7 +104,7 @@ public class LogIn extends AppCompatActivity {
 
 //                        userPass = myUser.getPassword();
 //                        if (userPass.equals(inputPassword)) {
-                            UserStatusCheck.setUserStatus("not a visitor");
+
                             //TODO move the user id to the home page and then move it to create story intent (move it under name=("userId"))
                             //
                             Intent signInDone = new Intent(getApplicationContext(), AppHomePage.class);
@@ -124,7 +124,6 @@ public class LogIn extends AppCompatActivity {
                                 {
                                 signInDone.putExtra("myUserJson", json);
                             }
-                            UserStatusCheck.setUserStatus("not a visitor");
                             AppHomePage.user2=json;
                             passErr.setVisibility(View.INVISIBLE);
                             startActivity(signInDone);

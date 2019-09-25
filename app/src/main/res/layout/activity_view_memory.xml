@@ -64,26 +64,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="520dp"
         android:layout_marginTop="100dp"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:background="@color/colorPrimary"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="@id/header_layout">
 
-        <ImageView
-            android:id="@+id/background"
-            android:layout_width="414dp"
-            android:layout_height="500dp"
-            android:layout_marginBottom="8dp"
+        <ImageButton
+            android:id="@+id/likebtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@color/colorPrimaryDark"
-            android:clickable="false"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:srcCompat="@drawable/like" />
 
         <ImageView
             android:id="@+id/picture_person"
@@ -162,6 +160,32 @@
             app:layout_constraintTop_toTopOf="@+id/name_txt_person" />
 
         <ImageButton
+            android:id="@+id/commentbtn2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/colorPrimaryDark"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/likebtn"
+            app:layout_constraintTop_toTopOf="@+id/likebtn"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/comment" />
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="414dp"
+            android:layout_height="520dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
             android:id="@+id/sharebtn2"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -172,55 +196,12 @@
             app:layout_constraintTop_toTopOf="@+id/commentbtn2"
             app:srcCompat="@drawable/sharenew" />
 
-        <ImageButton
-            android:id="@+id/commentbtn2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@color/colorPrimaryDark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/likebtn"
-            app:layout_constraintStart_toEndOf="@+id/likebtn"
-            app:layout_constraintTop_toTopOf="@+id/likebtn"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/comment" />
-
-        <TextView
-            android:id="@+id/commentNum"
-            android:layout_width="22dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginBottom="16dp"
-
-            android:fontFamily="@font/quicksand_bold"
-            android:text="9"
-            android:textColor="@color/colorLogin"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/likesNum" />
-
-        <ImageButton
-            android:id="@+id/likebtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryDark"
-
-            app:layout_constraintBottom_toBottomOf="@+id/background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.022"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
-            app:layout_constraintVertical_bias="0.85"
-            app:srcCompat="@drawable/like" />
-
         <TextView
             android:id="@+id/likesNum"
             android:layout_width="22dp"
             android:layout_height="17dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginBottom="16dp"
             android:fontFamily="@font/quicksand_bold"
             android:text="15"
             android:textColor="@color/colorLogin"
@@ -230,6 +211,20 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/likebtn" />
 
+        <TextView
+            android:id="@+id/commentNum"
+            android:layout_width="22dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+
+            android:fontFamily="@font/quicksand_bold"
+            android:text="9"
+            android:textColor="@color/colorLogin"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/likesNum" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/memory_pic"
             android:layout_width="0dp"
@@ -238,40 +233,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingHorizontal="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descr"
             android:clipToPadding="false"
             android:padding="@dimen/ef_spacing"
-            app:layout_constraintVertical_bias="0.035" />
-
-        <com.borjabravo.readmoretextview.ReadMoreTextView
-            android:id="@+id/tags_text"
-            android:layout_width="380dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="224dp"
-            android:background="@drawable/edit_round3"
-            android:fontFamily="@font/quicksand_bold"
-            android:gravity="center_vertical"
-            android:text="#TAG"
-            android:textColor="@color/colorName"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:colorClickableText="@color/colorGrayHint"
-            app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintBottom_toTopOf="@id/tags_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.258"
+            app:layout_constraintHorizontal_bias="0.875"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descr"
-            app:trimCollapsedText="@string/showMore"
-            app:trimExpandedText="@string/showLess"
-            app:trimLength="35"
-            app:trimMode="trimModeLength" />
+            app:layout_constraintTop_toBottomOf="@+id/descr" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
@@ -298,6 +267,30 @@
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"
             app:trimLength="120"
+            app:trimMode="trimModeLength" />
+
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/tags_text"
+            android:layout_width="380dp"
+            android:layout_height="45dp"
+            android:background="@drawable/edit_round3"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center_vertical"
+            android:text="#TAG"
+            android:textColor="@color/colorName"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:colorClickableText="@color/colorGrayHint"
+            app:layout_constraintBottom_toTopOf="@+id/sharebtn2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.258"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memory_pic"
+            app:layout_constraintVertical_bias="0.7"
+            app:trimCollapsedText="@string/showMore"
+            app:trimExpandedText="@string/showLess"
+            app:trimLength="35"
             app:trimMode="trimModeLength" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

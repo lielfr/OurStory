@@ -48,7 +48,7 @@
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
-            android:layout_width="300dp"
+            android:layout_width="270dp"
             android:layout_height="20dp"
 
             android:fontFamily="@font/quicksand_bold"
@@ -82,8 +82,8 @@
             android:visibility="visible"
             app:colorClickableText="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.458"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.129"
+            app:layout_constraintStart_toStartOf="@id/descr"
             app:layout_constraintTop_toBottomOf="@+id/descr"
             app:trimCollapsedText="@string/showMore"
             app:trimExpandedText="@string/showLess"

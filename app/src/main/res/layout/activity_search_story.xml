@@ -41,10 +41,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/searchbar"
         android:ems="10"
-        android:hint="Story/Memory name"
+        android:hint="Story/Memory name..."
         android:inputType="textPersonName"
         android:scrollbarStyle="outsideInset"
         android:textColor="#FFFFFF"
+        android:textColorHint="#5EA89B9B"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -71,8 +72,8 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="27dp"
-            android:layout_height="28dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:layout_marginTop="108dp"
             android:layout_marginEnd="7dp"
             android:layout_marginRight="7dp"
@@ -85,8 +86,8 @@
 
         <ImageView
             android:id="@+id/imageView12"
-            android:layout_width="50dp"
-            android:layout_height="25dp"
+            android:layout_width="53dp"
+            android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView10"
             app:layout_constraintEnd_toEndOf="@+id/imageView10"
             app:layout_constraintHorizontal_bias="0.503"
@@ -171,15 +172,16 @@
 
         <Spinner
             android:id="@+id/sp"
-            android:layout_width="28dp"
-            android:layout_height="35dp"
+            android:layout_width="23dp"
+            android:layout_height="25dp"
             android:layout_marginStart="152dp"
             android:layout_marginLeft="152dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="108dp"
             android:background="@mipmap/down"
-            android:popupBackground="@drawable/asd"
+            android:popupBackground="#34495E"
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toStartOf="@+id/catg"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -209,15 +211,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/sp" />
 
-        <ImageView
+        <TextView
             android:id="@+id/imageView15"
             android:layout_width="211dp"
             android:layout_height="31dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center"
+            android:text="Search"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView10"
             app:layout_constraintEnd_toEndOf="@+id/imageView10"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/imageView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView12"
-            app:srcCompat="@drawable/searchstoryin" />
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -269,14 +277,5 @@
             app:tabTextColor="#FFFFFF" />
 
     </RelativeLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="409dp"
-        android:layout_height="51dp"
-        android:background="#2C3E58"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

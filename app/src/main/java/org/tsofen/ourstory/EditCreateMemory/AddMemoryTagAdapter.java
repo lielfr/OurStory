@@ -55,7 +55,7 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
     public int calculateWidth(String text) {
         Rect bounds = new Rect();
         TextView textView = new TextView(ctx);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
         textView.getPaint().getTextBounds(text, 0, text.length(), bounds);
         return bounds.width();
     }
@@ -72,13 +72,14 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
                 // This actually adds the tag whenever the user presses Done on the soft keyboard.
                 // TODO: This needs more fine tuning, like maybe allowing other events to trigger it
                 if ((i == EditorInfo.IME_ACTION_DONE && keyEvent == null)) {
-                    Tag t = new Tag();
-                    t.setLabel(editText.getText().toString());
-                    tags.add(t);
-                    notifyItemInserted(tags.size() - 1);
-                    editText.setText("");
-                    rv.scrollToPosition(tags.size());
-
+                    rv.post(() -> {
+                        Tag t = new Tag();
+                        t.setLabel(editText.getText().toString());
+                        tags.add(t);
+                        notifyItemInserted(tags.size() - 1);
+                        editText.setText("");
+                        rv.scrollToPosition(tags.size());
+                    });
                 }
                 return true;
             });
@@ -89,13 +90,17 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             editText.setOnClickListener(view -> editText.showDropDown());
             editText.setOnFocusChangeListener((view, b) -> {
 
-                if (!b) {
-                    Tag t = new Tag();
-                    t.setLabel(editText.getText().toString());
-                    tags.add(t);
-                    notifyItemInserted(tags.size() - 1);
-                    editText.setText("");
-                    rv.scrollToPosition(tags.size());
+                if (!b && editText.getText().length() >= 3) {
+
+                    rv.post(() -> {
+                        Tag t = new Tag();
+                        t.setLabel(editText.getText().toString());
+                        tags.add(t);
+                        notifyItemInserted(tags.size() - 1);
+                        editText.setText("");
+                        rv.scrollToPosition(tags.size());
+                    });
+
                 }
             });
             // TODO: Replace this with using a suggestion API
@@ -128,11 +133,13 @@ public class AddMemoryTagAdapter extends RecyclerView.Adapter<AddMemoryTagAdapte
             String text = tags.get(position).getLabel();
             editText.setText(text);
             editText.setInputType(InputType.TYPE_NULL);
-            editText.setWidth(calculateWidth(text));
+            editText.setWidth(calculateWidth(text + " "));
             closeButton.setVisibility(View.VISIBLE);
             closeButton.setOnClickListener(view -> {
-                tags.remove(position);
-                notifyItemRemoved(position);
+                rv.post(() -> {
+                    tags.remove(position);
+                    notifyItemRemoved(position);
+                });
             });
         }
     }

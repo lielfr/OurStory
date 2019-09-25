@@ -92,7 +92,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
 
                 if (memory.getUser().getProfilePicture() != null) {
 
-                    Uri uri = Uri.parse(memory.getUser().getProfilePicture().toString());
+                    Uri uri = Uri.parse(memory.getUser().getProfilePicture());
                     RequestOptions options = new RequestOptions()
                             .override(300, 300)
                             .centerCrop()
@@ -103,7 +103,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
                     holder.profile.setImageResource(R.drawable.defaultprofilepicture);
                 }
             } else {
-                Toast toast = Toast.makeText(ctx, "there is no memories", Toast.LENGTH_SHORT);
+//                Toast toast = Toast.makeText(ctx, "there is no memories", Toast.LENGTH_SHORT);
 
             }
         }
@@ -146,7 +146,7 @@ public class SearchMemoryAdapter extends RecyclerView.Adapter<SearchMemoryAdapte
                 //Toast.makeText(context, "Condratolation  remember Story Adapter ", Toast.LENGTH_SHORT).show();
                 ctx.startActivity(showMemory);                                                 //TODO NEED to Activate this Intent
             } else {
-                Toast.makeText(ctx, "Warning intent is null ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ctx, "Warning intent is null ", Toast.LENGTH_SHORT).show();
             }
         }
     }

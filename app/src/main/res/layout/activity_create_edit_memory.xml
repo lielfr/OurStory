@@ -237,10 +237,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout_cememory"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
-                    android:layout_height="53dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/DateOfMemHandler">
@@ -252,32 +252,43 @@
 
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:fontFamily="@font/quicksand_bold"
                         android:text="@string/this_was_at"
                         android:textColor="@android:color/background_light"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/relativeLayout_cememory"
-                        tools:layout_conversion_absoluteHeight="0dp"
-                        tools:layout_conversion_absoluteWidth="0dp" />
+                        tools:layout_conversion_absoluteHeight="23dp"
+                        tools:layout_conversion_absoluteWidth="90dp" />
 
                     <TextView
                         android:id="@+id/showMemDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="4dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
                         android:calendarTextColor="@color/colorGrayHint"
+                        android:fontFamily="@font/quicksand_bold"
                         android:foregroundGravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/dateOfMem_cememory"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_conversion_absoluteHeight="24dp"
+                        tools:layout_conversion_absoluteWidth="309dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"
@@ -311,7 +322,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:buttonTint="@color/colorError"
-                        android:text="year Unknown"
+                        android:text="Year Unknown"
                         android:textColor="@color/colorGrayHint" />
                 </LinearLayout>
 

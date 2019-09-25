@@ -24,6 +24,7 @@ import org.tsofen.ourstory.StoryTeam.SearchStory;
 import org.tsofen.ourstory.StoryTeam.ViewStory;
 import org.tsofen.ourstory.model.Memory;
 import org.tsofen.ourstory.model.api.MemoryA;
+import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
 import org.tsofen.ourstory.web.WebFactory;
 
@@ -46,15 +47,17 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
     int year, flag;
     String storyName, tag;
     private ArrayList<Memory> memories;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memories);
         Intent intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
         tag = intent.getStringExtra("tag");
         storyId = intent.getLongExtra("storyId", storyId);
-       // memoryId = intent.getLongExtra("memoryId", memoryId);
+        // memoryId = intent.getLongExtra("memoryId", memoryId);
         storyName = intent.getStringExtra("storyName");
         year = intent.getIntExtra("year", year);
         flag = intent.getIntExtra("flag", flag);
@@ -73,7 +76,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this, memories);
+                    adapter = new MemoryAdapter(MemoriesOfStoryActivity.this, memories, MemoriesOfStoryActivity.this);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     adapter.notifyDataSetChanged();
@@ -89,7 +92,7 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
                     memories = response.body();
-                    adapter = new MemoryAdapter(getApplicationContext(), memories);
+                    adapter = new MemoryAdapter(getApplicationContext(), memories, MemoriesOfStoryActivity.this);
                     rv.setAdapter(adapter);
                     rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     adapter.notifyDataSetChanged();
@@ -112,5 +115,9 @@ public class MemoriesOfStoryActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void closeActivity(View view) {
+        finish();
     }
 }

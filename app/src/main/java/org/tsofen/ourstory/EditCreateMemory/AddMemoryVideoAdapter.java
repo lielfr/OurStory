@@ -24,13 +24,15 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
     Activity parent;
     public List<Uploadable> data;
     int upload_start = 0;
+    RecyclerView rv;
 
     public static final int ADDMEMORY_VIDEO = 959;
 
-    public AddMemoryVideoAdapter(Activity parent) {
+    public AddMemoryVideoAdapter(Activity parent, RecyclerView rv) {
         super();
         data = new LinkedList<>();
         this.parent = parent;
+        this.rv = rv;
     }
 
     @NonNull
@@ -64,20 +66,17 @@ public class AddMemoryVideoAdapter extends RecyclerView.Adapter<AddMemoryVideoAd
 
         } else {
             holder.itemView.findViewById(R.id.deleteButtonRVMedia).
-                    setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String item = data.get(position - 1).getUrl();
-                            data.remove(position - 1);
-                            notifyItemRemoved(position);
-                            notifyDataSetChanged();
-                            if (position - 1 < upload_start) {
-                                --upload_start;
-                                FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
-                                wrapper.removeImg(item);
-                            }
+                    setOnClickListener(view -> rv.post(() -> {
+                        String item = data.get(position - 1).getUrl();
+                        data.remove(position - 1);
+                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
+                        if (position - 1 < upload_start) {
+                            --upload_start;
+                            FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
+                            wrapper.removeImg(item);
                         }
-                    });
+                    }));
             String uri = data.get(position - 1).getUrl();
             Glide.with(holder.itemView)
                     .load(uri)

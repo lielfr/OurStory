@@ -63,6 +63,7 @@ public class MyMemories extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getActivity() == null) return;
         Gson gson = new Gson();
         pr = getContext().getSharedPreferences(getString(R.string.shared_pref_key), MODE_PRIVATE);
         String userJsonString = pr.getString(AppHomePage.USER, "ERROR");
@@ -77,6 +78,7 @@ public class MyMemories extends Fragment {
             MemoryAService.GetMemoriesByUser(user_id).enqueue(new Callback<ArrayList<Memory>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Memory>> call, Response<ArrayList<Memory>> response) {
+                    if (getActivity() == null) return;
                     memories = response.body();
                     adapter = new MyMemoriesAdapter(getActivity().getApplicationContext(), memories, userObj, rv);
                     rv.setAdapter(adapter);

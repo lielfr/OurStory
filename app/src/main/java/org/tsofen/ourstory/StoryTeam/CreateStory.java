@@ -33,10 +33,10 @@ import org.tsofen.ourstory.EditCreateMemory.CreateEditMemoryActivity;
 import org.tsofen.ourstory.FirebaseImageWrapper;
 import org.tsofen.ourstory.R;
 
+import org.tsofen.ourstory.UserModel.AppHomePage;
 import org.tsofen.ourstory.UserModel.LogIn;
 import org.tsofen.ourstory.UserModel.RegistrationPage1;
 
-import org.tsofen.ourstory.UserModel.UserStatusCheck;
 import org.tsofen.ourstory.model.api.Story;
 import org.tsofen.ourstory.model.api.User;
 import org.tsofen.ourstory.web.OurStoryService;
@@ -313,7 +313,7 @@ public class CreateStory extends AppCompatActivity implements Serializable {
 
 
         Intent intent = getIntent();  //getting the user from the server
-        if (UserStatusCheck.getUserStatus().equals("not a visitor")) {
+        if (AppHomePage.user1!=""||AppHomePage.user2!=null) {
             if (intent.getStringExtra("userId") != null) {
                 userid = Long.parseLong(intent.getStringExtra("userId"));
                 Wepengine.GetUserById(userid).enqueue(new Callback<User>() {
@@ -323,20 +323,20 @@ public class CreateStory extends AppCompatActivity implements Serializable {
                             owner = response.body();
                             Toast.makeText(CreateStory.this, "Owner name is " + owner.getFirstName(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(CreateStory.this, "Owner By API is null !!", Toast.LENGTH_SHORT).show();
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(CreateStory.this, "Cant connect to Server In order to get the user", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CreateStory.this, "Cant connect to Server In order to get the user", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
-                Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "DIDNT catch the userID from the intent !!", Toast.LENGTH_SHORT).show();
             }
-        } else if (UserStatusCheck.getUserStatus().equals("visitor")) {
+        } else  {
             // show a pop up with a log in option
             AlertDialog.Builder myAlertBuilder = new AlertDialog.Builder(CreateStory.this);
             myAlertBuilder.setCancelable(false);

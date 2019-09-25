@@ -25,13 +25,15 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
     Activity parent;
     List<Uploadable> data = new ArrayList<>();
     int upload_start = 0;
+    RecyclerView rv;
 
     static final int ADDMEMORY_IMAGE = 1;
 
-    public AddMemoryImageAdapter(Activity parent) {
+    public AddMemoryImageAdapter(Activity parent, RecyclerView rv) {
         super();
         data = new ArrayList<>();
         this.parent = parent;
+        this.rv = rv;
     }
 
     @NonNull
@@ -51,34 +53,28 @@ public class AddMemoryImageAdapter extends RecyclerView.Adapter<AddMemoryImageAd
             Glide.with(holder.itemView)
                     .load(R.drawable.ic_plus_cube)
                     .into(imageView);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                    i.setType("image/*");
-                    i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    parent.startActivityForResult(Intent.createChooser(i, "Choose Video"),
-                            ADDMEMORY_IMAGE);
-                }
+            holder.itemView.setOnClickListener(view -> {
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.setType("image/*");
+                i.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                parent.startActivityForResult(Intent.createChooser(i, "Choose Video"),
+                        ADDMEMORY_IMAGE);
             });
             holder.itemView.findViewById(R.id.deleteButtonRVMedia).setVisibility(View.GONE);
 
         } else {
             holder.itemView.findViewById(R.id.deleteButtonRVMedia).
-                    setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            String item = data.get(position - 1).getUrl();
-                            data.remove(position - 1);
-                            notifyItemRemoved(position);
-                            notifyDataSetChanged();
-                            if (position - 1 < upload_start) {
-                                --upload_start;
-                                FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
-                                wrapper.removeImg(item);
-                            }
+                    setOnClickListener(view -> rv.post(() -> {
+                        String item = data.get(position - 1).getUrl();
+                        data.remove(position - 1);
+                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
+                        if (position - 1 < upload_start) {
+                            --upload_start;
+                            FirebaseImageWrapper wrapper = new FirebaseImageWrapper();
+                            wrapper.removeImg(item);
                         }
-                    });
+                    }));
             String uri = data.get(position - 1).getUrl();
             Glide.with(holder.itemView)
                     .load(uri)

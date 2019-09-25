@@ -55,7 +55,8 @@
             android:hint="  Add comment"
             android:inputType="textMultiLine"
             android:paddingLeft="20dp"
-            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorGrayHint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
