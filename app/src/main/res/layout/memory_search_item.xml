@@ -48,7 +48,7 @@
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/descr"
-            android:layout_width="300dp"
+            android:layout_width="270dp"
             android:layout_height="20dp"
 
             android:fontFamily="@font/quicksand_bold"
