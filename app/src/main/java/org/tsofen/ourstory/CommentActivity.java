@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,6 +96,9 @@ public class CommentActivity extends Activity {
                 public void onResponse(Call<Comment> call, Response<Comment> response) {
                     //Toast.makeText(getApplicationContext(), "added", Toast.LENGTH_LONG).show();
                     updateComments();
+                    txtview.setText("");
+                    InputMethodManager imm = (InputMethodManager) CommentActivity.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
 
                 @Override
